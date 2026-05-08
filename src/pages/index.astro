@@ -1,0 +1,1406 @@
+---
+import Layout from '../layouts/Layout.astro';
+import logo from '../assets/fpagency.svg';
+---
+
+<Layout>
+<div class="fp-agency-wrapper">
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#inicio" class="brand" aria-label="FP Agency">
+        <!-- Logo adicionado aqui -->
+        <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
+        <span>FP Agency</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#jornadas">Jornadas</a>
+        <a href="#programas">Programas</a>
+        <a href="#estrutura">Estrutura</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a href="#contato" class="btn btn-secondary">Falar com a FP</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal show">
+          <div class="eyebrow">Monetização, creators e parcerias</div>
+          <h1>Transforme influência em operação profissional e receita.</h1>
+          <p class="lead">
+            A FP Agency conecta criadores, recrutadores e marcas com uma estrutura premium de monetização, operação e crescimento. Entenda exatamente onde você entra e qual é o seu próximo passo para escalar nas plataformas.
+          </p>
+
+          <div class="btn-row">
+            <a href="#jornadas" class="btn btn-primary">Quero entrar na minha jornada</a>
+            <a href="#programas" class="btn btn-secondary">Ver programas em destaque</a>
+          </div>
+
+          <div class="hero-kpis">
+            <span class="badge">Estrutura premium</span>
+            <span class="badge">Otimização de RPM</span>
+            <span class="badge">Escala de Audiência</span>
+            <span class="badge">Gestão Técnica</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal show" aria-label="Painel visual da FP Agency">
+          <div class="panel-top">
+            <div class="panel-title">Foco de Atuação</div>
+            <div class="status-pill"><span class="status-dot"></span> Operação Ativa</div>
+          </div>
+
+          <div class="dashboard">
+            <div class="metric-card">
+              <div>
+                <strong>NarraStars</strong>
+                <small>Treinamento e monetização para editores.</small>
+              </div>
+              <div class="metric-tag">Destaque</div>
+            </div>
+
+            <div class="metric-card">
+              <div>
+                <strong>Três jornadas</strong>
+                <small>Criadores, recrutadores e marcas.</small>
+              </div>
+              <div class="metric-tag">Arquitetura</div>
+            </div>
+
+            <div class="metric-card">
+              <div>
+                <strong>Crescimento Real</strong>
+                <small>Estratégia baseada em retenção visual e engajamento.</small>
+              </div>
+              <div class="metric-tag">Confiança</div>
+            </div>
+          </div>
+
+          <div class="talents-strip">
+            <div class="talent-card">
+              <div class="talent-avatar">C</div>
+              <strong>Criadores</strong>
+              <div class="talent-role">Monetização e aceleração</div>
+            </div>
+            <div class="talent-card">
+              <div class="talent-avatar">R</div>
+              <strong>Recrutadores</strong>
+              <div class="talent-role">Captação e escala</div>
+            </div>
+            <div class="talent-card">
+              <div class="talent-avatar">M</div>
+              <strong>Marcas</strong>
+              <div class="talent-role">Ações e parcerias</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="container">
+        <div class="proof-band reveal">
+          <div class="proof-track">
+            <span class="proof-chip"><b>Mais de 130 mil</b> seguidores gerenciados</span>
+            <span class="proof-chip"><b>Canais com mais de 120M</b> de alcance</span>
+            <span class="proof-chip"><b>Foco em</b> SEO e Retenção Visual</span>
+            <span class="proof-chip"><b>Gestão</b> Mateus (CEO)</span>
+            <span class="proof-chip"><b>Mais de 130 mil</b> seguidores gerenciados</span>
+            <span class="proof-chip"><b>Canais com mais de 120M</b> de alcance</span>
+            <span class="proof-chip"><b>Foco em</b> SEO e Retenção Visual</span>
+            <span class="proof-chip"><b>Gestão</b> Mateus (CEO)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact" id="jornadas">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Jornadas principais</div>
+          <h2>Nossa estrutura separa públicos para acelerar resultados.</h2>
+          <p class="lead muted">
+            A experiência da FP Agency foi desenhada para que você encontre rapidamente o caminho ideal para o seu perfil profissional.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="audience-card reveal">
+            <div class="icon-box">🎬</div>
+            <h3>Para Criadores</h3>
+            <p class="muted">
+              Estrutura focada em quem quer monetizar conteúdo, participar de programas oficiais e crescer com segurança operacional e ganchos de alta conversão.
+            </p>
+            <ul class="list">
+              <li>Treinamento em retenção</li>
+              <li>Entrada orientada por programa</li>
+              <li>Suporte focado em RPM</li>
+            </ul>
+            <a href="#contato" class="inline-link">Começar como criador →</a>
+          </article>
+
+          <article class="audience-card reveal">
+            <div class="icon-box">🤝</div>
+            <h3>Para Recrutadores</h3>
+            <p class="muted">
+              Trilha própria para quem quer captar perfis, receber diretrizes claras e operar a captação de talentos de forma profissional e escalável.
+            </p>
+            <ul class="list">
+              <li>Fluxo de adesão objetivo</li>
+              <li>Acesso a regras e materiais</li>
+              <li>Base sólida para escalar</li>
+            </ul>
+            <a href="#contato" class="inline-link">Entrar como recrutador →</a>
+          </article>
+
+          <article class="audience-card reveal">
+            <div class="icon-box">📈</div>
+            <h3>Para Marcas e Parceiros</h3>
+            <p class="muted">
+              Camada institucional voltada para desenvolvimento de parcerias, ativações com nossa rede de creators e crescimento de presença digital.
+            </p>
+            <ul class="list">
+              <li>Acesso a canais validados</li>
+              <li>Estratégia de conteúdo viral</li>
+              <li>Canal direto para negócios</li>
+            </ul>
+            <a href="#contato" class="inline-link">Conversar sobre parceria →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programas">
+      <div class="container split-panel">
+        <div class="glass-card reveal">
+          <div class="eyebrow">Programas em destaque</div>
+          <h2>Produtos focados em rentabilidade e influência.</h2>
+          <p class="lead muted">
+            Apresentamos nossos programas como estruturas completas de capacitação e monetização de vídeos nas principais plataformas sociais.
+          </p>
+
+          <div class="board">
+            <div class="board-card">
+              <strong>NarraStars</strong>
+              <span>Programa de monetização e treinamento intensivo para editores e criadores. Foco em dominar o algoritmo e escalar o RPM.</span>
+            </div>
+            <div class="board-card">
+              <strong>Kwai Cut</strong>
+              <span>Editoriais, cortes, categorias e formatos curtos com requisitos próprios e alto potencial de viralização.</span>
+            </div>
+            <div class="board-card">
+              <strong>Lives & Presença</strong>
+              <span>Trilha dedicada para creators com foco em construir comunidade, aumentar a retenção e gerar recorrência diária.</span>
+            </div>
+            <div class="board-card">
+              <strong>Projetos Especiais</strong>
+              <span>Espaço reservado para campanhas sazonais e parcerias estratégicas com marcas.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillars reveal" id="estrutura">
+          <article class="pillar">
+            <small>01. Treinamento</small>
+            <h3>Foco em Retenção Visual</h3>
+            <p class="muted">
+              Ensinamos a criar descrições estratégicas e ganchos de alta conversão para maximizar o alcance dos seus vídeos.
+            </p>
+          </article>
+
+          <article class="pillar">
+            <small>02. Gestão Técnica</small>
+            <h3>Infraestrutura Sólida</h3>
+            <p class="muted">
+              Operamos com sistemas web dedicados para garantir que sua jornada de monetização seja rastreável e organizada.
+            </p>
+          </article>
+
+          <article class="pillar">
+            <small>03. Escala</small>
+            <h3>Otimização Constante</h3>
+            <p class="muted">
+              Acompanhamento de métricas, compreensão das regras de RPM e ajustes práticos para garantir que você não deixe dinheiro na mesa.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Detalhes dos programas</div>
+          <h2>Conheça nossas frentes de atuação.</h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="program-card reveal">
+            <span class="program-tag">Treinamento & Escala</span>
+            <h3>NarraStars</h3>
+            <p class="muted">
+              Nosso programa premium. Inclui documentação completa, entendimento das regras de plataforma e os passos exatos para treinar editores de vídeo para o sucesso.
+            </p>
+            <ul class="list">
+              <li>Modelos de Monetização (RPM)</li>
+              <li>Regras de engajamento</li>
+              <li>Treinamento passo a passo</li>
+            </ul>
+            <div class="program-foot">
+              <span>Vagas qualificadas</span>
+              <a href="#contato" class="inline-link" style="margin-top: 0;">Ver detalhes</a>
+            </div>
+          </article>
+
+          <article class="program-card reveal">
+            <span class="program-tag">Creator Economy</span>
+            <h3>Kwai Cut</h3>
+            <p class="muted">
+              Programa focado em edição de formatos curtos. Ideal para quem domina categorias específicas e busca alavancar visualizações rápidas.
+            </p>
+            <ul class="list">
+              <li>Exploração de nichos</li>
+              <li>Critérios de viralização</li>
+              <li>Orientação de cortes</li>
+            </ul>
+            <div class="program-foot">
+              <span>Entrada guiada</span>
+              <a href="#contato" class="inline-link" style="margin-top: 0;">Saiba mais</a>
+            </div>
+          </article>
+
+          <article class="program-card reveal">
+            <span class="program-tag">Partners & Brands</span>
+            <h3>Ações Institucionais</h3>
+            <p class="muted">
+              Conectando o alcance massivo da nossa rede de contas com o seu objetivo de negócio, gerando conversão e autoridade de marca.
+            </p>
+            <ul class="list">
+              <li>Parcerias e ativações</li>
+              <li>Match estratégico</li>
+              <li>Relatórios de alcance</li>
+            </ul>
+            <div class="program-foot">
+              <span>Modelo consultivo</span>
+              <a href="#contato" class="inline-link" style="margin-top: 0;">Conversar</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container results-strip">
+        <div class="reveal">
+          <div class="section-head" style="margin-bottom: 26px;">
+            <div class="eyebrow">Resultados e prova</div>
+            <h2>Nossos números refletem nosso método.</h2>
+            <p class="lead muted">
+              A FP Agency gerencia uma audiência massiva através de processos bem estruturados de atração e engajamento.
+            </p>
+          </div>
+
+          <div class="stats-grid">
+            <article class="result-card">
+              <strong>+130k</strong>
+              <p>Seguidores totais gerenciados</p>
+            </article>
+            <article class="result-card">
+              <strong>+120M</strong>
+              <p>Views no canal de maior alcance</p>
+            </article>
+            <article class="result-card">
+              <strong>+14M</strong>
+              <p>Alcance em canais secundários</p>
+            </article>
+            <article class="result-card">
+              <strong>100%</strong>
+              <p>Foco na otimização de RPM</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="quote-stack reveal">
+          <article class="quote-card">
+            <p>
+              "Entender as métricas de RPM e os ganchos de retenção que a FP Agency ensina mudou a forma como nossos vídeos performam nas plataformas."
+            </p>
+            <div class="person">
+              <div class="avatar">C</div>
+              <div>
+                <strong>Creator do NarraStars</strong>
+                <div class="subtle">Programa de Monetização</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <p>
+              "A agência fornece a infraestrutura técnica e o treinamento necessário para que os recrutadores foquem apenas em trazer os melhores talentos."
+            </p>
+            <div class="person">
+              <div class="avatar">R</div>
+              <div>
+                <strong>Equipe de Captação</strong>
+                <div class="subtle">Operação Interna</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Dúvidas Frequentes</div>
+          <h2>Transparência desde o primeiro contato.</h2>
+        </div>
+
+        <div class="faq-wrap reveal">
+          <div class="faq-item active">
+            <button class="faq-question" type="button">
+              <span>Como funciona o programa NarraStars?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer" style="max-height: 180px;">
+              <div class="faq-answer-inner">
+                O NarraStars é o nosso programa de treinamento e monetização voltado para editores e criadores de vídeo. Ele oferece documentação detalhada sobre regras, foco na otimização do RPM e metodologias para alavancar a audiência nas redes.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Qualquer pessoa pode entrar nos programas da FP Agency?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Cada programa possui requisitos específicos de qualidade, nicho e formato de conteúdo (como o Kwai Cut). Após o primeiro contato, direcionamos você para o onboarding do programa que melhor se alinha ao seu perfil.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Como a FP Agency ajuda os recrutadores?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Fornecemos as regras de recrutamento claras e a infraestrutura necessária (painéis e documentação) para que você possa captar e gerenciar novos talentos com eficiência e suporte constante.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="cta-panel reveal">
+          <div class="eyebrow">Dê o próximo passo</div>
+          <h2>Faça parte do ecossistema da FP Agency.</h2>
+          <p class="lead">
+            Pronto para transformar sua influência em uma operação profissional de alta performance? Escolha seu canal de atendimento e fale diretamente com nossa equipe gerencial.
+          </p>
+          <div class="btn-row">
+            <a href="mailto:contato@fpagency.com.br" class="btn btn-primary">Enviar E-mail</a>
+            <a href="https://wa.me/message/3YJWHJM7UOR6C1" class="btn btn-secondary">Falar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 14px;">
+          <!-- Logo adicionado aqui no Footer -->
+          <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
+          <span>FP Agency</span>
+        </div>
+        <p class="subtle">
+          Conectando criadores, recrutadores e marcas com tecnologia, treinamento e foco em resultados massivos. Direcionamento estratégico liderado por Mateus.
+        </p>
+      </div>
+
+      <div>
+        <h3>Navegação</h3>
+        <div class="footer-links">
+          <a href="#jornadas">Jornadas</a>
+          <a href="#programas">Programas</a>
+          <a href="#estrutura">Estrutura</a>
+          <a href="#resultados">Resultados</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Institucional</h3>
+        <div class="footer-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Suporte ao Creator</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+  }
+
+  document.querySelectorAll(".faq-item").forEach((item) => {
+    // Adicionamos "as HTMLElement" para confirmar que o elemento possui a propriedade "style"
+    const button = item.querySelector(".faq-question") as HTMLElement;
+    const answer = item.querySelector(".faq-answer") as HTMLElement;
+
+    // A verificação "if" acalma o Astro, garantindo que não são nulos
+    if (button && answer) {
+      button.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+
+        document.querySelectorAll(".faq-item").forEach((other) => {
+          other.classList.remove("active");
+          const otherAnswer = other.querySelector(".faq-answer") as HTMLElement;
+          if (otherAnswer) otherAnswer.style.removeProperty("maxHeight");
+        });
+
+        if (!isActive) {
+          item.classList.add("active");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    }
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-2: #181c27;
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-2: rgba(255, 255, 255, 0.06);
+    --line: #2a3048;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --orange: #ff6b2b;
+    --orange2: #ff9a5c;
+    --gold: #f59e0b;
+    --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    --radius-xl: 34px;
+    --radius-lg: 26px;
+    --radius-md: 20px;
+    --container: 1220px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fp-agency-wrapper {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(255, 107, 43, 0.16), transparent 28%),
+      radial-gradient(circle at 85% 10%, rgba(255, 154, 92, 0.1), transparent 22%),
+      linear-gradient(180deg, #0f1117 0%, #13161e 40%, #181c27 100%);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    scroll-behavior: smooth;
+  }
+
+  .fp-agency-wrapper::before,
+  .fp-agency-wrapper::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .fp-agency-wrapper::before {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 85%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 85%);
+  }
+
+  .fp-agency-wrapper::after {
+    background: radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.28) 100%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    width: min(calc(100% - 32px), var(--container));
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 104px 0;
+    position: relative;
+  }
+
+  .section.compact {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--orange2);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--orange), transparent);
+  }
+
+  h1, h2, h3, h4 {
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 7vw, 6.2rem);
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-size: 1.28rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .lead {
+    font-size: clamp(1.04rem, 1.9vw, 1.18rem);
+    color: #d7e3ec;
+    max-width: 780px;
+  }
+
+  .muted {
+    color: var(--muted);
+  }
+
+  .section-head {
+    max-width: 780px;
+    margin-bottom: 44px;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .btn {
+    min-height: 56px;
+    padding: 0 22px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 800;
+    border: 1px solid transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    color: #fff;
+    box-shadow: 0 18px 40px rgba(255, 107, 43, 0.25);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+  }
+
+  .btn-ghost {
+    background: rgba(255, 154, 92, 0.05);
+    color: var(--orange2);
+    border-color: rgba(255, 154, 92, 0.18);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 14px;
+    min-height: 38px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #dce9f2;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    padding: 16px 0;
+    backdrop-filter: blur(16px);
+    background: rgba(15, 17, 23, 0.66);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    font-size: 1.04rem;
+  }
+
+  /* ESTA É A NOVA CLASSE DO LOGO OFICIAL */
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    color: #dbe7f0;
+    font-weight: 650;
+  }
+
+  .nav-links a {
+    position: relative;
+    opacity: 0.92;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange2));
+    transition: width 0.2s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .hero {
+    padding: 84px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .hero-copy p.lead {
+    margin-top: 22px;
+  }
+
+  .hero-kpis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .hero-panel {
+    position: relative;
+    padding: 28px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .hero-panel::before {
+    content: "";
+    position: absolute;
+    right: -60px;
+    top: -40px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255, 107, 43, 0.24), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-panel::after {
+    content: "";
+    position: absolute;
+    left: -40px;
+    bottom: -60px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.12), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .panel-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .panel-title {
+    font-size: 0.92rem;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .status-pill {
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 154, 92, 0.08);
+    border: 1px solid rgba(255, 154, 92, 0.18);
+    color: var(--orange2);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 0 6px rgba(255, 107, 43, 0.1);
+  }
+
+  .dashboard {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 16px;
+  }
+
+  .metric-card,
+  .talent-card,
+  .glass-card,
+  .quote-card,
+  .faq-item,
+  .program-card,
+  .pillar,
+  .result-card,
+  .audience-card,
+  .timeline-item,
+  .cta-panel {
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow);
+  }
+
+  .metric-card {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .metric-card strong {
+    display: block;
+    font-size: 1.45rem;
+    margin-bottom: 4px;
+  }
+
+  .metric-card small {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .metric-tag {
+    background: linear-gradient(135deg, var(--gold), #fbbf24);
+    color: #221b07;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.76rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .talents-strip {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .talent-card {
+    padding: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  }
+
+  .talent-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+  }
+
+  .talent-role {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .proof-band {
+    margin-top: 28px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .proof-track {
+    display: flex;
+    width: max-content;
+    gap: 14px;
+    animation: marquee 28s linear infinite;
+  }
+
+  .proof-chip {
+    min-height: 42px;
+    padding: 0 16px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: #dbe8f2;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .proof-chip b {
+    color: var(--orange2);
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    display: grid;
+    gap: 20px;
+  }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .audience-card {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .audience-card:hover,
+  .program-card:hover,
+  .pillar:hover,
+  .quote-card:hover,
+  .result-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 154, 92, 0.18);
+  }
+
+  .audience-card::before,
+  .program-card::before,
+  .pillar::before,
+  .quote-card::before,
+  .cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 60%);
+    pointer-events: none;
+  }
+
+  .icon-box {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    font-size: 1.35rem;
+    background: linear-gradient(135deg, rgba(255, 107, 43, 0.18), rgba(255, 154, 92, 0.08));
+    border: 1px solid rgba(255, 154, 92, 0.18);
+  }
+
+  .list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .list li {
+    position: relative;
+    padding-left: 22px;
+    color: #d8e5ee;
+  }
+
+  .list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--orange2);
+    font-weight: 900;
+  }
+
+  .inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    color: var(--orange2);
+    font-weight: 800;
+  }
+
+  .split-panel {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .glass-card,
+  .pillar,
+  .program-card,
+  .quote-card,
+  .timeline-item,
+  .result-card,
+  .cta-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+  }
+
+  .pillars {
+    display: grid;
+    gap: 16px;
+  }
+
+  .pillar small {
+    display: block;
+    color: var(--orange2);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+
+  .program-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 100%;
+  }
+
+  .program-tag {
+    width: fit-content;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 154, 92, 0.08);
+    border: 1px solid rgba(255, 154, 92, 0.16);
+    color: var(--orange2);
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+
+  .program-foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .board-card {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .board-card strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .board-card span {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .timeline {
+    display: grid;
+    gap: 18px;
+    margin-top: 26px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 66px 1fr;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .step-index {
+    width: 66px;
+    height: 66px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    box-shadow: 0 14px 30px rgba(255, 107, 43, 0.2);
+  }
+
+  .results-strip {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 180px;
+  }
+
+  .result-card strong {
+    display: block;
+    font-size: clamp(2.1rem, 3.4vw, 3.3rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .result-card p {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .quote-stack {
+    display: grid;
+    gap: 18px;
+  }
+
+  .quote-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 100%;
+  }
+
+  .quote-card p {
+    font-size: 1.02rem;
+    color: #dce8f1;
+  }
+
+  .person {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+  }
+
+  .faq-wrap {
+    display: grid;
+    gap: 14px;
+    max-width: 960px;
+  }
+
+  .faq-item {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .faq-question {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .faq-question span:last-child {
+    font-size: 1.5rem;
+    color: var(--orange2);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+  }
+
+  .faq-answer-inner {
+    padding: 0 24px 22px;
+    color: var(--muted);
+  }
+
+  .faq-item.active .faq-question span:last-child {
+    transform: rotate(45deg);
+  }
+
+  .cta-panel {
+    padding: 42px;
+    background:
+      radial-gradient(circle at top right, rgba(255, 154, 92, 0.18), transparent 24%),
+      linear-gradient(145deg, rgba(31, 18, 13, 0.98), rgba(16, 10, 8, 0.95));
+    border-color: rgba(255, 154, 92, 0.16);
+  }
+
+  .cta-panel .lead {
+    margin-top: 14px;
+    max-width: 720px;
+  }
+
+  footer {
+    padding: 34px 0 44px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 22px;
+  }
+
+  .footer-links {
+    display: grid;
+    gap: 10px;
+    color: var(--muted);
+  }
+
+  .footer-links a:hover {
+    color: var(--text);
+  }
+
+  .subtle {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1120px) {
+    .hero-grid, .split-panel, .results-strip, .footer-grid, .grid-4, .grid-3, .grid-2 {
+      grid-template-columns: 1fr;
+    }
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 860px) {
+    .nav-links {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 16px;
+      right: 16px;
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(8, 16, 24, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+    .nav-links.open { display: flex; }
+    .menu-toggle { display: inline-flex; }
+    .nav .btn-secondary { display: none; }
+    .section { padding: 86px 0; }
+    .glass-card, .program-card, .pillar, .quote-card, .timeline-item, .result-card, .audience-card, .cta-panel, .hero-panel {
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .container { width: min(calc(100% - 20px), var(--container)); }
+    .btn, .btn-row .btn { width: 100%; }
+    .btn-row { flex-direction: column; }
+    .talents-strip, .board, .stats-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 54px 1fr; }
+    .step-index {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+    }
+    .hero { padding-top: 58px; }
+  }
+</style>
+</Layout>
