@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 import logo from '../assets/fpagency.svg';
 ---
 
@@ -9,7 +10,7 @@ import logo from '../assets/fpagency.svg';
     <div class="container nav">
       <a href="#inicio" class="brand" aria-label="FP Agency">
         <!-- Logo adicionado aqui -->
-        <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
+        <img src={logo.src} alt="FP Agency Logo" class="brand-logo" loading="eager" fetchpriority="high" />
         <span>FP Agency</span>
       </a>
 
@@ -423,7 +424,7 @@ import logo from '../assets/fpagency.svg';
       <div>
         <div class="brand" style="margin-bottom: 14px;">
           <!-- Logo adicionado aqui no Footer -->
-          <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
+          <Image src={logo} alt="FP Agency Logo" class="brand-logo" />
           <span>FP Agency</span>
         </div>
         <p class="subtle">
@@ -445,9 +446,9 @@ import logo from '../assets/fpagency.svg';
       <div>
         <h3>Institucional</h3>
         <div class="footer-links">
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Termos de Uso</a>
-          <a href="#">Suporte ao Creator</a>
+          <a href="/politica-de-privacidade">Política de Privacidade</a>
+          <a href="/termos-de-servico">Termos de Serviço</a>
+          <a href="/aviso-legal">Aviso Legal</a>
         </div>
       </div>
     </div>

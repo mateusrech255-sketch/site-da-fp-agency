@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import logo from '../assets/fpagency.svg';
+---
+
+<Layout>
+  <div class="fp-agency-wrapper">
+    <header class="site-header">
+      <div class="container nav">
+        <!-- Como é uma página interna, o logo volta para a home (/) -->
+        <a href="/" class="brand" aria-label="FP Agency">
+          <img src={logo.src} alt="FP Agency Logo" class="brand-logo" loading="eager" fetchpriority="high" />
+          <span>FP Agency</span>
+        </a>
+        <a href="/#contato" class="btn btn-secondary">Voltar</a>
+      </div>
+    </header>
+
+    <main class="container section">
+      <h1>Termos de Serviço</h1>
+      <p class="lead muted">Atualizado em 09/05/2026.</p>
+      
+      <div style="margin-top: 40px; color: var(--text);">
+        <h3>1. Coleta de Dados</h3>
+        <p>1. Aceitação e Objeto Ao acessar o site institucional, o dashboard ou as plataformas de recrutamento da FP Agency, você concorda expressamente com estes Termos de Serviço. O presente documento regula as condições de uso das nossas plataformas digitais, cujo objetivo principal é o recrutamento de criadores de conteúdo e editores de vídeo, além do gerenciamento de parcerias com plataformas de redes sociais.
+
+2. Elegibilidade e Condutas do Usuário O uso da plataforma é restrito a indivíduos com capacidade legal plena ou menores devidamente assistidos por seus responsáveis. O usuário compromete-se a fornecer informações exatas, atualizadas e verdadeiras em seus cadastros. É terminantemente proibido o uso da plataforma para fins ilegais, tentativas de fraude, adulteração de código, engenharia reversa, criação de múltiplas contas falsas ou qualquer ação que comprometa a integridade dos nossos servidores e da nossa infraestrutura web.
+
+2.1 Prevenção a fraudes e validação de identidade A FP Agency reserva-se o direito de verificar, validar e cruzar informações fornecidas pelos usuários, incluindo dados cadastrais, documentos e atividades na plataforma, com o objetivo de prevenir fraudes, abusos ou uso indevido do sistema. Contas que apresentarem indícios de irregularidade poderão ser suspensas ou encerradas preventivamente, independentemente de aviso prévio.
+
+3. Plataforma de Recrutamento e Projetos O preenchimento de formulários e a criação de conta no nosso sistema não garantem, sob nenhuma hipótese, a aprovação do usuário para campanhas, projetos ou monetização. A FP Agency atua como intermediadora e avaliadora de talentos, reservando-se o direito de aprovar, recusar, suspender ou excluir usuários da plataforma a seu exclusivo critério, especialmente caso sejam detectadas irregularidades, dados falsos ou violações de diretrizes de plataformas parceiras.
+
+4. Propriedade Intelectual Toda a estrutura do site, códigos-fonte, design, logotipos, textos e interfaces (UI/UX) são de propriedade exclusiva da FP Agency e protegidos por leis de propriedade intelectual. Nenhum elemento pode ser copiado, reproduzido ou distribuído sem autorização prévia por escrito.
+
+5. Segurança da Conta O usuário é integral e exclusivamente responsável por manter a confidencialidade de suas credenciais de acesso (login e senha) ao dashboard. Qualquer atividade realizada sob sua conta será presumida como de sua responsabilidade. A FP Agency não se responsabiliza por perdas decorrentes do acesso não autorizado causado por negligência do usuário na guarda de suas senhas.
+
+6. Limitação de Responsabilidade A FP Agency atua de forma diligente para manter a estabilidade do sistema, mas não garante que a plataforma estará livre de interrupções ou falhas técnicas. Na máxima extensão permitida pela legislação aplicável, a responsabilidade total da FP Agency por quaisquer danos diretos ou indiretos relacionados ao uso do site será limitada ao valor efetivamente pago pelo usuário à agência (quando aplicável). Em casos de uso gratuito de nossas plataformas de recrutamento, a responsabilidade será limitada ao mínimo permitido por lei.
+
+7. Relação com Terceiros Nossos serviços envolvem a integração e o direcionamento para plataformas de terceiros (como redes sociais e aplicativos de vídeos curtos). A FP Agency não possui controle sobre as regras, algoritmos, atualizações ou políticas de banimento destas plataformas, eximindo-se de qualquer responsabilidade por ações tomadas por estas empresas em relação aos perfis dos criadores.
+
+8. Cancelamento e Encerramento A FP Agency poderá suspender ou encerrar o acesso ao site, ao dashboard ou aos serviços a qualquer momento, sem aviso prévio, em caso de: violação destes Termos de Serviço; uso indevido da plataforma; suspeita de fraude; ou determinação legal/regulatória. O usuário também poderá solicitar o encerramento da sua conta a qualquer momento. Para serviços especificamente contratados, aplicar-se-ão as condições de rescisão do respectivo contrato.
+
+9. Disposições Gerais Estes termos poderão ser modificados a qualquer momento, sendo responsabilidade do usuário revisá-los periodicamente. Fica eleito o foro da comarca da sede da FP Agency, no Brasil, para dirimir quaisquer controvérsias decorrentes deste documento.
+
+10. Aceite eletrônico e validade jurídica O usuário declara que a marcação de caixas de seleção, cliques em botões de aceite ou qualquer outra forma eletrônica de concordância disponível na plataforma constituem manifestação válida, inequívoca e juridicamente vinculante de sua aceitação aos presentes Termos de Serviço, Política de Privacidade e Aviso Legal. Esses registros poderão ser armazenados como prova de consentimento e aceitação em eventuais disputas judiciais ou administrativas.</p>
+      </div>
+    </main>
+  </div>
+</Layout>
