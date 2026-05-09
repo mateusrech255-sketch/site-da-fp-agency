@@ -1,5 +1,7 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // Verifique se no GitHub termina com 'agencia' ou 'agency'
+  site: 'https://mateusrech255-sketch.github.io/site-da-fp-agencia',
+  base: '/site-da-fp-agencia',
+});
