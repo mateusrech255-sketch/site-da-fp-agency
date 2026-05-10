@@ -1,0 +1,552 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="kc">
+      <div class="kc-hero">
+        <div class="kc-hero-inner">
+          <div class="kc-badge">
+            <span class="kc-badge-dot"></span>
+            Programa Ativo · Vagas Abertas
+          </div>
+          <p class="kc-hero-kicker">FP Agency × Kwai</p>
+          <h1 class="kc-hero-title">
+            Programa<br>
+            <span class="kwai">Kwai</span> <span class="cut">CUT</span>
+          </h1>
+          <p class="kc-hero-sub">
+            Edite vídeos, construa seu canal e seja remunerado pelo seu desempenho.
+            Tudo com suporte, treinamento e comunidade da FP Agency.
+          </p>
+          <div class="kc-hero-actions">
+            <a href={`${import.meta.env.BASE_URL}/kwai-cut/inscricao`} class="kc-btn-primary">
+              <i class="ri-quill-pen-line"></i> Quero me Inscrever
+            </a>
+            <a href={`${import.meta.env.BASE_URL}/kwai-cut/treinamento`} class="kc-btn-secondary">
+              <i class="ri-play-circle-line"></i> Ver Treinamento
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="kc-stats">
+        <div class="kc-stat">
+          <div class="kc-stat-icon"><i class="ri-video-line"></i></div>
+          <div>
+            <div class="kc-stat-val">+10 Mil</div>
+            <div class="kc-stat-lbl">Criadores Ativos</div>
+          </div>
+        </div>
+        <div class="kc-stat">
+          <div class="kc-stat-icon"><i class="ri-eye-line"></i></div>
+          <div>
+            <div class="kc-stat-val">+7 Mi</div>
+            <div class="kc-stat-lbl">Views Gerados</div>
+          </div>
+        </div>
+        <div class="kc-stat">
+          <div class="kc-stat-icon"><i class="ri-money-dollar-circle-line"></i></div>
+          <div>
+            <div class="kc-stat-val">Em Dólar</div>
+            <div class="kc-stat-lbl">Pagamentos</div>
+          </div>
+        </div>
+        <div class="kc-stat">
+          <div class="kc-stat-icon"><i class="ri-shield-check-line"></i></div>
+          <div>
+            <div class="kc-stat-val">100%</div>
+            <div class="kc-stat-lbl">Suporte Incluso</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kc-marquee-wrap" aria-hidden="true">
+        <div class="kc-marquee-band">
+          <div class="kc-marquee-track">
+            <div class="kc-marquee-group">
+              <span class="kc-chip"><i class="ri-scissors-cut-line"></i> Edição de Vídeos</span>
+              <span class="kc-chip"><i class="ri-money-dollar-circle-line"></i> Monetização RPM</span>
+              <span class="kc-chip"><i class="ri-motion-line"></i> CUT Motions</span>
+              <span class="kc-chip"><i class="ri-graduation-cap-line"></i> Treinamento Completo</span>
+              <span class="kc-chip"><i class="ri-team-line"></i> Comunidade Ativa</span>
+              <span class="kc-chip"><i class="ri-global-line"></i> Pagamento em Dólar</span>
+              <span class="kc-chip"><i class="ri-bar-chart-grouped-line"></i> Relatórios Mensais</span>
+              <span class="kc-chip"><i class="ri-customer-service-2-line"></i> Suporte FP Agency</span>
+            </div>
+            <div class="kc-marquee-group" aria-hidden="true">
+              <span class="kc-chip"><i class="ri-scissors-cut-line"></i> Edição de Vídeos</span>
+              <span class="kc-chip"><i class="ri-money-dollar-circle-line"></i> Monetização RPM</span>
+              <span class="kc-chip"><i class="ri-motion-line"></i> CUT Motions</span>
+              <span class="kc-chip"><i class="ri-graduation-cap-line"></i> Treinamento Completo</span>
+              <span class="kc-chip"><i class="ri-team-line"></i> Comunidade Ativa</span>
+              <span class="kc-chip"><i class="ri-global-line"></i> Pagamento em Dólar</span>
+              <span class="kc-chip"><i class="ri-bar-chart-grouped-line"></i> Relatórios Mensais</span>
+              <span class="kc-chip"><i class="ri-customer-service-2-line"></i> Suporte FP Agency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kc-section">
+        <div class="kc-section-label">
+          <span class="kc-section-label-text">Navegue pelo programa</span>
+          <div class="kc-section-label-line"></div>
+        </div>
+
+        <div class="kc-nav-grid">
+          <a href={`${import.meta.env.BASE_URL}/kwai-cut/treinamento`} class="kc-nav-card c-orange">
+            <div class="kc-nav-icon"><i class="ri-graduation-cap-line"></i></div>
+            <div class="kc-nav-tag">Passo a passo</div>
+            <h3 class="kc-nav-title">Treinamento CUT</h3>
+            <p class="kc-nav-desc">Aprenda do zero como editar vídeos no padrão exigido pelo programa e maximize seus resultados.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Acessar Treinamento</div>
+          </a>
+
+          <a href={`${import.meta.env.BASE_URL}/kwai-cut/monetizacao`} class="kc-nav-card c-green">
+            <div class="kc-nav-icon"><i class="ri-money-dollar-circle-line"></i></div>
+            <div class="kc-nav-tag">Como ganhar</div>
+            <h3 class="kc-nav-title">Monetização & RPM</h3>
+            <p class="kc-nav-desc">Entenda como funciona o sistema de RPM, as metas de visualizações e como aumentar seus ganhos mensais.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Ver Monetização</div>
+          </a>
+
+          <a href={`${import.meta.env.BASE_URL}/kwai-cut/cut-motions`} class="kc-nav-card c-blue">
+            <div class="kc-nav-icon"><i class="ri-magic-line"></i></div>
+            <div class="kc-nav-tag">Recursos visuais</div>
+            <h3 class="kc-nav-title">CUT Motions</h3>
+            <p class="kc-nav-desc">Acesse o pacote de motions, templates e efeitos visuais para deixar seus vídeos no padrão da agência.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Ver CUT Motions</div>
+          </a>
+
+          <a href={`${import.meta.env.BASE_URL}/kwai-cut/inscricao`} class="kc-nav-card c-purple">
+            <div class="kc-nav-icon"><i class="ri-quill-pen-line"></i></div>
+            <div class="kc-nav-tag">Faça parte</div>
+            <h3 class="kc-nav-title">Inscrição</h3>
+            <p class="kc-nav-desc">Preencha o formulário de inscrição e aguarde a aprovação. Vagas limitadas por categoria.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Inscrever-se</div>
+          </a>
+
+          <a href={`${import.meta.env.BASE_URL}/kwai-cut/regras`} class="kc-nav-card c-yellow">
+            <div class="kc-nav-icon"><i class="ri-file-list-3-line"></i></div>
+            <div class="kc-nav-tag">Leia antes</div>
+            <h3 class="kc-nav-title">Regras do Programa</h3>
+            <p class="kc-nav-desc">Conheça todas as diretrizes, critérios de avaliação e requisitos para continuar no programa.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Ler Regras</div>
+          </a>
+
+          <a href={`${import.meta.env.BASE_URL}/area-do-criador`} class="kc-nav-card c-red">
+            <div class="kc-nav-icon"><i class="ri-search-eye-line"></i></div>
+            <div class="kc-nav-tag">Já é membro</div>
+            <h3 class="kc-nav-title">Consultar Status</h3>
+            <p class="kc-nav-desc">Verifique seu status de aprovação, relatórios mensais e desempenho do seu canal no programa.</p>
+            <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Área do Criador</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="kc-section">
+        <div class="kc-section-label">
+          <span class="kc-section-label-text">Já faz parte do programa?</span>
+          <div class="kc-section-label-line"></div>
+        </div>
+
+        <a href={`${import.meta.env.BASE_URL}/area-do-criador`} class="kc-featured-card">
+          <div class="kc-featured-icon"><i class="ri-user-star-line"></i></div>
+          <div class="kc-featured-body">
+            <div class="kc-featured-tag"><i class="ri-circle-fill" style="font-size:.5rem;vertical-align:middle"></i> Acesso Exclusivo</div>
+            <div class="kc-featured-title">Área do Criador</div>
+            <div class="kc-featured-desc">Consulte seus relatórios mensais, status de aprovação, histórico de vídeos e acompanhe sua evolução dentro do programa CUT.</div>
+          </div>
+          <span class="kc-featured-cta">
+            <i class="ri-arrow-right-line"></i> Acessar Agora
+          </span>
+        </a>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  :root {
+    --bg-card:      #181c27;
+    --bg-input:     #1e2332;
+    --border:       #2a3048;
+    --border-h:     #3d4d7a;
+    --orange-dim:   #ff6b2b18;
+    --orange-glow:  rgba(255,107,43,.22);
+    --green:        #22c55e;
+    --green-dim:    #22c55e18;
+    --blue:         #3b82f6;
+    --blue-dim:     #3b82f618;
+    --text-faint:   #1e2332;
+    --mono:         'JetBrains Mono', monospace;
+    --r:            14px;
+    --rl:           20px;
+    
+    /* Variaveis de texto que estavam faltando: */
+    --text:         #e2e8f0;
+    --text-muted:   #64748b;
+  }
+
+  /* ── WRAP ── */
+  .kc {
+    font-family: 'Sora', sans-serif;
+    background: transparent;
+    color: var(--text);
+    overflow-x: hidden;
+    padding-bottom: 72px;
+    position: relative;
+  }
+
+  /* ── HERO ── */
+  .kc-hero {
+    position: relative;
+    padding: 56px 20px 52px;
+    text-align: center;
+    overflow: hidden;
+  }
+  /* Glow central */
+  .kc-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 360px;
+    background: radial-gradient(ellipse, rgba(255,107,43,.16) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  /* Grade de fundo */
+  .kc-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,107,43,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,43,.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+  }
+
+  .kc-hero-inner { position: relative; z-index: 1; }
+
+  .kc-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: .7rem;
+    color: var(--orange); letter-spacing: .1em; text-transform: uppercase;
+    background: var(--orange-dim); padding: 5px 15px;
+    border-radius: 99px; border: 1px solid rgba(255,107,43,.3);
+    margin-bottom: 22px;
+  }
+  .kc-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 8px var(--orange);
+    animation: kc-pulse 2s ease-in-out infinite;
+  }
+  @keyframes kc-pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  .kc-hero-kicker {
+    font-family: var(--mono); font-size: .78rem;
+    color: var(--text-muted); letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .kc-hero-title {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    font-weight: 900; line-height: 1.0;
+    letter-spacing: -.035em; margin-bottom: 6px;
+  }
+  .kc-hero-title .cut { color: var(--orange); }
+  .kc-hero-title .kwai {
+    background: linear-gradient(135deg, #ff6b2b, #ff9a5c);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .kc-hero-sub {
+    font-size: 1rem; color: var(--text-muted);
+    max-width: 480px; margin: 16px auto 32px;
+    line-height: 1.65;
+  }
+
+  .kc-hero-actions {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center;
+  }
+  .kc-btn-primary {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--orange);
+    color: #fff; font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: .92rem;
+    padding: 14px 28px; border-radius: 99px;
+    text-decoration: none;
+    box-shadow: 0 6px 24px var(--orange-glow);
+    transition: transform .18s, box-shadow .18s;
+  }
+  .kc-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px var(--orange-glow);
+    color: #fff;
+  }
+  .kc-btn-secondary {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--bg-card);
+    color: var(--text); font-family: 'Sora', sans-serif;
+    font-weight: 600; font-size: .92rem;
+    padding: 14px 28px; border-radius: 99px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color .18s, transform .18s;
+  }
+  .kc-btn-secondary:hover {
+    border-color: var(--border-h);
+    transform: translateY(-2px);
+    color: var(--text);
+  }
+
+  /* ── STATS ── */
+  .kc-stats {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px; padding: 0 20px;
+    margin: 0 auto 48px; max-width: 780px;
+    position: relative; z-index: 1;
+  }
+  .kc-stat {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 20px;
+    flex: 1 1 160px;
+  }
+  .kc-stat-icon {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--orange-dim);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+  .kc-stat-val {
+    font-size: 1.15rem; font-weight: 800;
+    color: var(--text); line-height: 1;
+  }
+  .kc-stat-lbl {
+    font-size: .72rem; color: var(--text-muted);
+    font-family: var(--mono); margin-top: 3px;
+  }
+
+  /* ── MARQUEE ── */
+  .kc-marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    margin-bottom: 52px;
+  }
+  .kc-marquee-band {
+    padding: 16px 0;
+    display: flex; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .kc-marquee-track {
+    display: flex; width: max-content;
+    animation: kc-marquee 26s linear infinite;
+    will-change: transform;
+  }
+  .kc-marquee-track:hover { animation-play-state: paused; }
+  .kc-marquee-group { display: flex; gap: 10px; padding-right: 10px; }
+  .kc-chip {
+    min-height: 38px; padding: 0 18px;
+    border-radius: 99px;
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+    color: var(--text-muted);
+    font-size: .8rem; font-weight: 500;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+  }
+  .kc-chip i {
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-size: .95rem;
+  }
+  @keyframes kc-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── SEÇÃO LABEL ── */
+  .kc-section {
+    padding: 0 20px;
+    max-width: 960px;
+    margin: 0 auto 52px;
+  }
+  .kc-section-label {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .kc-section-label-text {
+    font-family: var(--mono); font-size: .7rem;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: .12em;
+    white-space: nowrap;
+  }
+  .kc-section-label-line {
+    flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── NAV CARDS (subpáginas) ── */
+  .kc-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .kc-nav-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--rl);
+    padding: 24px;
+    text-decoration: none;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    transition: border-color .22s, transform .22s, box-shadow .22s;
+    cursor: pointer;
+  }
+  .kc-nav-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .28s ease;
+  }
+  .kc-nav-card:hover {
+    border-color: var(--border-h);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 48px rgba(0,0,0,.35);
+  }
+  .kc-nav-card:hover::before { transform: scaleX(1); }
+
+  /* Variantes de cor do ícone por card */
+  .kc-nav-card.c-orange .kc-nav-icon { background: var(--orange-dim); color: var(--orange); }
+  .kc-nav-card.c-green  .kc-nav-icon { background: var(--green-dim);  color: var(--green);  }
+  .kc-nav-card.c-blue   .kc-nav-icon { background: var(--blue-dim);   color: var(--blue);   }
+  .kc-nav-card.c-purple .kc-nav-icon { background: #a855f718; color: #a855f7; }
+  .kc-nav-card.c-yellow .kc-nav-icon { background: #f59e0b18; color: #f59e0b; }
+  .kc-nav-card.c-red    .kc-nav-icon { background: #ef444418; color: #ef4444; }
+
+  .kc-nav-card.c-orange::before { background: linear-gradient(90deg, var(--orange), var(--orange2)); }
+  .kc-nav-card.c-green::before  { background: linear-gradient(90deg, var(--green), #4ade80); }
+  .kc-nav-card.c-blue::before   { background: linear-gradient(90deg, var(--blue), #60a5fa); }
+  .kc-nav-card.c-purple::before { background: linear-gradient(90deg, #a855f7, #c084fc); }
+  .kc-nav-card.c-yellow::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .kc-nav-card.c-red::before    { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+  .kc-nav-icon {
+    width: 46px; height: 46px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem;
+    margin-bottom: 16px; flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .kc-nav-card:hover .kc-nav-icon { transform: scale(1.1) rotate(-4deg); }
+
+  .kc-nav-tag {
+    font-family: var(--mono); font-size: .65rem;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em;
+    margin-bottom: 7px;
+  }
+  .kc-nav-title {
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--text); margin-bottom: 9px; line-height: 1.25;
+  }
+  .kc-nav-desc {
+    font-size: .82rem; color: var(--text-muted);
+    line-height: 1.6; flex-grow: 1;
+  }
+  .kc-nav-arrow {
+    display: flex; align-items: center; gap: 5px;
+    margin-top: 18px;
+    font-family: var(--mono); font-size: .72rem;
+    color: var(--text-muted);
+    transition: color .2s, gap .2s;
+  }
+  .kc-nav-card:hover .kc-nav-arrow {
+    color: var(--orange); gap: 9px;
+  }
+
+  /* ── CARD DESTAQUE (Área do Criador) ── */
+  .kc-featured-card {
+    background: linear-gradient(135deg, rgba(255,107,43,.12), rgba(255,154,92,.06));
+    border: 1px solid rgba(255,107,43,.35);
+    border-radius: var(--rl);
+    padding: 36px 32px;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 28px;
+    flex-wrap: wrap;
+    position: relative; overflow: hidden;
+    transition: transform .22s, box-shadow .22s, border-color .22s;
+    box-shadow: 0 0 0 1px rgba(255,107,43,.1), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .kc-featured-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255,107,43,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .kc-featured-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,107,43,.6);
+    box-shadow: 0 20px 48px rgba(255,107,43,.15), 0 0 0 1px rgba(255,107,43,.25);
+    color: var(--text);
+  }
+
+  .kc-featured-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; color: #fff;
+    box-shadow: 0 8px 24px var(--orange-glow);
+    flex-shrink: 0;
+  }
+  .kc-featured-body { flex: 1; min-width: 200px; }
+  .kc-featured-tag {
+    font-family: var(--mono); font-size: .68rem;
+    color: var(--orange); text-transform: uppercase; letter-spacing: .1em;
+    margin-bottom: 7px;
+  }
+  .kc-featured-title {
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--text); margin-bottom: 8px; letter-spacing: -.01em;
+  }
+  .kc-featured-desc {
+    font-size: .86rem; color: var(--text-muted); line-height: 1.6;
+  }
+  .kc-featured-cta {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--orange); color: #fff;
+    padding: 13px 24px; border-radius: 99px;
+    font-weight: 700; font-size: .88rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px var(--orange-glow);
+    transition: transform .18s, box-shadow .18s;
+    text-decoration: none;
+    align-self: center;
+  }
+  .kc-featured-card:hover .kc-featured-cta {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--orange-glow);
+    color: #fff;
+  }
+</style>

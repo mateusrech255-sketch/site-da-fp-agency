@@ -1,25 +1,26 @@
 ---
-import { Image } from 'astro:assets';
 import logo from '../assets/fpagency.svg';
+const base = import.meta.env.BASE_URL;
+const baseUrl = base === '/' ? '' : base;
 ---
 
 <header class="site-header">
   <div class="container nav">
-    <a href="/site-da-fp-agency/" class="brand" aria-label="FP Agency">
-      <Image src={logo} alt="FP Agency Logo" class="brand-logo" loading="eager" fetchpriority="high" />
+    <a href={`${baseUrl}/`} class="brand" aria-label="FP Agency">
+      <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
       <span>FP Agency</span>
     </a>
 
     <nav class="nav-links" id="navLinks">
-      <a href="/site-da-fp-agency/#jornadas">Jornadas</a>
-      <a href="/site-da-fp-agency/#programas">Programas</a>
-      <a href="/site-da-fp-agency/#estrutura">Estrutura</a>
-      <a href="/site-da-fp-agency/#resultados">Resultados</a>
-      <a href="/site-da-fp-agency/#faq">FAQ</a>
-      <a href="/site-da-fp-agency/#contato">Contato</a>
+      <a href={`${baseUrl}/#jornadas`}>Jornadas</a>
+      <a href={`${baseUrl}/#programas`}>Programas</a>
+      <a href={`${baseUrl}/#estrutura`}>Estrutura</a>
+      <a href={`${baseUrl}/#resultados`}>Resultados</a>
+      <a href={`${baseUrl}/#faq`}>FAQ</a>
+      <a href={`${baseUrl}/#contato`}>Contato</a>
     </nav>
 
-    <a href="/site-da-fp-agency/#contato" class="btn btn-secondary nav-btn">Falar com a FP</a>
+    <a href={`${baseUrl}/#contato`} class="btn-secondary nav-btn">Falar com a FP</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
   </div>
 </header>
@@ -27,7 +28,7 @@ import logo from '../assets/fpagency.svg';
 <script>
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
-
+  
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", () => {
       navLinks.classList.toggle("open");
@@ -42,19 +43,23 @@ import logo from '../assets/fpagency.svg';
     z-index: 90;
     padding: 16px 0;
     backdrop-filter: blur(16px);
-    background: rgba(15, 17, 23, 0.66);
+    background: rgba(15, 17, 23, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: system-ui, -apple-system, sans-serif;
   }
+  
   .container {
-    width: min(calc(100% - 32px), var(--container, 1220px));
+    width: min(calc(100% - 32px), 1220px);
     margin: 0 auto;
   }
+  
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
   }
+  
   .brand {
     display: inline-flex;
     align-items: center;
@@ -65,11 +70,13 @@ import logo from '../assets/fpagency.svg';
     color: #fff;
     text-decoration: none;
   }
+  
   .brand-logo {
     width: 46px;
     height: 46px;
     object-fit: contain;
   }
+  
   .nav-links {
     display: flex;
     align-items: center;
@@ -77,12 +84,14 @@ import logo from '../assets/fpagency.svg';
     color: #dbe7f0;
     font-weight: 650;
   }
+  
   .nav-links a {
     text-decoration: none;
     color: inherit;
     position: relative;
     opacity: 0.92;
   }
+  
   .nav-links a::after {
     content: "";
     position: absolute;
@@ -90,40 +99,39 @@ import logo from '../assets/fpagency.svg';
     bottom: -8px;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--orange, #ff6b2b), var(--orange2, #ff9a5c));
+    background: linear-gradient(90deg, #ff6b2b, #ff9a5c);
     transition: width 0.2s ease;
   }
+  
   .nav-links a:hover::after {
     width: 100%;
   }
-  .btn {
-    min-height: 56px;
+  
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.045);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    min-height: 50px;
     padding: 0 22px;
     border-radius: 999px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     font-weight: 800;
-    border: 1px solid transparent;
     text-decoration: none;
     transition: transform 0.18s ease;
-    cursor: pointer;
   }
-  .btn:hover {
+  
+  .btn-secondary:hover {
     transform: translateY(-2px);
   }
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.045);
-    color: var(--text, #e2e8f0);
-    border-color: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-  }
+  
   .menu-toggle {
     display: none;
     background: transparent;
     border: 0;
-    color: var(--text, #e2e8f0);
+    color: #fff;
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -142,7 +150,7 @@ import logo from '../assets/fpagency.svg';
       border-radius: 22px;
       background: rgba(8, 16, 24, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow, 0 30px 80px rgba(0,0,0,0.35));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
     }
     .nav-links.open { display: flex; }
     .menu-toggle { display: inline-flex; }
