@@ -1,75 +1,169 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import logo from '../assets/fpagency.svg';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
   <div class="fp-agency-wrapper">
-    <header class="site-header">
-      <div class="container nav">
-        <!-- Como é uma página interna, o logo volta para a home (/) -->
-        <a href="/" class="brand" aria-label="FP Agency">
-          <img src={logo.src} alt="FP Agency Logo" class="brand-logo" loading="eager" fetchpriority="high" />
-          <span>FP Agency</span>
-        </a>
-        <a href="/#contato" class="btn btn-secondary">Voltar</a>
+    <Header />
+
+    <main class="container section legal-page">
+      <div class="legal-header">
+        <h1>Aviso Legal</h1>
+        <p class="lead muted">Atualizado em 09/05/2026.</p>
       </div>
-    </header>
-
-    <main class="container section">
-      <h1>Aviso Legal</h1>
-      <p class="lead muted">Atualizado em 09/05/2026.</p>
       
-      <div style="margin-top: 40px; color: var(--text);">
-        <h3>1. Coleta de Dados</h3>
-        <p>A FP Agency valoriza a sua privacidade e está estritamente comprometida em proteger os dados pessoais dos usuários e visitantes do site https://www.fpagency.com.br e de suas plataformas internas. Esta Política de Privacidade descreve de forma clara e transparente como coletamos, utilizamos, armazenamos e protegemos suas informações, em total conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).
+      <div class="legal-content">
+        <p>
+          A FP Agency valoriza a sua privacidade e está estritamente comprometida em proteger os dados pessoais dos usuários e visitantes do site https://www.fpagency.com.br e de suas plataformas internas. Esta Política de Privacidade descreve de forma clara e transparente como coletamos, utilizamos, armazenamos e protegemos suas informações, em total conformidade com a <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm" target="_blank" rel="noopener noreferrer">Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD)</a>.
+        </p>
 
-1. Informações que coletamos Coletamos dados necessários para a prestação dos nossos serviços, recrutamento e segurança do sistema. Estes dados dividem-se em:
+        <h2>1. Informações que coletamos</h2>
+        <p>Coletamos dados necessários para a prestação dos nossos serviços, recrutamento e segurança do sistema. Estes dados dividem-se em:</p>
+        <ul>
+          <li><strong>Informações fornecidas ativamente pelo usuário:</strong> Nome completo, e-mail, telefone (WhatsApp) e quaisquer outras informações enviadas voluntariamente por meio de nossos formulários de contato e aplicação.</li>
+          <li><strong>Dados coletados na plataforma de recrutamento e dashboard:</strong> Para usuários que se cadastram em nosso sistema interno, coletamos dados de identificação e financeiros, incluindo CPF, data de nascimento, Chave PIX (opcional, para fins de repasse de monetização), foto de perfil, dados de autenticação (login) e informações atreladas a perfis em redes sociais (como links do Kwai, TikTok e portfólios).</li>
+          <li><strong>Informações coletadas automaticamente:</strong> Durante a navegação, nosso sistema coleta automaticamente dados como Endereço IP, tipo de navegador, dispositivo utilizado, tempo de permanência e páginas acessadas, essenciais para a segurança e otimização do nosso ambiente web.</li>
+        </ul>
 
-Informações fornecidas ativamente pelo usuário: Nome completo, e-mail, telefone (WhatsApp) e quaisquer outras informações enviadas voluntariamente por meio de nossos formulários de contato e aplicação.
+        <h2>2. Uso das informações e Finalidade</h2>
+        <p>Os dados coletados são utilizados para finalidades específicas e legítimas, incluindo: processamento e avaliação de cadastros de criadores e editores; comunicação direta via WhatsApp ou e-mail; viabilização de repasses financeiros (pagamentos e monetização); melhoria da interface e da experiência do usuário no sistema; e prevenção contra fraudes e acessos indevidos.</p>
 
-Dados coletados na plataforma de recrutamento e dashboard: Para usuários que se cadastram em nosso sistema interno, coletamos dados de identificação e financeiros, incluindo CPF, data de nascimento, Chave PIX (opcional, para fins de repasse de monetização), foto de perfil, dados de autenticação (login) e informações atreladas a perfis em redes sociais (como links do Kwai, TikTok e portfólios).
+        <h3>2.1 Base legal para o tratamento de dados</h3>
+        <p>O tratamento de dados pessoais realizado pela FP Agency é fundamentado nas bases legais previstas na LGPD, incluindo:</p>
+        <ul>
+          <li>Consentimento explícito do titular;</li>
+          <li>Cumprimento de obrigação legal ou regulatória (especialmente para questões financeiras e fiscais);</li>
+          <li>Execução de contrato ou de procedimentos preliminares relacionados a contrato (termos de agenciamento e recrutamento);</li>
+          <li>Legítimo interesse da FP Agency, visando a segurança da plataforma e a prestação eficiente dos serviços, respeitados os direitos fundamentais do titular. Sempre que o tratamento for baseado no consentimento, o usuário poderá revogá-lo a qualquer momento.</li>
+        </ul>
 
-Informações coletadas automaticamente: Durante a navegação, nosso sistema coleta automaticamente dados como Endereço IP, tipo de navegador, dispositivo utilizado, tempo de permanência e páginas acessadas, essenciais para a segurança e otimização do nosso ambiente web.
+        <h3>2.2 Tratamento de dados sensíveis e de identificação</h3>
+        <p>Dados críticos, como o CPF e informações de repasse financeiro, são protegidos com camadas adicionais de segurança no nosso banco de dados. Eles são utilizados restritamente para validação de identidade (KYC - Know Your Customer), emissão de repasses e prevenção estrutural contra fraudes na plataforma.</p>
 
-2. Uso das informações e Finalidade Os dados coletados são utilizados para finalidades específicas e legítimas, incluindo: processamento e avaliação de cadastros de criadores e editores; comunicação direta via WhatsApp ou e-mail; viabilização de repasses financeiros (pagamentos e monetização); melhoria da interface e da experiência do usuário no sistema; e prevenção contra fraudes e acessos indevidos.
+        <h3>2.3 Proteção de menores</h3>
+        <p>Nossos serviços e formulários de recrutamento são direcionados a usuários com plena capacidade civil. Usuários entre 14 e 18 anos só poderão integrar projetos ou fornecer dados mediante autorização prévia, expressa e documentada dos pais ou responsáveis legais.</p>
 
-2.1 Base legal para o tratamento de dados O tratamento de dados pessoais realizado pela FP Agency é fundamentado nas bases legais previstas na LGPD, incluindo:
+        <h3>2.4 Consentimento para dados financeiros</h3>
+        <p>Ao fornecer voluntariamente dados financeiros, como chave PIX, o usuário declara estar ciente de que essas informações serão utilizadas exclusivamente para fins de pagamento, repasse de valores e cumprimento de obrigações financeiras. O fornecimento desses dados é opcional, porém necessário para participação em projetos que envolvam remuneração.</p>
 
-Consentimento explícito do titular;
+        <h2>3. Cookies e tecnologias de rastreamento</h2>
+        <p>Utilizamos cookies e tecnologias similares para melhorar a experiência do usuário, garantir a estabilidade das sessões de login, analisar o tráfego do site e personalizar conteúdos. Nossos cookies dividem-se em:</p>
+        <ul>
+          <li><strong>Cookies essenciais:</strong> Estritamente necessários para o funcionamento do site e para a manutenção de sessões seguras no dashboard.</li>
+          <li><strong>Cookies analíticos:</strong> Coletam informações agregadas sobre uso e desempenho (ex.: Google Analytics) para otimização da plataforma.</li>
+          <li><strong>Cookies de marketing:</strong> Utilizados eventualmente para campanhas de publicidade ou remarketing.</li>
+        </ul>
+        <p>O usuário pode gerenciar ou desativar os cookies não essenciais diretamente nas configurações do seu navegador. Ao continuar navegando na plataforma, o usuário concorda com o uso dessas tecnologias, conforme descrito.</p>
 
-Cumprimento de obrigação legal ou regulatória (especialmente para questões financeiras e fiscais);
+        <h2>4. Compartilhamento e Transferência Internacional de Dados</h2>
+        <p>A FP Agency não comercializa dados pessoais. O compartilhamento ocorre apenas quando estritamente necessário para: a execução dos serviços (ex.: envio de relatórios anonimizados para plataformas parceiras como o Kwai), processamento de pagamentos ou mediante requisição de autoridades legais.</p>
+        <p><strong>Transferência internacional:</strong> Como utilizamos infraestruturas de nuvem e serviços de terceiros globais, alguns dados poderão ser armazenados em servidores localizados fora do Brasil. A FP Agency adota medidas rigorosas para garantir que essas transferências ocorram em ambientes que assegurem níveis adequados de proteção de dados, em conformidade com a LGPD.</p>
 
-Execução de contrato ou de procedimentos preliminares relacionados a contrato (termos de agenciamento e recrutamento);
+        <h2>5. Segurança e Retenção</h2>
+        <p>Implementamos rigorosos padrões técnicos para proteger seus dados, incluindo o uso de conexões criptografadas (HTTPS), controle estrito de acesso a bancos de dados e monitoramento contínuo contra atividades suspeitas.</p>
+        <p><strong>Período de retenção:</strong> Os dados pessoais serão armazenados apenas pelo tempo necessário para cumprir as finalidades para as quais foram coletados, abrangendo o cumprimento de obrigações legais, contratuais, prestação de contas financeiras e o exercício regular de direitos em processos. Esgotada a finalidade, os dados serão excluídos de forma segura ou anonimizados.</p>
 
-Legítimo interesse da FP Agency, visando a segurança da plataforma e a prestação eficiente dos serviços, respeitados os direitos fundamentais do titular. Sempre que o tratamento for baseado no consentimento, o usuário poderá revogá-lo a qualquer momento.
+        <h2>6. Direitos do Titular</h2>
+        <p>Em conformidade com o Art. 18 da LGPD, o titular dos dados tem o direito de solicitar a qualquer momento: o acesso aos seus dados; a correção de informações incompletas ou desatualizadas; a anonimização, bloqueio ou eliminação de dados desnecessários; e a portabilidade ou revogação do consentimento.</p>
 
-2.2 Tratamento de dados sensíveis e de identificação Dados críticos, como o CPF e informações de repasse financeiro, são protegidos com camadas adicionais de segurança no nosso banco de dados. Eles são utilizados restritamente para validação de identidade (KYC - Know Your Customer), emissão de repasses e prevenção estrutural contra fraudes na plataforma.
-
-2.3 Proteção de menores Nossos serviços e formulários de recrutamento são direcionados a usuários com plena capacidade civil. Usuários entre 14 e 18 anos só poderão integrar projetos ou fornecer dados mediante autorização prévia, expressa e documentada dos pais ou responsáveis legais.
-
-2.4 Consentimento para dados financeiros Ao fornecer voluntariamente dados financeiros, como chave PIX, o usuário declara estar ciente de que essas informações serão utilizadas exclusivamente para fins de pagamento, repasse de valores e cumprimento de obrigações financeiras. O fornecimento desses dados é opcional, porém necessário para participação em projetos que envolvam remuneração.
-
-3. Cookies e tecnologias de rastreamento Utilizamos cookies e tecnologias similares para melhorar a experiência do usuário, garantir a estabilidade das sessões de login, analisar o tráfego do site e personalizar conteúdos. Nossos cookies dividem-se em:
-
-Cookies essenciais: Estritamente necessários para o funcionamento do site e para a manutenção de sessões seguras no dashboard.
-
-Cookies analíticos: Coletam informações agregadas sobre uso e desempenho (ex.: Google Analytics) para otimização da plataforma.
-
-Cookies de marketing: Utilizados eventualmente para campanhas de publicidade ou remarketing. O usuário pode gerenciar ou desativar os cookies não essenciais diretamente nas configurações do seu navegador. Ao continuar navegando na plataforma, o usuário concorda com o uso dessas tecnologias, conforme descrito.
-
-4. Compartilhamento e Transferência Internacional de Dados A FP Agency não comercializa dados pessoais. O compartilhamento ocorre apenas quando estritamente necessário para: a execução dos serviços (ex.: envio de relatórios anonimizados para plataformas parceiras como o Kwai), processamento de pagamentos ou mediante requisição de autoridades legais.
-
-Transferência internacional: Como utilizamos infraestruturas de nuvem e serviços de terceiros globais, alguns dados poderão ser armazenados em servidores localizados fora do Brasil. A FP Agency adota medidas rigorosas para garantir que essas transferências ocorram em ambientes que assegurem níveis adequados de proteção de dados, em conformidade com a LGPD.
-
-5. Segurança e Retenção Implementamos rigorosos padrões técnicos para proteger seus dados, incluindo o uso de conexões criptografadas (HTTPS), controle estrito de acesso a bancos de dados e monitoramento contínuo contra atividades suspeitas.
-
-Período de retenção: Os dados pessoais serão armazenados apenas pelo tempo necessário para cumprir as finalidades para as quais foram coletados, abrangendo o cumprimento de obrigações legais, contratuais, prestação de contas financeiras e o exercício regular de direitos em processos. Esgotada a finalidade, os dados serão excluídos de forma segura ou anonimizados.
-
-6. Direitos do Titular Em conformidade com o Art. 18 da LGPD, o titular dos dados tem o direito de solicitar a qualquer momento: o acesso aos seus dados; a correção de informações incompletas ou desatualizadas; a anonimização, bloqueio ou eliminação de dados desnecessários; e a portabilidade ou revogação do consentimento.
-
-7. Encarregado pelo tratamento de dados (DPO) e Contato A FP Agency disponibiliza um canal direto de comunicação para assuntos relacionados à proteção de dados e privacidade. Para exercer seus direitos ou esclarecer dúvidas, entre em contato com nosso encarregado através do e-mail: suporte@fpagency.com.br.</p>
+        <h2>7. Encarregado pelo tratamento de dados (DPO) e Contato</h2>
+        <p>A FP Agency disponibiliza um canal direto de comunicação para assuntos relacionados à proteção de dados e privacidade. Para exercer seus direitos ou esclarecer dúvidas, entre em contato com nosso encarregado através do e-mail: <a href="mailto:suporte@fpagency.com.br">suporte@fpagency.com.br</a>.</p>
       </div>
     </main>
+
+    <Footer />
   </div>
 </Layout>
+
+<style>
+  /* --- ESTILOS EXCLUSIVOS DO TEXTO JURÍDICO --- */
+  .section {
+    padding: 80px 0;
+  }
+
+  .legal-page h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+  }
+
+  .legal-header {
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 24px;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    margin-top: 0;
+  }
+
+  .muted {
+    color: var(--muted);
+  }
+
+  .legal-content {
+    max-width: 840px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .legal-content h2 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-top: 56px;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-content h3 {
+    font-size: 1.25rem;
+    color: var(--orange2);
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+
+  .legal-content p {
+    margin-bottom: 20px;
+    color: #dce8f1;
+    font-size: 1.05rem;
+  }
+
+  .legal-content ul {
+    margin-bottom: 24px;
+    padding-left: 24px;
+    color: #dce8f1;
+    list-style-type: disc;
+  }
+
+  .legal-content li {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+  }
+
+  .legal-content li strong {
+    color: #fff;
+  }
+
+  .legal-content a {
+    color: var(--orange2);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  .legal-content a:hover {
+    color: var(--orange);
+    text-decoration-color: var(--orange);
+  }
+
+  @media (max-width: 640px) {
+    .legal-content h2 { font-size: 1.5rem; margin-top: 40px; }
+    .section { padding: 60px 0; }
+  }
+</style>

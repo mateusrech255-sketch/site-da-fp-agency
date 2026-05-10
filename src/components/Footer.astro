@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/fpagency.svg';
+---
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="brand" style="margin-bottom: 14px;">
+        <Image src={logo} alt="FP Agency Logo" class="brand-logo" loading="lazy" />
+        <span>FP Agency</span>
+      </div>
+      <p class="subtle">
+        Conectando criadores, recrutadores e marcas com tecnologia, treinamento e foco em resultados massivos. Direcionamento estratégico liderado por Mateus.
+      </p>
+    </div>
+
+    <div>
+      <h3>Navegação</h3>
+      <div class="footer-links">
+        <a href="/site-da-fp-agency/#jornadas">Jornadas</a>
+        <a href="/site-da-fp-agency/#programas">Programas</a>
+        <a href="/site-da-fp-agency/#estrutura">Estrutura</a>
+        <a href="/site-da-fp-agency/#resultados">Resultados</a>
+        <a href="/site-da-fp-agency/#faq">FAQ</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Institucional</h3>
+      <div class="footer-links">
+        <a href="/site-da-fp-agency/politica-de-privacidade">Política de Privacidade</a>
+        <a href="/site-da-fp-agency/termos-de-servico">Termos de Serviço</a>
+        <a href="/site-da-fp-agency/aviso-legal">Aviso Legal</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .container {
+    width: min(calc(100% - 32px), var(--container, 1220px));
+    margin: 0 auto;
+  }
+  footer {
+    padding: 34px 0 44px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--text, #e2e8f0);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 22px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 900;
+    font-size: 1.04rem;
+    color: #fff;
+  }
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+  .subtle {
+    font-size: 0.92rem;
+    color: var(--muted, #64748b);
+    line-height: 1.6;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+  .footer-links {
+    display: grid;
+    gap: 10px;
+  }
+  .footer-links a {
+    color: var(--muted, #64748b);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-links a:hover {
+    color: #fff;
+  }
+  @media (max-width: 1120px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
