@@ -1,0 +1,347 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Central de Busca - FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <Header />
+
+  <div class="fp" id="fp-root">
+    <div class="fp-loader" id="fp-loader">
+      <div class="fp-loader-ring"></div>
+      <span class="fp-loader-text">consultando base...</span>
+    </div>
+
+    <div class="fp-hero">
+      <div class="fp-hero-eyebrow"><i class="fas fa-circle-dot"></i> Busca em Tempo Real</div>
+      <h1 class="fp-hero-title">Consulte <span>status</span> e<br>relatórios de editores</h1>
+      <p class="fp-hero-sub">Pesquise por nome ou WhatsApp para acompanhar aprovações e desempenho mensal.</p>
+    </div>
+
+    <main class="fp-content">
+      <section class="search-card">
+        <div class="sc-head">
+          <div class="sc-icon"><i class="fas fa-user-check"></i></div>
+          <span class="sc-title">Status de Aprovação</span>
+        </div>
+        <p class="sc-desc">Pesquise pelo Nome do Editor ou número de WhatsApp.</p>
+        <div class="input-row">
+          <input type="text" id="in-aprovacao" class="fp-input" placeholder="Ex: João ou 81999999999" autocomplete="off">
+          <select id="sel-aprovacao" class="fp-select">
+            <option value="all">Todo o período</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="30">Últimos 30 dias</option>
+          </select>
+          <button class="fp-btn" id="btn-aprovacao"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+        </div>
+      </section>
+      <div class="results-area" id="res-aprovacao" aria-live="polite"></div>
+
+      <div class="fp-divider">
+        <div class="fp-divider-line"></div>
+        <span class="fp-divider-label">Relatórios</span>
+        <div class="fp-divider-line"></div>
+      </div>
+
+      <section class="search-card">
+        <div class="sc-head">
+          <div class="sc-icon"><i class="fas fa-chart-line"></i></div>
+          <span class="sc-title">Histórico de Relatórios</span>
+        </div>
+        <p class="sc-desc">Digite o Nome de Usuário para consultar o desempenho mensal.</p>
+        <div class="input-row">
+          <input type="text" id="in-relatorio" class="fp-input" placeholder="Ex: NewsBR" autocomplete="off">
+          <select id="sel-relatorio" class="fp-select">
+            <option value="all">Todo o período</option>
+            <option value="1">Mês atual</option>
+          </select>
+          <button class="fp-btn" id="btn-relatorio"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+        </div>
+      </section>
+      <div class="results-area" id="res-relatorios" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* ─── TOKENS E RESET ─────────────────────────────────────────────────────── */
+  :root {
+    --bg-card: #181c27;
+    --bg-input: #1e2332;
+    --border: #2a3048;
+    --border-hover: #3d4d7a;
+    --orange: #ff6b2b;
+    --orange-dim: #ff6b2b22;
+    --orange-glow: rgba(255,107,43,.18);
+    --green: #22c55e;
+    --green-dim: #22c55e1a;
+    --red: #ef4444;
+    --red-dim: #ef44441a;
+    --yellow: #f59e0b;
+    --yellow-dim: #f59e0b1a;
+    --blue: #3b82f6;
+    --blue-dim: #3b82f61a;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-faint: #334155;
+    --radius: 12px;
+    --radius-lg: 18px;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .fp {
+    font-family: 'Sora', sans-serif;
+    background: transparent;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 60px;
+    color: var(--text);
+  }
+
+  /* ─── LOADER ─────────────────────────────────────────────────────────────── */
+  .fp-loader { display: none; position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); z-index: 999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+  .fp-loader.on { display: flex; }
+  .fp-loader-ring { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .fp-loader-text { font-size: .82rem; color: var(--text-muted); font-family: var(--mono); letter-spacing: .05em; }
+
+  /* ─── HERO ───────────────────────────────────────────────────────────────── */
+  .fp-hero { position: relative; z-index: 1; padding: 40px 24px 56px; text-align: center; overflow: hidden; }
+  .fp-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, var(--orange-glow) 0%, transparent 70%); pointer-events: none; }
+  .fp-hero-eyebrow { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: .72rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; background: var(--orange-dim); padding: 5px 13px; border-radius: 99px; border: 1px solid var(--orange-glow); margin-bottom: 18px; }
+  .fp-hero-title { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.1; color: var(--text); letter-spacing: -.02em; margin-bottom: 10px; }
+  .fp-hero-title span { color: var(--orange); }
+  .fp-hero-sub { font-size: .88rem; color: var(--text-muted); max-width: 380px; margin: 0 auto; line-height: 1.6; }
+
+  /* ─── CONTEÚDO ───────────────────────────────────────────────────────────── */
+  .fp-content { position: relative; z-index: 2; padding: 0 20px; max-width: 860px; margin: -20px auto 0; }
+  
+  .search-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; transition: border-color .25s; }
+  .search-card:focus-within { border-color: var(--border-hover); }
+  .sc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .sc-icon { width: 32px; height: 32px; background: var(--orange-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: .88rem; flex-shrink: 0; }
+  .sc-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .sc-desc { font-size: .8rem; color: var(--text-muted); margin-bottom: 16px; margin-left: 42px; }
+
+  .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .fp-input, .fp-select { flex: 1 1 200px; padding: 12px 15px; background: var(--bg-input); border: 1.5px solid var(--border); border-radius: var(--radius); font-family: 'Sora', sans-serif; font-size: .88rem; color: var(--text); outline: none; transition: border-color .2s, box-shadow .2s; }
+  .fp-select { flex: 0 1 175px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .fp-input::placeholder { color: var(--text-faint); }
+  .fp-input:focus, .fp-select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px var(--orange-dim); }
+  
+  .fp-btn { flex: 0 1 auto; min-width: 118px; background: var(--orange); color: #fff; border: none; padding: 12px 22px; border-radius: var(--radius); font-family: 'Sora', sans-serif; font-weight: 700; font-size: .88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: transform .16s, box-shadow .16s; box-shadow: 0 4px 16px var(--orange-glow); }
+  .fp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px var(--orange-glow); }
+
+  .fp-divider { display: flex; align-items: center; gap: 12px; margin: 28px 0 20px; }
+  .fp-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .fp-divider-label { font-family: var(--mono); font-size: .7rem; color: var(--text-faint); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* ─── RESULT CARDS ───────────────────────────────────────────────────────── */
+  .results-area { margin-bottom: 30px; }
+  .result-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 12px; position: relative; overflow: hidden; animation: slideIn .25s ease both; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .result-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); border-radius: 3px 0 0 3px; }
+  .result-card.from-cut::before { background: var(--blue); }
+  .result-card.from-narrastars::before { background: #a855f7; }
+  
+  .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .rc-name-block { display: flex; flex-direction: column; gap: 4px; }
+  .rc-name { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .rc-fonte { font-family: var(--mono); font-size: .68rem; color: var(--text-muted); letter-spacing: .06em; }
+  .rc-badges { display: flex; gap: 7px; flex-wrap: wrap; align-items: flex-start; }
+  
+  .rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+  .db { display: flex; flex-direction: column; gap: 4px; }
+  .db-label { font-family: var(--mono); font-size: .65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .07em; }
+  .db-value { font-size: .88rem; color: var(--text); font-weight: 600; }
+  
+  /* ─── BADGES ─────────────────────────────────────────────────────────────── */
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 99px; font-family: var(--mono); font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+  .b-success { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+  .b-danger { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+  .b-warning { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
+  .b-neutral { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
+  .b-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue); }
+  .b-purple { background: #a855f71a; color: #a855f7; border: 1px solid #a855f7; }
+  
+  .btn-link { display: inline-flex; align-items: center; gap: 5px; background: var(--bg-input); color: var(--orange); padding: 5px 12px; border-radius: 8px; font-family: var(--mono); font-size: .72rem; text-decoration: none; border: 1px solid var(--border); }
+  .tag-mes { font-family: var(--mono); font-size: .72rem; color: var(--text-muted); background: var(--bg-input); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); }
+  
+  .feedback { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 22px 16px; font-size: .86rem; color: var(--text-muted); font-family: var(--mono); }
+  .feedback.error { color: var(--red); }
+
+  @media (max-width: 560px) { .fp-select, .fp-btn { flex: 1 1 100%; } }
+</style>
+
+<script is:inline>
+  (function () {
+    'use strict';
+
+    const API_URL   = 'https://script.google.com/macros/s/AKfycbzUol4KKXVu3F8CKLvXUuSnP6gFT_rkv3N_jdrJYN9oNRUq_LU4acBKhDZs-YyU21ng/exec';
+    const PAGE_SIZE = 20;
+    const MIN_TERM  = 2;
+
+    const state = {
+      aprovacao:  { page: 1, termo: '', filtro: 'all', loading: false },
+      relatorios: { page: 1, termo: '', filtro: 'all', loading: false }
+    };
+    
+    function esc(v) { return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    
+    const showLoader = () => document.getElementById('fp-loader').classList.add('on');
+    const hideLoader = () => document.getElementById('fp-loader').classList.remove('on');
+    function setFeedback(id, msg, isErr = false) { 
+      document.getElementById(id).innerHTML = `<div class="feedback ${isErr ? 'error' : ''}"><i class="fas ${isErr ? 'fa-triangle-exclamation' : 'fa-circle-info'}"></i> ${esc(msg)}</div>`; 
+    }
+
+    async function fetchAPI(action, termo, filtro, page) {
+      const url = new URL(API_URL);
+      url.searchParams.set('action', action); 
+      url.searchParams.set('termo', termo); 
+      url.searchParams.set('filtro', filtro); 
+      url.searchParams.set('page', page); 
+      url.searchParams.set('limit', PAGE_SIZE);
+      const resp = await fetch(url.toString(), { method: 'GET', redirect: 'follow' });
+      return await resp.json();
+    }
+
+    function badgeStatus(status) {
+      const s = String(status || '').toLowerCase();
+      if (s.includes('aprovado')) return ['b-success', 'fa-circle-check', status || 'Aprovado'];
+      if (s.includes('reprovado')) return ['b-danger', 'fa-circle-xmark', status || 'Reprovado'];
+      if (s.includes('pendente')||s.includes('analis')) return ['b-warning', 'fa-clock', status || 'Em Análise'];
+      return ['b-neutral', 'fa-circle-question', status || 'Em Análise'];
+    }
+
+    function renderAprovacao(items) {
+      const container = document.getElementById('res-aprovacao');
+      container.innerHTML = '';
+      items.forEach(item => {
+        const [bClass, bIcon, bLabel] = badgeStatus(item.statusResultado);
+        const card = document.createElement('div');
+        card.className = `result-card ${item.fonte === 'Cut' ? 'from-cut' : item.fonte === 'Narrastars' ? 'from-narrastars' : ''}`;
+        card.innerHTML = `
+          <div class="rc-head">
+            <div class="rc-name-block">
+              <span class="rc-name">${esc(item.nomeCompleto) || 'Anônimo'}</span>
+              <span class="rc-fonte">${esc(item.fonte || 'Resultados')}</span>
+            </div>
+            <div class="rc-badges">
+              <span class="badge ${bClass}"><i class="fas ${bIcon}"></i> ${esc(bLabel)}</span>
+            </div>
+          </div>
+          <div class="rc-grid">
+            <div class="db"><span class="db-label">Data</span><span class="db-value">${esc(item.data) || '-'}</span></div>
+            <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsapp) || '-'}</span></div>
+            ${item.motivo ? `<div class="db"><span class="db-label">Motivo</span><span class="db-value" style="font-size:.82rem; color:var(--text-muted)">${esc(item.motivo)}</span></div>` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderRelatorios(items) {
+      const container = document.getElementById('res-relatorios');
+      container.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.innerHTML = `
+          <div class="rc-head">
+            <div class="rc-name-block">
+              <span class="rc-name">${esc(item.nomeUsuario) || '-'}</span>
+              <span class="rc-fonte">${esc(item.categoria) || '-'}</span>
+            </div>
+            <div class="rc-badges">
+              <span class="tag-mes">${esc(item.mesReferencia) || '-'}</span>
+            </div>
+          </div>
+          <div class="rc-grid">
+            <div class="db"><span class="db-label">UID Kwai</span><span class="db-value" style="font-family:var(--mono)">${esc(item.uid) || '-'}</span></div>
+            <div class="db"><span class="db-label">Total Views</span><span class="db-value">${esc(item.totalVv)}</span></div>
+            <div class="db"><span class="db-label">Vídeos Válidos</span><span class="db-value">${esc(item.videosValidos)}</span></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function buscar(tipo) {
+      const s = state[tipo];
+      const cfg = tipo === 'aprovacao' 
+        ? { input:'in-aprovacao', select:'sel-aprovacao', result:'res-aprovacao', action:'buscarAprovacao', render:renderAprovacao }
+        : { input:'in-relatorio', select:'sel-relatorio', result:'res-relatorios', action:'buscarRelatorios', render:renderRelatorios };
+      
+      const termo = document.getElementById(cfg.input).value.trim();
+      if (!termo || termo.length < MIN_TERM) { 
+        setFeedback(cfg.result, `Digite ao menos ${MIN_TERM} caracteres.`); 
+        return; 
+      }
+
+      s.termo = termo;
+      s.filtro = document.getElementById(cfg.select).value;
+      
+      setFeedback(cfg.result, 'Consultando base de dados…');
+      showLoader();
+      
+      try {
+        const res = await fetchAPI(cfg.action, s.termo, s.filtro, s.page);
+        hideLoader();
+        
+        if (!res || res.status === 'error') { 
+          setFeedback(cfg.result, res?.message || 'Erro no servidor.', true); 
+          return; 
+        }
+        if (!res.data || res.data.length === 0) { 
+          setFeedback(cfg.result, 'Nenhum registro encontrado para esta busca.'); 
+          return; 
+        }
+        
+        cfg.render(res.data);
+      } catch (err) {
+        hideLoader();
+        setFeedback(cfg.result, 'Falha ao buscar os dados na planilha.', true);
+      }
+    }
+
+    // Eventos de clique
+    document.getElementById('btn-aprovacao').addEventListener('click', () => buscar('aprovacao'));
+    document.getElementById('btn-relatorio').addEventListener('click', () => buscar('relatorios'));
+
+    // Eventos de teclado (Enter)
+    document.getElementById('in-aprovacao').addEventListener('keydown', e => { 
+      if (e.key === 'Enter') buscar('aprovacao'); 
+    });
+    document.getElementById('in-relatorio').addEventListener('keydown', e => { 
+      if (e.key === 'Enter') buscar('relatorios'); 
+    });
+
+    // 🚀 LÓGICA DE AUTO-PREENCHIMENTO (Gatilho da Busca Global no Header)
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('q');
+      
+      if (query && query.trim() !== '') {
+        // Preenche automaticamente o termo de busca nos dois inputs
+        document.getElementById('in-aprovacao').value = query;
+        document.getElementById('in-relatorio').value = query;
+        
+        // Dispara a busca principal de aprovação
+        buscar('aprovacao');
+        
+        // Se quiser que busque os relatórios ao mesmo tempo, basta descomentar a linha abaixo:
+        // buscar('relatorios');
+      }
+    });
+
+  })();
+</script>

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import logo from '../assets/fpagency.svg';
 const base = import.meta.env.BASE_URL;
 const baseUrl = base === '/' ? '' : base;
@@ -8,7 +9,14 @@ const baseUrl = base === '/' ? '' : base;
   <div class="container footer-grid">
     <div>
       <a href={`${baseUrl}/`} class="brand">
-        <img src={logo.src} alt="FP Agency Logo" class="brand-logo" />
+        <Image 
+          src={logo} 
+          alt="FP Agency Logo" 
+          class="brand-logo" 
+          width={46} 
+          height={46} 
+          loading="lazy" 
+        />
         <span>FP Agency</span>
       </a>
       <p class="subtle">
