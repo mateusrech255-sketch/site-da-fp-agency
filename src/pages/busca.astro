@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const baseUrl = base === '/' ? '' : base;
 ---
 
 <Layout title="Central de Busca - FP Agency">
@@ -11,64 +14,475 @@ import Footer from '../components/Footer.astro';
 
   <Header />
 
-  <div class="fp" id="fp-root">
+  <div class="fp" id="fp-root" data-base={baseUrl}>
     <div class="fp-loader" id="fp-loader">
       <div class="fp-loader-ring"></div>
-      <span class="fp-loader-text">consultando base...</span>
+      <span class="fp-loader-text">consultando...</span>
     </div>
 
     <div class="fp-hero">
-      <div class="fp-hero-eyebrow"><i class="fas fa-circle-dot"></i> Busca em Tempo Real</div>
-      <h1 class="fp-hero-title">Consulte <span>status</span> e<br>relatórios de editores</h1>
-      <p class="fp-hero-sub">Pesquise por nome ou WhatsApp para acompanhar aprovações e desempenho mensal.</p>
+      <div class="fp-hero-eyebrow"><i class="fas fa-circle-dot"></i> Central de Comando</div>
+      <h1 class="fp-hero-title">O que você deseja <span>localizar</span>?</h1>
+      <p class="fp-hero-sub">Alterne entre as opções abaixo para buscar editores, relatórios ou informações no site.</p>
     </div>
 
     <main class="fp-content">
-      <section class="search-card">
-        <div class="sc-head">
-          <div class="sc-icon"><i class="fas fa-user-check"></i></div>
-          <span class="sc-title">Status de Aprovação</span>
+      
+      <div class="search-master-card">
+        
+        <div class="tab-switcher" id="tabSwitcher" role="tablist">
+          <div class="tab-slider" id="tabSlider"></div>
+          <button class="tab-btn active" data-tab="aprovacao" data-index="0" role="tab" aria-selected="true">
+            <i class="fas fa-user-check"></i> Aprovação
+          </button>
+          <button class="tab-btn" data-tab="relatorio" data-index="1" role="tab" aria-selected="false">
+            <i class="fas fa-chart-line"></i> Relatórios
+          </button>
+          <button class="tab-btn" data-tab="site" data-index="2" role="tab" aria-selected="false">
+            <i class="fas fa-globe"></i> No Site
+          </button>
         </div>
-        <p class="sc-desc">Pesquise pelo Nome do Editor ou número de WhatsApp.</p>
-        <div class="input-row">
-          <input type="text" id="in-aprovacao" class="fp-input" placeholder="Ex: João ou 81999999999" autocomplete="off">
-          <select id="sel-aprovacao" class="fp-select">
-            <option value="all">Todo o período</option>
-            <option value="7">Últimos 7 dias</option>
-            <option value="30">Últimos 30 dias</option>
-          </select>
-          <button class="fp-btn" id="btn-aprovacao"><i class="fas fa-magnifying-glass"></i> Buscar</button>
-        </div>
-      </section>
-      <div class="results-area" id="res-aprovacao" aria-live="polite"></div>
 
-      <div class="fp-divider">
-        <div class="fp-divider-line"></div>
-        <span class="fp-divider-label">Relatórios</span>
-        <div class="fp-divider-line"></div>
+        <div class="tab-content active" id="content-aprovacao">
+          <p class="sc-desc">Acompanhe aprovações digitando o Nome ou número de WhatsApp.</p>
+          <div class="input-row">
+            <input type="text" id="in-aprovacao" class="fp-input" placeholder="Ex: João ou 81999999999" autocomplete="off" maxlength="150">
+            <select id="sel-aprovacao" class="fp-select">
+              <option value="all">Todo o período</option>
+              <option value="7">Últimos 7 dias</option>
+              <option value="15">Últimos 15 dias</option>
+              <option value="30">Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+            </select>
+            <button class="fp-btn" id="btn-aprovacao"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+          </div>
+        </div>
+
+        <div class="tab-content" id="content-relatorio">
+          <p class="sc-desc">Consulte o desempenho mensal através do Nome de Usuário.</p>
+          <div class="input-row">
+            <input type="text" id="in-relatorio" class="fp-input" placeholder="Ex: NewsBR" autocomplete="off" maxlength="150">
+            <select id="sel-relatorio" class="fp-select">
+              <option value="all">Todo o histórico</option>
+              <option value="1">Mês atual</option>
+              <option value="3">Últimos 3 meses</option>
+              <option value="6">Últimos 6 meses</option>
+              <option value="12">1 ano</option>
+            </select>
+            <button class="fp-btn" id="btn-relatorio"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+          </div>
+        </div>
+
+        <div class="tab-content" id="content-site">
+          <p class="sc-desc">Use palavras-chave para encontrar jornadas, regras e páginas institucionais.</p>
+          <div class="input-row">
+            <input type="text" id="in-site" class="fp-input" placeholder="Ex: privacidade, regras, recrutador..." autocomplete="off" maxlength="100">
+            <button class="fp-btn" id="btn-site"><i class="fas fa-location-crosshairs"></i> Localizar</button>
+          </div>
+        </div>
+
       </div>
 
-      <section class="search-card">
-        <div class="sc-head">
-          <div class="sc-icon"><i class="fas fa-chart-line"></i></div>
-          <span class="sc-title">Histórico de Relatórios</span>
-        </div>
-        <p class="sc-desc">Digite o Nome de Usuário para consultar o desempenho mensal.</p>
-        <div class="input-row">
-          <input type="text" id="in-relatorio" class="fp-input" placeholder="Ex: NewsBR" autocomplete="off">
-          <select id="sel-relatorio" class="fp-select">
-            <option value="all">Todo o período</option>
-            <option value="1">Mês atual</option>
-          </select>
-          <button class="fp-btn" id="btn-relatorio"><i class="fas fa-magnifying-glass"></i> Buscar</button>
-        </div>
-      </section>
-      <div class="results-area" id="res-relatorios" aria-live="polite"></div>
+      <div class="results-container" id="master-results" aria-live="polite"></div>
+
     </main>
   </div>
 
   <Footer />
 </Layout>
+
+<script is:inline>
+  (function () {
+    'use strict';
+
+    const API_URL   = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
+    const PAGE_SIZE = 20;
+    const MIN_TERM  = 2;
+    const DEBOUNCE_MS = 380;
+
+    const rootEl = document.getElementById('fp-root');
+    const basePath = rootEl ? rootEl.getAttribute('data-base') : '';
+
+    const state = {
+      aprovacao:  { page: 1, total: 0, pages: 0, termo: '', filtro: 'all', loading: false },
+      relatorios: { page: 1, total: 0, pages: 0, termo: '', filtro: 'all', loading: false },
+      activeTab: 'aprovacao'
+    };
+    const abort = { aprovacao: null, relatorios: null };
+
+    // Base atualizada (Ignorará acentos durante a pesquisa)
+    const BASE_SITE = [
+      { nome: "Regras e Níveis de Gamificação", url: `${basePath}/diretrizes`, icon: "fa-trophy", tags: "regras niveis ouro prata bronze bônus metas diretrizes", desc: "Consulte todas as regras, níveis (Ouro, Prata, Bronze), metas e a estrutura completa de bônus." },
+      { nome: "Portal do Parceiro", url: `${basePath}/login`, icon: "fa-user-lock", tags: "login cadastro entrar acesso", desc: "Acesse sua conta para visualizar painéis, relatórios completos e realizar cadastros." },
+      { nome: "Carteira e Financeiro", url: `${basePath}/financeiro`, icon: "fa-wallet", tags: "saque saldo dinheiro carteira extrato pagamento financeiro", desc: "Gerencie seu saldo, acompanhe os extratos de pagamentos e solicite saques." },
+      { nome: "Nossas Jornadas", url: `${basePath}/#jornadas`, icon: "fa-route", tags: "jornadas caminhos inicio guia", desc: "Conheça os caminhos, guias iniciais e a jornada completa de desenvolvimento." },
+      { nome: "Programas de Monetização", url: `${basePath}/#programas`, icon: "fa-money-bill-trend-up", tags: "programas monetização kwai narrastars", desc: "Detalhes sobre os programas de monetização parceiros, como Kwai Cut e Narrastars." },
+      { nome: "FAQ - Dúvidas Frequentes", url: `${basePath}/#faq`, icon: "fa-circle-question", tags: "duvidas perguntas respostas faq ajuda", desc: "Encontre respostas rápidas para as perguntas mais comuns e suporte institucional." },
+      { nome: "Falar com a FP (Contato)", url: `${basePath}/#contato`, icon: "fa-headset", tags: "contato suporte whatsapp falar atendimento", desc: "Precisa de ajuda? Acesse nosso suporte oficial via WhatsApp e canais de atendimento." },
+      { nome: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, icon: "fa-shield-halved", tags: "politica privacidade dados lgpd segurança legal", desc: "Leia nossa política de privacidade e saiba como protegemos e tratamos seus dados." },
+      { nome: "Termos de Serviço", url: `${basePath}/termos-de-servico`, icon: "fa-file-contract", tags: "termos serviço regras contrato legal uso", desc: "Termos e condições gerais de uso das plataformas e serviços da FP Agency." },
+      { nome: "Aviso Legal", url: `${basePath}/aviso-legal`, icon: "fa-scale-balanced", tags: "aviso legal juridico direitos", desc: "Informações jurídicas, transparência e avisos legais da nossa empresa." },
+      { nome: "Área do Recrutador", url: `${basePath}/recrutador`, icon: "fa-users-gear", tags: "recrutador equipe gerenciar convites painel", desc: "Área de uso exclusivo para recrutadores acompanharem e gerenciarem suas equipes." }
+    ];
+
+    // ── LÓGICA DE ABAS (UI) ───────────────────────────────────────────────────
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const tabSlider = document.getElementById('tabSlider');
+    const resultsContainer = document.getElementById('master-results');
+
+    function switchTab(tabId, index) {
+      tabSlider.style.transform = `translateX(${index * 100}%)`;
+      
+      tabBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      tabBtns[index].classList.add('active');
+      tabBtns[index].setAttribute('aria-selected', 'true');
+
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+        content.style.opacity = '0';
+        setTimeout(() => content.style.display = 'none', 200);
+      });
+
+      const activeContent = document.getElementById(`content-${tabId}`);
+      setTimeout(() => {
+        activeContent.style.display = 'block';
+        setTimeout(() => activeContent.style.opacity = '1', 10);
+      }, 200);
+
+      state.activeTab = tabId;
+      resultsContainer.innerHTML = ''; 
+    }
+
+    tabBtns.forEach((btn, index) => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab, index));
+    });
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function removeAcentos(str) {
+      return String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    function esc(v) {
+      return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+    }
+    
+    function safeUrl(raw) {
+      const u = String(raw || '').trim();
+      if (!u || /^(javascript|data|vbscript):/i.test(u) || !/^https?:\/\//i.test(u)) return null;
+      return u;
+    }
+    
+    function mkLink(url, label) {
+      const u = safeUrl(url);
+      if (!u) return '-';
+      return `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fas fa-arrow-up-right-from-square"></i> ${esc(label || 'Ver Perfil')}</a>`;
+    }
+
+    const showLoader = () => document.getElementById('fp-loader').classList.add('on');
+    const hideLoader = () => document.getElementById('fp-loader').classList.remove('on');
+
+    function setFeedback(msg, isErr = false) {
+      resultsContainer.innerHTML =
+        '<div class="feedback ' + (isErr ? 'error' : '') + '">' +
+        '<i class="fas ' + (isErr ? 'fa-triangle-exclamation' : 'fa-circle-info') + '"></i> ' +
+        esc(msg) + '</div>';
+    }
+
+    function debounce(fn, ms) {
+      let t;
+      return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+    }
+
+    // ── API Fetch (POST) ──────────────────────────────────────────────────────
+    async function fetchAPI(action, termo, filtro, page) {
+      const tipo = action === 'buscarAprovacao' ? 'aprovacao' : 'relatorios';
+      if (abort[tipo]) abort[tipo].abort();
+      abort[tipo] = new AbortController();
+
+      const resp = await fetch(API_URL, {
+        method: 'POST',
+        signal: abort[tipo].signal,
+        body: JSON.stringify({
+          action: action,
+          data: { termo: termo, filtro: filtro, page: page, limit: PAGE_SIZE }
+        })
+      });
+      const text = await resp.text();
+      try { return JSON.parse(text); } 
+      catch (_) { throw new Error('Back-end retornou resposta inválida.'); }
+    }
+
+    // ── RENDERIZADORES ────────────────────────────────────────────────────────
+    function badgeStatus(status) {
+      var s = String(status || '').toLowerCase();
+      if (s.includes('aprovado')) return ['b-success', 'fa-circle-check', status || 'Aprovado'];
+      if (s.includes('reprovado')) return ['b-danger', 'fa-circle-xmark', status || 'Reprovado'];
+      if (s.includes('pendente') || s.includes('analis')) return ['b-warning', 'fa-clock', status || 'Em Análise'];
+      return ['b-neutral', 'fa-circle-question', status || 'Em Análise'];
+    }
+
+    function badgeFonte(fonte) {
+      if (fonte === 'Cut') return '<span class="badge b-blue"><i class="fas fa-scissors"></i> CUT</span>';
+      if (fonte === 'Narrastars') return '<span class="badge b-purple"><i class="fas fa-star"></i> NARRASTARS</span>';
+      return '<span class="badge b-neutral"><i class="fas fa-database"></i> RESULTADOS</span>';
+    }
+
+    function renderAprovacao(items, append) {
+      if (!append) resultsContainer.innerHTML = '<h3 class="section-badge">Resultados de Aprovação</h3>';
+      const frag = document.createDocumentFragment();
+
+      items.forEach(item => {
+        const [bClass, bIcon, bLabel] = badgeStatus(item.statusResultado);
+        const fonteClass = item.fonte === 'Cut' ? 'from-cut' : item.fonte === 'Narrastars' ? 'from-narrastars' : '';
+        const temRecrutador = item.recrutador && item.recrutador !== 'FP Agency';
+        const temPerfil = safeUrl(item.perfilUrl);
+        const temMotivo = item.motivo && item.motivo.trim();
+
+        const card = document.createElement('div');
+        card.className = `result-card ${fonteClass}`;
+        card.innerHTML = `
+          <div class="rc-head">
+            <div class="rc-name-block">
+              <span class="rc-name">${esc(item.nomeCompleto) || '<em style="opacity:.5">Não identificado</em>'}</span>
+              <span class="rc-fonte">${esc(item.fonte || 'Resultados')}</span>
+            </div>
+            <div class="rc-badges">
+              ${badgeFonte(item.fonte)}
+              <span class="badge ${bClass}"><i class="fas ${bIcon}"></i> ${esc(bLabel)}</span>
+            </div>
+          </div>
+          <div class="rc-grid">
+            <div class="db"><span class="db-label">Data</span><span class="db-value">${esc(item.data) || '-'}</span></div>
+            <div class="db"><span class="db-label">Categoria</span><span class="db-value">${esc(item.categoria) || '-'}</span></div>
+            <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsapp) || '-'}</span></div>
+            <div class="db"><span class="db-label">Perfil</span><span class="db-value">${temPerfil ? mkLink(item.perfilUrl) : '-'}</span></div>
+            ${temMotivo ? `<div class="db"><span class="db-label">Motivo</span><span class="db-value" style="font-size:.82rem; color:var(--text-muted)">${esc(item.motivo)}</span></div>` : ''}
+          </div>
+          ${temRecrutador ? `
+          <div class="rc-recruiter">
+            <div class="rc-recruiter-label"><i class="fas fa-user-tie"></i> Recrutado por</div>
+            <div class="db"><span class="db-label">Recrutador</span><span class="db-value">${esc(item.recrutador)}</span></div>
+            <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsRecrutador) || '-'}</span></div>
+          </div>` : ''}
+        `;
+        frag.appendChild(card);
+      });
+      resultsContainer.appendChild(frag);
+    }
+
+    function renderRelatorios(items, append) {
+      if (!append) resultsContainer.innerHTML = '<h3 class="section-badge">Histórico de Relatórios</h3>';
+      const frag = document.createDocumentFragment();
+
+      items.forEach(item => {
+        const totalInt = parseInt(item.totalVv, 10);
+        const views = isNaN(totalInt) ? esc(item.totalVv || '0') : totalInt.toLocaleString('pt-BR');
+        const uid = item.uid || '';
+        const kwai = uid ? `https://www.kwai.com/@${uid}` : '';
+
+        const card = document.createElement('div');
+        card.className = 'result-card';
+        card.innerHTML = `
+          <div class="rc-head">
+            <div class="rc-name-block">
+              <span class="rc-name">${esc(item.nomeUsuario) || '-'}</span>
+              <span class="rc-fonte">${esc(item.categoria) || '-'}</span>
+            </div>
+            <div class="rc-badges"><span class="tag-mes">${esc(item.mesReferencia) || '-'}</span></div>
+          </div>
+          <div class="rc-grid">
+            <div class="db">
+              <span class="db-label">UID Kwai</span>
+              <span class="db-value" style="font-size:.82rem; color:var(--text-muted); font-family:var(--mono)">${esc(uid) || '-'}</span>
+              ${kwai ? mkLink(kwai, 'Ver Perfil') : ''}
+            </div>
+            <div class="db"><span class="db-label">Taxa Vert.</span><span class="db-value" style="color:var(--orange)">${esc(item.taxaVerticalidade) || '-'}</span></div>
+            <div class="db"><span class="db-label">Data Início</span><span class="db-value">${esc(item.dataInicio) || '-'}</span></div>
+            <div class="db"><span class="db-label">Vídeos Válidos</span><span class="db-value">${esc(item.videosValidos) || '0'}</span></div>
+            <div class="db"><span class="db-label">Total Views</span><span class="db-value">${views}</span></div>
+          </div>
+        `;
+        frag.appendChild(card);
+      });
+      resultsContainer.appendChild(frag);
+    }
+
+    function renderSite(termo) {
+      resultsContainer.innerHTML = '<h3 class="section-badge">Resultados no Site</h3>';
+      
+      const t = removeAcentos(termo);
+      
+      const filtrados = BASE_SITE.filter(item => 
+        removeAcentos(item.nome).includes(t) || 
+        removeAcentos(item.desc).includes(t) || 
+        removeAcentos(item.tags).includes(t)
+      );
+      
+      if (filtrados.length === 0) {
+        setFeedback("Nenhuma página encontrada para essa palavra-chave.");
+        return;
+      }
+
+      const carousel = document.createElement('div');
+      carousel.className = 'site-carousel';
+
+      const frag = document.createDocumentFragment();
+      filtrados.forEach(item => {
+        const card = document.createElement('a');
+        card.href = item.url;
+        card.className = 'site-link-card';
+        card.innerHTML = `
+          <div class="site-link-icon"><i class="fas ${item.icon}"></i></div>
+          <div class="site-link-info">
+            <h4>${esc(item.nome)}</h4>
+            <p>${esc(item.desc)}</p>
+          </div>
+          <div class="site-link-action">
+            Acessar <i class="fas fa-arrow-right"></i>
+          </div>
+        `;
+        frag.appendChild(card);
+      });
+      
+      carousel.appendChild(frag);
+      resultsContainer.appendChild(carousel);
+    }
+
+    function renderPagination(tipo) {
+      const s = state[tipo];
+      const old = resultsContainer.querySelector('.fp-pagination');
+      if (old) old.remove();
+      if (s.page >= s.pages) return;
+
+      const shown = Math.min(s.page * PAGE_SIZE, s.total);
+      const pag = document.createElement('div');
+      pag.className = 'fp-pagination';
+      pag.innerHTML = `
+        <span class="fp-pag-info">${shown} de ${s.total} resultados</span>
+        <button class="btn-more" data-tipo="${tipo}">
+          <i class="fas fa-chevron-down"></i> Carregar mais
+        </button>`;
+      resultsContainer.appendChild(pag);
+    }
+
+    // ── Lógica Central de Busca (BLINDADA CONTRA TRAVAMENTOS) ────────────────
+    async function executarBusca(tipo, append = false) {
+      if (tipo === 'site') {
+        const termoSite = document.getElementById('in-site').value.trim();
+        if (termoSite.length < MIN_TERM) {
+          setFeedback(`Digite ao menos ${MIN_TERM} caracteres para buscar no site.`);
+          return;
+        }
+        renderSite(termoSite);
+        return;
+      }
+
+      const s = state[tipo];
+      if (s.loading) {
+        console.warn(`[Aviso] Busca de ${tipo} já está em andamento.`);
+        return; 
+      }
+
+      const inputId  = `in-${tipo}`;
+      const selectId = `sel-${tipo}`;
+      const btnId    = `btn-${tipo}`;
+      const action   = tipo === 'aprovacao' ? 'buscarAprovacao' : 'buscarRelatorios';
+
+      const termo  = document.getElementById(inputId).value.trim();
+      const filtro = document.getElementById(selectId).value;
+      const btn    = document.getElementById(btnId);
+
+      if (!termo || termo.length < MIN_TERM) {
+        setFeedback(`Digite ao menos ${MIN_TERM} caracteres.`);
+        return;
+      }
+
+      if (!append) {
+        s.page = 1;
+        s.termo = termo;
+        s.filtro = filtro;
+      }
+
+      // Trava de segurança para impedir cliques duplos
+      s.loading = true;
+      if(btn) btn.disabled = true;
+      
+      if (!append) setFeedback('Acessando servidor FP Agency...');
+      showLoader();
+
+      try {
+        console.log(`[Requisicao] Solicitando ${action} para: "${s.termo}"`);
+        const res = await fetchAPI(action, s.termo, s.filtro, s.page);
+        console.log(`[Resposta] ${action} retornou com sucesso.`);
+
+        if (!res || res.status === 'error') {
+          setFeedback(res?.message || 'Erro desconhecido no servidor.', true);
+          return;
+        }
+
+        s.total = res.total || 0;
+        s.pages = res.pages || 1;
+
+        if (!res.data || res.data.length === 0) {
+          if (!append) setFeedback('Nenhum registro encontrado para esta busca na base.');
+          return;
+        }
+
+        if (tipo === 'aprovacao') renderAprovacao(res.data, append);
+        else renderRelatorios(res.data, append);
+
+        renderPagination(tipo);
+
+      } catch (err) {
+        console.error(`[Falha Crítica] Erro ao buscar ${tipo}:`, err);
+        if (err.name === 'AbortError') return;
+        setFeedback(err.message, true);
+      } finally {
+        // FINALLY: Garante que o botão e o estado SEMPRE são resetados
+        hideLoader();
+        s.loading = false;
+        if(btn) btn.disabled = false;
+      }
+    }
+
+    // ── Listeners de Evento ───────────────────────────────────────────────────
+    document.getElementById('btn-aprovacao').addEventListener('click', () => executarBusca('aprovacao'));
+    document.getElementById('btn-relatorio').addEventListener('click', () => executarBusca('relatorios'));
+    document.getElementById('btn-site').addEventListener('click', () => executarBusca('site'));
+
+    const onEnterA = debounce(() => executarBusca('aprovacao'), DEBOUNCE_MS);
+    const onEnterR = debounce(() => executarBusca('relatorios'), DEBOUNCE_MS);
+    const onEnterS = debounce(() => executarBusca('site'), DEBOUNCE_MS);
+
+    document.getElementById('in-aprovacao').addEventListener('keydown', e => { if (e.key==='Enter') onEnterA(); });
+    document.getElementById('in-relatorio').addEventListener('keydown', e => { if (e.key==='Enter') onEnterR(); });
+    document.getElementById('in-site').addEventListener('keydown', e => { if (e.key==='Enter') onEnterS(); });
+
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.btn-more');
+      if (btn) {
+        const tipo = btn.dataset.tipo;
+        if (tipo) { state[tipo].page++; executarBusca(tipo, true); }
+      }
+    });
+
+    // ── Leitura de URL (?q=) ──────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const query  = params.get('q');
+
+      if (query && query.trim() !== '') {
+        document.getElementById('in-aprovacao').value = query.trim();
+        executarBusca('aprovacao');
+      }
+    });
+
+  })();
+</script>
 
 <style is:global>
   /* ─── TOKENS E RESET ─────────────────────────────────────────────────────── */
@@ -79,7 +493,7 @@ import Footer from '../components/Footer.astro';
     --border-hover: #3d4d7a;
     --orange: #ff6b2b;
     --orange-dim: #ff6b2b22;
-    --orange-glow: rgba(255,107,43,.18);
+    --orange-glow: rgba(255,107,43,.25);
     --green: #22c55e;
     --green-dim: #22c55e1a;
     --red: #ef4444;
@@ -89,259 +503,159 @@ import Footer from '../components/Footer.astro';
     --blue: #3b82f6;
     --blue-dim: #3b82f61a;
     --text: #e2e8f0;
-    --text-muted: #64748b;
-    --text-faint: #334155;
+    --text-muted: #94a3b8;
+    --text-faint: #475569;
     --radius: 12px;
-    --radius-lg: 18px;
+    --radius-lg: 20px;
     --mono: 'JetBrains Mono', monospace;
   }
 
-  .fp {
-    font-family: 'Sora', sans-serif;
-    background: transparent;
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
-    position: relative;
-    padding-bottom: 60px;
-    color: var(--text);
-  }
+  .fp { font-family: 'Sora', sans-serif; min-height: 100vh; width: 100%; color: var(--text); padding-bottom: 80px; }
 
-  /* ─── LOADER ─────────────────────────────────────────────────────────────── */
-  .fp-loader { display: none; position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); z-index: 999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+  /* ─── LOADER E HERO ──────────────────────────────────────────────────────── */
+  .fp-loader { display: none; position: fixed; inset: 0; background: rgba(15,17,23,.8); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
   .fp-loader.on { display: flex; }
-  .fp-loader-ring { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .7s linear infinite; }
+  .fp-loader-ring { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .fp-loader-text { font-size: .82rem; color: var(--text-muted); font-family: var(--mono); letter-spacing: .05em; }
+  .fp-loader-text { font-size: .85rem; color: var(--orange); font-family: var(--mono); letter-spacing: .05em; text-transform: uppercase; font-weight: 600;}
 
-  /* ─── HERO ───────────────────────────────────────────────────────────────── */
-  .fp-hero { position: relative; z-index: 1; padding: 40px 24px 56px; text-align: center; overflow: hidden; }
-  .fp-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, var(--orange-glow) 0%, transparent 70%); pointer-events: none; }
-  .fp-hero-eyebrow { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: .72rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; background: var(--orange-dim); padding: 5px 13px; border-radius: 99px; border: 1px solid var(--orange-glow); margin-bottom: 18px; }
-  .fp-hero-title { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.1; color: var(--text); letter-spacing: -.02em; margin-bottom: 10px; }
+  .fp-hero { position: relative; z-index: 1; padding: 50px 24px 40px; text-align: center; }
+  .fp-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .75rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; background: var(--orange-dim); padding: 6px 14px; border-radius: 99px; border: 1px solid var(--orange-glow); margin-bottom: 20px; }
+  .fp-hero-title { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 12px; }
   .fp-hero-title span { color: var(--orange); }
-  .fp-hero-sub { font-size: .88rem; color: var(--text-muted); max-width: 380px; margin: 0 auto; line-height: 1.6; }
+  .fp-hero-sub { font-size: .95rem; color: var(--text-muted); max-width: 450px; margin: 0 auto; line-height: 1.6; }
 
-  /* ─── CONTEÚDO ───────────────────────────────────────────────────────────── */
-  .fp-content { position: relative; z-index: 2; padding: 0 20px; max-width: 860px; margin: -20px auto 0; }
+  /* ─── ESTRUTURA CENTRAL ──────────────────────────────────────────────────── */
+  .fp-content { position: relative; z-index: 2; padding: 0 20px; max-width: 860px; margin: 0 auto; }
   
-  .search-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; transition: border-color .25s; }
-  .search-card:focus-within { border-color: var(--border-hover); }
-  .sc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-  .sc-icon { width: 32px; height: 32px; background: var(--orange-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: .88rem; flex-shrink: 0; }
-  .sc-title { font-size: 1rem; font-weight: 700; color: var(--text); }
-  .sc-desc { font-size: .8rem; color: var(--text-muted); margin-bottom: 16px; margin-left: 42px; }
+  .search-master-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 30px; }
 
-  .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .fp-input, .fp-select { flex: 1 1 200px; padding: 12px 15px; background: var(--bg-input); border: 1.5px solid var(--border); border-radius: var(--radius); font-family: 'Sora', sans-serif; font-size: .88rem; color: var(--text); outline: none; transition: border-color .2s, box-shadow .2s; }
-  .fp-select { flex: 0 1 175px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  /* ─── TAB SWITCHER ───────────────────────────────────────────────────────── */
+  .tab-switcher { position: relative; display: flex; background: var(--bg-input); border-radius: 99px; padding: 6px; margin-bottom: 30px; border: 1px solid var(--border); }
+  .tab-slider { position: absolute; top: 6px; left: 6px; height: calc(100% - 12px); width: calc(33.333% - 4px); background: var(--orange); border-radius: 99px; z-index: 1; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 15px var(--orange-glow); }
+  .tab-btn { flex: 1; text-align: center; padding: 14px 0; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: .9rem; font-family: 'Sora', sans-serif; cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .tab-btn.active { color: #fff; }
+
+  /* ─── TAB CONTENTS ───────────────────────────────────────────────────────── */
+  .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease; }
+  .tab-content.active { display: block; opacity: 1; }
+  .sc-desc { font-size: .85rem; color: var(--text-muted); margin-bottom: 18px; text-align: center;}
+
+  .input-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .fp-input, .fp-select { flex: 1 1 200px; padding: 14px 18px; background: #13161e; border: 1px solid var(--border); border-radius: var(--radius); font-family: 'Sora', sans-serif; font-size: .9rem; color: var(--text); outline: none; transition: all .2s; }
+  .fp-select { flex: 0 1 180px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
   .fp-input::placeholder { color: var(--text-faint); }
   .fp-input:focus, .fp-select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px var(--orange-dim); }
   
-  .fp-btn { flex: 0 1 auto; min-width: 118px; background: var(--orange); color: #fff; border: none; padding: 12px 22px; border-radius: var(--radius); font-family: 'Sora', sans-serif; font-weight: 700; font-size: .88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: transform .16s, box-shadow .16s; box-shadow: 0 4px 16px var(--orange-glow); }
-  .fp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px var(--orange-glow); }
+  .fp-btn { flex: 0 1 auto; min-width: 130px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: var(--radius); font-family: 'Sora', sans-serif; font-weight: 700; font-size: .9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all .2s; box-shadow: 0 4px 16px var(--orange-glow); }
+  .fp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); filter: brightness(1.1);}
+  .fp-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
 
-  .fp-divider { display: flex; align-items: center; gap: 12px; margin: 28px 0 20px; }
-  .fp-divider-line { flex: 1; height: 1px; background: var(--border); }
-  .fp-divider-label { font-family: var(--mono); font-size: .7rem; color: var(--text-faint); letter-spacing: .1em; text-transform: uppercase; }
-
-  /* ─── RESULT CARDS ───────────────────────────────────────────────────────── */
-  .results-area { margin-bottom: 30px; }
-  .result-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 12px; position: relative; overflow: hidden; animation: slideIn .25s ease both; }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .result-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); border-radius: 3px 0 0 3px; }
+  /* ─── RESULTADOS: APROVAÇÃO E RELATÓRIO ──────────────────────────────────── */
+  .results-container { min-height: 200px; }
+  .section-badge { display: inline-block; font-size: .75rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 2px; color: var(--text-faint); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 8px; width: 100%;}
+  
+  .result-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 26px; margin-bottom: 16px; position: relative; overflow: hidden; animation: slideIn .3s ease both; transition: border-color .2s, transform .2s; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+  .result-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.15);}
+  
+  .result-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--orange); border-radius: 4px 0 0 4px; }
   .result-card.from-cut::before { background: var(--blue); }
   .result-card.from-narrastars::before { background: #a855f7; }
   
-  .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
-  .rc-name-block { display: flex; flex-direction: column; gap: 4px; }
-  .rc-name { font-size: 1rem; font-weight: 700; color: var(--text); }
-  .rc-fonte { font-family: var(--mono); font-size: .68rem; color: var(--text-muted); letter-spacing: .06em; }
-  .rc-badges { display: flex; gap: 7px; flex-wrap: wrap; align-items: flex-start; }
+  .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .rc-name-block { display: flex; flex-direction: column; gap: 5px; }
+  .rc-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+  .rc-fonte { font-family: var(--mono); font-size: .7rem; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase;}
+  .rc-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; }
   
-  .rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
-  .db { display: flex; flex-direction: column; gap: 4px; }
-  .db-label { font-family: var(--mono); font-size: .65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .07em; }
-  .db-value { font-size: .88rem; color: var(--text); font-weight: 600; }
+  .rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; }
+  .db { display: flex; flex-direction: column; gap: 6px; }
+  .db-label { font-family: var(--mono); font-size: .65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .08em; }
+  .db-value { font-size: .9rem; color: var(--text); font-weight: 500; }
   
-  /* ─── BADGES ─────────────────────────────────────────────────────────────── */
-  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 99px; font-family: var(--mono); font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+  .rc-recruiter { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; background: rgba(0,0,0,0.1); border-radius: 8px; padding: 15px;}
+  .rc-recruiter-label { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .7rem; color: var(--orange); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* ─── CARROSSEL DO SITE (ABA 3) ──────────────────────────────────────────── */
+  .site-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 5px 30px 5px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -5px; 
+  }
+  .site-carousel::-webkit-scrollbar { display: none; }
+
+  .site-link-card {
+    flex: 0 0 280px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+    animation: slideIn .3s ease both;
+  }
+  .site-link-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(255, 107, 43, 0.15);
+  }
+  .site-link-icon {
+    width: 50px; height: 50px;
+    background: var(--orange-dim);
+    color: var(--orange);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .site-link-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .site-link-info h4 { font-size: 1.1rem; font-weight: 700; color: #fff; line-height: 1.3;}
+  .site-link-info p { font-size: .8rem; color: var(--text-muted); font-family: var(--mono); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .site-link-action {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 10px;
+    font-family: var(--mono); font-size: .75rem; color: var(--orange);
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .site-link-action i { transition: transform 0.2s; }
+  .site-link-card:hover .site-link-action i { transform: translateX(5px); }
+
+  /* ─── BADGES GERAIS ──────────────────────────────────────────────────────── */
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 99px; font-family: var(--mono); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
   .b-success { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-  .b-danger { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
-  .b-warning { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
-  .b-neutral { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
-  .b-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue); }
-  .b-purple { background: #a855f71a; color: #a855f7; border: 1px solid #a855f7; }
+  .b-danger  { background: var(--red-dim);   color: var(--red);   border: 1px solid var(--red);   }
+  .b-warning { background: var(--yellow-dim);color: var(--yellow);border: 1px solid var(--yellow);}
+  .b-neutral { background: var(--orange-dim);color: var(--orange);border: 1px solid var(--orange);}
+  .b-blue    { background: var(--blue-dim);  color: var(--blue);  border: 1px solid var(--blue);  }
+  .b-purple  { background: #a855f71a; color: #a855f7; border: 1px solid #a855f7; }
   
-  .btn-link { display: inline-flex; align-items: center; gap: 5px; background: var(--bg-input); color: var(--orange); padding: 5px 12px; border-radius: 8px; font-family: var(--mono); font-size: .72rem; text-decoration: none; border: 1px solid var(--border); }
-  .tag-mes { font-family: var(--mono); font-size: .72rem; color: var(--text-muted); background: var(--bg-input); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); }
+  .btn-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.2); color: var(--orange); padding: 6px 14px; border-radius: 8px; font-family: var(--mono); font-size: .75rem; text-decoration: none; border: 1px solid var(--border); transition: all .2s; }
+  .btn-link:hover { background: var(--orange-dim); border-color: var(--orange); }
+  .tag-mes { font-family: var(--mono); font-size: .75rem; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); }
   
-  .feedback { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 22px 16px; font-size: .86rem; color: var(--text-muted); font-family: var(--mono); }
-  .feedback.error { color: var(--red); }
+  .fp-pagination { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+  .fp-pag-info { font-family: var(--mono); font-size: .75rem; color: var(--text-faint); }
+  .btn-more { display: flex; align-items: center; gap: 8px; background: var(--bg-card); color: var(--text); border: 1px solid var(--border); padding: 12px 24px; border-radius: 99px; font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-more:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-dim);}
 
-  @media (max-width: 560px) { .fp-select, .fp-btn { flex: 1 1 100%; } }
+  .feedback { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 30px; font-size: .9rem; color: var(--text-muted); font-family: var(--mono); text-align: center; background: rgba(0,0,0,0.1); border-radius: 12px; border: 1px dashed var(--border);}
+  .feedback.error { color: var(--red); border-color: var(--red-dim); background: var(--red-dim); }
+
+  @media (max-width: 680px) { 
+    .tab-btn { font-size: 0; padding: 16px 0; }
+    .tab-btn i { font-size: 1.1rem; margin: 0;}
+    .search-master-card { padding: 20px 15px; }
+    .fp-select, .fp-btn { flex: 1 1 100%; } 
+  }
 </style>
-
-<script is:inline>
-  (function () {
-    'use strict';
-
-    const API_URL   = 'https://script.google.com/macros/s/AKfycbzUol4KKXVu3F8CKLvXUuSnP6gFT_rkv3N_jdrJYN9oNRUq_LU4acBKhDZs-YyU21ng/exec';
-    const PAGE_SIZE = 20;
-    const MIN_TERM  = 2;
-
-    const state = {
-      aprovacao:  { page: 1, termo: '', filtro: 'all', loading: false },
-      relatorios: { page: 1, termo: '', filtro: 'all', loading: false }
-    };
-    
-    function esc(v) { return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    
-    const showLoader = () => document.getElementById('fp-loader').classList.add('on');
-    const hideLoader = () => document.getElementById('fp-loader').classList.remove('on');
-    function setFeedback(id, msg, isErr = false) { 
-      document.getElementById(id).innerHTML = `<div class="feedback ${isErr ? 'error' : ''}"><i class="fas ${isErr ? 'fa-triangle-exclamation' : 'fa-circle-info'}"></i> ${esc(msg)}</div>`; 
-    }
-
-    async function fetchAPI(action, termo, filtro, page) {
-      const url = new URL(API_URL);
-      url.searchParams.set('action', action); 
-      url.searchParams.set('termo', termo); 
-      url.searchParams.set('filtro', filtro); 
-      url.searchParams.set('page', page); 
-      url.searchParams.set('limit', PAGE_SIZE);
-      const resp = await fetch(url.toString(), { method: 'GET', redirect: 'follow' });
-      return await resp.json();
-    }
-
-    function badgeStatus(status) {
-      const s = String(status || '').toLowerCase();
-      if (s.includes('aprovado')) return ['b-success', 'fa-circle-check', status || 'Aprovado'];
-      if (s.includes('reprovado')) return ['b-danger', 'fa-circle-xmark', status || 'Reprovado'];
-      if (s.includes('pendente')||s.includes('analis')) return ['b-warning', 'fa-clock', status || 'Em Análise'];
-      return ['b-neutral', 'fa-circle-question', status || 'Em Análise'];
-    }
-
-    function renderAprovacao(items) {
-      const container = document.getElementById('res-aprovacao');
-      container.innerHTML = '';
-      items.forEach(item => {
-        const [bClass, bIcon, bLabel] = badgeStatus(item.statusResultado);
-        const card = document.createElement('div');
-        card.className = `result-card ${item.fonte === 'Cut' ? 'from-cut' : item.fonte === 'Narrastars' ? 'from-narrastars' : ''}`;
-        card.innerHTML = `
-          <div class="rc-head">
-            <div class="rc-name-block">
-              <span class="rc-name">${esc(item.nomeCompleto) || 'Anônimo'}</span>
-              <span class="rc-fonte">${esc(item.fonte || 'Resultados')}</span>
-            </div>
-            <div class="rc-badges">
-              <span class="badge ${bClass}"><i class="fas ${bIcon}"></i> ${esc(bLabel)}</span>
-            </div>
-          </div>
-          <div class="rc-grid">
-            <div class="db"><span class="db-label">Data</span><span class="db-value">${esc(item.data) || '-'}</span></div>
-            <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsapp) || '-'}</span></div>
-            ${item.motivo ? `<div class="db"><span class="db-label">Motivo</span><span class="db-value" style="font-size:.82rem; color:var(--text-muted)">${esc(item.motivo)}</span></div>` : ''}
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function renderRelatorios(items) {
-      const container = document.getElementById('res-relatorios');
-      container.innerHTML = '';
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'result-card';
-        card.innerHTML = `
-          <div class="rc-head">
-            <div class="rc-name-block">
-              <span class="rc-name">${esc(item.nomeUsuario) || '-'}</span>
-              <span class="rc-fonte">${esc(item.categoria) || '-'}</span>
-            </div>
-            <div class="rc-badges">
-              <span class="tag-mes">${esc(item.mesReferencia) || '-'}</span>
-            </div>
-          </div>
-          <div class="rc-grid">
-            <div class="db"><span class="db-label">UID Kwai</span><span class="db-value" style="font-family:var(--mono)">${esc(item.uid) || '-'}</span></div>
-            <div class="db"><span class="db-label">Total Views</span><span class="db-value">${esc(item.totalVv)}</span></div>
-            <div class="db"><span class="db-label">Vídeos Válidos</span><span class="db-value">${esc(item.videosValidos)}</span></div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    async function buscar(tipo) {
-      const s = state[tipo];
-      const cfg = tipo === 'aprovacao' 
-        ? { input:'in-aprovacao', select:'sel-aprovacao', result:'res-aprovacao', action:'buscarAprovacao', render:renderAprovacao }
-        : { input:'in-relatorio', select:'sel-relatorio', result:'res-relatorios', action:'buscarRelatorios', render:renderRelatorios };
-      
-      const termo = document.getElementById(cfg.input).value.trim();
-      if (!termo || termo.length < MIN_TERM) { 
-        setFeedback(cfg.result, `Digite ao menos ${MIN_TERM} caracteres.`); 
-        return; 
-      }
-
-      s.termo = termo;
-      s.filtro = document.getElementById(cfg.select).value;
-      
-      setFeedback(cfg.result, 'Consultando base de dados…');
-      showLoader();
-      
-      try {
-        const res = await fetchAPI(cfg.action, s.termo, s.filtro, s.page);
-        hideLoader();
-        
-        if (!res || res.status === 'error') { 
-          setFeedback(cfg.result, res?.message || 'Erro no servidor.', true); 
-          return; 
-        }
-        if (!res.data || res.data.length === 0) { 
-          setFeedback(cfg.result, 'Nenhum registro encontrado para esta busca.'); 
-          return; 
-        }
-        
-        cfg.render(res.data);
-      } catch (err) {
-        hideLoader();
-        setFeedback(cfg.result, 'Falha ao buscar os dados na planilha.', true);
-      }
-    }
-
-    // Eventos de clique
-    document.getElementById('btn-aprovacao').addEventListener('click', () => buscar('aprovacao'));
-    document.getElementById('btn-relatorio').addEventListener('click', () => buscar('relatorios'));
-
-    // Eventos de teclado (Enter)
-    document.getElementById('in-aprovacao').addEventListener('keydown', e => { 
-      if (e.key === 'Enter') buscar('aprovacao'); 
-    });
-    document.getElementById('in-relatorio').addEventListener('keydown', e => { 
-      if (e.key === 'Enter') buscar('relatorios'); 
-    });
-
-    // 🚀 LÓGICA DE AUTO-PREENCHIMENTO (Gatilho da Busca Global no Header)
-    window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const query = params.get('q');
-      
-      if (query && query.trim() !== '') {
-        // Preenche automaticamente o termo de busca nos dois inputs
-        document.getElementById('in-aprovacao').value = query;
-        document.getElementById('in-relatorio').value = query;
-        
-        // Dispara a busca principal de aprovação
-        buscar('aprovacao');
-        
-        // Se quiser que busque os relatórios ao mesmo tempo, basta descomentar a linha abaixo:
-        // buscar('relatorios');
-      }
-    });
-
-  })();
-</script>

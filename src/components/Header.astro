@@ -63,7 +63,7 @@ const baseUrl = base === '/' ? '' : base;
 </header>
 
 <script>
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzUol4KKXVu3F8CKLvXUuSnP6gFT_rkv3N_jdrJYN9oNRUq_LU4acBKhDZs-YyU21ng/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
   
   const headerEl = document.getElementById('fp-header');
   const basePath = headerEl ? headerEl.getAttribute('data-base') : '';
@@ -80,7 +80,6 @@ const baseUrl = base === '/' ? '' : base;
   const searchModal = document.getElementById('global-search-modal');
   const searchInput = document.getElementById('global-search-input') as HTMLInputElement;
 
-  // Transformamos em funções constantes simples (sem 'window.')
   const openGlobalSearch = () => {
     searchModal?.classList.add('active');
     setTimeout(() => searchInput?.focus(), 100);
@@ -92,14 +91,11 @@ const baseUrl = base === '/' ? '' : base;
     document.body.style.overflow = '';
   };
 
-  // Atribuindo os eventos de clique aos botões usando os IDs
   document.getElementById('btn-mobile-search')?.addEventListener('click', openGlobalSearch);
   document.getElementById('btn-desktop-search')?.addEventListener('click', openGlobalSearch);
   document.getElementById('btn-close-search')?.addEventListener('click', closeGlobalSearch);
 
-  // ERRO CORRIGIDO: O 'e' agora tem o tipo KeyboardEvent
   document.addEventListener('keydown', (e: KeyboardEvent) => {
-    // ERRO EVITADO: Adicionado ?. no activeElement para o TS não reclamar de valores null
     if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
       e.preventDefault();
       openGlobalSearch();
@@ -107,7 +103,6 @@ const baseUrl = base === '/' ? '' : base;
     if (e.key === 'Escape') closeGlobalSearch();
   });
 
-  // ERRO CORRIGIDO: O 'e' agora tem o tipo KeyboardEvent
   searchInput?.addEventListener('keydown', function(e: KeyboardEvent) {
     if (e.key === 'Enter') {
       const termo = searchInput.value.trim();
@@ -117,10 +112,16 @@ const baseUrl = base === '/' ? '' : base;
     }
   });
 
+  // Função para limpar acentos na busca
+  function removeAcentos(str: string) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  }
+
   let typingTimer: number | ReturnType<typeof setTimeout>;
   searchInput?.addEventListener('input', function() {
     clearTimeout(typingTimer);
     const termo = searchInput.value.trim();
+    const termoFiltro = removeAcentos(termo);
     const container = document.getElementById('global-search-results');
     
     if (termo.length < 2) {
@@ -131,14 +132,24 @@ const baseUrl = base === '/' ? '' : base;
     typingTimer = setTimeout(async () => {
       if (container) container.innerHTML = '<div class="searching-status"><i class="fas fa-spinner fa-spin"></i> Procurando rapidamente...</div>';
       
+      // Base de páginas atualizada e completa
       const paginasSite = [
-        { nome: "Ver Regras e Níveis de Gamificação", url: `${basePath}/diretrizes`, tags: "regras niveis ouro prata bronze bônus metas" },
-        { nome: "Portal do Parceiro (Cadastrar / Login)", url: `${basePath}/login`, tags: "login cadastro entrar conta cpf" },
-        { nome: "Carteira e Histórico de Saques", url: `${basePath}/financeiro`, tags: "saque saldo dinheiro carteira extrato" }
+        { nome: "Regras e Níveis de Gamificação", url: `${basePath}/diretrizes`, tags: "regras niveis ouro prata bronze bônus metas diretrizes" },
+        { nome: "Portal do Parceiro", url: `${basePath}/login`, tags: "login cadastro entrar conta cpf acesso" },
+        { nome: "Carteira e Financeiro", url: `${basePath}/financeiro`, tags: "saque saldo dinheiro carteira extrato financeiro" },
+        { nome: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, tags: "politica privacidade dados lgpd segurança legal" },
+        { nome: "Termos de Serviço", url: `${basePath}/termos-de-servico`, tags: "termos serviço regras contrato legal uso" },
+        { nome: "Aviso Legal", url: `${basePath}/aviso-legal`, tags: "aviso legal juridico direitos" },
+        { nome: "Área do Recrutador", url: `${basePath}/recrutador`, tags: "recrutador equipe gerenciar convites painel" }
       ];
 
       let htmlResultados = '';
-      const paginasFiltradas = paginasSite.filter(p => p.tags.includes(termo.toLowerCase()) || p.nome.toLowerCase().includes(termo.toLowerCase()));
+      
+      // Filtro inteligente (ignora maiúsculas e acentos)
+      const paginasFiltradas = paginasSite.filter(p => 
+        removeAcentos(p.tags).includes(termoFiltro) || 
+        removeAcentos(p.nome).includes(termoFiltro)
+      );
       
       if(paginasFiltradas.length > 0) {
         htmlResultados += `<div class="search-section-title">Sugestões do Site</div>`;
@@ -166,7 +177,7 @@ const baseUrl = base === '/' ? '' : base;
         const text = await response.text();
         const resJson = JSON.parse(text);
 
-        if (resJson.success && resJson.data && resJson.data.length > 0) {
+        if (resJson.success !== false && resJson.data && resJson.data.length > 0) {
           htmlResultados += `<div class="search-section-title" style="margin-top:15px">Status de Editores (Planilha)</div>`;
           resJson.data.forEach((item: any) => {
             htmlResultados += `
