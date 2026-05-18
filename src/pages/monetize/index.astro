@@ -246,14 +246,6 @@ import Footer from '../../components/Footer.astro';
         </div>
       </div>
 
-      <a href="https://wa.me/message/3YJWHJM7UOR6C1"
-         onclick="pmOpenLink(event,this.href)"
-         rel="noopener noreferrer external"
-         class="pm-wpp" aria-label="Fale conosco pelo WhatsApp">
-        <div class="pm-wpp-ring"></div>
-        <i class="ri-whatsapp-line"></i>
-      </a>
-
     </main>
 
     <Footer />
@@ -261,7 +253,6 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <script>
-  // ── DECLARAÇÃO DE TIPOS GLOBAIS (O segredo para o TS parar de reclamar) ──
   declare global {
     interface Window {
       __pm_target_url: string | null;
@@ -278,7 +269,6 @@ import Footer from '../../components/Footer.astro';
   (function () {
     'use strict';
 
-    // ── DETECÇÃO DE WEBVIEW ──────────────────────────────────────────────────
     function isLockedWebView(): boolean {
       const ua = navigator.userAgent || '';
       return /(Kwai|Instagram|FBAN|FBAV|TikTok|Line\/|MicroMessenger|Snapchat|wv\b|WebView)/i.test(ua);
@@ -287,7 +277,6 @@ import Footer from '../../components/Footer.astro';
     function isAndroid(): boolean { return /Android/i.test(navigator.userAgent); }
     function isIOS(): boolean     { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
 
-    // ── INTERSTICIAL ─────────────────────────────────────────────────────────
     function pmShowExit(url: string) {
       window.__pm_target_url = url;
       const display = document.getElementById('pm-exit-url-display');
@@ -299,7 +288,6 @@ import Footer from '../../components/Footer.astro';
         copyBtn.innerHTML = '<i class="ri-clipboard-line"></i> Copiar Link';
       }
 
-      // O '?' (Optional Chaining) garante que o TS não reclame se o ID não for encontrado
       document.getElementById('pm-exit-layer')?.classList.add('show');
       document.body.style.overflow = 'hidden';
     }
@@ -365,7 +353,6 @@ import Footer from '../../components/Footer.astro';
       window.open(googleRedirectUrl, '_top');
     }
 
-    // ── ABERTURA UNIVERSAL ───────────────────────────────────────────────────
     function pmOpenLink(e: Event | null, url: string) {
       if (e) e.preventDefault();
       if (!url) return;
@@ -381,21 +368,17 @@ import Footer from '../../components/Footer.astro';
       }
     }
 
-    // ── AUTO-PATCH ───────────────────────────────────────────────────────────
     function patchExternalLinks() {
-      // Tipamos o querySelector para HTMLAnchorElement para podermos usar o .dataset e o .href sem erro
       document.querySelectorAll<HTMLAnchorElement>('a[href^="http"]').forEach(link => {
         if (link.dataset.pmPatched) return;
         link.removeAttribute('target');
         link.setAttribute('rel', 'noopener noreferrer external');
         
-        // Usando arrow function corrigimos o escopo do 'this'
         link.addEventListener('click', (e) => pmOpenLink(e, link.href));
         link.dataset.pmPatched = '1';
       });
     }
 
-    // ── MODAIS ───────────────────────────────────────────────────────────────
     function pmOpenModal(id: string) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -414,14 +397,12 @@ import Footer from '../../components/Footer.astro';
       }, { once: true });
     }
 
-    // Tipamos o NodeList para HTMLElements
     document.querySelectorAll<HTMLElement>('.pm-modal-overlay').forEach(overlay => {
       overlay.addEventListener('click', e => {
         if (e.target === overlay) pmCloseModal(overlay.id);
       });
     });
 
-    // Tipamos o Evento do teclado
     document.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         document.querySelectorAll<HTMLElement>('.pm-modal-overlay.visible').forEach(el => pmCloseModal(el.id));
@@ -429,7 +410,6 @@ import Footer from '../../components/Footer.astro';
       }
     });
 
-    // ── PROTEÇÃO BÁSICA ──────────────────────────────────────────────────────
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'F12') { e.preventDefault(); return; }
@@ -439,7 +419,6 @@ import Footer from '../../components/Footer.astro';
       if ((e.ctrlKey || e.metaKey) && e.key.toUpperCase() === 'U') e.preventDefault();
     });
 
-    // ── EXPOSIÇÃO GLOBAL ─────────────────────────────────────────────────────
     window.pmOpenLink      = pmOpenLink;
     window.pmOpenModal     = pmOpenModal;
     window.pmCloseModal    = pmCloseModal;
@@ -458,7 +437,6 @@ import Footer from '../../components/Footer.astro';
 
 <style>
   .pm {
-    /* Variáveis locais herdam as globais do Layout */
     --bg-card:     var(--bg-2);
     --bg-input:    #1e2332;
     --border:      #2a3048;
@@ -479,7 +457,6 @@ import Footer from '../../components/Footer.astro';
     --r:           14px;
     --rl:          20px;
 
-    /* Base da página */
     font-family: 'Sora', sans-serif;
     background: transparent;
     color: var(--text);
@@ -586,11 +563,6 @@ import Footer from '../../components/Footer.astro';
   .pm-modal-btn.ios     { background: #1c1c1e; }
   .pm-modal-btn.wpp     { background: #25d366; }
   .pm-modal-btn.primary { background: var(--orange); }
-
-  .pm-wpp { position: fixed; bottom: 28px; right: 22px; width: 56px; height: 56px; border-radius: 50%; background: #25d366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; text-decoration: none; box-shadow: 0 6px 20px rgba(37,211,102,.4); z-index: 9999; transition: transform .22s, box-shadow .22s; }
-  .pm-wpp:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,.5); color: #fff; }
-  .pm-wpp-ring { position: absolute; inset: -4px; border-radius: 50%; border: 2px solid #25d366; opacity: 0; animation: pm-wring 2.4s ease-out infinite; }
-  @keyframes pm-wring { 0% { transform: scale(.9); opacity: .7; } 100% { transform: scale(1.55); opacity: 0; } }
 
   .pm-exit-layer { display: none; position: fixed; inset: 0; z-index: 99999; background: #0f1117; align-items: center; justify-content: center; flex-direction: column; padding: 32px 24px; text-align: center; }
   .pm-exit-layer.show { display: flex; }
