@@ -85,8 +85,22 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <style>
-  /* --- ESTILOS PREMIUM DA PÁGINA JURÍDICA --- */
-  
+  :global(header) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8) !important; /* Fundo escuro do seu tema */
+    backdrop-filter: blur(12px) !important; /* Efeito de vidro borrado premium */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Compensa o espaço do header fixo para o card não sumir por baixo dele */
+  .legal-page, .premium-page {
+    padding-top: 140px !important; /* Ajuste essa altura se o seu header for menor/maior */
+  }
+
   .section {
     padding: 80px 20px;
     display: flex;
