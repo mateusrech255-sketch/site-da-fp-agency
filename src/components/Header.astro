@@ -40,7 +40,12 @@ const baseUrl = base === '/' ? '' : base;
         <kbd>/</kbd>
       </div>
       <a href={`${baseUrl}/#contato`} class="btn-secondary nav-btn">Falar com a FP</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+      
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </div>
 
@@ -48,41 +53,226 @@ const baseUrl = base === '/' ? '' : base;
     <div class="search-container">
       <div class="search-input-field">
         <i class="fas fa-magnifying-glass main-icon"></i>
-        <input type="text" id="global-search-input" placeholder="Digite o nome, ID ou assunto e pressione ENTER..." autocomplete="off">
-        <button class="close-search" id="btn-close-search">ESC</button>
+        <input type="text" id="global-search-input" placeholder="O que você está procurando?" autocomplete="off" spellcheck="false">
+        <button class="close-search" id="btn-close-search" aria-label="Fechar busca">
+          <i class="fas fa-xmark"></i>
+        </button>
       </div>
       
       <div class="search-results-flow" id="global-search-results">
         <div class="search-hint">
-          Comece a digitar para ver resultados rápidos.<br>
-          <strong>Pressione ENTER</strong> para ir à Central de Busca avançada.
+          <i class="fas fa-keyboard"></i>
+          <p>Busque por páginas, editores, diretrizes ou pressione <strong>ENTER</strong> para busca avançada.</p>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<script>
+<div class="header-spacer"></div>
+
+<script type="module">
+  import Fuse from 'https://esm.sh/fuse.js@7.0.0';
+
   const API_URL = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
-  
   const headerEl = document.getElementById('fp-header');
   const basePath = headerEl ? headerEl.getAttribute('data-base') : '';
 
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
-  
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
-    });
-  }
-
   const searchModal = document.getElementById('global-search-modal');
-  const searchInput = document.getElementById('global-search-input') as HTMLInputElement;
+  const searchInput = document.getElementById('global-search-input');
+  const resultsContainer = document.getElementById('global-search-results');
+  
+  const searchCache = new Map();
+  let fetchController = null;
+  let typingTimer = null;
+  let currentFocus = -1;
+
+  const paginasSite = [
+    { tipo: 'pagina', titulo: "Página Inicial (Home)", url: `${basePath}/`, tags: "home inicio fp agency", icon: "fa-home" },
+    { tipo: 'pagina', titulo: "Sobre a FP Agency", url: `${basePath}/sobre`, tags: "sobre historia missao visao valores ecossistema", icon: "fa-rocket" },
+    { tipo: 'pagina', titulo: "Kwai Cut", url: `${basePath}/monetize/kwaicut`, tags: "kwai cut monetize monetização edição", icon: "fa-video" },
+    { tipo: 'pagina', titulo: "NarraStars", url: `${basePath}/monetize/kwainarrastars`, tags: "narrastars narração kwai locução", icon: "fa-microphone" },
+    { tipo: 'pagina', titulo: "Área do Recrutador", url: `${basePath}/recrutador`, tags: "recrutador equipe gerenciar convites painel", icon: "fa-users" },
+    { tipo: 'pagina', titulo: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, tags: "politica privacidade dados lgpd segurança legal", icon: "fa-shield-halved" },
+    { tipo: 'pagina', titulo: "Termos de Serviço", url: `${basePath}/termos-de-servico`, tags: "termos serviço regras contrato legal uso", icon: "fa-file-signature" },
+    { tipo: 'pagina', titulo: "Aviso Legal", url: `${basePath}/aviso-legal`, tags: "aviso legal juridico direitos isenção responsabilidade", icon: "fa-gavel" },
+    { tipo: 'pagina', titulo: "Central de Busca Avançada", url: `${basePath}/busca`, tags: "busca pesquisar editores planilha status", icon: "fa-magnifying-glass" }
+  ];
+
+  const fuse = new Fuse(paginasSite, {
+    keys: ['titulo', 'tags'],
+    threshold: 0.4,
+    ignoreLocation: true,
+    minMatchCharLength: 2,
+    includeScore: true
+  });
+
+  const highlight = (texto, termo) => {
+    if (!termo) return texto;
+    const regex = new RegExp(`(${termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return texto.replace(regex, '<mark>$1</mark>');
+  };
+
+  const renderSkeleton = () => `
+    <div class="search-section-title">Buscando na base global...</div>
+    <div class="search-skeleton"></div>
+    <div class="search-skeleton" style="width: 85%"></div>
+    <div class="search-skeleton" style="width: 90%"></div>
+  `;
+
+  const renderItem = (item, termo, isApi = false) => {
+    const titleHighlighted = highlight(item.titulo, termo);
+    
+    if (isApi) {
+      let statusColor = item.status === 'Aprovado' ? '#10b981' : (item.status === 'Reprovado' ? '#ef4444' : '#f59e0b');
+      return `
+        <div class="site-search-item search-focusable api-result" data-url="#" tabindex="0">
+          <div class="api-item-left">
+            <i class="fas fa-user-astronaut api-icon"></i>
+            <div>
+              <div class="api-title">${titleHighlighted}</div>
+              <div class="api-sub">Fonte: ${item.fonte || 'Desconhecida'}</div>
+            </div>
+          </div>
+          <div class="api-status" style="color: ${statusColor}; background: ${statusColor}15; border-color: ${statusColor}30;">
+            ${item.status}
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <a href="${item.url}" class="site-search-item search-focusable" tabindex="0">
+        <i class="fas ${item.icon}"></i>
+        <span>${titleHighlighted}</span>
+        <i class="fas fa-chevron-right arrow-icon"></i>
+      </a>
+    `;
+  };
+
+  const executarBusca = async (termo) => {
+    const resultadosLocais = fuse.search(termo).slice(0, 4); 
+    let html = '';
+    
+    if (resultadosLocais.length > 0) {
+      html += `<div class="search-section-title">Páginas Sugeridas</div>`;
+      html += resultadosLocais.map(res => renderItem(res.item, termo, false)).join('');
+    }
+
+    html += `
+      <a href="${basePath}/busca?q=${encodeURIComponent(termo)}" class="site-search-item highlight-enter search-focusable" tabindex="0">
+        <i class="fas fa-level-down-alt fa-rotate-90"></i>
+        <span>Pesquisar "<strong>${termo}</strong>" na base de editores</span>
+        <kbd>↵</kbd>
+      </a>
+    `;
+
+    resultsContainer.innerHTML = html;
+    currentFocus = -1; 
+
+    if (searchCache.has(termo)) {
+      renderApiResults(searchCache.get(termo), termo);
+      return;
+    }
+
+    if (fetchController) fetchController.abort();
+    fetchController = new AbortController();
+
+    const skeletonDiv = document.createElement('div');
+    skeletonDiv.id = 'api-skeleton-wrap';
+    skeletonDiv.innerHTML = renderSkeleton();
+    resultsContainer.appendChild(skeletonDiv);
+
+    try {
+      const payload = { action: 'buscarAprovacao', data: { termo: termo, filtro: 'all', page: 1, limit: 3 } };
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        signal: fetchController.signal 
+      });
+      
+      const resJson = await response.json();
+      
+      if (resJson.success !== false) {
+        searchCache.set(termo, resJson.data || []);
+        renderApiResults(resJson.data || [], termo);
+      }
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        console.log('Busca cancelada por nova digitação.');
+      } else {
+        document.getElementById('api-skeleton-wrap')?.remove();
+      }
+    }
+  };
+
+  const renderApiResults = (data, termo) => {
+    document.getElementById('api-skeleton-wrap')?.remove();
+    if (!data || data.length === 0) return;
+
+    const div = document.createElement('div');
+    div.innerHTML = `<div class="search-section-title" style="margin-top: 15px;">Editores na Base (Top 3)</div>` + 
+                    data.map(item => renderItem({ titulo: item.nomeCompleto, fonte: item.fonte, status: item.statusResultado }, termo, true)).join('');
+    
+    resultsContainer.appendChild(div);
+  };
+  
+  searchInput?.addEventListener('input', (e) => {
+    clearTimeout(typingTimer);
+    const termo = e.target.value.trim();
+    
+    if (termo.length < 2) {
+      resultsContainer.innerHTML = `
+        <div class="search-hint">
+          <i class="fas fa-keyboard"></i>
+          <p>Busque por páginas, editores, diretrizes ou pressione <strong>ENTER</strong> para busca avançada.</p>
+        </div>`;
+      if (fetchController) fetchController.abort(); 
+      return;
+    }
+
+    typingTimer = setTimeout(() => executarBusca(termo), 250); 
+  });
+
+  searchInput?.addEventListener('keydown', (e) => {
+    const items = document.querySelectorAll('.search-focusable');
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      currentFocus++;
+      addActive(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      currentFocus--;
+      addActive(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentFocus > -1 && items[currentFocus]) {
+        items[currentFocus].click();
+      } else {
+        const termo = searchInput.value.trim();
+        if (termo.length >= 2) window.location.href = `${basePath}/busca?q=${encodeURIComponent(termo)}`;
+      }
+    }
+  });
+
+  const addActive = (items) => {
+    if (!items || items.length === 0) return;
+    removeActive(items);
+    if (currentFocus >= items.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (items.length - 1);
+    
+    items[currentFocus].classList.add("active");
+    items[currentFocus].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+
+  const removeActive = (items) => {
+    items.forEach(item => item.classList.remove("active"));
+  };
 
   const openGlobalSearch = () => {
     searchModal?.classList.add('active');
-    setTimeout(() => searchInput?.focus(), 100);
+    setTimeout(() => { searchInput.value = ''; searchInput?.focus(); }, 50);
     document.body.style.overflow = 'hidden'; 
   };
 
@@ -95,109 +285,49 @@ const baseUrl = base === '/' ? '' : base;
   document.getElementById('btn-desktop-search')?.addEventListener('click', openGlobalSearch);
   document.getElementById('btn-close-search')?.addEventListener('click', closeGlobalSearch);
 
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
       e.preventDefault();
       openGlobalSearch();
     }
-    if (e.key === 'Escape') closeGlobalSearch();
-  });
-
-  searchInput?.addEventListener('keydown', function(e: KeyboardEvent) {
-    if (e.key === 'Enter') {
-      const termo = searchInput.value.trim();
-      if (termo.length >= 2) {
-        window.location.href = `${basePath}/busca?q=${encodeURIComponent(termo)}`;
-      }
+    if (e.key === 'Escape' && searchModal?.classList.contains('active')) {
+      closeGlobalSearch();
     }
   });
 
-  // Função para limpar acentos na busca
-  function removeAcentos(str: string) {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      menuToggle.classList.toggle("open");
+    });
   }
-
-  let typingTimer: number | ReturnType<typeof setTimeout>;
-  searchInput?.addEventListener('input', function() {
-    clearTimeout(typingTimer);
-    const termo = searchInput.value.trim();
-    const termoFiltro = removeAcentos(termo);
-    const container = document.getElementById('global-search-results');
-    
-    if (termo.length < 2) {
-      if (container) container.innerHTML = '<div class="search-hint">Continue digitando ou pressione ENTER para busca profunda.</div>';
-      return;
-    }
-
-    typingTimer = setTimeout(async () => {
-      if (container) container.innerHTML = '<div class="searching-status"><i class="fas fa-spinner fa-spin"></i> Procurando rapidamente...</div>';
-      
-      // Base de páginas atualizada e completa
-      const paginasSite = [
-        { nome: "Regras e Níveis de Gamificação", url: `${basePath}/diretrizes`, tags: "regras niveis ouro prata bronze bônus metas diretrizes" },
-        { nome: "Portal do Parceiro", url: `${basePath}/login`, tags: "login cadastro entrar conta cpf acesso" },
-        { nome: "Carteira e Financeiro", url: `${basePath}/financeiro`, tags: "saque saldo dinheiro carteira extrato financeiro" },
-        { nome: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, tags: "politica privacidade dados lgpd segurança legal" },
-        { nome: "Termos de Serviço", url: `${basePath}/termos-de-servico`, tags: "termos serviço regras contrato legal uso" },
-        { nome: "Aviso Legal", url: `${basePath}/aviso-legal`, tags: "aviso legal juridico direitos" },
-        { nome: "Área do Recrutador", url: `${basePath}/recrutador`, tags: "recrutador equipe gerenciar convites painel" }
-      ];
-
-      let htmlResultados = '';
-      
-      // Filtro inteligente (ignora maiúsculas e acentos)
-      const paginasFiltradas = paginasSite.filter(p => 
-        removeAcentos(p.tags).includes(termoFiltro) || 
-        removeAcentos(p.nome).includes(termoFiltro)
-      );
-      
-      if(paginasFiltradas.length > 0) {
-        htmlResultados += `<div class="search-section-title">Sugestões do Site</div>`;
-        paginasFiltradas.forEach(p => {
-          htmlResultados += `<a href="${p.url}" class="site-search-item"><i class="fas fa-link"></i> ${p.nome}</a>`;
-        });
-      }
-
-      htmlResultados += `
-        <a href="${basePath}/busca?q=${encodeURIComponent(termo)}" class="site-search-item highlight-enter">
-          <i class="fas fa-level-down-alt fa-rotate-90"></i> Pesquisar "<strong>${termo}</strong>" na base de editores (Enter)
-        </a>
-      `;
-
-      try {
-        const payload = {
-          action: 'buscarAprovacao',
-          data: { termo: termo, filtro: 'all', page: 1, limit: 5 }
-        };
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        });
-        
-        const text = await response.text();
-        const resJson = JSON.parse(text);
-
-        if (resJson.success !== false && resJson.data && resJson.data.length > 0) {
-          htmlResultados += `<div class="search-section-title" style="margin-top:15px">Status de Editores (Planilha)</div>`;
-          resJson.data.forEach((item: any) => {
-            htmlResultados += `
-              <div class="site-search-item" style="display:flex; justify-content:space-between; cursor:default; pointer-events:none;">
-                <span><i class="fas fa-user"></i> ${item.nomeCompleto} (${item.fonte})</span>
-                <span style="color:#ff6b2b; font-size:0.8rem; font-weight:bold">${item.statusResultado}</span>
-              </div>`;
-          });
-        }
-      } catch (e) {
-        console.log("Busca rápida na planilha não retornou resultados ou falhou.", e);
-      }
-
-      if (container) container.innerHTML = htmlResultados;
-    }, 400); 
-  });
 </script>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 1000; padding: 16px 0; backdrop-filter: blur(16px); background: rgba(15, 17, 23, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-family: system-ui, sans-serif; }
+  /* 1. CONFIGURAÇÃO GLOBAL DO HEADER (Fixo no topo e transparente blur) */
+  .site-header { 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    padding: 16px 0; 
+    backdrop-filter: blur(16px); 
+    background: rgba(15, 17, 23, 0.85); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+    font-family: system-ui, sans-serif; 
+  }
+  
+  /* 2. ESPAÇADOR FANTASMA: Garante que o texto da página não suma embaixo do header */
+  .header-spacer {
+    display: block;
+    width: 100%;
+    height: 79px; 
+  }
+
+  /* 3. ESTRUTURA E LINKS */
   .container { width: min(calc(100% - 32px), 1220px); margin: 0 auto; }
   .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .brand { display: inline-flex; align-items: center; gap: 14px; font-weight: 900; color: #fff; text-decoration: none; font-size: 1.04rem;}
@@ -206,50 +336,98 @@ const baseUrl = base === '/' ? '' : base;
   .nav-links { display: flex; align-items: center; gap: 24px; color: #dbe7f0; font-weight: 600; font-size: 0.95rem; }
   .nav-links a { text-decoration: none; color: inherit; position: relative; }
   .nav-links a:hover { color: #ff6b2b; }
-  .mobile-search-btn { display: none; background: rgba(255,107,43,0.1); color: #ff6b2b; border: 1px solid rgba(255,107,43,0.3); padding: 10px 15px; border-radius: 8px; width: 100%; text-align: left; cursor: pointer; font-weight: bold; }
-
+  
+  /* 4. BOTÕES E AÇÕES */
   .header-actions { display: flex; align-items: center; gap: 15px; }
   
   .search-trigger { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 99px; color: #94a3b8; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-  .search-trigger:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .search-trigger kbd { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
+  .search-trigger:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2); }
+  .search-trigger kbd { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; color: #fff; }
 
   .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 10px 22px; border-radius: 99px; font-weight: 700; text-decoration: none; transition: 0.2s; }
   .btn-secondary:hover { background: #fff; color: #000; }
   
-  .menu-toggle { display: none; background: transparent; border: 0; color: #fff; font-size: 1.8rem; cursor: pointer; }
+  /* 5. ANIMAÇÃO DO MENU MOBILE (HAMBURGUER -> X) */
+  .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; background: transparent; border: 0; cursor: pointer; padding: 0; z-index: 1001; }
+  .menu-toggle .bar { width: 100%; height: 3px; background-color: #fff; border-radius: 3px; transition: all 0.3s ease-in-out; transform-origin: center; }
+  
+  .menu-toggle.open .bar:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+  .menu-toggle.open .bar:nth-child(2) { opacity: 0; transform: scale(0); }
+  .menu-toggle.open .bar:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
 
-  .search-overlay { position: fixed; inset: 0; background: rgba(8, 10, 15, 0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: flex-start; padding-top: 10vh; opacity: 0; pointer-events: none; transition: 0.3s ease; }
+  /* 6. MODAL DE BUSCA GLOAL (COMMAND PALETTE) */
+  .search-overlay { position: fixed; inset: 0; background: rgba(8, 10, 15, 0.6); backdrop-filter: blur(12px); z-index: 9999; display: flex; justify-content: center; align-items: flex-start; padding-top: 12vh; opacity: 0; pointer-events: none; transition: 0.2s ease; }
   .search-overlay.active { opacity: 1; pointer-events: all; }
-  .search-container { width: 90%; max-width: 650px; background: #181c27; border: 1px solid #2a3048; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; transform: translateY(-20px); transition: 0.3s ease; }
-  .search-overlay.active .search-container { transform: translateY(0); }
   
-  .search-input-field { display: flex; align-items: center; padding: 20px 25px; border-bottom: 1px solid #2a3048; background: #1e2332; }
-  .main-icon { font-size: 1.3rem; color: #ff6b2b; margin-right: 15px; }
-  .search-input-field input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 1.2rem; font-family: 'Sora', sans-serif; }
+  .search-container { width: 90%; max-width: 650px; background: var(--bg-2, #181c27); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); overflow: hidden; transform: scale(0.96) translateY(-10px); transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  .search-overlay.active .search-container { transform: scale(1) translateY(0); }
+  
+  .search-input-field { display: flex; align-items: center; padding: 18px 25px; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); }
+  .main-icon { font-size: 1.2rem; color: var(--primary, #ff6b2b); margin-right: 15px; }
+  .search-input-field input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 1.15rem; font-family: 'Sora', sans-serif; }
   .search-input-field input::placeholder { color: #64748b; }
-  .close-search { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 5px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; transition: 0.2s; }
-  .close-search:hover { background: #ef4444; color: white; border-color: #ef4444; }
-
-  .search-results-flow { padding: 20px 25px; max-height: 60vh; overflow-y: auto; }
-  .search-hint { text-align: center; color: #64748b; font-size: 0.9rem; padding: 20px 0; }
-  .searching-status { color: #ff6b2b; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
   
-  .search-section-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 10px; font-weight: bold; }
-  .site-search-item { display: block; padding: 12px 15px; background: rgba(255,255,255,0.03); border-radius: 10px; color: #dbe7f0; text-decoration: none; margin-bottom: 8px; transition: 0.2s; font-size: 0.95rem; border: 1px solid transparent; }
-  .site-search-item i { margin-right: 8px; color: #ff6b2b; }
-  .site-search-item:hover { background: rgba(255,107,43,0.1); border-color: rgba(255,107,43,0.3); color: #fff; transform: translateX(5px); }
-  .highlight-enter { margin-top: 15px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; }
-  .highlight-enter i { color: #60a5fa; }
-  .highlight-enter:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
-  .highlight-enter:hover i { color: #fff; }
+  .close-search { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+  .close-search:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
+  /* 7. ESTILOS DA LISTA DE RESULTADOS */
+  .search-results-flow { padding: 15px 15px; max-height: 55vh; overflow-y: auto; scroll-behavior: smooth; }
+  .search-results-flow::-webkit-scrollbar { width: 6px; }
+  .search-results-flow::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+  
+  .search-hint { text-align: center; color: #64748b; font-size: 0.9rem; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+  .search-hint i { font-size: 2rem; opacity: 0.5; color: var(--primary); }
+  .search-hint p { margin: 0; line-height: 1.5; }
+  
+  .search-section-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin: 15px 10px 8px; font-weight: 700; }
+  
+  .site-search-item { display: flex; align-items: center; padding: 12px 15px; background: transparent; border-radius: 10px; color: #dbe7f0; text-decoration: none; margin-bottom: 4px; transition: 0.1s ease; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; }
+  .site-search-item > i:first-child { width: 24px; text-align: center; margin-right: 12px; color: #64748b; font-size: 1.1rem; }
+  .site-search-item > span { flex: 1; }
+  .arrow-icon { color: #64748b; opacity: 0; transform: translateX(-5px); transition: 0.2s; }
+  
+  .site-search-item:hover, .site-search-item.active { background: rgba(255,255,255,0.03); color: #fff; border-color: rgba(255,255,255,0.05); }
+  .site-search-item:hover > i:first-child, .site-search-item.active > i:first-child { color: var(--primary, #ff6b2b); }
+  .site-search-item:hover .arrow-icon, .site-search-item.active .arrow-icon { opacity: 1; transform: translateX(0); }
+
+  mark { background: rgba(255, 107, 43, 0.15); color: #ff9a5c; border-radius: 3px; padding: 0 2px; font-weight: 700; }
+
+  .highlight-enter { background: rgba(59, 130, 246, 0.05); margin-top: 10px; }
+  .highlight-enter > i:first-child { color: #3b82f6 !important; }
+  .highlight-enter kbd { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; color: #fff; }
+  .highlight-enter:hover, .highlight-enter.active { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.2); }
+
+  .api-result { justify-content: space-between; align-items: center; }
+  .api-item-left { display: flex; align-items: center; }
+  .api-icon { width: 24px; text-align: center; margin-right: 12px; font-size: 1.1rem; color: #94a3b8; }
+  .api-title { font-weight: 600; color: #fff; }
+  .api-sub { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+  .api-status { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 99px; border: 1px solid transparent; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* 8. SKELETON LOADING */
+  .search-skeleton {
+    height: 52px;
+    margin: 8px 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s infinite ease-in-out;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* 9. RESPONSIVO (MOBILE) */
+  .mobile-search-btn { display: none; background: rgba(255,107,43,0.1); color: #ff6b2b; border: 1px solid rgba(255,107,43,0.3); padding: 10px 15px; border-radius: 8px; width: 100%; text-align: left; cursor: pointer; font-weight: bold; }
+  
   @media (max-width: 860px) {
-    .nav-links { position: absolute; top: 100%; left: 0; right: 0; display: none; flex-direction: column; background: #0f1117; padding: 20px; border-bottom: 1px solid #2a3048; gap: 20px; }
+    .nav-links { position: absolute; top: 100%; left: 0; right: 0; display: none; flex-direction: column; background: #0f1117; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 20px; }
     .nav-links.open { display: flex; }
-    .menu-toggle { display: block; }
+    .menu-toggle { display: flex; }
     .nav-btn, .search-trigger { display: none; }
     .mobile-search-btn { display: block; }
+    .search-overlay { padding-top: 5vh; }
     .search-input-field input { font-size: 1rem; }
   }
 </style>
