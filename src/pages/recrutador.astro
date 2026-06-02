@@ -75,10 +75,10 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       <div class="modal-icon-wrapper info"><i class="fas fa-camera"></i></div>
       <h3 class="custom-modal-title">Selecionar Imagem</h3>
       <p class="custom-modal-text">De onde você quer enviar a foto?</p>
-      <div class="modal-btn-group" style="flex-direction:column">
-        <button class="btn-confirm" onclick="selectMedia('camera')" style="margin-bottom:5px"><i class="fas fa-camera"></i> Tirar Foto</button>
-        <button class="btn-confirm" onclick="selectMedia('gallery')" style="background:#475569"><i class="fas fa-images"></i> Da Galeria</button>
-        <button class="btn-cancel" onclick="closeMediaModal()" style="margin-top:10px">Cancelar</button>
+      <div class="modal-btn-group modal-stack">
+        <button class="btn-confirm" onclick="selectMedia('camera')"><i class="fas fa-camera"></i> Tirar Foto</button>
+        <button class="btn-confirm media-gallery-btn" onclick="selectMedia('gallery')"><i class="fas fa-images"></i> Da Galeria</button>
+        <button class="btn-cancel" onclick="closeMediaModal()">Cancelar</button>
       </div>
     </div>
   </div>
@@ -92,10 +92,14 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
     </div>
   </div>
 
-  <div class="fp-agency-wrapper" id="main-app-container">
-
-    <div id="view-Landing" class="view active">
+  <div class="fp-agency-wrapper" id="main-app-container" data-portal-state="public" data-auth-state="checking" data-active-view="Landing">
+    <div class="app-shell-header" id="portalHeaderWrapper">
       <Header />
+    </div>
+
+    <main class="app-shell-content" id="views-container" aria-live="polite">
+
+    <div id="view-Landing" class="view view-container view-public active" data-view="Landing" data-public="true">
       <div class="rc">
         <div class="rc-hero">
           <div class="rc-hero-inner">
@@ -103,18 +107,18 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
             <h1 class="rc-hero-title">Transforme sua audiência<br>em <span>oportunidades</span></h1>
             <p class="rc-hero-sub">Participe do programa oficial de recrutadores e receba comissões conforme o desempenho dos usuários que você indicar. Plataformas parceiras oficiais.</p>
 
-            <div class="rc-hero-stats" style="display:flex; justify-content:center; gap:30px; margin:25px 0; flex-wrap:wrap;">
-              <div style="text-align:center;">
-                <div style="font-size:1.6rem; font-weight:900; color:#fff;">+R$ 250 Mil</div>
-                <div style="font-size:0.85rem; color:var(--text-muted);">Pagos nos últimos 12 meses</div>
+            <div class="rc-hero-stats">
+              <div class="rc-stat">
+                <div class="rc-stat-value">+R$ 250 Mil</div>
+                <div class="rc-stat-label">Pagos nos últimos 12 meses</div>
               </div>
-              <div style="text-align:center;">
-                <div style="font-size:1.6rem; font-weight:900; color:#fff;">+1.800</div>
-                <div style="font-size:0.85rem; color:var(--text-muted);">Recrutadores ativos</div>
+              <div class="rc-stat">
+                <div class="rc-stat-value">+1.800</div>
+                <div class="rc-stat-label">Recrutadores ativos</div>
               </div>
-              <div style="text-align:center;">
-                <div style="font-size:1.6rem; font-weight:900; color:#fff;">98%</div>
-                <div style="font-size:0.85rem; color:var(--text-muted);">Pagos em até 48h</div>
+              <div class="rc-stat">
+                <div class="rc-stat-value">98%</div>
+                <div class="rc-stat-label">Pagos em até 48h</div>
               </div>
             </div>
 
@@ -123,36 +127,36 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
               <button class="rc-btn-secondary" onclick="document.getElementById('simulador').scrollIntoView({behavior: 'smooth'})"><i class="ri-calculator-line"></i> Ver quanto posso ganhar</button>
             </div>
 
-            <div style="margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">
+            <div class="rc-partners">
               <span>Parceiros Oficiais:</span>
-              <span style="margin: 0 10px; color: #fff; font-weight: 600;"><i class="fas fa-video"></i> Kwai Cut</span>
-              <span style="color: #fff; font-weight: 600;"><i class="fas fa-microphone"></i> Narrastars</span>
+              <span><i class="fas fa-video"></i> Kwai Cut</span>
+              <span><i class="fas fa-microphone"></i> Narrastars</span>
             </div>
           </div>
         </div>
 
         <div class="rc-section">
           <div class="rc-section-label"><span class="rc-section-label-text">Quem pode participar?</span><div class="rc-section-label-line"></div></div>
-          <div class="rc-who-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; margin-top:20px;">
-             <div class="rc-who-card" style="background:var(--bg-card); padding:24px; border-radius:15px; border:1px solid var(--border); text-align:center;">
-                <i class="ri-vidicon-line" style="font-size:2.2rem; color:var(--orange);"></i>
-                <h4 style="color:#fff; margin:10px 0 5px;">Criadores</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Produtores de conteúdo de qualquer nicho na internet.</p>
+          <div class="rc-who-grid">
+             <div class="rc-who-card">
+                <i class="ri-vidicon-line"></i>
+                <h4>Criadores</h4>
+                <p>Produtores de conteúdo de qualquer nicho na internet.</p>
              </div>
-             <div class="rc-who-card" style="background:var(--bg-card); padding:24px; border-radius:15px; border:1px solid var(--border); text-align:center;">
-                <i class="ri-links-line" style="font-size:2.2rem; color:var(--orange);"></i>
-                <h4 style="color:#fff; margin:10px 0 5px;">Afiliados</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Especialistas em tráfego pago e alta conversão.</p>
+             <div class="rc-who-card">
+                <i class="ri-links-line"></i>
+                <h4>Afiliados</h4>
+                <p>Especialistas em tráfego pago e alta conversão.</p>
              </div>
-             <div class="rc-who-card" style="background:var(--bg-card); padding:24px; border-radius:15px; border:1px solid var(--border); text-align:center;">
-                <i class="ri-group-line" style="font-size:2.2rem; color:var(--orange);"></i>
-                <h4 style="color:#fff; margin:10px 0 5px;">Gestores</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Líderes de comunidades, WhatsApp e grupos VIP.</p>
+             <div class="rc-who-card">
+                <i class="ri-group-line"></i>
+                <h4>Gestores</h4>
+                <p>Líderes de comunidades, WhatsApp e grupos VIP.</p>
              </div>
-             <div class="rc-who-card" style="background:var(--bg-card); padding:24px; border-radius:15px; border:1px solid var(--border); text-align:center;">
-                <i class="ri-megaphone-line" style="font-size:2.2rem; color:var(--orange);"></i>
-                <h4 style="color:#fff; margin:10px 0 5px;">Influenciadores</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Pessoas com grande poder de influência e indicação.</p>
+             <div class="rc-who-card">
+                <i class="ri-megaphone-line"></i>
+                <h4>Influenciadores</h4>
+                <p>Pessoas com grande poder de influência e indicação.</p>
              </div>
           </div>
         </div>
@@ -168,36 +172,36 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
 
         <div id="simulador" class="rc-section">
           <div class="rc-section-label"><span class="rc-section-label-text">Potencial de Ganhos</span><div class="rc-section-label-line"></div></div>
-          <p style="color:var(--text-muted); font-size:0.95rem; text-align:center; margin-bottom:20px;">Veja uma estimativa de ganhos mensais baseada em atividade média (RPM):</p>
-          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:15px; overflow:hidden;">
-            <table style="width:100%; border-collapse:collapse; text-align:left; color:#fff;">
-              <thead style="background:rgba(255,107,43,0.1);">
+          <p class="rc-table-intro">Veja uma estimativa de ganhos mensais baseada em atividade média (RPM):</p>
+          <div class="rc-table-wrap">
+            <table class="rc-earnings-table">
+              <thead>
                 <tr>
-                  <th style="padding:15px; border-bottom:1px solid var(--border); color:var(--orange);">Usuários Ativos</th>
-                  <th style="padding:15px; border-bottom:1px solid var(--border); color:var(--orange);">RPM Médio Estimado</th>
-                  <th style="padding:15px; border-bottom:1px solid var(--border); color:var(--orange);">Ganho Estimado</th>
+                  <th>Usuários Ativos</th>
+                  <th>RPM Médio Estimado</th>
+                  <th>Ganho Estimado</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="padding:15px; border-bottom:1px solid var(--border);">50</td>
-                  <td style="padding:15px; border-bottom:1px solid var(--border);">R$ 10,00</td>
-                  <td style="padding:15px; border-bottom:1px solid var(--border); font-weight:bold; color:#22c55e;">R$ 500,00</td>
+                  <td>50</td>
+                  <td>R$ 10,00</td>
+                  <td class="rc-money">R$ 500,00</td>
                 </tr>
                 <tr>
-                  <td style="padding:15px; border-bottom:1px solid var(--border);">100</td>
-                  <td style="padding:15px; border-bottom:1px solid var(--border);">R$ 10,00</td>
-                  <td style="padding:15px; border-bottom:1px solid var(--border); font-weight:bold; color:#22c55e;">R$ 1.000,00</td>
+                  <td>100</td>
+                  <td>R$ 10,00</td>
+                  <td class="rc-money">R$ 1.000,00</td>
                 </tr>
                 <tr>
-                  <td style="padding:15px;">300</td>
-                  <td style="padding:15px;">R$ 10,00</td>
-                  <td style="padding:15px; font-weight:bold; color:#22c55e;">R$ 3.000,00</td>
+                  <td>300</td>
+                  <td>R$ 10,00</td>
+                  <td class="rc-money">R$ 3.000,00</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p style="color:var(--text-muted); font-size:0.8rem; text-align:center; margin-top:10px;">* Valores puramente estimativos. Os ganhos variam de acordo com o desempenho real nas plataformas.</p>
+          <p class="rc-table-note">* Valores puramente estimativos. Os ganhos variam de acordo com o desempenho real nas plataformas.</p>
         </div>
 
         <div class="rc-section">
@@ -211,7 +215,7 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
           </div>
         </div>
 
-        <div class="rc-section" style="margin-bottom:0">
+        <div class="rc-section rc-section-last">
           <div class="rc-cta">
             <div class="rc-cta-title">Pronto para escalar seus resultados?</div>
             <p class="rc-cta-sub">Junte-se ao time de recrutadores de alta performance e transforme indicações em negócio.</p>
@@ -222,10 +226,9 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
           </div>
         </div>
       </div>
-      <Footer />
     </div>
 
-    <div id="view-Diretrizes" class="view" style="display:none !important; visibility:hidden !important;">
+    <div id="view-Diretrizes" class="view view-container view-public" data-view="Diretrizes" data-public="true">
       <div class="dg">
         <div class="dg-banner">
           <div class="dg-banner-inner">
@@ -348,40 +351,40 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Login" class="view" style="display:none !important; visibility:hidden !important;">
+    <div id="view-Login" class="view view-container view-public view-auth" data-view="Login" data-public="true">
       <div class="auth-wrapper">
-        <div class="auth-card" style="background:white;padding:2rem;border-radius:16px;box-shadow:0 4px 12px rgba(249,115,22,.08);text-align:center;width:92%;max-width:400px;">
-          <h1 style="color:var(--primary);margin:0 0 5px">Portal Parceiro</h1>
-          <p style="color:#9a3412;margin-bottom:25px">Faça login para continuar</p>
-          <button type="button" class="btn" style="background:white;color:#333;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;font-weight:500" onclick="loginComGoogle()">
-            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width={20} height={20} alt="Google" loading="lazy" decoding="async" style="width:20px;height:20px" /> Continuar com o Google
+        <div class="auth-card">
+          <h1 class="auth-title">Portal Parceiro</h1>
+          <p class="auth-subtitle auth-subtitle-accent">Faça login para continuar</p>
+          <button type="button" class="btn auth-google-btn" onclick="loginComGoogle()">
+            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Continuar com o Google
           </button>
-          <div style="margin:20px 0;display:flex;align-items:center;gap:10px"><div style="height:1px;background:#e2e8f0;flex:1"></div><span style="font-size:.8rem;color:#94a3b8">ou use seu acesso</span><div style="height:1px;background:#e2e8f0;flex:1"></div></div>
+          <div class="auth-separator"><div></div><span>ou use seu acesso</span><div></div></div>
           
           <form id="loginForm" onsubmit="event.preventDefault()">
             <input type="email" name="email" placeholder="E-mail cadastrado" required>
             
             <div class="password-wrapper"><input type="password" id="senha" name="senha" placeholder="Sua senha" required><i class="fas fa-eye toggle-password" onclick="togglePassword('senha',this)"></i></div>
-            <div style="text-align:right;margin:-6px 0 16px;font-size:.75rem"><a onclick="nav('Redefinir')" style="color:var(--primary);font-weight:600;cursor:pointer">Esqueceu a senha?</a></div>
+            <div class="auth-forgot"><a onclick="nav('Redefinir')" style="color:var(--primary);font-weight:600;cursor:pointer">Esqueceu a senha?</a></div>
             <button type="submit" class="btn" id="btnLogin">ENTRAR</button>
             
-            <div style="margin:20px 0;display:flex;align-items:center;gap:10px"><div style="height:1px;background:#e2e8f0;flex:1"></div><span style="font-size:.8rem;color:#94a3b8">ou</span><div style="height:1px;background:#e2e8f0;flex:1"></div></div>
-            <button type="button" class="btn" style="background:transparent;border:2px solid var(--primary);color:var(--primary)" onclick="nav('Cadastro')">CRIAR NOVA CONTA</button>
-            <div style="margin-top:16px"><button type="button" class="btn" style="background:transparent;border:1px solid #e2e8f0;color:#64748b;font-size:.85rem" onclick="nav('Landing')">← Voltar para o Início</button></div>
+            <div class="auth-separator"><div></div><span>ou</span><div></div></div>
+            <button type="button" class="btn btn-outline-primary" onclick="nav('Cadastro')">CRIAR NOVA CONTA</button>
+            <div class="auth-back-action"><button type="button" class="btn btn-outline-muted" onclick="nav('Landing')">← Voltar para o Início</button></div>
           </form>
         </div>
       </div>
     </div>
 
-    <div id="view-Cadastro" class="view" style="display:none !important; visibility:hidden !important;">
+    <div id="view-Cadastro" class="view view-container view-public view-auth" data-view="Cadastro" data-public="true">
       <div class="auth-wrapper">
-        <div class="auth-card" style="background:white;padding:2rem;border-radius:16px;box-shadow:0 4px 12px rgba(249,115,22,.08);text-align:center;width:92%;max-width:400px;">
-          <h1 style="color:var(--primary);margin:0 0 5px">Cadastro</h1>
-          <p style="color:var(--gray);margin-bottom:25px">Crie sua conta para começar</p>
-          <button type="button" class="btn" id="btnGoogleCad" style="background:white;color:#333;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;font-weight:500" onclick="preencherComGoogle()">
-            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width={20} height={20} alt="Google" loading="lazy" decoding="async" style="width:20px;height:20px" /> Preencher dados com o Google
+        <div class="auth-card">
+          <h1 class="auth-title">Cadastro</h1>
+          <p class="auth-subtitle">Crie sua conta para começar</p>
+          <button type="button" class="btn auth-google-btn" id="btnGoogleCad" onclick="preencherComGoogle()">
+            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Preencher dados com o Google
           </button>
-          <div id="div-ou-cad" style="margin:20px 0;display:flex;align-items:center;gap:10px"><div style="height:1px;background:#e2e8f0;flex:1"></div><span style="font-size:.8rem;color:#94a3b8">ou digite manualmente</span><div style="height:1px;background:#e2e8f0;flex:1"></div></div>
+          <div id="div-ou-cad" class="auth-separator"><div></div><span>ou digite manualmente</span><div></div></div>
           
           <form id="formCadastro" onsubmit="event.preventDefault()">
             <input type="text"  name="nome"     id="cad-nome"     placeholder="Nome Completo" required>
@@ -391,7 +394,7 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
             <label for="cad-dataNasc" style="text-align:left">Data de Nascimento</label>
             <input type="date" name="dataNasc" id="cad-dataNasc" required onchange="verificarIdade(this)" style="color:#334155;padding:15px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;width:100%;margin-bottom:15px;font-family:inherit">
             
-            <div id="blocoResponsavel" style="display:none;background:#fffbeb;padding:15px;border-radius:12px;border:1px solid #fde68a;margin-bottom:15px;text-align:left">
+            <div id="blocoResponsavel" class="guardian-consent">
               <div style="font-size:.75rem;color:#b45309;margin-bottom:10px;line-height:1.4"><b>Declaração de Responsabilidade Legal:</b> Por possuir entre 14 e 15 anos, você declara autorização expressa do responsável legal.</div>
               <input type="text" name="nomeResp" id="nomeResp" placeholder="Nome Completo do Responsável" style="margin-bottom:10px">
               <input type="tel"  name="cpfResp"  id="cpfResp"  placeholder="CPF do Responsável" maxlength="14" oninput="maskCPF(this)" style="margin-bottom:0">
@@ -415,11 +418,11 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Redefinir" class="view" style="display:none !important; visibility:hidden !important;">
+    <div id="view-Redefinir" class="view view-container view-public view-auth" data-view="Redefinir" data-public="true">
       <div class="auth-wrapper">
-        <div class="auth-card" style="background:white;padding:2.5rem 2rem;border-radius:16px;box-shadow:0 4px 12px rgba(249,115,22,.08);text-align:center;width:92%;max-width:400px;">
-          <h2 style="color:var(--primary);margin-top:0;margin-bottom:5px">Redefinir Senha</h2>
-          <p id="reset-subtitle" style="font-size:.85rem;color:var(--gray);margin-bottom:25px">Digite seu e-mail para receber um link de redefinição.</p>
+        <div class="auth-card auth-card-reset">
+          <h2 class="auth-title">Redefinir Senha</h2>
+          <p id="reset-subtitle" class="auth-subtitle">Digite seu e-mail para receber um link de redefinição.</p>
           <div id="reset-alert" style="display:none;margin-bottom:15px;padding:12px;border-radius:10px;font-size:.85rem;font-weight:600"></div>
           <form id="resetForm" onsubmit="event.preventDefault()">
             <input type="email" name="email" placeholder="E-mail cadastrado" required>
@@ -430,14 +433,13 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Dashboard" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header" style="display:flex;align-items:center;padding-top:10px;gap:15px">
-        <div class="header-icon" style="visibility:hidden;display:none"><i class="fas fa-bars"></i></div>
-        <Image id="uFoto" src={defaultProfileAvatar} width={50} height={50} alt="Foto de perfil" loading="eager" decoding="async" style="width:50px; height:50px; min-width:50px; min-height:50px; flex-shrink:0; border-radius:50%; object-fit:cover; border:2px solid var(--orange); background-color:var(--bg-card);" />
-        <div style="text-align:left;width:100%;overflow:hidden"><small style="opacity:.9">Bem-vindo(a),</small><div style="font-weight:700;font-size:1.4rem;text-transform:uppercase;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="uName">...</div></div>
-      </div>
+    <div id="view-Dashboard" class="view view-container view-private" data-view="Dashboard">
+      <section class="dashboard-hero" aria-label="Resumo do recrutador">
+        <Image id="uFoto" class="profile-avatar profile-avatar-sm" src={defaultProfileAvatar} width={50} height={50} alt="Foto de perfil" loading="eager" decoding="async" />
+        <div class="dashboard-welcome"><small>Bem-vindo(a),</small><div id="uName">...</div></div>
+      </section>
       
-      <div class="card-float" style="text-align:center">
+      <div class="card-float balance-card">
         <div style="color:var(--gray);font-size:.8rem;font-weight:600;letter-spacing:1px">SALDO DISPONÍVEL</div>
         <div style="font-size:2.5rem;font-weight:800;color:var(--primary);margin:5px 0 20px" id="uSaldo">R$ ...</div>
         <button class="btn" onclick="nav('Financeiro')"><i class="fas fa-money-bill-wave"></i> Solicitar Saque</button>
@@ -483,9 +485,9 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Financeiro" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Carteira</h2><div style="width:24px"></div></div>
-      <div class="card-float" style="text-align:center;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:30px 20px;margin-top:-25px">
+    <div id="view-Financeiro" class="view view-container view-private" data-view="Financeiro">
+      <h1 class="view-heading">Carteira</h1>
+      <div class="card-float finance-balance-card">
         <div style="font-size:.85rem;font-weight:600;letter-spacing:1px;opacity:.9">SALDO DISPONÍVEL</div>
         <div style="font-size:2.8rem;font-weight:800;margin:10px 0 20px" id="saldo-fin">R$ 0,00</div>
         <button class="btn" style="background:white;color:var(--primary);box-shadow:0 4px 15px rgba(0,0,0,.1)" onclick="tentarSaque()"><i class="fas fa-money-bill-wave"></i> Solicitar Saque</button>
@@ -493,8 +495,8 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       <div style="padding:0 10px 90px"><h3 style="color:#1e293b;margin-bottom:15px;font-size:1.1rem;padding-left:5px">Histórico</h3><div id="lista-financeiro"></div></div>
     </div>
 
-    <div id="view-Ranking" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Top Recrutadores</h2><div style="width:24px"></div></div>
+    <div id="view-Ranking" class="view view-container view-private" data-view="Ranking">
+      <h1 class="view-heading">Top Recrutadores</h1>
       <div style="padding:0 20px 20px;">
         <div style="background:linear-gradient(135deg, var(--bg-card), #1e2332); border:1px solid var(--orange); border-radius:15px; padding:20px; text-align:center; box-shadow: 0 4px 15px rgba(255,107,43,0.1);">
            <p style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; font-weight:700; margin-bottom:5px;">Sua Posição Prevista</p>
@@ -502,18 +504,18 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">Faltam <strong>poucas aprovações</strong> para você entrar no Top 10 e se qualificar para as bonificações mensais exclusivas!</p>
         </div>
       </div>
-      <div class="card-float" style="box-shadow:none;background:transparent;padding:0;margin-top:-25px">
+      <div class="card-float plain-card">
         <div id="lista" class="rank-list"><div style="text-align:center;padding:50px"><i class="fas fa-circle-notch fa-spin fa-2x" style="color:#cbd5e1"></i></div></div>
       </div>
     </div>
 
-    <div id="view-Configuracoes" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Meus Dados</h2><div style="width:24px"></div></div>
+    <div id="view-Configuracoes" class="view view-container view-private" data-view="Configuracoes">
+      <h1 class="view-heading">Meus Dados</h1>
       <div class="card-float">
         <div style="text-align:center">
 
           <div class="avatar-wrapper" style="display:flex; justify-content:center; align-items:center; position:relative; margin-bottom:15px;">
-            <Image id="ui_foto" class="avatar-img" src={defaultProfileAvatar} width={120} height={120} alt="Minha foto de perfil" loading="lazy" decoding="async" style="width:120px; height:120px; min-width:120px; min-height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--orange); box-shadow:0 4px 15px rgba(255,107,43,0.2); background-color:var(--bg-card);" />
+            <Image id="ui_foto" class="avatar-img profile-avatar profile-avatar-lg" src={defaultProfileAvatar} width={120} height={120} alt="Minha foto de perfil" loading="lazy" decoding="async" />
           </div>
 
           <div class="progress-bar-container" id="progContainer" style="max-width:200px;margin:0 auto"><div class="progress-bar" id="progBar"></div></div>
@@ -543,14 +545,14 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Avisos" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Mural de Avisos</h2><div style="width:24px"></div></div>
-      <div class="card-float" style="box-shadow:none;background:transparent;padding:0;margin-top:-25px"><div id="lista-avisos"></div></div>
+    <div id="view-Avisos" class="view view-container view-private" data-view="Avisos">
+      <h1 class="view-heading">Mural de Avisos</h1>
+      <div class="card-float plain-card"><div id="lista-avisos"></div></div>
     </div>
 
-    <div id="view-Editores" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Minha Equipe</h2><div style="width:24px"></div></div>
-      <div class="card-float" style="padding:12px 10px;background:transparent;box-shadow:none;margin-top:-25px">
+    <div id="view-Editores" class="view view-container view-private" data-view="Editores">
+      <h1 class="view-heading">Minha Equipe</h1>
+      <div class="card-float editors-panel">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px">
           <div style="display:flex;background:white;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0;flex:1">
             <button class="proj-tab active" data-proj="Todos"       onclick="setFilterProjeto('Todos')"       style="border-right:0">Todos</button>
@@ -574,9 +576,9 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div id="view-Links" class="view" style="display:none !important; visibility:hidden !important;">
-      <div class="header"><div class="header-icon" style="visibility:hidden"><i class="fas fa-bars"></i></div><h2>Links & Recrutamento</h2><div style="width:24px"></div></div>
-      <div class="card-float" style="padding-bottom:20px;margin-top:-25px">
+    <div id="view-Links" class="view view-container view-private" data-view="Links">
+      <h1 class="view-heading">Links & Recrutamento</h1>
+      <div class="card-float links-panel">
         <div class="section-title" style="margin-top:0;margin-bottom:10px">Seu Código de Recrutador</div>
         <div class="link-group" style="background:#fff7ed;border-color:#fdba74">
           <label for="meuCodigoCopia" style="color:#c2410c"><i class="fas fa-fingerprint"></i> Código Kwai Cut / Narrastars</label>
@@ -633,16 +635,21 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
       </div>
     </div>
 
-    <div class="top-nav" id="topNavSidebar" style="display:none">
-      <div class="nav-item" data-page="Dashboard"    onclick="nav('Dashboard')">   <i class="fas fa-home"></i>         <span>Início</span></div>
-      <div class="nav-item" data-page="Ranking"      onclick="nav('Ranking')">     <i class="fas fa-trophy"></i>        <span>Ranking</span></div>
-      <div class="nav-item" data-page="Financeiro"   onclick="nav('Financeiro')">  <i class="fas fa-wallet"></i>        <span>Carteira</span></div>
-      <div class="nav-item" data-page="Links"        onclick="nav('Links')">       <i class="fas fa-link"></i>          <span>Links</span></div>
-      <div class="nav-item" data-page="Editores"     onclick="nav('Editores')">    <i class="fas fa-users"></i>         <span>Equipe</span></div>
-      <div class="nav-item" data-page="Avisos"       onclick="nav('Avisos')">      <i class="fas fa-bell"></i>          <span>Avisos</span></div>
+    </main>
+
+    <nav class="bottom-nav" id="bottomNavSidebar" aria-label="Navegação do portal">
+      <div class="nav-item" data-page="Dashboard"     onclick="nav('Dashboard')">   <i class="fas fa-home"></i>         <span>Início</span></div>
+      <div class="nav-item" data-page="Ranking"       onclick="nav('Ranking')">     <i class="fas fa-trophy"></i>       <span>Ranking</span></div>
+      <div class="nav-item" data-page="Financeiro"    onclick="nav('Financeiro')">  <i class="fas fa-wallet"></i>       <span>Carteira</span></div>
+      <div class="nav-item" data-page="Links"         onclick="nav('Links')">       <i class="fas fa-link"></i>         <span>Links</span></div>
+      <div class="nav-item" data-page="Editores"      onclick="nav('Editores')">    <i class="fas fa-users"></i>        <span>Equipe</span></div>
+      <div class="nav-item" data-page="Avisos"        onclick="nav('Avisos')">      <i class="fas fa-bell"></i>         <span>Avisos</span></div>
       <div class="nav-item" data-page="Configuracoes" onclick="nav('Configuracoes')"><i class="fas fa-cog"></i>         <span>Ajustes</span></div>
-      <div class="nav-item logout"                   onclick="logoutApp()">         <i class="fas fa-sign-out-alt"></i>  <span>Sair</span></div>
-      <div class="nav-item" id="btnToggleNav"        onclick="toggleSidebarCompact()"><i class="fas fa-compress-alt"></i><span>Ocultar</span></div>
+      <div class="nav-item logout"                    onclick="logoutApp()">        <i class="fas fa-sign-out-alt"></i> <span>Sair</span></div>
+    </nav>
+
+    <div class="app-shell-footer" id="portalFooterWrapper">
+      <Footer />
     </div>
   </div>
 </Layout>
@@ -756,45 +763,51 @@ function patchAllLinks() {
 const PUBLIC_VIEWS = new Set(['Landing', 'Diretrizes', 'Login', 'Cadastro', 'Redefinir']);
 let _prevPage = 'Landing';
 
+function isPublicView(page) {
+  return PUBLIC_VIEWS.has(page);
+}
+
+function hasValidSessionToken() {
+  return Boolean(sessionStorage.getItem('idToken'));
+}
+
+function storeDashboardSession(idToken, data) {
+  sessionStorage.setItem('idToken', idToken);
+  sessionStorage.setItem('user_nome',  data?.nome || '');
+  sessionStorage.setItem('user_nivel', data?.nivel || '');
+  sessionStorage.setItem('user_foto',  data?.avatar || data?.foto || '');
+}
+
+function setShellState(page) {
+  const appCont = document.getElementById('main-app-container');
+  const isPublic = isPublicView(page);
+  if (!appCont) return;
+
+  appCont.dataset.portalState = isPublic ? 'public' : 'private';
+  appCont.dataset.activeView = page;
+  appCont.dataset.authState = hasValidSessionToken() ? 'authenticated' : 'guest';
+  appCont.classList.toggle('dark-mode', isPublic);
+
+  document.getElementById('wa-fab-container')?.classList.toggle('portal-hidden', !isPublic);
+  document.dispatchEvent(new CustomEvent('portal:view-change', { detail: { page, isPublic } }));
+}
+
 function nav(page) {
-  // Remover todas as classes active e visibility
+  const target = document.getElementById('view-' + page);
+  if (!target) return;
+
+  if (!isPublicView(page) && !hasValidSessionToken()) {
+    globalAlert('Sessão Necessária', 'Faça login para acessar o portal do recrutador.', 'warning');
+    nav('Login');
+    return;
+  }
+
   const cur = document.querySelector('.view.active');
   if (cur) _prevPage = cur.id.replace('view-', '');
-  
-  // Remover active de todas as views
-  document.querySelectorAll('.view').forEach(v => {
-    v.classList.remove('active');
-    v.style.display = 'none';
-    v.style.visibility = 'hidden';
-    v.style.pointerEvents = 'none';
-  });
-  
-  // Adicionar active à view alvo
-  const target = document.getElementById('view-' + page);
-  if (target) {
-    target.classList.add('active');
-    target.style.display = '';
-    target.style.visibility = '';
-    target.style.pointerEvents = '';
-  }
 
-  const appCont = document.getElementById('main-app-container');
-  const bNav    = document.getElementById('topNavSidebar');
-  const wpp = document.getElementById('wa-fab-container');
-
-  if (PUBLIC_VIEWS.has(page)) {
-    appCont.classList.add('dark-mode');
-    appCont.style.paddingTop = '0px';
-    if (bNav) bNav.style.display = 'none';
-    if (wpp)  wpp.style.display  = 'flex';
-  } else {
-    appCont.classList.remove('dark-mode');
-    if (bNav) {
-      bNav.style.display = 'flex';
-      appCont.style.paddingTop = bNav.classList.contains('compact') ? '55px' : '85px';
-    }
-    if (wpp) wpp.style.display = 'none'; // esconde no portal (nav já ocupa topo)
-  }
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  target.classList.add('active');
+  setShellState(page);
 
   /* FAQ init */
   document.querySelectorAll('.rc-faq-header').forEach(h => {
@@ -807,11 +820,12 @@ function nav(page) {
 
   /* Active nav item */
   document.querySelectorAll('.nav-item').forEach(el => {
-    el.classList.remove('active');
-    if (el.getAttribute('data-page') === page) { el.classList.add('active'); el.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}); }
+    const isActive = el.getAttribute('data-page') === page;
+    el.classList.toggle('active', isActive);
+    if (isActive) el.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
   });
 
-  if (typeof window['load'+page] === 'function') window['load'+page]();
+  if (!isPublicView(page) && typeof window['load'+page] === 'function') window['load'+page]();
   window.scrollTo(0,0);
   setTimeout(patchAllLinks, 100);
 }
@@ -826,12 +840,12 @@ function navBack() {
    ============================================================ */
 let loaderTimeout;
 function showLoader() {
-  document.getElementById('global-loader').style.display = 'flex';
+  document.getElementById('global-loader')?.classList.add('is-visible');
   clearTimeout(loaderTimeout);
   loaderTimeout = setTimeout(hideLoader, 12000);
 }
 function hideLoader() {
-  document.getElementById('global-loader').style.display = 'none';
+  document.getElementById('global-loader')?.classList.remove('is-visible');
   clearTimeout(loaderTimeout);
 }
 
@@ -879,22 +893,30 @@ firebase.auth().onAuthStateChanged(async (user) => {
   if (user && sessionStorage.getItem('esperando_login_google') === 'sim') {
     sessionStorage.removeItem('esperando_login_google');
     showLoader();
-    const idToken = await user.getIdToken();
-    const res = await gsRun('getDashboardData', { idToken });
-    hideLoader();
-    if (res.success) {
-      sessionStorage.setItem('idToken', idToken);
-      sessionStorage.setItem('user_nome',  res.data.nome);
-      sessionStorage.setItem('user_nivel', res.data.nivel);
-      sessionStorage.setItem('user_foto',  res.data.avatar);
-      nav('Dashboard');
-    } else {
-      document.getElementById('cad-nome').value  = user.displayName || '';
-      if (user.email) { document.getElementById('cad-email').value = user.email; document.getElementById('cad-email').readOnly = true; document.getElementById('cad-email').style.backgroundColor='#f1f5f9'; }
-      document.getElementById('btnGoogleCad').style.display = 'none';
-      document.getElementById('div-ou-cad').style.display   = 'none';
-      nav('Cadastro');
-      globalAlert("Quase lá!", "Complete os campos restantes para finalizar o cadastro.", "info");
+    try {
+      const idToken = await user.getIdToken();
+      const res = await gsRun('getDashboardData', { idToken });
+      hideLoader();
+      if (res.success) {
+        storeDashboardSession(idToken, res.data);
+        nav('Dashboard');
+      } else {
+        document.getElementById('cad-nome').value  = user.displayName || '';
+        if (user.email) {
+          const cadEmail = document.getElementById('cad-email');
+          cadEmail.value = user.email;
+          cadEmail.readOnly = true;
+          cadEmail.classList.add('is-readonly');
+        }
+        document.getElementById('btnGoogleCad').classList.add('is-hidden');
+        document.getElementById('div-ou-cad').classList.add('is-hidden');
+        nav('Cadastro');
+        globalAlert("Quase lá!", "Complete os campos restantes para finalizar o cadastro.", "info");
+      }
+    } catch (error) {
+      hideLoader();
+      sessionStorage.removeItem('esperando_login_google');
+      globalAlert('Erro Google', 'Não foi possível validar seu acesso com o Google. Tente novamente.', 'error');
     }
   }
 });
@@ -912,8 +934,7 @@ async function gsRun(action, dataObj) {
 function forceLogout(msg) {
   sessionStorage.clear();
   try { firebase.auth().signOut(); } catch(e){}
-  const bNav = document.getElementById('topNavSidebar');
-  if (bNav) bNav.style.setProperty('display','none','important');
+  document.getElementById('main-app-container')?.setAttribute('data-auth-state', 'guest');
   if (msg) globalAlert('Sessão Encerrada', msg, 'warning');
   nav('Landing');
 }
@@ -953,10 +974,7 @@ document.getElementById('loginForm').onsubmit = async function(e) {
     btn.disabled = false;
 
     if (res.success) { 
-      sessionStorage.setItem('idToken', idToken);
-      sessionStorage.setItem('user_nome', res.data.nome); 
-      sessionStorage.setItem('user_nivel', res.data.nivel); 
-      sessionStorage.setItem('user_foto', res.data.avatar); 
+      storeDashboardSession(idToken, res.data);
       nav('Dashboard'); 
     }
     else { 
@@ -1000,9 +1018,9 @@ function verificarIdade(inputData) {
   const dataD=new Date(inputData.value+'T00:00:00'); if(!inputData.value) return;
   const hoje=new Date(); let idade=hoje.getFullYear()-dataD.getFullYear();
   if(hoje.getMonth()<dataD.getMonth()||(hoje.getMonth()===dataD.getMonth()&&hoje.getDate()<dataD.getDate())) idade--;
-  if(idade<14){ globalAlert("Bloqueado","Mínimo de 14 anos.","error"); btn.disabled=true; inputData.value=''; blocoResp.style.display='none'; iNome.required=false; iCpf.required=false; }
-  else if(idade<16){ blocoResp.style.display='block'; iNome.required=true; iCpf.required=true; btn.disabled=false; globalAlert("Declaração Legal","Você precisa de autorização do responsável legal.","warning"); }
-  else { blocoResp.style.display='none'; iNome.required=false; iCpf.required=false; btn.disabled=false; }
+  if(idade<14){ globalAlert("Bloqueado","Mínimo de 14 anos.","error"); btn.disabled=true; inputData.value=''; blocoResp.classList.remove('is-visible'); iNome.required=false; iCpf.required=false; }
+  else if(idade<16){ blocoResp.classList.add('is-visible'); iNome.required=true; iCpf.required=true; btn.disabled=false; globalAlert("Declaração Legal","Você precisa de autorização do responsável legal.","warning"); }
+  else { blocoResp.classList.remove('is-visible'); iNome.required=false; iCpf.required=false; btn.disabled=false; }
 }
 
 document.getElementById('formCadastro').onsubmit = async (e) => {
@@ -1022,7 +1040,18 @@ document.getElementById('formCadastro').onsubmit = async (e) => {
     else { const uc=await firebase.auth().createUserWithEmailAndPassword(e.target.email.value,e.target.senha.value); idToken=await uc.user.getIdToken(); }
     const res=await gsRun('cadastrarUsuarioPlanilha',{ idToken, form:formData });
     hideLoader(); btn.disabled=false; btn.innerText="CRIAR CONTA";
-    if(res.success){ globalAlert("Bem-Vindo!","Conta criada com sucesso!","success"); e.target.reset(); document.getElementById('blocoResponsavel').style.display='none'; document.getElementById('btnGoogleCad').style.display='flex'; document.getElementById('div-ou-cad').style.display='flex'; document.getElementById('cad-email').readOnly=false; document.getElementById('cad-email').style.backgroundColor='#f8fafc'; firebase.auth().signOut(); nav('Login'); }
+    if(res.success){
+      globalAlert("Bem-Vindo!","Conta criada com sucesso!","success");
+      e.target.reset();
+      document.getElementById('blocoResponsavel').classList.remove('is-visible');
+      document.getElementById('btnGoogleCad').classList.remove('is-hidden');
+      document.getElementById('div-ou-cad').classList.remove('is-hidden');
+      const cadEmail = document.getElementById('cad-email');
+      cadEmail.readOnly=false;
+      cadEmail.classList.remove('is-readonly');
+      firebase.auth().signOut();
+      nav('Login');
+    }
     else { globalAlert("Atenção",res.msg,"warning"); }
   } catch(error) {
     hideLoader(); btn.disabled=false; btn.innerText="CRIAR CONTA";
@@ -1296,13 +1325,17 @@ async function loadEditores() {
 
 function setFilterProjeto(proj) {
   stateFiltroProj=proj;
-  document.querySelectorAll('.proj-tab').forEach(el=>{ if(el.getAttribute('data-proj')===proj){el.classList.add('active');el.style.background='#fff7ed';el.style.color='var(--primary)';}else{el.classList.remove('active');el.style.background='transparent';el.style.color='var(--gray)';} });
+  document.querySelectorAll('.proj-tab').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-proj') === proj);
+  });
   applyFiltersEditores();
 }
 function setFilterTempo(t){ stateFiltroTempo=t; applyFiltersEditores(); }
 function setFilterStatus(s){
   stateFiltroStatus=s;
-  document.querySelectorAll('.status-filter').forEach(el=>{ if(el.getAttribute('data-status')===s){el.classList.add('active');el.style.borderColor='var(--primary)';}else{el.classList.remove('active');el.style.borderColor='transparent';} });
+  document.querySelectorAll('.status-filter').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-status') === s);
+  });
   renderEditoresList();
 }
 
@@ -1415,11 +1448,7 @@ function openFromInput(id){
 function logoutApp(){ globalConfirm("Sair do Sistema","Tem certeza que deseja sair?",function(){ forceLogout('Você saiu da sua conta.'); }); }
 
 function toggleSidebarCompact(){
-  const navEl=document.getElementById('topNavSidebar'); const btn=document.getElementById('btnToggleNav'); const app=document.getElementById('main-app-container');
-  navEl.classList.toggle('compact');
-  if(navEl.classList.contains('compact')){ app.style.paddingTop='55px'; btn.innerHTML='<i class="fas fa-expand-arrows-alt"></i><span>Expandir</span>'; }
-  else { app.style.paddingTop='85px'; btn.innerHTML='<i class="fas fa-compress-alt"></i><span>Ocultar</span>'; }
-  setTimeout(()=>btn.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}),100);
+  document.getElementById('main-app-container')?.classList.toggle('is-compact-nav');
 }
 
 /* ============================================================
@@ -1436,14 +1465,34 @@ document.addEventListener('keydown', e => {
 /* ============================================================
    INIT
    ============================================================ */
-function initApp(){
-  hideLoader();
-  const token=sessionStorage.getItem('idToken');
-  
-  // Se há token, ir para Dashboard; caso contrário, manter na Landing
-  // A Landing já é o padrão no HTML (tem classe active)
-  if (token) {
-    nav('Dashboard');
+async function initApp(){
+  const appCont = document.getElementById('main-app-container');
+  const token = sessionStorage.getItem('idToken');
+
+  if (!token) {
+    appCont?.setAttribute('data-auth-state', 'guest');
+    nav('Landing');
+    hideLoader();
+    return;
+  }
+
+  showLoader();
+  appCont?.setAttribute('data-auth-state', 'checking');
+
+  try {
+    const res = await gsRun('getDashboardData', { idToken: token });
+    if (res.success && !res.locked) {
+      storeDashboardSession(token, res.data);
+      appCont?.setAttribute('data-auth-state', 'authenticated');
+      nav('Dashboard');
+      return;
+    }
+
+    forceLogout(res.msg || 'Sua sessão expirou. Faça login novamente.');
+  } catch (error) {
+    forceLogout('Não foi possível validar sua sessão. Faça login novamente.');
+  } finally {
+    hideLoader();
   }
 }
 
@@ -1485,21 +1534,85 @@ function copyInviteMessage() {
 .fp-agency-wrapper {
   --primary:      #f97316;
   --primary-dark: #ea580c;
-  --bg:           #fff7ed;
+  --bg:           #f8fafc;
+  --bg-app:       transparent;
+  --bg-soft:      #f1f5f9;
+  --bg-card:      #ffffff;
+  --bg-input:     #f8fafc;
+  --brand-tint:   #fff7ed;
   --text:         #1e293b;
+  --text-muted:   #64748b;
   --gray:         #64748b;
   --white:        #ffffff;
-  --radius:       16px;
-  --shadow:       0 4px 10px -3px rgba(0,0,0,.04);
+  --border:       #e2e8f0;
+  --orange:       var(--primary);
+  --radius:       18px;
+  --shadow:       0 10px 25px -5px rgba(249,115,22,.08), 0 8px 20px -12px rgba(15,23,42,.22);
+  --border-soft:  #e2e8f0;
   --mono: 'JetBrains Mono', monospace;
+  --bottom-nav-height: 75px;
   
+  display:flex;
+  flex-direction:column;
   font-family:'Poppins', sans-serif;
   color:var(--text);
   min-height:100dvh;
   position:relative; 
   width:100%;
   overflow-x:hidden;
-  overflow-y:auto;
+  background:var(--bg-app);
+  transition:background .3s ease;
+}
+
+.fp-agency-wrapper[data-portal-state="private"] {
+  --bg-app:
+    radial-gradient(circle at top right, rgba(249,115,22,.08), transparent 360px),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.fp-agency-wrapper[data-portal-state="public"] {
+  --bg-app: transparent;
+}
+
+.app-shell-header,
+.app-shell-footer {
+  flex:0 0 auto;
+  position:relative;
+  z-index:40;
+}
+
+.app-shell-content {
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  min-height:0;
+  width:100%;
+}
+
+.fp-agency-wrapper[data-portal-state="private"] .app-shell-content {
+  padding-bottom:calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+}
+
+.fp-agency-wrapper[data-portal-state="private"] .app-shell-footer {
+  display:none;
+}
+
+.fp-agency-wrapper .bottom-nav {
+  display:none;
+}
+
+.fp-agency-wrapper[data-portal-state="private"] .bottom-nav {
+  display:flex;
+}
+
+.portal-hidden,
+.is-hidden {
+  display:none !important;
+}
+
+.is-readonly {
+  background:#f1f5f9 !important;
+  cursor:not-allowed;
 }
 
 /* ============================================================
@@ -1533,32 +1646,25 @@ function copyInviteMessage() {
 /* ============================================================
    SHELL E TRANSIÇÕES
    ============================================================ */
-#main-app-container {
-  padding-top:85px;
-  padding-bottom:40px;
-  background-color:var(--bg);
-  transition:background .3s, padding-top .3s;
-  position:relative;
-  overflow:hidden;
-  width:100%;
-}
-#main-app-container.dark-mode { background-color:transparent; } /* Transparente para o fundo do Layout.astro vazar */
+#main-app-container { width:100%; }
 
 /* ============================================================
    VIEW SYSTEM
    ============================================================ */
-.view { 
-  display:none !important; 
+.view {
+  display:none;
   width:100%; 
   animation:fadeIn .4s ease;
-  visibility:hidden;
   position:relative;
-  z-index:-1;
 }
-.view.active { 
-  display:block !important; 
-  visibility:visible;
-  z-index:1;
+.view.active {
+  display:flex;
+  flex:1;
+  flex-direction:column;
+}
+.view-container {
+  flex:1;
+  min-height:100%;
 }
 @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
@@ -1575,7 +1681,8 @@ function copyInviteMessage() {
   z-index:999999; display:none;
   justify-content:center; align-items:center; flex-direction:column;
 }
-#main-app-container.dark-mode ~ #global-loader,
+#global-loader.is-visible { display:flex; }
+.fp-agency-wrapper[data-portal-state="public"] ~ #global-loader,
 .dark-mode #global-loader { background:rgba(15,17,23,.9); }
 .spinner { 
   width:40px; height:40px; border:4px solid #fed7aa;
@@ -1662,8 +1769,42 @@ function copyInviteMessage() {
 .custom-modal-title { color:#1e293b; margin-bottom:10px; font-size:1.25rem; font-weight:700; }
 .custom-modal-text  { font-size:.9rem; color:#64748b; margin-bottom:25px; line-height:1.5; }
 .modal-btn-group { display:flex; gap:10px; justify-content:center; width:100%; }
+.modal-btn-group.modal-stack { flex-direction:column; }
+.modal-stack .btn-confirm + .btn-confirm { margin-top:5px; }
+.modal-stack .btn-cancel { margin-top:10px; }
+.media-gallery-btn { background:#475569; }
 .btn-confirm { background:var(--primary); color:white; padding:12px 20px; border-radius:12px; font-weight:600; width:100%; cursor:pointer; border:none; font-size:.9rem; }
 .btn-cancel  { background:#f1f5f9; color:#475569; padding:12px 20px; border-radius:12px; font-weight:600; width:100%; cursor:pointer; border:none; font-size:.9rem; }
+
+/* ============================================================
+   FIX: ESTRUTURA FLEX E SCROLL LIVRE
+   ============================================================ */
+.fp-agency-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100dvh !important;
+  width: 100% !important;
+  overflow-y: visible !important; /* Libera o scroll nativo da página */
+}
+
+#main-app-container {
+  overflow: visible !important; /* Salva o login de ficar esmagado no topo */
+}
+
+#views-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Estica o meio da tela e obriga o rodapé a ficar no fundo */
+  width: 100%;
+}
+
+.view.active {
+  display: flex !important;
+  flex-direction: column;
+  flex: 1; /* Faz a aba aberta preencher o container inteiro */
+  visibility: visible;
+  z-index: 1;
+}
 
 /* ============================================================
    PORTAL COMPONENTS (Ajustados ao contexto `.fp-agency-wrapper`)
@@ -1673,8 +1814,8 @@ function copyInviteMessage() {
   flex-direction:column; 
   justify-content:center; 
   align-items:center; 
-  min-height:100vh; 
-  padding:15px;
+  min-height:calc(100dvh - 96px);
+  padding:20px 15px;
   position:relative;
   z-index:10;
 }
@@ -1684,11 +1825,160 @@ function copyInviteMessage() {
   height:0;
   overflow:hidden;
 }
-.fp-agency-wrapper .header { background:var(--primary); color:white; padding:15px 15px 35px; border-radius:0 0 20px 20px; display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:10; }
-.fp-agency-wrapper .header h2 { position:absolute; left:50%; transform:translateX(-50%); top:15px; margin:0; font-size:1.25rem; font-weight:600; white-space:nowrap; }
-.fp-agency-wrapper .header-icon { font-size:1.3rem; cursor:pointer; z-index:11; width:24px; }
-.fp-agency-wrapper .card-float { background:white; margin:-25px 12px 15px; padding:18px; border-radius:var(--radius); box-shadow:var(--shadow); position:relative; z-index:20; }
+.fp-agency-wrapper .auth-card {
+  background:white;
+  padding:2rem;
+  border-radius:16px;
+  box-shadow:0 4px 12px rgba(249,115,22,.08);
+  text-align:center;
+  width:92%;
+  max-width:400px;
+}
+.fp-agency-wrapper .auth-card-reset { padding:2.5rem 2rem; }
+.fp-agency-wrapper .auth-title {
+  color:var(--primary);
+  margin:0 0 5px;
+  font-size:1.8rem;
+  font-weight:800;
+}
+.fp-agency-wrapper h2.auth-title { font-size:1.5rem; }
+.fp-agency-wrapper .auth-subtitle {
+  color:var(--gray);
+  font-size:.85rem;
+  margin-bottom:25px;
+}
+.fp-agency-wrapper .auth-subtitle-accent { color:#9a3412; }
+.fp-agency-wrapper .auth-google-btn {
+  background:white;
+  color:#333;
+  border:1px solid #e2e8f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+  font-weight:500;
+}
+.fp-agency-wrapper .auth-google-icon { width:20px; height:20px; }
+.fp-agency-wrapper .auth-separator {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:20px 0;
+}
+.fp-agency-wrapper .auth-separator div { height:1px; background:#e2e8f0; flex:1; }
+.fp-agency-wrapper .auth-separator span { font-size:.8rem; color:#94a3b8; }
+.fp-agency-wrapper .btn-outline-primary {
+  background:transparent;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+.fp-agency-wrapper .btn-outline-muted {
+  background:transparent;
+  border:1px solid #e2e8f0;
+  color:#64748b;
+  font-size:.85rem;
+}
+.fp-agency-wrapper .auth-back-action { margin-top:16px; }
+.fp-agency-wrapper .view-heading {
+  width:min(calc(100% - 32px), 920px);
+  margin:18px auto 12px;
+  color:#1e293b;
+  font-size:1.35rem;
+  font-weight:800;
+  letter-spacing:0;
+}
+.fp-agency-wrapper .dashboard-hero {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:min(calc(100% - 24px), 920px);
+  margin:16px auto 12px;
+  padding:14px;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:white;
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  position:relative;
+  z-index:2;
+}
+.fp-agency-wrapper .dashboard-welcome {
+  min-width:0;
+  text-align:left;
+}
+.fp-agency-wrapper .dashboard-welcome small { opacity:.9; }
+.fp-agency-wrapper .dashboard-welcome div {
+  font-size:1.35rem;
+  font-weight:800;
+  line-height:1.1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.fp-agency-wrapper .profile-avatar {
+  aspect-ratio:1 / 1;
+  border-radius:50%;
+  flex-shrink:0;
+  object-fit:cover;
+  object-position:center;
+  background-color:var(--bg-card);
+}
+.fp-agency-wrapper .profile-avatar-sm {
+  width:50px;
+  height:50px;
+  border:2px solid rgba(255,255,255,.8);
+}
+.fp-agency-wrapper .profile-avatar-lg {
+  width:120px;
+  height:120px;
+  border:3px solid var(--orange);
+  box-shadow:0 4px 15px rgba(255,107,43,0.2);
+}
+.fp-agency-wrapper .card-float {
+  background:white;
+  margin:12px auto 15px;
+  padding:18px;
+  width:min(calc(100% - 24px), 920px);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  position:relative;
+  z-index:1;
+}
+.fp-agency-wrapper .balance-card { text-align:center; }
+.fp-agency-wrapper .finance-balance-card {
+  text-align:center;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:white;
+  padding:30px 20px;
+}
+.fp-agency-wrapper .plain-card {
+  background:transparent;
+  box-shadow:none;
+  padding:0;
+}
+.fp-agency-wrapper .editors-panel {
+  background:transparent;
+  box-shadow:none;
+  padding:12px 10px;
+}
+.fp-agency-wrapper .links-panel { padding-bottom:20px; }
 .fp-agency-wrapper .card { background:white; margin:15px 12px; padding:18px; border-radius:16px; box-shadow:0 2px 8px -2px rgba(0,0,0,.04); }
+.fp-agency-wrapper .guardian-consent {
+  display:none;
+  background:#fffbeb;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #fde68a;
+  margin-bottom:15px;
+  text-align:left;
+}
+.fp-agency-wrapper .guardian-consent.is-visible { display:block; }
+.fp-agency-wrapper .auth-forgot {
+  text-align:right;
+  margin:0 0 16px;
+  font-size:.75rem;
+}
 
 .fp-agency-wrapper input:not([type="checkbox"]), .fp-agency-wrapper select { width:100%; padding:15px; margin-bottom:15px; border:1px solid #e2e8f0; border-radius:10px; background:#f8fafc; box-sizing:border-box; font-family:inherit; outline:none; color: var(--text-portal); }
 .fp-agency-wrapper input:focus, .fp-agency-wrapper select:focus { border-color:var(--primary); background:white; }
@@ -1701,24 +1991,66 @@ function copyInviteMessage() {
 .fp-agency-wrapper .btn:active { transform:scale(.98); background:var(--primary-dark); }
 .fp-agency-wrapper .btn.danger { background:#ef4444; }
 .fp-agency-wrapper .btn.secondary { background:#e2e8f0; color:var(--text); }
+.fp-agency-wrapper .btn.auth-google-btn {
+  background:white;
+  color:#333;
+  border:1px solid #e2e8f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+  font-weight:500;
+}
+.fp-agency-wrapper .btn.btn-outline-primary {
+  background:transparent;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+.fp-agency-wrapper .btn.btn-outline-muted {
+  background:transparent;
+  border:1px solid #e2e8f0;
+  color:#64748b;
+  font-size:.85rem;
+}
 .fp-agency-wrapper .password-wrapper { position:relative; width:100%; }
 .fp-agency-wrapper .password-wrapper input { padding-right:40px; margin-bottom:15px; }
 .fp-agency-wrapper .toggle-password { position:absolute; right:15px; top:40%; transform:translateY(-50%); cursor:pointer; color:#94a3b8; font-size:1.1rem; transition:.2s; }
 .fp-agency-wrapper .toggle-password:hover { color:var(--primary); }
 
-/* Top nav (portal) */
-.fp-agency-wrapper .top-nav { position:fixed; top:0; left:0; width:100%; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,.05); display:flex; align-items:center; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; z-index:5000; padding:10px; border-radius:0 0 20px 20px; box-sizing:border-box; -ms-overflow-style:none; scrollbar-width:none; transition:all .3s; height:75px; }
-.fp-agency-wrapper .top-nav::-webkit-scrollbar { display:none; }
-.fp-agency-wrapper .top-nav.compact { height:45px; padding:5px 10px; border-radius:0 0 15px 15px; }
-.fp-agency-wrapper .top-nav.compact .nav-item { flex-direction:row; gap:8px; flex:0 0 auto; padding:5px 15px; height:auto; }
-.fp-agency-wrapper .top-nav.compact .nav-item i { display:none; }
-.fp-agency-wrapper .top-nav.compact .nav-item span { font-size:.8rem; }
-.fp-agency-wrapper .top-nav.compact .nav-item.active { background:#fff7ed; border-radius:10px; }
-.fp-agency-wrapper .nav-item { scroll-snap-align:start; flex:0 0 75px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; text-decoration:none; font-size:.65rem; font-weight:600; gap:5px; cursor:pointer; transition:all .3s; -webkit-tap-highlight-color:transparent; }
-.fp-agency-wrapper .nav-item i { font-size:1.3rem; padding:6px 16px; border-radius:14px; transition:all .3s; }
-.fp-agency-wrapper .nav-item.active { color:var(--primary); }
-.fp-agency-wrapper .nav-item.active i { background:#fff7ed; color:var(--primary); transform:translateY(3px); }
-.fp-agency-wrapper .nav-item.logout { color:#ef4444; }
+/* ==============================================
+   NAVEGAÇÃO INFERIOR DO APP (BOTTOM NAV)
+   ============================================== */
+.fp-agency-wrapper .bottom-nav {
+  position: fixed; bottom: 0; left: 0; width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+  display: none; align-items: center;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; -ms-overflow-style: none; scrollbar-width: none;
+  z-index: 5000; height: 75px; padding: 0 5px;
+  border-top: 1px solid rgba(249,115,22,0.1);
+  padding-bottom: env(safe-area-inset-bottom); /* Garante que não invada a barra do iPhone */
+}
+.fp-agency-wrapper[data-portal-state="private"] .bottom-nav { display:flex; }
+.fp-agency-wrapper .bottom-nav::-webkit-scrollbar { display: none; }
+
+.fp-agency-wrapper .nav-item {
+  scroll-snap-align: start; flex: 0 0 72px; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #64748b; text-decoration: none; font-size: 0.65rem; font-weight: 600; gap: 5px;
+  cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+}
+.fp-agency-wrapper .nav-item i {
+  font-size: 1.25rem; width: 42px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px; transition: all 0.2s;
+}
+.fp-agency-wrapper .nav-item:hover { color: var(--primary); }
+.fp-agency-wrapper .nav-item.active { color: var(--primary); font-weight: 700; }
+.fp-agency-wrapper .nav-item.active i { background: #fff7ed; color: var(--primary); transform: translateY(-2px); }
+.fp-agency-wrapper .nav-item.logout { color: #ef4444; }
 
 /* Dashboard widgets */
 .fp-agency-wrapper .counter-box { background:white; padding:15px 5px; border-radius:12px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,.05); }
@@ -1830,6 +2162,12 @@ function copyInviteMessage() {
 .rc-hero-title span { background:linear-gradient(135deg,var(--orange),var(--orange2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .rc-hero-sub { font-size:.98rem; color:var(--text-muted); max-width:520px; margin:0 auto 32px; line-height:1.65; }
 .rc-hero-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.rc-hero-stats { display:flex; justify-content:center; gap:30px; margin:25px 0; flex-wrap:wrap; }
+.rc-stat { text-align:center; }
+.rc-stat-value { font-size:1.6rem; font-weight:900; color:#fff; }
+.rc-stat-label { font-size:.85rem; color:var(--text-muted); }
+.rc-partners { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:30px; color:var(--text-muted); font-size:.9rem; }
+.rc-partners span:not(:first-child) { color:#fff; font-weight:600; }
 .rc-btn-primary { display:inline-flex; align-items:center; gap:9px; background:var(--orange); color:#fff; font-family:'Sora',sans-serif; font-weight:700; font-size:.92rem; padding:14px 28px; border-radius:99px; text-decoration:none; border:none; cursor:pointer; box-shadow:0 6px 24px var(--orange-glow); transition:transform .18s,box-shadow .18s; }
 .rc-btn-primary:hover { transform:translateY(-3px); box-shadow:0 10px 32px var(--orange-glow); color:#fff; }
 .rc-btn-secondary { display:inline-flex; align-items:center; gap:9px; background:var(--bg-card); color:var(--text); font-family:'Sora',sans-serif; font-weight:600; font-size:.92rem; padding:14px 28px; border-radius:99px; text-decoration:none; border:1px solid var(--border); cursor:pointer; transition:border-color .18s,transform .18s; }
@@ -1845,9 +2183,25 @@ function copyInviteMessage() {
 @keyframes rc-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
 .rc-section { padding:0 20px; max-width:960px; margin:0 auto 56px; }
+.rc-section-last { margin-bottom:0; }
 .rc-section-label { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
 .rc-section-label-text { font-family:var(--mono); font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.12em; white-space:nowrap; }
 .rc-section-label-line { flex:1; height:1px; background:var(--border); }
+.rc-who-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; margin-top:20px; }
+.rc-who-card { background:var(--bg-card); padding:24px; border-radius:15px; border:1px solid var(--border); text-align:center; }
+.rc-who-card i { font-size:2.2rem; color:var(--orange); }
+.rc-who-card h4 { color:#fff; margin:10px 0 5px; }
+.rc-who-card p { font-size:.85rem; color:var(--text-muted); }
+.rc-table-intro { color:var(--text-muted); font-size:.95rem; text-align:center; margin-bottom:20px; }
+.rc-table-wrap { background:var(--bg-card); border:1px solid var(--border); border-radius:15px; overflow:hidden; }
+.rc-earnings-table { width:100%; border-collapse:collapse; text-align:left; color:#fff; }
+.rc-earnings-table thead { background:rgba(255,107,43,.1); }
+.rc-earnings-table th,
+.rc-earnings-table td { padding:15px; border-bottom:1px solid var(--border); }
+.rc-earnings-table tbody tr:last-child td { border-bottom:0; }
+.rc-earnings-table th { color:var(--orange); }
+.rc-money { font-weight:700; color:#22c55e; }
+.rc-table-note { color:var(--text-muted); font-size:.8rem; text-align:center; margin-top:10px; }
 
 .rc-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
 .rc-step { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:28px; position:relative; overflow:hidden; transition:border-color .22s,transform .22s,box-shadow .22s; }
