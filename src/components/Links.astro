@@ -1,0 +1,58 @@
+    <div id="view-Links" class="view view-container view-private" data-view="Links">
+      <h1 class="view-heading">Links & Recrutamento</h1>
+      <div class="card-float links-panel">
+        <div class="section-title" style="margin-top:0;margin-bottom:10px">Seu Código de Recrutador</div>
+        <div class="link-group" style="background:#fff7ed;border-color:#fdba74">
+          <label for="meuCodigoCopia" style="color:#c2410c"><i class="fas fa-fingerprint"></i> Código Kwai Cut / Narrastars</label>
+          <div class="input-row"><input type="text" id="meuCodigoCopia" readonly value="Carregando..." style="font-weight:800;color:#c2410c;text-align:center;font-size:1.1rem;letter-spacing:1px"><button type="button" class="action-btn-small" style="background:#f97316" onclick="copy('meuCodigoCopia')"><i class="fas fa-copy"></i></button></div>
+        </div>
+
+        <div class="section-title" style="margin-top:25px;margin-bottom:15px">Seus Convites Exclusivos</div>
+
+        <div class="premium-invite-card kwai-cut">
+          <div class="invite-header"><div class="invite-title"><i class="fas fa-video"></i> Kwai Cut</div><div class="invite-code-badge">CÓDIGO <strong><span id="meuCodigoTexto">...</span></strong></div></div>
+          <p class="invite-desc">Envie este link pré-preenchido para convidar novos criadores.</p>
+          <div class="invite-input-wrapper" style="margin-bottom:15px; border:none; padding:0; background:transparent;">
+            <input type="text" id="meuLinkRecrutamento" readonly value="Carregando..." style="width:100%; padding:15px; border-radius:10px; background:rgba(0,0,0,0.2); border:1px solid var(--border); color:#fff; font-size:0.95rem; margin-bottom:10px;">
+            <div style="display:flex; gap:10px;">
+              <button onclick="window.shareInviteWhatsApp('meuLinkRecrutamento')" style="flex:1; background:#25D366; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+              <button onclick="window.copyInviteMessage('meuLinkRecrutamento')" style="flex:1; background:rgba(255,107,43,0.1); border:1px solid var(--orange); color:var(--orange); padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fas fa-paste"></i> Copiar Msg</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-invite-card narrastars">
+          <div class="invite-header"><div class="invite-title"><i class="fas fa-microphone"></i> Narrastars</div><div class="invite-code-badge">CÓDIGO <strong><span id="meuCodigoTextoNarrastars">...</span></strong></div></div>
+          <p class="invite-desc">Envie este link pré-preenchido para convidar narradores.</p>
+          <div class="invite-input-wrapper" style="margin-bottom:15px; border:none; padding:0; background:transparent;">
+            <input type="text" id="meuLinkNarrastarsRecrutamento" readonly value="Carregando..." style="width:100%; padding:15px; border-radius:10px; background:rgba(0,0,0,0.2); border:1px solid var(--border); color:#fff; font-size:0.95rem; margin-bottom:10px;">
+            <div style="display:flex; gap:10px;">
+              <button onclick="window.shareInviteWhatsApp('meuLinkNarrastarsRecrutamento')" style="flex:1; background:#25D366; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+              <button onclick="window.copyInviteMessage('meuLinkNarrastarsRecrutamento')" style="flex:1; background:rgba(255,107,43,0.1); border:1px solid var(--orange); color:var(--orange); padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fas fa-paste"></i> Copiar Msg</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-title" style="margin-top:25px">Outros Oficiais</div>
+        <div class="link-group"><label for="fantazy"><i class="fas fa-gem"></i> Fantazy</label><div class="input-row"><input type="text" id="fantazy" readonly value="Carregando..."><button type="button" class="action-btn-small btn-copy" onclick="copy('fantazy')"><i class="fas fa-copy"></i></button></div></div>
+        <div class="link-group"><label for="kako"><i class="fas fa-comment-dots"></i> Kako</label><div class="input-row"><input type="text" id="kako" readonly value="Carregando..."><button type="button" class="action-btn-small btn-copy" onclick="copy('kako')"><i class="fas fa-copy"></i></button></div></div>
+      </div>
+      
+      <div class="card">
+        <div class="section-title" style="margin-top:0">Minhas Redes Sociais</div>
+        <form id="formLinks">
+          <div class="link-group"><label for="instagram"><i class="fab fa-instagram"></i> Instagram</label><div class="input-row"><input type="text" name="instagram" id="instagram" oninput="validateLink(this)"><button type="button" class="action-btn-small btn-open" onclick="openFromInput('instagram')"><i class="fas fa-external-link-alt"></i></button><button type="button" class="action-btn-small btn-copy" onclick="copy('instagram')"><i class="fas fa-copy"></i></button></div></div>
+          <div class="link-group"><label for="facebook"><i class="fab fa-facebook"></i> Facebook</label><div class="input-row"><input type="text" name="facebook" id="facebook" oninput="validateLink(this)"><button type="button" class="action-btn-small btn-open" onclick="openFromInput('facebook')"><i class="fas fa-external-link-alt"></i></button><button type="button" class="action-btn-small btn-copy" onclick="copy('facebook')"><i class="fas fa-copy"></i></button></div></div>
+          <div class="link-group"><label for="threads"><i class="fab fa-threads"></i> Threads</label><div class="input-row"><input type="text" name="threads" id="threads" oninput="validateLink(this)"><button type="button" class="action-btn-small btn-open" onclick="openFromInput('threads')"><i class="fas fa-external-link-alt"></i></button><button type="button" class="action-btn-small btn-copy" onclick="copy('threads')"><i class="fas fa-copy"></i></button></div></div>
+          <div class="link-group"><label for="twitter"><i class="fab fa-twitter"></i> X (Twitter)</label><div class="input-row"><input type="text" name="twitter" id="twitter" oninput="validateLink(this)"><button type="button" class="action-btn-small btn-open" onclick="openFromInput('twitter')"><i class="fas fa-external-link-alt"></i></button><button type="button" class="action-btn-small btn-copy" onclick="copy('twitter')"><i class="fas fa-copy"></i></button></div></div>
+          
+          <div class="link-group">
+            <label for="outros1"><i class="fas fa-globe"></i> Outros Links</label>
+            <input type="text" name="outros1" id="outros1" aria-label="Outro link 1" oninput="validateLink(this)" style="margin-bottom:5px">
+            <input type="text" name="outros2" id="outros2" aria-label="Outro link 2" oninput="validateLink(this)" style="margin-bottom:5px">
+            <input type="text" name="outros3" id="outros3" aria-label="Outro link 3" oninput="validateLink(this)">
+          </div>
+          <button type="submit" class="btn" style="margin-top:10px">SALVAR ALTERAÇÕES</button>
+        </form>
+      </div>
+    </div>

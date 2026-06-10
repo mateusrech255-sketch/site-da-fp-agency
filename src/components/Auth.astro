@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+---
+
+    <div id="view-Login" class="view view-container view-public view-auth" data-view="Login" data-public="true">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <h1 class="auth-title">Portal Parceiro</h1>
+          <p class="auth-subtitle auth-subtitle-accent">Faça login para continuar</p>
+          <button type="button" class="btn auth-google-btn" onclick="loginComGoogle()">
+            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Continuar com o Google
+          </button>
+          <div class="auth-separator"><div></div><span>ou use seu acesso</span><div></div></div>
+          
+          <form id="loginForm" onsubmit="event.preventDefault()">
+            <input type="email" name="email" placeholder="E-mail cadastrado" required>
+            
+            <div class="password-wrapper"><input type="password" id="senha" name="senha" placeholder="Sua senha" required><i class="fas fa-eye toggle-password" onclick="togglePassword('senha',this)"></i></div>
+            <div class="auth-forgot"><a onclick="nav('Redefinir')" style="color:var(--primary);font-weight:600;cursor:pointer">Esqueceu a senha?</a></div>
+            <button type="submit" class="btn" id="btnLogin">ENTRAR</button>
+            
+            <div class="auth-separator"><div></div><span>ou</span><div></div></div>
+            <button type="button" class="btn btn-outline-primary" onclick="nav('Cadastro')">CRIAR NOVA CONTA</button>
+            <div class="auth-back-action"><button type="button" class="btn btn-outline-muted" onclick="nav('Landing')">← Voltar para o Início</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-Cadastro" class="view view-container view-public view-auth" data-view="Cadastro" data-public="true">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <h1 class="auth-title">Cadastro</h1>
+          <p class="auth-subtitle">Crie sua conta para começar</p>
+          <button type="button" class="btn auth-google-btn" id="btnGoogleCad" onclick="preencherComGoogle()">
+            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Preencher dados com o Google
+          </button>
+          <div id="div-ou-cad" class="auth-separator"><div></div><span>ou digite manualmente</span><div></div></div>
+          
+          <form id="formCadastro" onsubmit="event.preventDefault()">
+            <input type="text"  name="nome"     id="cad-nome"     placeholder="Nome Completo" required>
+            <input type="email" name="email"    id="cad-email"    placeholder="Seu Email" required>
+            <input type="tel"   name="cpf"      id="cad-cpf"      placeholder="CPF (Apenas números)" required maxlength="14" oninput="maskCPF(this)">
+            <input type="tel"   name="whatsapp" id="cad-whatsapp" placeholder="WhatsApp" required oninput="maskPhone(this)">
+            <label for="cad-dataNasc" style="text-align:left">Data de Nascimento</label>
+            <input type="date" name="dataNasc" id="cad-dataNasc" required onchange="verificarIdade(this)" style="color:#334155;padding:15px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;width:100%;margin-bottom:15px;font-family:inherit">
+            
+            <div id="blocoResponsavel" class="guardian-consent">
+              <div style="font-size:.75rem;color:#b45309;margin-bottom:10px;line-height:1.4"><b>Declaração de Responsabilidade Legal:</b> Por possuir entre 14 e 15 anos, você declara autorização expressa do responsável legal.</div>
+              <input type="text" name="nomeResp" id="nomeResp" placeholder="Nome Completo do Responsável" style="margin-bottom:10px">
+              <input type="tel"  name="cpfResp"  id="cpfResp"  placeholder="CPF do Responsável" maxlength="14" oninput="maskCPF(this)" style="margin-bottom:0">
+            </div>
+            
+            <input type="text" name="chavePix" placeholder="Chave PIX (Opcional)">
+            <div class="password-wrapper"><input type="password" id="senhaCad" name="senha" placeholder="Senha" required minlength="6"><i class="fas fa-eye toggle-password" onclick="togglePassword('senhaCad',this)"></i></div>
+            
+            <div style="text-align:left;margin:10px 0 20px;font-size:.75rem;color:var(--gray)">
+              <label for="chkTermos" style="display:flex;align-items:flex-start;gap:8px;margin-bottom:12px;cursor:pointer"><input type="checkbox" name="termos" id="chkTermos" required style="width:auto;margin-top:2px"><span style="line-height:1.4">Concordo com a <a onclick="openLink(null,'https://www.fpagency.com.br/politica-de-privacidade')" style="color:var(--primary);cursor:pointer">Política de Privacidade</a>, <a onclick="openLink(null,'https://www.fpagency.com.br/termos-de-servico')" style="color:var(--primary);cursor:pointer">Termos de Uso</a> e <a onclick="openLink(null,'https://www.fpagency.com.br/aviso-legal')" style="color:var(--primary);cursor:pointer">Aviso Legal</a>.</span></label>
+              <label for="chkIdade" style="display:flex;align-items:flex-start;gap:8px;cursor:pointer"><input type="checkbox" name="idade" id="chkIdade" required style="width:auto;margin-top:2px"><span id="txtConfirmIdade" style="line-height:1.4">Confirmo que tenho mais de 14 anos de idade.</span></label>
+            </div>
+            <button type="submit" class="btn" id="btnReg">CRIAR CONTA</button>
+          </form>
+          
+          <div class="link" style="margin-top:25px;padding-top:20px;border-top:1px solid #e2e8f0">
+            <p style="margin:0 0 10px;font-size:.9rem;color:var(--gray);font-weight:500">Já tem conta?</p>
+            <button type="button" class="btn" onclick="nav('Login')">FAZER LOGIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-Redefinir" class="view view-container view-public view-auth" data-view="Redefinir" data-public="true">
+      <div class="auth-wrapper">
+        <div class="auth-card auth-card-reset">
+          <h2 class="auth-title">Redefinir Senha</h2>
+          <p id="reset-subtitle" class="auth-subtitle">Digite seu e-mail para receber um link de redefinição.</p>
+          <div id="reset-alert" style="display:none;margin-bottom:15px;padding:12px;border-radius:10px;font-size:.85rem;font-weight:600"></div>
+          <form id="resetForm" onsubmit="event.preventDefault()">
+            <input type="email" name="email" placeholder="E-mail cadastrado" required>
+            <button type="submit" class="btn" id="btnReset" style="margin-top:15px">ENVIAR LINK</button>
+          </form>
+          <div id="back-login-link" style="margin-top:20px"><a onclick="nav('Login')" style="color:var(--primary);font-weight:600;cursor:pointer">Voltar ao Login</a></div>
+        </div>
+      </div>
+    </div>

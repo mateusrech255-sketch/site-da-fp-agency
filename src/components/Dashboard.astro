@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+
+const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&background=fed7aa&color=c2410c&bold=true&size=256';
+---
+
+    <div id="view-Dashboard" class="view view-container view-private" data-view="Dashboard">
+      <section class="dashboard-hero" aria-label="Resumo do recrutador">
+        <Image id="uFoto" class="profile-avatar profile-avatar-sm" src={defaultProfileAvatar} width={50} height={50} alt="Foto de perfil" loading="eager" decoding="async" />
+        <div class="dashboard-welcome"><small>Bem-vindo(a),</small><div id="uName">...</div></div>
+      </section>
+      
+      <div class="card-float balance-card">
+        <div style="color:var(--gray);font-size:.8rem;font-weight:600;letter-spacing:1px">SALDO DISPONÍVEL</div>
+        <div style="font-size:2.5rem;font-weight:800;color:var(--primary);margin:5px 0 20px" id="uSaldo">R$ ...</div>
+        <button class="btn" onclick="nav('Financeiro')"><i class="fas fa-money-bill-wave"></i> Solicitar Saque</button>
+      </div>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 10px">
+        <div class="card" style="margin:0;text-align:center;cursor:pointer" onclick="nav('Editores')">
+          <div style="font-size:1.8rem;font-weight:800;color:#333" id="uEquipe">-</div>
+          <div style="font-size:.8rem;color:var(--gray)">Minha Equipe</div>
+        </div>
+        <div class="card" style="margin:0;text-align:center;cursor:pointer" onclick="nav('Diretrizes')">
+          <div style="font-size:1.8rem;font-weight:800;color:#854d0e" id="uNivel">-</div>
+          <div style="font-size:.8rem;color:var(--gray)">Nível Atual</div>
+        </div>
+      </div>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 10px">
+        <button class="btn secondary" onclick="nav('Avisos')"><i class="fas fa-bell" style="color:var(--primary)"></i> Avisos</button>
+        <button class="btn secondary" onclick="nav('Editores')"><i class="fas fa-users" style="color:var(--primary)"></i> Editores</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin:0 10px 15px;">
+        <div class="card" style="text-align:center; padding:15px; margin:0;">
+          <i class="ri-group-line" style="font-size:1.8rem; color:var(--primary); display:block; margin-bottom:8px;"></i>
+          <div style="font-size:1.4rem; font-weight:800; color:#1e293b;" id="dash_recrutados_mes">0</div>
+          <div style="font-size:0.7rem; color:var(--gray); text-transform:uppercase; font-weight:600;">Recrutados (Mês)</div>
+        </div>
+        <div class="card" style="text-align:center; padding:15px; margin:0;">
+          <i class="ri-check-double-line" style="font-size:1.8rem; color:#10b981; display:block; margin-bottom:8px;"></i>
+          <div style="font-size:1.4rem; font-weight:800; color:#1e293b;" id="dash_aprovados">0</div>
+          <div style="font-size:0.7rem; color:var(--gray); text-transform:uppercase; font-weight:600;">Aprovados</div>
+        </div>
+        <div class="card" style="text-align:center; padding:15px; margin:0;">
+          <i class="ri-close-circle-line" style="font-size:1.8rem; color:#ef4444; display:block; margin-bottom:8px;"></i>
+          <div style="font-size:1.4rem; font-weight:800; color:#1e293b;" id="dash_reprovados">0</div>
+          <div style="font-size:0.7rem; color:var(--gray); text-transform:uppercase; font-weight:600;">Reprovados</div>
+        </div>
+        <div class="card" style="text-align:center; padding:15px; margin:0;">
+          <i class="ri-percent-line" style="font-size:1.8rem; color:var(--orange); display:block; margin-bottom:8px;"></i>
+          <div style="font-size:1.4rem; font-weight:800; color:#1e293b;" id="dash_taxa">0%</div>
+          <div style="font-size:0.7rem; color:var(--gray); text-transform:uppercase; font-weight:600;">Taxa Aprovação</div>
+        </div>
+      </div>
+    </div>

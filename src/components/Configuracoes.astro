@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+
+const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&background=fed7aa&color=c2410c&bold=true&size=256';
+---
+
+    <div id="view-Configuracoes" class="view view-container view-private" data-view="Configuracoes">
+      <h1 class="view-heading">Meus Dados</h1>
+      <div class="card-float">
+        <div style="text-align:center">
+
+          <div class="avatar-wrapper" style="display:flex; justify-content:center; align-items:center; position:relative; margin-bottom:15px;">
+            <Image id="ui_foto" class="avatar-img profile-avatar profile-avatar-lg" src={defaultProfileAvatar} width={120} height={120} alt="Minha foto de perfil" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="progress-bar-container" id="progContainer" style="max-width:200px;margin:0 auto"><div class="progress-bar" id="progBar"></div></div>
+          <div id="ui_status"></div>
+          <input type="file" id="inputFileCamera"  accept="image/*" capture="environment" style="display:none" onchange="subirFoto(this)">
+          <input type="file" id="inputFileGallery" accept="image/*"                       style="display:none" onchange="subirFoto(this)">
+          <div class="action-row" style="margin-top:15px">
+            <button class="btn-small btn-upload" onclick="openMediaModal('inputFileCamera')"><i class="fas fa-camera"></i> Mudar Foto</button>
+            <button class="btn-small btn-delete" onclick="removerFoto()"><i class="fas fa-trash"></i> Apagar</button>
+          </div>
+        </div>
+        <div class="form-box">
+          <label for="ui_nome">Nome Completo</label><input type="text" id="ui_nome" placeholder="Carregando...">
+          <label for="ui_cpf">CPF</label><input type="text" id="ui_cpf" readonly style="background:#f1f5f9;cursor:not-allowed;color:#64748b" placeholder="Carregando...">
+          <label for="ui_whats">WhatsApp</label><input type="text" id="ui_whats" placeholder="Carregando...">
+          <label for="ui_pix">Chave PIX</label><input type="text" id="ui_pix" placeholder="Carregando...">
+          <label for="ui_senha">Nova Senha (Opcional)</label>
+          <div class="password-wrapper"><input type="password" id="ui_senha" placeholder="Deixe em branco para manter"><i class="fas fa-eye toggle-password" onclick="togglePassword('ui_senha',this)"></i></div>
+          <button type="button" class="btn" style="margin-top:10px" onclick="salvarPerfil()">Salvar Alterações</button>
+        </div>
+        <div style="margin-top:40px;padding-top:25px;border-top:1px dashed #fca5a5">
+          <div style="color:#ef4444;font-size:.95rem;font-weight:700;margin-bottom:5px">Zona de Perigo</div>
+          <p style="font-size:.8rem;color:#666;margin-bottom:15px">Gerencie o status da sua conta no portal.</p>
+          <button type="button" class="btn" style="background:#f59e0b;margin-bottom:10px" onclick="inativarConta()">INATIVAR CONTA (Pausar)</button>
+          <button type="button" class="btn danger" onclick="excluirContaDefinitivamente()">EXCLUIR DEFINITIVAMENTE</button>
+        </div>
+      </div>
+    </div>

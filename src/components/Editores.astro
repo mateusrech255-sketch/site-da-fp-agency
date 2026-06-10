@@ -1,0 +1,25 @@
+    <div id="view-Editores" class="view view-container view-private" data-view="Editores">
+      <h1 class="view-heading">Minha Equipe</h1>
+      <div class="card-float editors-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px">
+          <div style="display:flex;background:white;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0;flex:1">
+            <button class="proj-tab active" data-proj="Todos"       onclick="setFilterProjeto('Todos')"       style="border-right:0">Todos</button>
+            <button class="proj-tab"        data-proj="Cut"         onclick="setFilterProjeto('Cut')"         style="border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0">Cut</button>
+            <button class="proj-tab"        data-proj="Narrastars"  onclick="setFilterProjeto('Narrastars')"  style="border-left:0">Narrastars</button>
+          </div>
+          <select onchange="setFilterTempo(this.value)" style="margin:0;padding:9px 10px;border-radius:10px;border:1px solid #e2e8f0;font-size:.75rem;font-weight:600;color:var(--text);background:white;width:auto;flex-shrink:0;cursor:pointer;outline:none">
+            <option value="Todos">Todo período</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="15">Últimos 15 dias</option>
+            <option value="30">Últimos 30 dias</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:15px">
+          <div class="counter-box status-filter active" data-status="Todos"      onclick="setFilterStatus('Todos')"      style="cursor:pointer;border:2px solid var(--primary);padding:10px 2px"><div class="counter-num" id="c-todos"  style="color:var(--text);font-size:1.1rem">0</div><div class="counter-lbl" style="font-size:.65rem">Todos</div></div>
+          <div class="counter-box status-filter"        data-status="Aprovado"   onclick="setFilterStatus('Aprovado')"   style="cursor:pointer;border:2px solid transparent;padding:10px 2px"><div class="counter-num txt-green" id="c-aprov"  style="font-size:1.1rem">0</div><div class="counter-lbl" style="font-size:.65rem">Aprovados</div></div>
+          <div class="counter-box status-filter"        data-status="Reprovado"  onclick="setFilterStatus('Reprovado')"  style="cursor:pointer;border:2px solid transparent;padding:10px 2px"><div class="counter-num txt-red"   id="c-reprov" style="font-size:1.1rem">0</div><div class="counter-lbl" style="font-size:.65rem">Reprovados</div></div>
+          <div class="counter-box status-filter"        data-status="Aguardando" onclick="setFilterStatus('Aguardando')" style="cursor:pointer;border:2px solid transparent;padding:10px 2px"><div class="counter-num txt-orange" id="c-analise" style="font-size:1.1rem">0</div><div class="counter-lbl" style="font-size:.65rem">Aguardando</div></div>
+        </div>
+        <div id="lista-editores"></div>
+      </div>
+    </div>
