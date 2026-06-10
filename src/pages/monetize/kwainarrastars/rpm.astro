@@ -1,0 +1,382 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Tratamento seguro para URLs
+const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="NarraStars: Monetização, RPM e Tarefas | FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="ns-content">
+      
+      <section class="ns-hero">
+        <div class="ns-hero-inner">
+          <div class="ns-badge">
+            <span class="ns-badge-dot"></span>
+            A Nova Era da Monetização Kwai
+          </div>
+          <h1 class="ns-hero-title">
+            O Fim dos Cortes Simples.<br>
+            <span class="highlight-blue">A Explosão do NarraStars.</span>
+          </h1>
+          <p class="ns-hero-sub">
+            O algoritmo mudou. Descubra por que a plataforma está pagando muito mais por vídeos narrados e como você pode multiplicar sua renda em dólar com as exclusivas Tarefas Remuneradas.
+          </p>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="market-shift-box">
+          <div class="shift-info">
+            <h2><i class="ri-global-line text-blue"></i> A Visão de Futuro</h2>
+            <p>Os "cortes simples" (apenas pegar um vídeo e postar) estão saturados e serão passados para usuários comuns. O Kwai agora exige <strong>Edição Avançada e Narração</strong> dos seus criadores parceiros.</p>
+            <div class="shift-stats">
+              <div class="stat-trend down">
+                <i class="ri-arrow-right-down-line"></i>
+                <div>
+                  <strong>Cortes Simples</strong>
+                  <span>RPM será reduzido</span>
+                </div>
+              </div>
+              <div class="stat-trend up">
+                <i class="ri-arrow-right-up-line"></i>
+                <div>
+                  <strong>NarraStars</strong>
+                  <span>RPM será aumentado + Tarefas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="shift-china">
+            <div class="china-badge">Inspirado no Modelo Chinês</div>
+            <h3>O Sucesso Absoluto</h3>
+            <p>Na China, o nicho "1 minuto te ajuda a entender um filme" domina <strong>70% do mercado de vídeos curtos</strong>. Contas de narração ultrapassam 60 milhões de seguidores, e o Brasil está exatamente no início dessa mesma onda.</p>
+            <ul class="china-list">
+              <li><i class="ri-check-line text-blue"></i> Alto tempo de tela (retenção).</li>
+              <li><i class="ri-check-line text-blue"></i> Crescimento de 200k seguidores em 1 mês.</li>
+              <li><i class="ri-check-line text-blue"></i> Média superior a 1 Milhão de views por vídeo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section bg-darker">
+        <div class="section-header text-center">
+          <h2><i class="ri-vip-diamond-line text-purple"></i> A Dupla Monetização</h2>
+          <p>O maior benefício de ser NarraStars: Acesso exclusivo às <strong>Tarefas Remuneradas</strong>.</p>
+        </div>
+
+        <div class="tasks-explain">
+          <div class="tasks-text">
+            <h3>O que são Tarefas Remuneradas?</h3>
+            <p>Como editor de narração, você tem o poder de inserir anúncios (como downloads de apps ou produtos) perfeitamente integrados ao seu vídeo. Como o seu conteúdo gera curiosidade, o usuário assiste até o final, vê o anúncio e converte. <strong>Você ganha em dólar por cada ação!</strong></p>
+            
+            <div class="tasks-advantages">
+              <div class="adv-item">
+                <i class="ri-ghost-smile-line"></i>
+                <div>
+                  <h4>Sem precisar aparecer</h4>
+                  <span>Diferente de influenciadores, você faz as tarefas usando apenas voz e edição.</span>
+                </div>
+              </div>
+              <div class="adv-item">
+                <i class="ri-timer-flash-line"></i>
+                <div>
+                  <h4>Alta Produtividade</h4>
+                  <span>Você consegue produzir e testar várias tarefas no mesmo dia.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="earnings-proof">
+            <div class="proof-header">
+              <i class="ri-bar-chart-box-line"></i>
+              <h4>Estudo de Caso Real</h4>
+              <span>(Vídeo com 138.722 visualizações)</span>
+            </div>
+            <div class="proof-body">
+              <div class="proof-row">
+                <span class="proof-label">Ganhos com Anúncios (RPM)</span>
+                <span class="proof-value">~$ 3.00</span>
+              </div>
+              <div class="proof-row highlight">
+                <span class="proof-label">Ganhos com Tarefas Remuneradas</span>
+                <span class="proof-value text-green">$ 35.52</span>
+              </div>
+              <div class="proof-total">
+                <span>Total gerado no vídeo:</span>
+                <strong class="text-green">$ 38.52 USD</strong>
+              </div>
+              <p class="proof-note">*As tarefas pagaram quase 12x mais que o RPM tradicional.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="production-alert">
+          <div class="prod-icon"><i class="ri-calendar-check-fill"></i></div>
+          <div class="prod-content">
+            <h3>Organização e Frequência: A Regra dos 90</h3>
+            <p>O mercado recompensa quem é constante. Para manter seu perfil validado no programa <strong>NarraStars (Especialmente no nicho FTV - Filmes e TV)</strong>, o mínimo exigido é de <strong>90 vídeos mensais</strong>.</p>
+            
+            <div class="prod-math">
+              <div class="p-math-box">
+                <strong>90</strong>
+                <span>Vídeos/Mês</span>
+              </div>
+              <i class="ri-arrow-right-line p-math-arrow"></i>
+              <div class="p-math-box">
+                <strong class="text-blue">3</strong>
+                <span>Vídeos/Dia</span>
+              </div>
+              <i class="ri-arrow-right-line p-math-arrow"></i>
+              <div class="p-math-box success">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Super Possível!</span>
+              </div>
+            </div>
+            
+            <p class="prod-footer">Não fique mudando o formato do seu vídeo o tempo todo. Crie uma identidade visual forte, organize sua rotina de edição e mantenha a constância.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="section-header">
+          <h2><i class="ri-team-line text-blue"></i> Como a FP Agency vai te ajudar</h2>
+          <p>Nós sabemos que a Narração exige técnica. Por isso, oferecemos suporte completo em 3 etapas:</p>
+        </div>
+
+        <div class="support-grid">
+          <div class="sup-card">
+            <div class="sup-step">Passo 1</div>
+            <h4>Técnica Base</h4>
+            <p>Ensinamos do zero como criar roteiros curtos, usar narração (IA ou Voz) e editar legendas dinâmicas.</p>
+          </div>
+          <div class="sup-card">
+            <div class="sup-step">Passo 2</div>
+            <h4>Curadoria</h4>
+            <p>Ajudamos você a escolher cenas estratégicas de Filmes e TV que garantem alta retenção visual.</p>
+          </div>
+          <div class="sup-card">
+            <div class="sup-step">Passo 3</div>
+            <h4>Feedback e Tarefas</h4>
+            <p>Nossos tutores analisam suas contas, compartilham exemplos virais e te ajudam a fechar as primeiras Tarefas Remuneradas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-cta-section">
+        <div class="ns-cta-box">
+          <h2>O momento de surfar essa onda é agora.</h2>
+          <p>Enquanto muitos continuam nos cortes simples perdendo RPM, você pode iniciar na Narração e acessar o maior nível de monetização da plataforma.</p>
+          <div class="ns-cta-actions">
+            <a href={`${baseUrl}/inscricao?programa=kwai-narrastars`} class="btn-primary-large">
+              <i class="ri-quill-pen-line"></i> Inscrever Conta NarraStars
+            </a>
+            <a href={`${baseUrl}/treinamento`} class="btn-secondary-large">
+              <i class="ri-play-circle-line"></i> Acessar Treinamentos
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  /* ============================================================
+     BASE E SHELL LAYOUT (Imune a bugs de Footer)
+     ============================================================ */
+  .fp-agency-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    background: var(--bg, #0f1117);
+  }
+
+  .ns-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-color, #e2e8f0);
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    
+    /* Paleta Premium NarraStars */
+    --blue: #3b82f6;
+    --blue-dark: #2563eb;
+    --blue-dim: rgba(59,130,246,0.15);
+    --purple: #8b5cf6;
+    --purple-dim: rgba(139,92,246,0.15);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.15);
+    --bg-card: #181c27;
+    --border: #2a3048;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .text-blue { color: var(--blue); }
+  .text-purple { color: var(--purple); }
+  .text-green { color: var(--green); }
+  .text-center { text-align: center; }
+
+  /* ============================================================
+     HERO SECTION
+     ============================================================ */
+  .ns-hero {
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 70%);
+  }
+  .ns-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .75rem; color: var(--purple); text-transform: uppercase; letter-spacing: 1px; background: var(--purple-dim); padding: 6px 16px; border-radius: 99px; border: 1px solid rgba(139,92,246,0.3); margin-bottom: 24px;
+  }
+  .ns-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 8px var(--purple); animation: pulsePurple 2s infinite; }
+  @keyframes pulsePurple { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  
+  .ns-hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  .ns-hero-title .highlight-blue { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; color: transparent; }
+  .ns-hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin: 0 auto; line-height: 1.6; }
+
+  /* ============================================================
+     SEÇÕES BASE
+     ============================================================ */
+  .ns-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .bg-darker { background: rgba(0,0,0,0.2); border-radius: 24px; border: 1px solid var(--border); padding: 50px 30px; margin-top: 20px; margin-bottom: 20px;}
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; justify-content: inherit; }
+  .section-header p { color: var(--muted); font-size: 1rem; }
+
+  /* ============================================================
+     MARKET SHIFT (Cortes vs Narração)
+     ============================================================ */
+  .market-shift-box { display: flex; flex-wrap: wrap; gap: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
+  .shift-info { flex: 3; min-width: 300px; padding: 40px; }
+  .shift-info h2 { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+  .shift-info p { color: #cbd5e1; line-height: 1.6; font-size: 0.95rem; margin-bottom: 30px; }
+  
+  .shift-stats { display: flex; flex-direction: column; gap: 15px; }
+  .stat-trend { display: flex; align-items: center; gap: 15px; padding: 15px 20px; border-radius: 12px; }
+  .stat-trend.down { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.2); }
+  .stat-trend.down i { color: var(--red); font-size: 1.5rem; }
+  .stat-trend.up { background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.3); }
+  .stat-trend.up i { color: var(--blue); font-size: 1.5rem; }
+  .stat-trend div { display: flex; flex-direction: column; }
+  .stat-trend strong { font-size: 1rem; color: #fff; }
+  .stat-trend span { font-size: 0.8rem; color: var(--muted); }
+
+  .shift-china { flex: 2; min-width: 250px; background: linear-gradient(135deg, rgba(59,130,246,0.1), transparent); padding: 40px; border-left: 1px solid var(--border); }
+  .china-badge { font-family: var(--mono); font-size: 0.7rem; background: var(--blue); color: #fff; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 15px; text-transform: uppercase; font-weight: 700; }
+  .shift-china h3 { font-size: 1.3rem; margin-bottom: 10px; }
+  .shift-china p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+  .china-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .china-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: #cbd5e1; }
+
+  /* ============================================================
+     TAREFAS EXPLAIN & EARNINGS PROOF
+     ============================================================ */
+  .tasks-explain { display: flex; flex-wrap: wrap; gap: 30px; align-items: stretch; }
+  .tasks-text { flex: 1; min-width: 300px; }
+  .tasks-text h3 { font-size: 1.4rem; margin-bottom: 15px; }
+  .tasks-text p { color: #cbd5e1; line-height: 1.6; font-size: 0.95rem; margin-bottom: 25px; }
+  
+  .tasks-advantages { display: flex; flex-direction: column; gap: 15px; }
+  .adv-item { display: flex; align-items: flex-start; gap: 15px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid var(--border); }
+  .adv-item i { font-size: 1.5rem; color: var(--purple); margin-top: 2px; }
+  .adv-item h4 { font-size: 0.95rem; margin-bottom: 5px; color: #fff; }
+  .adv-item span { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+
+  /* Tabela de Ganhos Visuais */
+  .earnings-proof { flex: 1; min-width: 300px; background: #0f1c14; border: 1px solid var(--green); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(34,197,94,0.08); display: flex; flex-direction: column; }
+  .proof-header { background: var(--green-dim); padding: 20px; text-align: center; border-bottom: 1px solid rgba(34,197,94,0.2); }
+  .proof-header i { font-size: 2rem; color: var(--green); margin-bottom: 10px; display: block; }
+  .proof-header h4 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+  .proof-header span { font-family: var(--mono); font-size: 0.75rem; color: var(--green); }
+  
+  .proof-body { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .proof-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .proof-row.highlight { background: rgba(34,197,94,0.1); padding: 15px; border-radius: 8px; border: 1px dashed var(--green); margin-top: 10px; border-bottom: none; }
+  .proof-label { font-size: 0.9rem; color: #cbd5e1; }
+  .proof-value { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: #fff; }
+  
+  .proof-total { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .proof-total span { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .proof-total strong { font-family: var(--mono); font-size: 1.5rem; }
+  .proof-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 15px; font-style: italic; }
+
+  /* ============================================================
+     PRODUCTION ALERT (90 Videos)
+     ============================================================ */
+  .production-alert { display: flex; gap: 25px; background: linear-gradient(135deg, var(--blue-dim), transparent); border: 1px solid rgba(59,130,246,0.3); border-radius: 24px; padding: 40px; align-items: center; }
+  .prod-icon { width: 80px; height: 80px; background: var(--blue); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #fff; flex-shrink: 0; box-shadow: 0 10px 25px rgba(59,130,246,0.4); }
+  .prod-content { flex: 1; }
+  .prod-content h3 { font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+  .prod-content p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+  
+  .prod-math { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+  .p-math-box { background: var(--bg-card); border: 1px solid var(--border); padding: 15px 20px; border-radius: 12px; text-align: center; display: flex; flex-direction: column; min-width: 110px; }
+  .p-math-box strong { font-family: var(--mono); font-size: 1.8rem; line-height: 1; margin-bottom: 5px; }
+  .p-math-box span { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 600; }
+  .p-math-box.success { background: var(--green-dim); border-color: var(--green); justify-content: center; color: var(--green); }
+  .p-math-box.success i { font-size: 1.8rem; margin-bottom: 5px; }
+  .p-math-arrow { color: var(--muted); font-size: 1.5rem; }
+  
+  .prod-footer { font-size: 0.85rem !important; color: var(--muted) !important; margin: 0 !important; }
+
+  /* ============================================================
+     SUPPORT GRID
+     ============================================================ */
+  .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .sup-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; position: relative; overflow: hidden; }
+  .sup-card:hover { border-color: var(--blue); }
+  .sup-step { font-family: var(--mono); font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--muted); padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 15px; text-transform: uppercase; }
+  .sup-card h4 { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+  .sup-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0; }
+
+  /* ============================================================
+     CTA FINAL
+     ============================================================ */
+  .ns-cta-section { padding: 20px 20px 80px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .ns-cta-box { background: linear-gradient(135deg, var(--bg-card), #0a101d); border: 1px solid var(--blue); border-radius: 24px; padding: 50px 40px; box-shadow: 0 10px 40px rgba(59,130,246,0.1); text-align: center; }
+  .ns-cta-box h2 { font-size: 1.8rem; margin-bottom: 15px; }
+  .ns-cta-box p { color: var(--muted); margin-bottom: 30px; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  
+  .ns-cta-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+  .btn-primary-large { display: inline-flex; align-items: center; gap: 10px; background: var(--blue); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 700; text-decoration: none; transition: 0.2s; box-shadow: 0 8px 20px rgba(59,130,246,0.2); }
+  .btn-primary-large:hover { transform: translateY(-3px); background: var(--blue-dark); color: #fff;}
+  .btn-secondary-large { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--border); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+  .btn-secondary-large:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ============================================================
+     RESPONSIVO
+     ============================================================ */
+  @media (max-width: 768px) {
+    .shift-china { border-left: none; border-top: 1px solid var(--border); }
+    .production-alert { flex-direction: column; text-align: center; padding: 30px 20px; }
+    .prod-math { justify-content: center; }
+    .p-math-arrow { transform: rotate(90deg); }
+    .ns-cta-actions { flex-direction: column; }
+    .btn-primary-large, .btn-secondary-large { width: 100%; justify-content: center; }
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import OpenVideoPlayer from '../../components/OpenVideoPlayer.astro';
+import videoList from '../../data/videos.json';
+
+// 1. Tipo do TypeScript para validação dos dados
+interface Video {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+}
+
+// 2. Função OBRIGATÓRIA para gerar os links a partir do JSON
+export async function getStaticPaths() {
+  return (videoList as Video[]).map((video) => ({
+    params: { slug: video.slug },
+    props: { video },
+  }));
+}
+
+// 3. Captura os dados do vídeo atual já com a tipagem correta
+const { video } = Astro.props as { video: Video };
+---
+
+<Layout title={`${video.title} | FP Agency`}>
+  <Header />
+
+  <main class="watch-container">
+    <div class="player-section">
+      {/* Componente do Open Vídeo com o ID dinâmico */}
+      <OpenVideoPlayer videoId={video.id} />
+    </div>
+
+    <div class="details-section">
+      <h1>{video.title}</h1>
+      <p>{video.description}</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .watch-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: system-ui, sans-serif;
+  }
+  .player-section {
+    margin-bottom: 2rem;
+  }
+  .details-section h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .details-section p {
+    color: #a1a1aa;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+</style>

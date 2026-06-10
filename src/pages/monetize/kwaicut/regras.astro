@@ -1,0 +1,354 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Tratamento seguro para URLs
+const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Regras e Monetização - Kwai Cut | FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="kc-content">
+      
+      <section class="rules-hero">
+        <div class="rules-hero-inner">
+          <div class="rules-badge">
+            <span class="rules-badge-dot"></span>
+            Diretrizes Oficiais 2026
+          </div>
+          <h1 class="rules-hero-title">
+            O Guia Definitivo da<br>
+            <span class="highlight">Campanha Kwai Cut</span>
+          </h1>
+          <p class="rules-hero-sub">
+            Entenda exatamente como funciona, quais são as regras do jogo e como maximizar seus lucros transformando edições simples em uma fonte de renda real.
+          </p>
+        </div>
+      </section>
+
+      <section class="rules-section">
+        <div class="section-header text-center">
+          <h2><i class="ri-movie-2-line text-orange"></i> O que é a Campanha Cut?</h2>
+          <p>O conceito é simples, o potencial é gigante.</p>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-scissors-cut-line"></i></div>
+            <h3>1. Recorte e Edite</h3>
+            <p>Você pega trechos virais de Filmes, Séries, Novelas ou Animes (de acordo com seu nicho).</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-quill-pen-line"></i></div>
+            <h3>2. Crie seu Roteiro</h3>
+            <p>Adiciona seu toque pessoal, roteiro único e edição dinâmica. <em>(Ensinamos tudo passo a passo no treinamento!)</em></p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-wallet-3-line"></i></div>
+            <h3>3. Monetize</h3>
+            <p>Ganhe dinheiro baseado no desempenho dos seus vídeos na plataforma.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rules-section bg-darker">
+        <div class="section-header">
+          <h2><i class="ri-money-dollar-circle-line text-green"></i> Como funciona o Pagamento?</h2>
+          <p>Transparência total: você ganha pelo sistema de <strong>RPM (Receita por Mil Visualizações)</strong>.</p>
+        </div>
+
+        <div class="rpm-showcase">
+          <div class="rpm-card base-rpm">
+            <div class="rpm-badge">Valor Base</div>
+            <div class="rpm-value">$0,025<span>/ 1k views</span></div>
+            <p>Este é o valor em dólar pago a cada 1.000 visualizações qualificadas que o seu vídeo atingir.</p>
+          </div>
+          
+          <div class="rpm-math-icon"><i class="ri-add-line"></i></div>
+
+          <div class="rpm-card bonus-rpm">
+            <div class="rpm-badge pulse">Bônus de Iniciante</div>
+            <div class="rpm-value text-green">+$0,006<span>/ 1k views</span></div>
+            <p>Contas novas ganham um incentivo extra no <strong>primeiro mês</strong> para acelerar os ganhos iniciais!</p>
+          </div>
+        </div>
+
+        <div class="payment-steps">
+          <div class="step">
+            <i class="ri-calendar-check-line"></i>
+            <h4>Pagamento Diário</h4>
+            <span>Cai direto na carteira Kwai</span>
+          </div>
+          <div class="step-arrow"><i class="ri-arrow-right-line"></i></div>
+          <div class="step">
+            <i class="ri-exchange-dollar-line"></i>
+            <h4>Conversão Automática</h4>
+            <span>Dólar convertido para Real (R$)</span>
+          </div>
+          <div class="step-arrow"><i class="ri-arrow-right-line"></i></div>
+          <div class="step">
+            <i class="ri-bank-card-line"></i>
+            <h4>Saque via PIX</h4>
+            <span>Saque imediato a partir de R$ 10,00</span>
+          </div>
+        </div>
+
+        <div class="alert-box success">
+          <i class="ri-shield-check-fill"></i>
+          <div>
+            <strong>100% do valor é seu!</strong> Não cobramos taxas de agenciamento ou comissões sobre o seu trabalho.
+          </div>
+        </div>
+      </section>
+
+      <section class="rules-section">
+        <div class="section-header">
+          <h2><i class="ri-list-check-3 text-orange"></i> Regras de Ouro</h2>
+          <p>Siga estas diretrizes rigorosamente para garantir sua aprovação e monetização.</p>
+        </div>
+
+        <div class="rules-grid">
+          <div class="rules-card">
+            <h3><i class="ri-video-line"></i> Requisitos do Vídeo</h3>
+            <ul class="check-list">
+              <li><i class="ri-checkbox-circle-fill"></i> Duração mínima de <strong>30 segundos</strong> por vídeo.</li>
+              <li><i class="ri-checkbox-circle-fill"></i> Apenas views da página <strong>"For You" (Para Você)</strong> são monetizadas.</li>
+              <li><i class="ri-checkbox-circle-fill"></i> A visualização só contabiliza se o usuário assistir <strong>mais de 3 segundos</strong>.</li>
+              <li><i class="ri-checkbox-circle-fill"></i> Os vídeos continuam gerando receita por <strong>até 7 dias</strong> após a publicação.</li>
+            </ul>
+          </div>
+
+          <div class="rules-card">
+            <h3><i class="ri-star-smile-line"></i> Conta Qualificada</h3>
+            <ul class="check-list">
+              <li><i class="ri-checkbox-circle-fill"></i> Publicar no mínimo <strong>30 vídeos por mês</strong> (1 por dia é o ideal).</li>
+              <li><i class="ri-checkbox-circle-fill"></i> Manter uma média de <strong>1.000 views</strong> por vídeo.</li>
+              <li><i class="ri-checkbox-circle-fill"></i> <strong>Atenção:</strong> É obrigatório ativar o "Programa de Receita de Anúncios" após a aprovação!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="critical-alert">
+          <div class="critical-header">
+            <i class="ri-error-warning-fill"></i>
+            <h3>Regra Inegociável: A Criação do Perfil</h3>
+          </div>
+          <div class="critical-body">
+            <p>Para entrar na FP Agency e participar do Kwai Cut, <strong>você deve criar um perfil 100% NOVO no aplicativo.</strong></p>
+            <div class="critical-grid">
+              <div class="crit-item">
+                <i class="ri-close-circle-fill text-red"></i>
+                <span>Não é permitido usar contas antigas.</span>
+              </div>
+              <div class="crit-item">
+                <i class="ri-check-double-line text-green"></i>
+                <span>Suas contas antigas não serão afetadas.</span>
+              </div>
+              <div class="crit-item">
+                <i class="ri-smartphone-line text-blue"></i>
+                <span>Limite seguro: 8 a 12 contas por celular.</span>
+              </div>
+              <div class="crit-item">
+                <i class="ri-file-list-3-line text-orange"></i>
+                <span>Aguarde a aprovação do formulário para começar!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rules-cta-section">
+        <div class="rules-cta-box">
+          <h2>Tudo entendido? Pronto para faturar?</h2>
+          <p>O mercado de vídeos curtos recompensa a constância e a qualidade. Se você tem isso, nós temos o caminho.</p>
+          <div class="rules-cta-actions">
+            <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="btn-primary-large">
+              <i class="ri-quill-pen-line"></i> Preencher Formulário de Inscrição
+            </a>
+            <a href={`${baseUrl}/treinamento`} class="btn-secondary-large">
+              <i class="ri-play-circle-line"></i> Começar o Treinamento
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  /* ============================================================
+     VARIÁVEIS E BASE (Integrado com o Shell Layout)
+     ============================================================ */
+  .fp-agency-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    background: var(--bg, #0f1117);
+  }
+
+  .kc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-color, #e2e8f0);
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    
+    /* Cores Temáticas */
+    --orange: #ff6b2b;
+    --orange-dark: #e85a1f;
+    --orange-dim: rgba(255,107,43,0.15);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.15);
+    --blue: #3b82f6;
+    --bg-card: #181c27;
+    --bg-card-hover: #1e2332;
+    --border: #2a3048;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .text-orange { color: var(--orange); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-blue { color: var(--blue); }
+  .text-center { text-align: center; }
+
+  /* ============================================================
+     HERO SECTION
+     ============================================================ */
+  .rules-hero {
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at top, rgba(255,107,43,0.1) 0%, transparent 70%);
+  }
+  .rules-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: .75rem; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 1px;
+    background: var(--orange-dim); padding: 6px 16px;
+    border-radius: 99px; border: 1px solid rgba(255,107,43,0.3);
+    margin-bottom: 24px;
+  }
+  .rules-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 8px var(--orange); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  
+  .rules-hero-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  .rules-hero-title .highlight { background: linear-gradient(135deg, var(--orange), #ff9a5c); -webkit-background-clip: text; color: transparent; }
+  .rules-hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  /* ============================================================
+     SECTIONS & HEADERS
+     ============================================================ */
+  .rules-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .bg-darker { background: rgba(0,0,0,0.2); border-radius: 24px; border: 1px solid var(--border); padding: 50px 30px; margin-top: 20px; margin-bottom: 20px;}
+  
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; justify-content: inherit; }
+  .section-header p { color: var(--muted); font-size: 1rem; }
+
+  /* ============================================================
+     CONCEPTS GRID (Passo a Passo)
+     ============================================================ */
+  .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .concept-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: transform 0.3s, border-color 0.3s; }
+  .concept-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+  .concept-icon { width: 50px; height: 50px; border-radius: 12px; background: var(--orange-dim); color: var(--orange); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .concept-card h3 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; }
+  .concept-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ============================================================
+     RPM SHOWCASE (Dinheiro)
+     ============================================================ */
+  .rpm-showcase { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px; margin-bottom: 40px; }
+  .rpm-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; flex: 1; min-width: 280px; text-align: center; position: relative; overflow: hidden; }
+  .rpm-badge { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--border); font-family: var(--mono); font-size: 0.7rem; padding: 4px 12px; border-radius: 0 0 8px 8px; font-weight: 600; text-transform: uppercase; }
+  .rpm-badge.pulse { background: var(--green); color: #000; animation: badgePulse 2s infinite; }
+  @keyframes badgePulse { 0%{box-shadow: 0 0 0 0 rgba(34,197,94,0.4)} 70%{box-shadow: 0 0 0 10px rgba(34,197,94,0)} 100%{box-shadow: 0 0 0 0 rgba(34,197,94,0)} }
+  
+  .rpm-value { font-size: 3rem; font-weight: 900; margin: 25px 0 15px; font-family: var(--mono); }
+  .rpm-value span { font-size: 1rem; color: var(--muted); font-weight: 500; }
+  .rpm-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+  
+  .rpm-math-icon { font-size: 2rem; color: var(--muted); background: var(--bg-card); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
+
+  /* Steps Pagamento */
+  .payment-steps { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+  .step { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 120px; }
+  .step i { font-size: 1.8rem; color: var(--orange); margin-bottom: 10px; }
+  .step h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+  .step span { font-size: 0.75rem; color: var(--muted); }
+  .step-arrow { color: var(--border); font-size: 1.5rem; }
+
+  /* Alertas */
+  .alert-box { display: flex; align-items: center; gap: 15px; padding: 20px; border-radius: 16px; font-size: 0.95rem; line-height: 1.5; }
+  .alert-box.success { background: var(--green-dim); border: 1px solid rgba(34,197,94,0.3); }
+  .alert-box.success i { color: var(--green); font-size: 2rem; flex-shrink: 0; }
+
+  /* ============================================================
+     RULES LIST
+     ============================================================ */
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+  .rules-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; }
+  .rules-card h3 { font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--orange); }
+  .check-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: #cbd5e1; line-height: 1.5; }
+  .check-list i { color: var(--green); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .check-list strong { color: #fff; }
+
+  /* ============================================================
+     CRITICAL ALERT (Atenção Perfil)
+     ============================================================ */
+  .critical-alert { background: linear-gradient(135deg, rgba(239,68,68,0.1), transparent); border: 1px dashed var(--red); border-radius: 24px; overflow: hidden; }
+  .critical-header { background: var(--red-dim); padding: 20px 30px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(239,68,68,0.2); }
+  .critical-header i { font-size: 1.8rem; color: var(--red); animation: pulse 2s infinite; }
+  .critical-header h3 { font-size: 1.3rem; color: #fff; margin: 0; }
+  .critical-body { padding: 30px; }
+  .critical-body p { font-size: 1.05rem; margin-bottom: 25px; line-height: 1.5; }
+  
+  .critical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+  .crit-item { background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 600; }
+  .crit-item i { font-size: 1.4rem; }
+
+  /* ============================================================
+     CTA FINAL
+     ============================================================ */
+  .rules-cta-section { padding: 20px 20px 80px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .rules-cta-box { background: linear-gradient(135deg, var(--bg-card), #22150e); border: 1px solid var(--orange); border-radius: 24px; padding: 50px 30px; text-align: center; box-shadow: 0 10px 40px rgba(255,107,43,0.1); }
+  .rules-cta-box h2 { font-size: 1.8rem; margin-bottom: 15px; }
+  .rules-cta-box p { color: var(--muted); margin-bottom: 30px; font-size: 1rem; }
+  .rules-cta-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+  
+  .btn-primary-large { display: inline-flex; align-items: center; gap: 10px; background: var(--orange); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 700; text-decoration: none; transition: 0.2s; box-shadow: 0 8px 20px rgba(255,107,43,0.2); }
+  .btn-primary-large:hover { transform: translateY(-3px); background: var(--orange-dark); box-shadow: 0 12px 25px rgba(255,107,43,0.3); }
+  
+  .btn-secondary-large { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--border); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+  .btn-secondary-large:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ============================================================
+     RESPONSIVO
+     ============================================================ */
+  @media (max-width: 768px) {
+    .payment-steps { flex-direction: column; align-items: stretch; }
+    .step-arrow { transform: rotate(90deg); margin: 10px auto; }
+    .rpm-math-icon { display: none; } /* Oculta o "+" no mobile para focar nos cards um embaixo do outro */
+    .rules-cta-actions { flex-direction: column; }
+    .btn-primary-large, .btn-secondary-large { width: 100%; justify-content: center; }
+  }
+</style>

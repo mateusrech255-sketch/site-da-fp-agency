@@ -1,0 +1,359 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Tratamento seguro para evitar barras duplas nas URLs
+const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Monetização e RPM - Kwai Cut | FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="kc-content">
+      
+      <section class="money-hero">
+        <div class="money-hero-inner">
+          <div class="money-badge">
+            <span class="money-badge-dot"></span>
+            Guia de Ganhos 2026
+          </div>
+          <h1 class="money-hero-title">
+            Transforme Visualizações em <span class="highlight-green">Dólar na Conta</span>
+          </h1>
+          <p class="money-hero-sub">
+            Descubra como funciona o Programa de Receita de Anúncios do Kwai. Monetize vídeos e lives sem precisar vender nada e sem aparecer, usando o método de acesso antecipado da FP Agency.
+          </p>
+        </div>
+      </section>
+
+      <section class="money-section">
+        <div class="rpm-explain-box">
+          <div class="rpm-header">
+            <h2>O que é o <span>RPM</span>?</h2>
+            <p>Receita Por Mil Visualizações</p>
+          </div>
+          <div class="rpm-body">
+            <p>O Programa de Receita de Anúncios do Kwai é um sistema oficial que paga você pela exibição automática de anúncios nos seus vídeos. O cálculo é feito pelo <strong>RPM</strong>.</p>
+            <div class="rpm-math">
+              <div class="math-item">
+                <i class="ri-play-circle-line"></i>
+                <span>1.000 Views Qualificadas</span>
+              </div>
+              <div class="math-operator"><i class="ri-equal-line"></i></div>
+              <div class="math-item highlight">
+                <i class="ri-money-dollar-circle-line"></i>
+                <span>Você Recebe em Dólar</span>
+              </div>
+            </div>
+            <ul class="rpm-benefits">
+              <li><i class="ri-check-line"></i> Sem precisar vender nenhum produto</li>
+              <li><i class="ri-check-line"></i> Sem precisar mostrar o rosto (foco em Cuts)</li>
+              <li><i class="ri-check-line"></i> A monetização é contínua e escalável</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="money-section">
+        <div class="section-header text-center">
+          <h2><i class="ri-rocket-2-line text-orange"></i> Como ativar a Monetização?</h2>
+          <p>O segredo que a maioria dos criadores não sabe sobre a liberação de anúncios.</p>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comp-card bad">
+            <div class="comp-badge">Método 1: Tradicional</div>
+            <h3>Pelo Aplicativo (Difícil)</h3>
+            <p>Tentar ativar a receita por conta própria exige que você cumpra metas demoradas e quase impossíveis para iniciantes:</p>
+            <ul class="comp-list">
+              <li><i class="ri-close-line text-red"></i> Exige Nível 6 ou superior</li>
+              <li><i class="ri-close-line text-red"></i> Milhares de seguidores exigidos</li>
+              <li><i class="ri-close-line text-red"></i> Depende de "Convite" da plataforma</li>
+              <li><i class="ri-close-line text-red"></i> Pode levar meses de trabalho sem ganhar nada</li>
+            </ul>
+          </div>
+
+          <div class="comp-card good">
+            <div class="comp-badge glow">Método 2: Acesso VIP</div>
+            <h3>Pela FP Agency (Rápido)</h3>
+            <p>Contas de Cuts vinculadas a uma agência oficial <strong>pulam a fila</strong> e ativam a monetização sem os requisitos mínimos.</p>
+            <ul class="comp-list">
+              <li><i class="ri-check-double-line text-green"></i> Acesso antecipado à Receita</li>
+              <li><i class="ri-check-double-line text-green"></i> Não exige Nível 6</li>
+              <li><i class="ri-check-double-line text-green"></i> Contrato oficial de proteção</li>
+              <li><i class="ri-check-double-line text-green"></i> Ganhe dinheiro antes mesmo de ser famoso</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="money-section bg-darker">
+        <div class="section-header">
+          <h2><i class="ri-wallet-3-line text-green"></i> Duas formas de faturar</h2>
+          <p>Multiplique seus ganhos explorando os dois formatos do aplicativo.</p>
+        </div>
+
+        <div class="income-sources">
+          <div class="income-card">
+            <div class="ic-icon"><i class="ri-video-line"></i></div>
+            <h3>Monetização de Vídeos</h3>
+            <p>A principal fonte de renda. O algoritmo distribui seus vídeos na página "For You" e insere anúncios automáticos.</p>
+            <div class="ic-tag">Renda Passiva por 7 dias</div>
+          </div>
+          
+          <div class="income-card">
+            <div class="ic-icon"><i class="ri-live-line"></i></div>
+            <h3>Monetização de Lives</h3>
+            <p>Transmissões ao vivo também pagam! Anúncios são exibidos enquanto você interage com a audiência.</p>
+            <div class="ic-tag">Paga por Views e Cliques</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="money-section">
+        <div class="section-header">
+          <h2><i class="ri-line-chart-line text-orange"></i> Como multiplicar seus ganhos</h2>
+          <p>O algoritmo recompensa quem sabe prender a atenção. Siga estes pilares:</p>
+        </div>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <i class="ri-timer-flash-line"></i>
+            <h4>Alta Retenção</h4>
+            <p>O segredo número 1. Vídeos com roteiros que prendem o usuário até o final aumentam absurdamente o seu RPM.</p>
+          </div>
+          <div class="strategy-card">
+            <i class="ri-fire-line"></i>
+            <h4>Conteúdo Viral</h4>
+            <p>Edite cenas de alto impacto emocional, curiosidade ou humor. Emoção gera compartilhamento.</p>
+          </div>
+          <div class="strategy-card">
+            <i class="ri-calendar-event-line"></i>
+            <h4>Frequência</h4>
+            <p>Publicar todos os dias avisa ao algoritmo que você é um criador ativo, aumentando sua distribuição.</p>
+          </div>
+          <div class="strategy-card">
+            <i class="ri-speed-up-line"></i>
+            <h4>O Boost dos 7 Dias</h4>
+            <p>Foque em fazer o vídeo "estourar" (passar de 10k views) logo nos primeiros dias para maximizar o pagamento.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="money-section">
+        <div class="section-header text-center">
+          <h2>Dúvidas Frequentes</h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-card">
+            <h4><i class="ri-question-answer-line"></i> O Kwai paga mesmo?</h4>
+            <p>Sim. O pagamento é oficial e diário, baseado na exibição de anúncios. Você saca via PIX direto pro seu banco quando atingir R$ 10,00.</p>
+          </div>
+          <div class="faq-card">
+            <h4><i class="ri-question-answer-line"></i> Precisa ter muitos seguidores?</h4>
+            <p>Pelo método tradicional, sim. Mas através da nossa Agência, ativamos a sua monetização por contrato, sem precisar de milhares de seguidores.</p>
+          </div>
+          <div class="faq-card">
+            <h4><i class="ri-question-answer-line"></i> Dá pra ganhar sem aparecer?</h4>
+            <p>Sim! O formato Kwai Cut é focado exatamente nisso: edição de filmes, séries, animes e podcasts. Você cria, roteiriza, mas não precisa gravar a si mesmo.</p>
+          </div>
+          <div class="faq-card">
+            <h4><i class="ri-question-answer-line"></i> Como eu vejo meus ganhos?</h4>
+            <p>Tudo fica no próprio App. Vá no seu perfil > Central do Criador > Programa de Parcerias > Painel. Lá você acompanha o saldo diário em tempo real.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="money-cta-section">
+        <div class="money-cta-box">
+          <h2>Quanto antes começar, mais rápido vai faturar.</h2>
+          <p>O acesso antecipado à monetização é a sua maior vantagem. Preencha o formulário e inicie no programa hoje mesmo.</p>
+          <div class="money-cta-actions">
+            <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="btn-primary-large">
+              <i class="ri-quill-pen-line"></i> Quero Entrar na Agência
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  /* ============================================================
+     BASE E SHELL LAYOUT (Imune a bugs de Footer)
+     ============================================================ */
+  .fp-agency-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    background: var(--bg, #0f1117);
+  }
+
+  .kc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-color, #e2e8f0);
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    
+    /* Variáveis Temáticas Locais */
+    --orange: #ff6b2b;
+    --orange-dark: #e85a1f;
+    --orange-dim: rgba(255,107,43,0.15);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.15);
+    --bg-card: #181c27;
+    --bg-card-hover: #1e2332;
+    --border: #2a3048;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .text-orange { color: var(--orange); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-center { text-align: center; }
+
+  /* ============================================================
+     HERO SECTION
+     ============================================================ */
+  .money-hero {
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at top, rgba(34,197,94,0.1) 0%, transparent 70%);
+  }
+  .money-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: .75rem; color: var(--green);
+    text-transform: uppercase; letter-spacing: 1px;
+    background: var(--green-dim); padding: 6px 16px;
+    border-radius: 99px; border: 1px solid rgba(34,197,94,0.3);
+    margin-bottom: 24px;
+  }
+  .money-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulseGreen 2s infinite; }
+  @keyframes pulseGreen { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  
+  .money-hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  .money-hero-title .highlight-green { background: linear-gradient(135deg, #4ade80, var(--green)); -webkit-background-clip: text; color: transparent; }
+  .money-hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 650px; margin: 0 auto; line-height: 1.6; }
+
+  /* ============================================================
+     SEÇÕES E HEADERS
+     ============================================================ */
+  .money-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .bg-darker { background: rgba(0,0,0,0.2); border-radius: 24px; border: 1px solid var(--border); padding: 50px 30px; margin-top: 20px; margin-bottom: 20px;}
+  
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; justify-content: inherit; }
+  .section-header p { color: var(--muted); font-size: 1rem; }
+
+  /* ============================================================
+     RPM EXPLAIN BOX (O que é RPM)
+     ============================================================ */
+  .rpm-explain-box { background: linear-gradient(135deg, var(--bg-card), #141b17); border: 1px solid var(--green); border-radius: 24px; display: flex; overflow: hidden; flex-wrap: wrap; box-shadow: 0 10px 40px rgba(34,197,94,0.05); }
+  .rpm-header { background: var(--green-dim); padding: 40px; flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-right: 1px solid rgba(34,197,94,0.2); }
+  .rpm-header h2 { font-size: 3rem; font-weight: 900; color: #fff; margin: 0; line-height: 1; }
+  .rpm-header h2 span { color: var(--green); }
+  .rpm-header p { font-family: var(--mono); font-size: 0.85rem; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; font-weight: 600; }
+  
+  .rpm-body { padding: 40px; flex: 2; min-width: 300px; }
+  .rpm-body p { font-size: 1rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 20px; }
+  
+  .rpm-math { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 16px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+  .math-item { display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+  .math-item i { font-size: 1.5rem; color: var(--muted); }
+  .math-item span { font-size: 0.85rem; font-weight: 600; }
+  .math-item.highlight i { color: var(--green); font-size: 1.8rem; }
+  .math-item.highlight span { color: var(--green); }
+  .math-operator { font-size: 1.5rem; color: var(--muted); }
+
+  .rpm-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .rpm-benefits li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--muted); }
+  .rpm-benefits i { color: var(--green); }
+
+  /* ============================================================
+     COMPARISON GRID (O Contraste - Agência vs Normal)
+     ============================================================ */
+  .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .comp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; overflow: hidden; }
+  .comp-card.bad { border-top: 4px solid var(--red); }
+  .comp-card.good { border-top: 4px solid var(--green); background: linear-gradient(180deg, var(--green-dim) 0%, var(--bg-card) 30%); box-shadow: 0 10px 30px rgba(34,197,94,0.08); }
+  
+  .comp-badge { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 15px; }
+  .comp-card.bad .comp-badge { background: var(--red-dim); color: var(--red); }
+  .comp-card.good .comp-badge { background: var(--green); color: #000; box-shadow: 0 0 15px rgba(34,197,94,0.4); }
+  
+  .comp-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+  .comp-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+  
+  .comp-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .comp-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: #cbd5e1; line-height: 1.4; font-weight: 500; }
+  .comp-list i { font-size: 1.2rem; flex-shrink: 0; }
+
+  /* ============================================================
+     FONTES DE RENDA & ESTRATÉGIAS
+     ============================================================ */
+  .income-sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .income-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; }
+  .ic-icon { width: 50px; height: 50px; background: var(--green-dim); color: var(--green); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 20px; }
+  .income-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .income-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+  .ic-tag { position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 0.7rem; padding: 4px 10px; border-radius: 99px; color: var(--muted); }
+
+  .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .strategy-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; transition: transform 0.2s; }
+  .strategy-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+  .strategy-card i { font-size: 2rem; color: var(--orange); margin-bottom: 15px; display: block; }
+  .strategy-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
+  .strategy-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+  /* ============================================================
+     FAQ GRID
+     ============================================================ */
+  .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .faq-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; }
+  .faq-card h4 { font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; color: #fff; }
+  .faq-card h4 i { color: var(--orange); font-size: 1.2rem; flex-shrink: 0; }
+  .faq-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin: 0; padding-left: 28px; }
+
+  /* ============================================================
+     CTA FINAL
+     ============================================================ */
+  .money-cta-section { padding: 20px 20px 80px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .money-cta-box { background: linear-gradient(135deg, var(--bg-card), #0f1c14); border: 1px solid var(--green); border-radius: 24px; padding: 50px 30px; text-align: center; box-shadow: 0 10px 40px rgba(34,197,94,0.1); }
+  .money-cta-box h2 { font-size: 1.8rem; margin-bottom: 15px; }
+  .money-cta-box p { color: var(--muted); margin-bottom: 30px; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .money-cta-actions { display: flex; justify-content: center; }
+  
+  .btn-primary-large { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #000; padding: 16px 36px; border-radius: 99px; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: 0.2s; box-shadow: 0 8px 20px rgba(34,197,94,0.3); }
+  .btn-primary-large:hover { transform: translateY(-3px); background: #4ade80; box-shadow: 0 12px 25px rgba(34,197,94,0.4); }
+
+  /* ============================================================
+     RESPONSIVO
+     ============================================================ */
+  @media (max-width: 768px) {
+    .rpm-explain-box { flex-direction: column; }
+    .rpm-header { border-right: none; border-bottom: 1px solid rgba(34,197,94,0.2); padding: 30px 20px; }
+    .rpm-body { padding: 30px 20px; }
+    .rpm-math { flex-direction: column; gap: 10px; }
+    .math-operator { transform: rotate(90deg); margin: 5px 0; }
+    .ic-tag { position: relative; top: 0; right: 0; display: inline-block; margin-top: 15px; }
+  }
+</style>

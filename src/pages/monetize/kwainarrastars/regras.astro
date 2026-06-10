@@ -1,0 +1,388 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Tratamento seguro para evitar barras duplas nas URLs
+const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+---
+
+<Layout title="Kwai NarraStars - Regras e Monetização | FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="ns-content">
+      
+      <section class="ns-hero">
+        <div class="ns-hero-inner">
+          <div class="ns-badge">
+            <span class="ns-badge-dot"></span>
+            Programa Premium NarraStars
+          </div>
+          <h1 class="ns-hero-title">
+            Conteúdo Narrado.<br>
+            <span class="highlight-blue">Ganhos em Escala.</span>
+          </h1>
+          <p class="ns-hero-sub">
+            Utilize sua voz ou Inteligência Artificial (IA) para criar vídeos envolventes a partir de conteúdos virais. Menos vídeos exigidos por mês, maior potencial de RPM.
+          </p>
+          <div class="ns-hero-actions">
+            <a href={`${baseUrl}/treinamento`} class="btn-primary-blue">
+              <i class="ri-play-circle-line"></i> Acessar Treinamento
+            </a>
+            <a href="https://wa.me/message/3YJWHJM7UOR6C1" target="_blank" class="btn-secondary-blue">
+              <i class="ri-whatsapp-line"></i> Falar com Suporte
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="critical-alert">
+          <div class="critical-header">
+            <i class="ri-error-warning-fill"></i>
+            <h3>Pare! Antes de começar: Regra do Perfil</h3>
+          </div>
+          <div class="critical-body">
+            <p>Para ser contratado no programa NarraStars pela FP Agency, <strong>você obrigatoriamente precisa criar um perfil 100% NOVO no aplicativo.</strong></p>
+            <div class="critical-grid">
+              <div class="crit-item">
+                <i class="ri-close-circle-fill text-red"></i>
+                <span>Proibido usar contas antigas ou pessoais.</span>
+              </div>
+              <div class="crit-item">
+                <i class="ri-check-double-line text-green"></i>
+                <span>Sua foto e ID devem seguir a categoria escolhida.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="section-header text-center">
+          <h2><i class="ri-mic-2-line text-blue"></i> Como funciona a criação?</h2>
+          <p>O foco é a retenção. Junte imagens virais com uma narrativa única.</p>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-film-line"></i></div>
+            <h3>1. Cenas de Alto Impacto</h3>
+            <p>Selecione trechos de famosos, realities, esportes ou filmes que já têm potencial de prender a atenção.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-file-text-line"></i></div>
+            <h3>2. Roteiro Próprio</h3>
+            <p>Escreva uma história, curiosidade ou resumo. É o seu roteiro que torna o vídeo original e válido para monetizar.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-icon"><i class="ri-voiceprint-line"></i></div>
+            <h3>3. Narração (Voz ou IA)</h3>
+            <p>Grave com sua própria voz ou use IAs narradoras para dar escala e produzir com qualidade profissional.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section bg-darker">
+        <div class="section-header">
+          <h2><i class="ri-ruler-line text-purple"></i> Regras de Ouro NarraStars</h2>
+          <p>Diretrizes estritas para que seus vídeos faturem em dólar.</p>
+        </div>
+
+        <div class="rules-grid">
+          <div class="rules-card">
+            <h3><i class="ri-video-line"></i> O Vídeo Perfeito</h3>
+            <ul class="check-list">
+              <li><i class="ri-time-line"></i> Duração mínima de <strong>1 Minuto (60s)</strong>.</li>
+              <li><i class="ri-mic-line"></i> No mínimo <strong>60% do vídeo</strong> deve conter narração.</li>
+              <li><i class="ri-edit-2-line"></i> Edição e roteiros originais (nada de baixar e repostar).</li>
+              <li><i class="ri-eye-line"></i> Apenas visualizações da aba <strong>"For You"</strong> contabilizam.</li>
+              <li><i class="ri-calendar-check-line"></i> O vídeo gera receita por <strong>até 7 dias</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="rules-card">
+            <h3><i class="ri-star-smile-line"></i> Meta da Conta</h3>
+            <ul class="check-list">
+              <li><i class="ri-video-upload-line"></i> Publicar no mínimo <strong>30 vídeos por mês</strong>.</li>
+              <li><i class="ri-bar-chart-grouped-line"></i> Alcançar média de <strong>1.000 views</strong> por vídeo.</li>
+              <li><i class="ri-toggle-line"></i> <strong>Obrigatório:</strong> Ativar o "Programa de Receita de Anúncios" após aprovação.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section">
+        <div class="section-header text-center">
+          <h2><i class="ri-money-dollar-circle-line text-green"></i> Muito mais RPM</h2>
+          <p>O NarraStars paga mais porque vídeos narrados de 1 minuto retêm mais o público.</p>
+        </div>
+
+        <div class="rpm-showcase">
+          <div class="rpm-card base-rpm">
+            <div class="rpm-badge">Valor Base (Premium)</div>
+            <div class="rpm-value">$0,040<span>/ 1k views</span></div>
+            <p>O dobro do valor base de campanhas comuns. Pago a cada 1.000 visualizações na For You.</p>
+          </div>
+          
+          <div class="rpm-math-icon"><i class="ri-add-line"></i></div>
+
+          <div class="rpm-card bonus-rpm">
+            <div class="rpm-badge pulse">Bônus de Conta Nova</div>
+            <div class="rpm-value text-green">+$0,006<span>/ 1k views</span></div>
+            <p>Válido pelos <strong>primeiros 3 meses</strong> para acelerar o crescimento do seu perfil inicial!</p>
+          </div>
+        </div>
+
+        <div class="double-income-box">
+          <div class="dib-icon"><i class="ri-vip-diamond-line"></i></div>
+          <div class="dib-content">
+            <h3>O Segredo: Dupla Monetização</h3>
+            <p>Além do RPM padrão, o NarraStars permite <strong>Tarefas Pagas</strong>. Marcas patrocinam ações no seu vídeo (ex: links para baixar um App). Se você for classificado como "Média/Alta qualidade" e já faturar $10 no mês, você ganha <strong>pelo RPM + Comissão por Downloads</strong> no mesmo vídeo!</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-section bg-darker">
+        <div class="section-header">
+          <h2><i class="ri-layout-grid-line text-blue"></i> Categorias e Exemplos</h2>
+          <p>Escolha seu nicho. Inspire-se nos melhores para criar o seu vídeo teste.</p>
+        </div>
+
+        <div class="category-grid">
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ri-clapperboard-line"></i></div>
+            <h4>FTV NarraStars</h4>
+            <p>Filmes, séries e storytelling envolvente.</p>
+            <a href="https://www.kwai.com/@Amo.Recap/video/5229110748431065184" target="_blank" class="cat-link"><i class="ri-external-link-line"></i> Ver Exemplo FTV</a>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ri-graduation-cap-line"></i></div>
+            <h4>Educação</h4>
+            <p>Curiosidades, histórias antigas e vida animal.</p>
+            <a href="https://www.kwai.com/@historias_antigs./video/5244873345996217689" target="_blank" class="cat-link"><i class="ri-external-link-line"></i> Exemplo História</a>
+            <a href="https://www.kwai.com/@Universo.Animal/video/5249376946813693522" target="_blank" class="cat-link"><i class="ri-external-link-line"></i> Exemplo Animal</a>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ri-football-line"></i></div>
+            <h4>Esportes</h4>
+            <p>Análises, bastidores e momentos épicos.</p>
+            <a href="https://www.kwai.com/@h10sport/video/5198148501957501323" target="_blank" class="cat-link"><i class="ri-external-link-line"></i> Ver Exemplo Esporte</a>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ri-vip-crown-line"></i></div>
+            <h4>Entretenimento</h4>
+            <p>Celebridades, reality shows e cultura pop.</p>
+            <a href="https://www.kwai.com/@aquelesfamosos/video/5230236649015917126" target="_blank" class="cat-link"><i class="ri-external-link-line"></i> Ver Exemplo Fofoca</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="ns-cta-section">
+        <div class="ns-cta-box">
+          <h2>Pronto para ser contratado(a)?</h2>
+          <p>Siga exatamente os passos abaixo. <strong>O prazo de análise é de até 7 dias.</strong></p>
+          
+          <div class="steps-to-hire">
+            <div class="step-item"><span>1</span> Crie um Perfil Novo no Kwai (Foto e ID da categoria).</div>
+            <div class="step-item"><span>2</span> Produza e publique <strong>UM vídeo teste</strong> na conta nova.</div>
+            <div class="step-item"><span>3</span> Preencha o Formulário de Inscrição abaixo.</div>
+            <div class="step-item alert-step"><span>4</span> <strong>NÃO publique mais vídeos</strong> até receber nossa aprovação!</div>
+          </div>
+
+          <div class="ns-cta-actions">
+            <a href={`${import.meta.env.BASE_URL}/inscricao?programa=kwai-narrastars`} class="btn-primary-large">
+              <i class="ri-quill-pen-line"></i> Formulário de Inscrição
+            </a>
+            <a href={`${baseUrl}/busca`} class="btn-secondary-large">
+              <i class="ri-user-star-line"></i> Área do Criador (Status)
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  /* ============================================================
+     BASE E SHELL LAYOUT 
+     ============================================================ */
+  .fp-agency-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    background: var(--bg, #0f1117);
+  }
+
+  .ns-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-color, #e2e8f0);
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    
+    /* Paleta Exclusiva NarraStars (Premium Blue/Purple) */
+    --blue: #3b82f6;
+    --blue-dark: #2563eb;
+    --blue-dim: rgba(59,130,246,0.15);
+    --purple: #8b5cf6;
+    --purple-dim: rgba(139,92,246,0.15);
+    --green: #22c55e;
+    --red: #ef4444;
+    --bg-card: #181c27;
+    --border: #2a3048;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .text-blue { color: var(--blue); }
+  .text-purple { color: var(--purple); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-center { text-align: center; }
+
+  /* ============================================================
+     HERO SECTION
+     ============================================================ */
+  .ns-hero {
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse at top, rgba(59,130,246,0.15) 0%, transparent 70%);
+  }
+  .ns-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: .75rem; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 1px;
+    background: var(--blue-dim); padding: 6px 16px;
+    border-radius: 99px; border: 1px solid rgba(59,130,246,0.3);
+    margin-bottom: 24px;
+  }
+  .ns-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px var(--blue); animation: pulseBlue 2s infinite; }
+  @keyframes pulseBlue { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  
+  .ns-hero-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  .ns-hero-title .highlight-blue { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; color: transparent; }
+  .ns-hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 650px; margin: 0 auto 30px; line-height: 1.6; }
+  
+  .ns-hero-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+  .btn-primary-blue { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 14px 28px; border-radius: 99px; font-weight: 700; text-decoration: none; transition: 0.2s; box-shadow: 0 6px 20px rgba(59,130,246,0.3); }
+  .btn-primary-blue:hover { transform: translateY(-3px); background: var(--blue-dark); color: #fff; }
+  .btn-secondary-blue { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--border); color: #fff; padding: 14px 28px; border-radius: 99px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+  .btn-secondary-blue:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ============================================================
+     SEÇÕES E HEADERS
+     ============================================================ */
+  .ns-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .bg-darker { background: rgba(0,0,0,0.2); border-radius: 24px; border: 1px solid var(--border); padding: 50px 30px; margin-top: 20px; margin-bottom: 20px;}
+  
+  .section-header { margin-bottom: 40px; }
+  .section-header h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; justify-content: inherit; }
+  .section-header p { color: var(--muted); font-size: 1rem; }
+
+  /* ============================================================
+     ALERTA CRÍTICO
+     ============================================================ */
+  .critical-alert { background: linear-gradient(135deg, rgba(239,68,68,0.1), transparent); border: 1px dashed var(--red); border-radius: 24px; overflow: hidden; }
+  .critical-header { background: rgba(239,68,68,0.15); padding: 20px 30px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(239,68,68,0.2); }
+  .critical-header i { font-size: 1.8rem; color: var(--red); }
+  .critical-header h3 { font-size: 1.3rem; color: #fff; margin: 0; }
+  .critical-body { padding: 30px; }
+  .critical-body p { font-size: 1.05rem; margin-bottom: 20px; line-height: 1.5; }
+  .critical-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+  .crit-item { background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 600; }
+  .crit-item i { font-size: 1.4rem; }
+
+  /* ============================================================
+     CONCEPTS GRID
+     ============================================================ */
+  .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .concept-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: transform 0.3s, border-color 0.3s; }
+  .concept-card:hover { transform: translateY(-5px); border-color: var(--blue); }
+  .concept-icon { width: 50px; height: 50px; border-radius: 12px; background: var(--blue-dim); color: var(--blue); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .concept-card h3 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; }
+  .concept-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ============================================================
+     RULES LIST
+     ============================================================ */
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .rules-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; }
+  .rules-card h3 { font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--purple); }
+  .check-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: #cbd5e1; line-height: 1.5; }
+  .check-list i { color: var(--blue); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .check-list strong { color: #fff; }
+
+  /* ============================================================
+     RPM SHOWCASE E DUPLA MONETIZAÇÃO
+     ============================================================ */
+  .rpm-showcase { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px; margin-bottom: 40px; }
+  .rpm-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; flex: 1; min-width: 280px; text-align: center; position: relative; overflow: hidden; }
+  .rpm-badge { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--border); font-family: var(--mono); font-size: 0.7rem; padding: 4px 12px; border-radius: 0 0 8px 8px; font-weight: 600; text-transform: uppercase; }
+  .rpm-badge.pulse { background: var(--green); color: #000; }
+  .rpm-value { font-size: 3rem; font-weight: 900; margin: 25px 0 15px; font-family: var(--mono); }
+  .rpm-value span { font-size: 1rem; color: var(--muted); font-weight: 500; }
+  .rpm-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+  .rpm-math-icon { font-size: 2rem; color: var(--muted); background: var(--bg-card); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
+
+  .double-income-box { display: flex; align-items: center; gap: 20px; background: linear-gradient(90deg, var(--blue-dim), transparent); border: 1px solid rgba(59,130,246,0.3); border-radius: 20px; padding: 30px; }
+  .dib-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(59,130,246,0.4); }
+  .dib-content h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .dib-content p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; margin: 0; }
+
+  /* ============================================================
+     CATEGORIAS GRID
+     ============================================================ */
+  .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .cat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; display: flex; flex-direction: column; }
+  .cat-icon { font-size: 2rem; color: var(--blue); margin-bottom: 15px; }
+  .cat-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
+  .cat-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; flex: 1; margin-bottom: 15px; }
+  .cat-link { display: flex; align-items: center; gap: 5px; font-size: 0.85rem; color: var(--blue); text-decoration: none; font-weight: 600; margin-top: 8px; }
+  .cat-link:hover { text-decoration: underline; }
+
+  /* ============================================================
+     CTA / PASSOS
+     ============================================================ */
+  .ns-cta-section { padding: 20px 20px 80px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .ns-cta-box { background: linear-gradient(135deg, var(--bg-card), #0a101d); border: 1px solid var(--blue); border-radius: 24px; padding: 50px 40px; box-shadow: 0 10px 40px rgba(59,130,246,0.1); }
+  .ns-cta-box h2 { font-size: 1.8rem; margin-bottom: 10px; text-align: center; }
+  .ns-cta-box > p { color: var(--muted); margin-bottom: 30px; text-align: center; }
+  
+  .steps-to-hire { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; }
+  .step-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; font-size: 0.95rem; }
+  .step-item span { background: var(--blue); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+  .alert-step { border-color: var(--orange); background: rgba(255,107,43,0.05); }
+  .alert-step span { background: var(--orange); }
+
+  .ns-cta-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+  .btn-primary-large { display: inline-flex; align-items: center; gap: 10px; background: var(--blue); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 700; text-decoration: none; transition: 0.2s; box-shadow: 0 8px 20px rgba(59,130,246,0.2); }
+  .btn-primary-large:hover { transform: translateY(-3px); background: var(--blue-dark); color: #fff;}
+  .btn-secondary-large { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--border); color: #fff; padding: 16px 32px; border-radius: 99px; font-weight: 600; text-decoration: none; transition: 0.2s; }
+  .btn-secondary-large:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ============================================================
+     RESPONSIVO
+     ============================================================ */
+  @media (max-width: 768px) {
+    .rpm-math-icon { display: none; }
+    .double-income-box { flex-direction: column; text-align: center; }
+    .ns-cta-actions { flex-direction: column; }
+    .btn-primary-large, .btn-secondary-large { width: 100%; justify-content: center; }
+  }
+</style>

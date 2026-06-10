@@ -1,0 +1,30 @@
+---
+interface Props {
+  videoId: string;
+}
+
+const { videoId } = Astro.props;
+---
+
+<div class="video-player-container">
+  {/* O Astro injeta a variável do servidor direto no script do navegador */}
+  <script is:inline define:vars={{ videoId }}>
+    (window.openVideoPlayers = window.openVideoPlayers || []).push({
+      allowPlaylistAds: false,
+      target: document.currentScript,
+      videoID: videoId
+    });
+  </script>
+  <script async src="https://open.video/video.js"></script>
+</div>
+
+<style>
+  .video-player-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+</style>

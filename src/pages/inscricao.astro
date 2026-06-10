@@ -1,0 +1,1550 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const rawBaseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const baseUrl = rawBaseUrl.replace(/\/$/, '');
+---
+
+<Layout title="Inscrição Oficial - FP Agency">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <div class="fp-agency-wrapper">
+    <Header />
+
+    <main class="kc-content">
+      <section class="form-section">
+        <div class="form-container-box">
+          <div class="form-header-main text-center">
+            <h1>Formulário de Inscrição</h1>
+            <p class="subtitle">Escolha o programa desejado para liberar sua ficha de cadastro.</p>
+          </div>
+
+          <div class="program-selector-zone">
+            <p class="field-label text-center block" id="program-selector-label">Selecione o seu Programa: *</p>
+
+            <div class="program-cards-grid" role="group" aria-labelledby="program-selector-label">
+              <button type="button" class="program-select-card" data-program="kwai-cut" aria-pressed="false">
+                <div class="card-icon-circle orange"><i class="ri-scissors-cut-line"></i></div>
+                <h3>Kwai Cut</h3>
+                <p>Cortes estratégicos de filmes, séries, novelas e animes.</p>
+                <div class="select-indicator" aria-hidden="true"></div>
+              </button>
+
+              <button type="button" class="program-select-card" data-program="kwai-narrastars" aria-pressed="false">
+                <div class="card-icon-circle blue"><i class="ri-mic-2-line"></i></div>
+                <h3>Kwai Narrastars</h3>
+                <p>Vídeos avançados com roteiro focado em narração, voz ou IA.</p>
+                <div class="select-indicator" aria-hidden="true"></div>
+              </button>
+            </div>
+          </div>
+
+          <form id="unified-registration-form" class="hidden-form" novalidate>
+            <input type="hidden" name="programa_selecionado" id="hidden-program-type" value="" />
+            <input type="hidden" name="recrutador_nome" id="hidden-recrutador-nome" value="" />
+            <input type="hidden" name="recrutador_whatsapp" id="hidden-recrutador-whatsapp" value="" />
+            <input type="hidden" name="whatsapp" id="hidden-whatsapp" value="" />
+
+            <div id="instructions-kwai-cut" class="instruction-box hidden-block">
+              <div class="inst-header orange">
+                <i class="ri-information-line"></i>
+                <h4>📝 Instruções para Preencher o Formulário (Kwai Cut)</h4>
+              </div>
+
+              <div class="inst-body">
+                <p><strong>Antes de tudo:</strong></p>
+                <ul>
+                  <li><i class="ri-checkbox-circle-line text-orange"></i> Crie uma nova conta no Kwai exclusiva para o projeto. Não use conta antiga.</li>
+                  <li><i class="ri-checkbox-circle-line text-orange"></i> Crie o vídeo teste seguindo os treinamentos disponíveis no site: <a href={`${baseUrl}/kwai-cut/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Clique aqui e acesse o Treinamento</a></li>
+                </ul>
+
+                <div class="inst-warning">
+                  <strong>⚠️ Importante:</strong>
+                  <span>• Poste primeiro seu vídeo teste antes de enviar o formulário.</span>
+                  <span>• Não poste mais nenhum vídeo até a aprovação.</span>
+                  <span>• Aguarde retorno via WhatsApp em até 7 dias úteis.</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="instructions-kwai-narrastars" class="instruction-box hidden-block">
+              <div class="inst-header blue">
+                <i class="ri-magic-line"></i>
+                <h4>📝 Instruções para Preencher o Formulário (Kwai Narrastars)</h4>
+              </div>
+
+              <div class="inst-body">
+                <p><strong>Antes de tudo:</strong></p>
+                <ul>
+                  <li><i class="ri-checkbox-circle-line text-blue"></i> Crie uma nova conta no Kwai do zero absoluto. Não use contas antigas ou pessoais.</li>
+                  <li><i class="ri-checkbox-circle-line text-blue"></i> Crie e publique o vídeo teste narrado de no mínimo 1 minuto seguindo as diretrizes: <a href={`${baseUrl}/kwai-narrastars/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Acessar Treinamento NarraStars</a></li>
+                </ul>
+
+                <div class="inst-warning">
+                  <strong>⚠️ Importante:</strong>
+                  <span>• Poste primeiro o seu vídeo teste com mais de 60% de narração.</span>
+                  <span>• Após se inscrever, não publique novos conteúdos até receber a resposta da agência.</span>
+                  <span>• Prazo de análise interna em até 7 dias úteis.</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="fields-note">* Indica uma pergunta obrigatória</p>
+
+            <div class="form-field">
+              <label class="field-label" for="input-indicacao">Código de Indicação: *</label>
+              <div class="field-desc">
+                1. Insira o código de quem indicou o seu perfil para a agência.<br>
+                2. Caso o código já tenha sido gerado automaticamente pelo sistema de recrutamento, não modifique.
+              </div>
+
+              <div class="input-status-wrapper">
+                <input
+                  type="text"
+                  name="codigo_indicacao"
+                  id="input-indicacao"
+                  placeholder="Ex: 58693"
+                  required
+                  autocomplete="off"
+                  inputmode="numeric"
+                  maxlength="20"
+                  aria-describedby="err-indicacao recruiter-info-box"
+                />
+                <span id="recruiter-input-status" class="input-status-dot idle" aria-hidden="true"></span>
+              </div>
+
+              <span class="error-msg" id="err-indicacao">Buscando recrutador...</span>
+              <div id="recruiter-info-box" class="recruiter-box hidden-block" aria-live="polite"></div>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="input-nome">Nome Completo: *</label>
+              <div class="field-desc">Digite seu nome real, sem abreviações. Obrigatório nome e sobrenome.</div>
+              <input type="text" name="nome_completo" id="input-nome" placeholder="Digite seu nome e sobrenome" required autocomplete="name" aria-describedby="err-nome" />
+              <span class="error-msg" id="err-nome">Por favor, insira o seu nome completo.</span>
+            </div>
+
+            <div id="field-cat-cut" class="form-field hidden-block">
+              <label class="field-label" for="select-cat-cut">Categoria Kwai Cut: *</label>
+              <div class="field-desc">Informe o que você vai postar no perfil.</div>
+              <select name="categoria_kwai_cut" id="select-cat-cut">
+                <option value="" disabled selected>Selecione uma categoria...</option>
+                <option value="Notícias">Notícias</option>
+                <option value="Fofocas & Celebridades">Fofocas & Celebridades</option>
+                <option value="Entretenimentos & Reality">Entretenimentos & Reality</option>
+                <option value="Esportes">Esportes</option>
+                <option value="Filmes">Filmes</option>
+                <option value="Séries">Séries</option>
+                <option value="PodCasts">PodCasts</option>
+                <option value="Anime & Desenhos Animados">Anime & Desenhos Animados</option>
+                <option value="Motivação">Motivação</option>
+                <option value="Religião">Religião</option>
+                <option value="Paranormal">Paranormal</option>
+                <option value="Música">Música</option>
+                <option value="🚀 Cartoon">🚀 Cartoon</option>
+              </select>
+            </div>
+
+            <div id="field-cat-narrastars" class="form-field hidden-block">
+              <label class="field-label" for="select-cat-narrastars">Categoria Narrastars: *</label>
+              <div class="field-desc">Informe o que você vai postar no perfil.</div>
+              <select name="categoria_narrastars" id="select-cat-narrastars">
+                <option value="" disabled selected>Selecione uma categoria...</option>
+                <option value="Filmes">Filmes</option>
+                <option value="Novelas">Novelas</option>
+                <option value="Séries">Séries</option>
+                <option value="Entretenimentos">Entretenimentos</option>
+                <option value="Educação">Educação</option>
+                <option value="Esportes">Esportes</option>
+                <option value="Inteligência Artificial">Inteligência Artificial</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="input-whatsapp">Número do WhatsApp: *</label>
+              <div class="field-desc">Inclua seu número com DDD corretamente. Ex: 11 12345-6789</div>
+              <input type="text" id="input-whatsapp" placeholder="+55 (__) _____-____" required autocomplete="tel" inputmode="tel" maxlength="19" aria-describedby="err-whatsapp" />
+              <span class="error-msg" id="err-whatsapp">Insira um número de WhatsApp válido com DDD.</span>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label" for="input-perfil">Link do Novo Perfil: *</label>
+              <div class="field-desc">Abra seu perfil no Kwai, toque em “Compartilhar perfil”, copie o link e cole aqui.</div>
+              <input type="url" name="link_perfil" id="input-perfil" placeholder="https://k.kwai.com/u/..." required autocomplete="url" aria-describedby="err-perfil" />
+              <span class="error-msg" id="err-perfil">O link deve ser um perfil válido do Kwai. Ex: https://k.kwai.com/...</span>
+            </div>
+
+            <div class="form-submit-zone">
+              <button type="submit" id="btn-submit-form" class="btn-submit-disabled" disabled>
+                <i class="ri-send-plane-2-line"></i>
+                Enviar Formulário de Inscrição
+              </button>
+            </div>
+
+            <div id="form-status-message" class="form-status-message hidden-block" role="status" aria-live="polite"></div>
+
+            <div class="form-footer-notes text-center">
+              <div class="notes-divider"></div>
+              <p>Entraremos em contato pelo WhatsApp em até 7 dias úteis.</p>
+              <div class="wpp-official-box">
+                <i class="ri-whatsapp-fill"></i>
+                <div>
+                  <span>Nosso WhatsApp oficial:</span>
+                  <strong>+55 (54) 99677-8933</strong>
+                </div>
+              </div>
+              <p class="faint-alert">Fique atento(a) às mensagens!</p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script define:vars={{ baseUrl }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // NOVA URL UNIFICADA DA API (Serve para Busca e para Cadastro)
+    const API_UNIFICADA = 'https://script.google.com/macros/s/AKfycbz2v0Ssig7czjEOQDr1NbxOE4_vy0mGhzWjy2Lo7rocIm-wyB4p1OYChbB2PXwKNj9d/exec';
+
+    const APP_CONFIG = {
+      API_CONTRATADOS: API_UNIFICADA,
+      API_RECRUTADORES: API_UNIFICADA,
+      BASE_URL: baseUrl || '',
+      MIN_RECRUITER_CODE_LENGTH: 3,
+      RECRUITER_DEBOUNCE_MS: 450,
+      RECRUITER_TIMEOUT_MS: 12000,
+      RECRUITER_REQUIRED: true,
+      SUBMIT_MODE: 'no-cors' // Mantido no-cors para evitar bloqueios do Google
+    };
+
+    const PROGRAMS = {
+      'kwai-cut': {
+        label: 'Kwai Cut',
+        instructionId: 'instructions-kwai-cut',
+        categoryFieldId: 'field-cat-cut',
+        categorySelectId: 'select-cat-cut'
+      },
+      'kwai-narrastars': {
+        label: 'Kwai Narrastars',
+        instructionId: 'instructions-kwai-narrastars',
+        categoryFieldId: 'field-cat-narrastars',
+        categorySelectId: 'select-cat-narrastars'
+      }
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    const dom = {
+      cards: $$('.program-select-card'),
+      form: $('#unified-registration-form'),
+      hiddenProgramInput: $('#hidden-program-type'),
+      hiddenRecruiterName: $('#hidden-recrutador-nome'),
+      hiddenRecruiterWhatsapp: $('#hidden-recrutador-whatsapp'),
+      inputIndicacao: $('#input-indicacao'),
+      recruiterInputStatus: $('#recruiter-input-status'),
+      recruiterInfoBox: $('#recruiter-info-box'),
+      inputNome: $('#input-nome'),
+      inputWpp: $('#input-whatsapp'),
+      hiddenWpp: $('#hidden-whatsapp'),
+      inputPerfil: $('#input-perfil'),
+      selectCut: $('#select-cat-cut'),
+      selectStars: $('#select-cat-narrastars'),
+      btnSubmit: $('#btn-submit-form'),
+      statusMessage: $('#form-status-message'),
+      errIndicacao: $('#err-indicacao'),
+      errNome: $('#err-nome'),
+      errWhatsapp: $('#err-whatsapp'),
+      errPerfil: $('#err-perfil')
+    };
+
+    const KWAI_PROFILE_HOSTS = new Set(['k.kwai.com', 'kwai.com', 'www.kwai.com', 'm.kwai.com']);
+    const STORAGE_KEYS = {
+      recruiterCode: 'fp_recrutador_id',
+      lastSubmission: 'fp_ultima_inscricao'
+    };
+
+    let currentProgram = '';
+    let recruiterData = null;
+    let recruiterStatus = 'empty';
+    let recruiterDebounce = null;
+    let recruiterAbortController = null;
+    let recruiterRequestId = 0;
+    let activeJsonpCancel = null;
+    let lastRecruiterQuery = '';
+    let isSubmitting = false;
+
+    function escapeHTML(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function digitsOnly(value) {
+      return String(value || '').replace(/\D/g, '');
+    }
+
+    function normalizeText(value) {
+      return String(value || '').trim();
+    }
+
+    function normalizeCode(value) {
+      return normalizeText(value).replace(/\s+/g, '');
+    }
+
+    function normalizeBrazilPhone(value) {
+      let digits = digitsOnly(value);
+      if (!digits) return '';
+
+      if (digits.startsWith('00')) digits = digits.replace(/^00+/, '');
+      if (digits.startsWith('055')) digits = digits.slice(1);
+
+      if (digits.startsWith('55')) {
+        const nationalNumber = digits.slice(2).replace(/^0+/, '').slice(0, 11);
+        return nationalNumber ? `55${nationalNumber}` : '';
+      }
+
+      const nationalNumber = digits.replace(/^0+/, '').slice(0, 11);
+      return nationalNumber ? `55${nationalNumber}` : '';
+    }
+
+    function isValidBrazilPhone(value) {
+      const digits = normalizeBrazilPhone(value);
+      const nationalNumber = digits.slice(2);
+      return digits.startsWith('55') && /^[1-9]{2}\d{8,9}$/.test(nationalNumber);
+    }
+
+    function formatBrazilPhone(value) {
+      const digits = normalizeBrazilPhone(value);
+      if (!digits) return { formatted: '', hidden: '' };
+
+      const areaCode = digits.slice(2, 4);
+      const localNumber = digits.slice(4);
+      const firstGroupLength = localNumber.length > 8 ? 5 : 4;
+      const firstGroup = localNumber.slice(0, firstGroupLength);
+      const secondGroup = localNumber.slice(firstGroupLength, 9);
+
+      let formatted = '+55';
+      if (areaCode) formatted += ` (${areaCode}`;
+      if (areaCode.length === 2) formatted += ')';
+      if (firstGroup) formatted += ` ${firstGroup}`;
+      if (secondGroup) formatted += `-${secondGroup}`;
+
+      return {
+        formatted,
+        hidden: `+${digits}`
+      };
+    }
+
+    function buildWhatsAppLink(value) {
+      const digits = normalizeBrazilPhone(value);
+      return digits ? `https://wa.me/${digits}` : '';
+    }
+
+    function normalizeProfileUrl(value) {
+      const text = normalizeText(value);
+      if (!text) return '';
+      if (/^https?:\/\//i.test(text)) return text;
+      if (/^(k\.kwai\.com|kwai\.com|www\.kwai\.com|m\.kwai\.com)(\/|$)/i.test(text)) {
+        return `https://${text}`;
+      }
+      return text;
+    }
+
+    function isValidKwaiProfileUrl(value) {
+      const text = normalizeProfileUrl(value);
+      if (!text) return false;
+
+      try {
+        const url = new URL(text);
+        const hasPath = url.pathname.replace(/\/+$/, '').length > 0;
+        return url.protocol === 'https:' && KWAI_PROFILE_HOSTS.has(url.hostname.toLowerCase()) && hasPath;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function safeStorageGet(storage, key) {
+      try {
+        return storage.getItem(key) || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function safeStorageSet(storage, key, value) {
+      try {
+        storage.setItem(key, value);
+      } catch (error) {
+        // Storage can be blocked in private or embedded browsing contexts.
+      }
+    }
+
+    function setFieldInvalid(input, errorElement, invalid, showError = invalid) {
+      input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+      if (errorElement) errorElement.style.display = showError ? 'block' : 'none';
+    }
+
+    function setInputStatus(status) {
+      dom.recruiterInputStatus.className = `input-status-dot ${status || 'idle'}`;
+    }
+
+    function setStatus(type, message) {
+      dom.statusMessage.className = 'form-status-message hidden-block';
+      dom.statusMessage.textContent = '';
+
+      if (!message) return;
+
+      dom.statusMessage.className = `form-status-message ${type}`;
+      dom.statusMessage.textContent = message;
+    }
+
+    function setRecruiterState(status, message = '') {
+      recruiterStatus = status;
+
+      if (status === 'empty' || status === 'idle') {
+        setInputStatus('idle');
+        dom.recruiterInfoBox.className = 'recruiter-box hidden-block';
+        dom.recruiterInfoBox.innerHTML = '';
+        dom.errIndicacao.style.display = 'none';
+        return;
+      }
+
+      if (status === 'typing') {
+        setInputStatus('idle');
+        dom.recruiterInfoBox.className = 'recruiter-box helper-border';
+        dom.recruiterInfoBox.innerHTML = `
+          <div class="recruiter-card-neutral">
+            <i class="ri-keyboard-line"></i>
+            <span>Digite pelo menos ${APP_CONFIG.MIN_RECRUITER_CODE_LENGTH} caracteres para buscar o recrutador automaticamente.</span>
+          </div>
+        `;
+        return;
+      }
+
+      if (status === 'loading') {
+        setInputStatus('loading');
+        dom.recruiterInfoBox.className = 'recruiter-box helper-border';
+        dom.recruiterInfoBox.innerHTML = `
+          <div class="loading-recruiter">
+            <i class="ri-loader-4-line spin"></i>
+            Procurando recrutador automaticamente...
+          </div>
+        `;
+        return;
+      }
+
+      if (status === 'found' && recruiterData) {
+        setInputStatus('success');
+        dom.errIndicacao.style.display = 'none';
+        dom.recruiterInfoBox.className = 'recruiter-box success-border';
+
+        const safeName = escapeHTML(recruiterData.nome);
+        const safeWhatsapp = escapeHTML(recruiterData.whatsapp || '');
+        const wppLink = buildWhatsAppLink(recruiterData.whatsapp);
+
+        dom.recruiterInfoBox.innerHTML = `
+          <div class="recruiter-card-success">
+            <div class="rc-avatar"><i class="ri-user-star-fill"></i></div>
+            <div class="rc-info">
+              <span>Indicado por:</span>
+              <strong>${safeName}</strong>
+              ${wppLink ? `<a href="${wppLink}" target="_blank" rel="noopener noreferrer" class="rc-wpp"><i class="ri-whatsapp-line"></i> Contactar via WhatsApp</a>` : '<small class="rc-muted">WhatsApp do recrutador não informado</small>'}
+              ${safeWhatsapp ? `<small class="rc-muted">${safeWhatsapp}</small>` : ''}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      setInputStatus('error');
+      dom.recruiterInfoBox.className = 'recruiter-box error-border';
+      dom.recruiterInfoBox.innerHTML = `
+        <div class="recruiter-card-error">
+          <i class="ri-error-warning-line"></i>
+          <span>${escapeHTML(message || 'Não foi possível confirmar o recrutador.')}</span>
+        </div>
+      `;
+    }
+
+    function clearRecruiterData() {
+      recruiterData = null;
+      dom.hiddenRecruiterName.value = '';
+      dom.hiddenRecruiterWhatsapp.value = '';
+    }
+
+    function pickFirstValue(source, keys) {
+      if (!source || typeof source !== 'object') return '';
+      for (const key of keys) {
+        if (source[key] !== undefined && source[key] !== null && String(source[key]).trim() !== '') {
+          return source[key];
+        }
+      }
+      return '';
+    }
+
+    function isFalseLike(value) {
+      return ['false', '0', 'no', 'não', 'nao', 'not_found', 'not-found', 'não encontrado', 'nao encontrado', 'erro', 'error']
+        .includes(normalizeText(value).toLowerCase());
+    }
+
+    function findRecordInsideResponse(data, codigo) {
+      const wanted = normalizeCode(codigo);
+
+      if (Array.isArray(data)) {
+        const exact = data.find((item) => {
+          if (!item || typeof item !== 'object') return false;
+          const itemCode = normalizeCode(pickFirstValue(item, ['codigo', 'código', 'codigo_indicacao', 'id', 'cod', 'Code', 'Código']));
+          return itemCode && itemCode === wanted;
+        });
+        if (exact) return exact;
+
+        if (data.length === 1) {
+          const [singleItem] = data;
+          if (!singleItem || typeof singleItem !== 'object') return null;
+
+          const singleItemCode = normalizeCode(pickFirstValue(singleItem, ['codigo', 'código', 'codigo_indicacao', 'id', 'cod', 'Code', 'Código']));
+          return !singleItemCode || singleItemCode === wanted ? singleItem : null;
+        }
+
+        return null;
+      }
+
+      if (!data || typeof data !== 'object') return null;
+
+      const containers = [
+        data.recrutador,
+        data.recruiter,
+        data.data,
+        data.result,
+        data.results,
+        data.items,
+        data.rows,
+        data.registros
+      ].filter(Boolean);
+
+      for (const container of containers) {
+        const found = findRecordInsideResponse(container, codigo);
+        if (found) return found;
+      }
+
+      return data;
+    }
+
+    function normalizeRecruiterResponse(data, codigo) {
+      const record = findRecordInsideResponse(data, codigo);
+      if (!record || typeof record !== 'object') return null;
+
+      const okFlag = pickFirstValue(record, ['ok', 'success', 'sucesso', 'found', 'encontrado']);
+      if (isFalseLike(okFlag)) return null;
+
+      const status = pickFirstValue(record, ['status', 'situacao', 'state']);
+      if (isFalseLike(status)) return null;
+
+      const nome = normalizeText(pickFirstValue(record, [
+        'nome',
+        'Nome',
+        'nome_completo',
+        'recrutador_nome',
+        'recrutador',
+        'name',
+        'Name'
+      ]));
+
+      const whatsapp = normalizeText(pickFirstValue(record, [
+        'whatsapp',
+        'WhatsApp',
+        'whatsapp_limpo',
+        'whatsapp_link',
+        'wpp',
+        'telefone',
+        'celular',
+        'phone',
+        'recrutador_whatsapp'
+      ]));
+
+      if (!nome) return null;
+
+      return {
+        codigo: normalizeCode(codigo),
+        nome,
+        whatsapp
+      };
+    }
+
+    function parseMaybeJSON(text) {
+      const cleanText = String(text || '').trim();
+      if (!cleanText) throw new Error('Resposta vazia da API.');
+
+      try {
+        return JSON.parse(cleanText);
+      } catch (error) {
+        const jsonpMatch = cleanText.match(/^[\w$.]+\((.*)\);?$/s);
+        if (jsonpMatch) return JSON.parse(jsonpMatch[1]);
+        throw new Error('A API de recrutadores não retornou JSON válido.');
+      }
+    }
+
+    function createAbortError(message = 'Busca cancelada.') {
+      const error = new Error(message);
+      error.name = 'AbortError';
+      return error;
+    }
+
+    function isAbortError(error) {
+      return error?.name === 'AbortError';
+    }
+
+    function cancelRecruiterLookup({ invalidate = true } = {}) {
+      window.clearTimeout(recruiterDebounce);
+      recruiterDebounce = null;
+
+      if (invalidate) recruiterRequestId += 1;
+
+      if (recruiterAbortController) {
+        recruiterAbortController.abort();
+        recruiterAbortController = null;
+      }
+
+      if (activeJsonpCancel) {
+        activeJsonpCancel();
+        activeJsonpCancel = null;
+      }
+    }
+
+    function fetchRecruiterWithJsonp(codigo) {
+      return new Promise((resolve, reject) => {
+        const callbackName = `fpRecruiterCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+        const script = document.createElement('script');
+        const url = new URL(APP_CONFIG.API_RECRUTADORES);
+
+        let done = false;
+        const timeout = window.setTimeout(() => finish(new Error('A API de Recrutadores respondeu sem executar o callback JSONP.')), APP_CONFIG.RECRUITER_TIMEOUT_MS);
+
+        function cleanup() {
+          window.clearTimeout(timeout);
+          if (script.parentNode) script.parentNode.removeChild(script);
+          try { delete window[callbackName]; } catch (error) { window[callbackName] = undefined; }
+          if (activeJsonpCancel === cancel) activeJsonpCancel = null;
+        }
+
+        function finish(error, data) {
+          if (done) return;
+          done = true;
+          cleanup();
+          if (error) reject(error);
+          else resolve(data);
+        }
+
+        function cancel() {
+          finish(createAbortError());
+        }
+
+        activeJsonpCancel = cancel;
+        window[callbackName] = (data) => finish(null, data);
+
+        url.searchParams.set('codigo', codigo);
+        url.searchParams.set('q', codigo);
+        url.searchParams.set('callback', callbackName);
+        url.searchParams.set('_', String(Date.now()));
+
+        script.src = url.toString();
+        script.async = true;
+        script.onerror = () => finish(new Error('A URL da API de Recrutadores não abriu como script público.'));
+
+        document.head.appendChild(script);
+      });
+    }
+
+    async function loadRecruiter(codigoRaw, options = {}) {
+      const codigo = normalizeCode(codigoRaw);
+      const silent = Boolean(options.silent);
+
+      if (codigo.length < APP_CONFIG.MIN_RECRUITER_CODE_LENGTH) {
+        cancelRecruiterLookup();
+        clearRecruiterData();
+        lastRecruiterQuery = '';
+        setRecruiterState(codigo ? 'typing' : 'empty');
+        validateForm();
+        return null;
+      }
+
+      if (lastRecruiterQuery === codigo && recruiterStatus === 'found' && recruiterData) {
+        validateForm();
+        return recruiterData;
+      }
+
+      cancelRecruiterLookup({ invalidate: false });
+      const requestId = ++recruiterRequestId;
+      lastRecruiterQuery = codigo;
+      clearRecruiterData();
+      if (!silent) setRecruiterState('loading');
+      validateForm();
+
+      try {
+        const rawData = await fetchRecruiterWithJsonp(codigo);
+
+        if (requestId !== recruiterRequestId || normalizeCode(dom.inputIndicacao.value) !== codigo) return null;
+
+        if (rawData && typeof rawData === 'object' && rawData.ok === false) {
+          clearRecruiterData();
+          setRecruiterState('error', rawData.message || 'A API de Recrutadores retornou erro de configuração.');
+          validateForm();
+          return null;
+        }
+
+        if (rawData && typeof rawData === 'object' && rawData.found === false) {
+          clearRecruiterData();
+          setRecruiterState('not-found', rawData.message || 'Recrutador não encontrado com este código.');
+          validateForm();
+          return null;
+        }
+
+        const normalized = normalizeRecruiterResponse(rawData, codigo);
+
+        if (!normalized) {
+          clearRecruiterData();
+          setRecruiterState('not-found', 'Recrutador não encontrado com este código.');
+          validateForm();
+          return null;
+        }
+
+        recruiterData = normalized;
+        dom.hiddenRecruiterName.value = normalized.nome;
+        dom.hiddenRecruiterWhatsapp.value = normalized.whatsapp || '';
+        safeStorageSet(window.localStorage, STORAGE_KEYS.recruiterCode, codigo);
+
+        setRecruiterState('found');
+        validateForm();
+        return normalized;
+      } catch (error) {
+        if (isAbortError(error) || requestId !== recruiterRequestId || normalizeCode(dom.inputIndicacao.value) !== codigo) return null;
+
+        clearRecruiterData();
+        setRecruiterState('error', error.message || 'Não foi possível confirmar o recrutador. Verifique a API.');
+        validateForm();
+        return null;
+      }
+    }
+
+    function scheduleRecruiterSearch() {
+      const codigo = normalizeCode(dom.inputIndicacao.value);
+
+      cancelRecruiterLookup();
+      clearRecruiterData();
+      lastRecruiterQuery = '';
+
+      if (!codigo) {
+        setRecruiterState('empty');
+        validateForm();
+        return;
+      }
+
+      if (codigo.length < APP_CONFIG.MIN_RECRUITER_CODE_LENGTH) {
+        setRecruiterState('typing');
+        validateForm();
+        return;
+      }
+
+      setRecruiterState('loading');
+      validateForm();
+
+      recruiterDebounce = window.setTimeout(() => {
+        loadRecruiter(codigo);
+      }, APP_CONFIG.RECRUITER_DEBOUNCE_MS);
+    }
+
+    function normalizeProgram(program) {
+      const value = normalizeText(program).toLowerCase();
+      const aliases = {
+        cut: 'kwai-cut',
+        'kwai-cut': 'kwai-cut',
+        kwai_cut: 'kwai-cut',
+        'kwai cut': 'kwai-cut',
+        stars: 'kwai-narrastars',
+        narrastars: 'kwai-narrastars',
+        'narra-stars': 'kwai-narrastars',
+        'kwai-narrastars': 'kwai-narrastars',
+        kwai_narrastars: 'kwai-narrastars',
+        'kwai narrastars': 'kwai-narrastars'
+      };
+      return aliases[value] || '';
+    }
+
+    function showProgram(program) {
+      const normalized = normalizeProgram(program);
+      if (!normalized) return;
+
+      currentProgram = normalized;
+      dom.hiddenProgramInput.value = normalized;
+
+      dom.cards.forEach((card) => {
+        const active = card.dataset.program === normalized;
+        card.classList.toggle('active', active);
+        card.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      Object.entries(PROGRAMS).forEach(([programKey, config]) => {
+        const instruction = document.getElementById(config.instructionId);
+        const categoryField = document.getElementById(config.categoryFieldId);
+        const categorySelect = document.getElementById(config.categorySelectId);
+
+        if (programKey === normalized) {
+          instruction.classList.remove('hidden-block');
+          categoryField.classList.remove('hidden-block');
+          categorySelect.setAttribute('required', 'true');
+        } else {
+          instruction.classList.add('hidden-block');
+          categoryField.classList.add('hidden-block');
+          categorySelect.removeAttribute('required');
+          categorySelect.value = '';
+        }
+      });
+
+      dom.form.classList.remove('hidden-form');
+      dom.form.classList.add('visible-form');
+      validateForm();
+    }
+
+    function getSelectedCategory() {
+      if (currentProgram === 'kwai-cut') return dom.selectCut.value || '';
+      if (currentProgram === 'kwai-narrastars') return dom.selectStars.value || '';
+      return '';
+    }
+
+    function formatWhatsappInput(event) {
+      const phone = formatBrazilPhone(event.target.value);
+      event.target.value = phone.formatted;
+      dom.hiddenWpp.value = phone.hidden;
+      validateForm();
+    }
+
+    function validateForm() {
+      if (isSubmitting) return false;
+
+      const codigo = normalizeCode(dom.inputIndicacao.value);
+      const nome = normalizeText(dom.inputNome.value);
+      const whatsappDigits = normalizeBrazilPhone(dom.hiddenWpp.value || dom.inputWpp.value);
+      const perfil = normalizeText(dom.inputPerfil.value);
+      const categoria = getSelectedCategory();
+
+      const programaValido = Boolean(currentProgram);
+      const categoriaValida = Boolean(categoria);
+      const codigoValido = codigo.length >= APP_CONFIG.MIN_RECRUITER_CODE_LENGTH;
+      const nomeValido = nome.split(/\s+/).filter(Boolean).length >= 2;
+      const whatsappValido = isValidBrazilPhone(whatsappDigits);
+      const perfilValido = isValidKwaiProfileUrl(perfil);
+      const recrutadorValido = !APP_CONFIG.RECRUITER_REQUIRED || recruiterStatus === 'found';
+
+      setFieldInvalid(dom.inputNome, dom.errNome, Boolean(nome && !nomeValido));
+      setFieldInvalid(dom.inputWpp, dom.errWhatsapp, Boolean(dom.inputWpp.value.length > 4 && !whatsappValido));
+      setFieldInvalid(dom.inputPerfil, dom.errPerfil, Boolean(perfil && !perfilValido));
+
+      let codigoInvalido = false;
+
+      if (!codigo) {
+        dom.errIndicacao.textContent = 'Informe o código de indicação.';
+        dom.errIndicacao.style.display = 'none';
+      } else if (!codigoValido) {
+        dom.errIndicacao.textContent = `Digite pelo menos ${APP_CONFIG.MIN_RECRUITER_CODE_LENGTH} caracteres.`;
+        dom.errIndicacao.style.display = 'block';
+        codigoInvalido = true;
+      } else if (APP_CONFIG.RECRUITER_REQUIRED && recruiterStatus === 'loading') {
+        dom.errIndicacao.textContent = 'Buscando informações do recrutador automaticamente...';
+        dom.errIndicacao.style.display = 'none';
+      } else if (APP_CONFIG.RECRUITER_REQUIRED && recruiterStatus === 'not-found') {
+        dom.errIndicacao.textContent = 'Código não encontrado. Confira o número ou fale com seu recrutador.';
+        dom.errIndicacao.style.display = 'block';
+        codigoInvalido = true;
+      } else if (APP_CONFIG.RECRUITER_REQUIRED && recruiterStatus === 'error') {
+        dom.errIndicacao.textContent = 'Não foi possível confirmar o recrutador. Tente novamente em alguns segundos.';
+        dom.errIndicacao.style.display = 'block';
+        codigoInvalido = true;
+      } else if (APP_CONFIG.RECRUITER_REQUIRED && recruiterStatus !== 'found') {
+        dom.errIndicacao.textContent = 'Aguarde a confirmação automática do recrutador.';
+        dom.errIndicacao.style.display = 'none';
+      } else {
+        dom.errIndicacao.style.display = 'none';
+      }
+
+      dom.inputIndicacao.setAttribute('aria-invalid', codigoInvalido ? 'true' : 'false');
+      dom.selectCut.setAttribute('aria-invalid', currentProgram === 'kwai-cut' && !categoriaValida ? 'true' : 'false');
+      dom.selectStars.setAttribute('aria-invalid', currentProgram === 'kwai-narrastars' && !categoriaValida ? 'true' : 'false');
+
+      const isValid = programaValido && categoriaValida && codigoValido && recrutadorValido && nomeValido && whatsappValido && perfilValido;
+
+      dom.btnSubmit.disabled = !isValid;
+      dom.btnSubmit.className = isValid ? 'btn-submit-active' : 'btn-submit-disabled';
+
+      return isValid;
+    }
+
+    function buildSubmissionPayload() {
+      const categoria = getSelectedCategory();
+      const perfil = normalizeProfileUrl(dom.inputPerfil.value);
+      const whatsapp = `+${normalizeBrazilPhone(dom.hiddenWpp.value || dom.inputWpp.value)}`;
+
+      return {
+        origem: 'formulario-inscricao-fp-agency',
+        timestamp_cliente: new Date().toISOString(),
+        programa_selecionado: currentProgram,
+        programa_nome: PROGRAMS[currentProgram]?.label || currentProgram,
+        codigo_indicacao: normalizeCode(dom.inputIndicacao.value),
+        recrutador_nome: recruiterData?.nome || '',
+        recrutador_whatsapp: recruiterData?.whatsapp || '',
+        nome_completo: normalizeText(dom.inputNome.value),
+        categoria,
+        categoria_kwai_cut: currentProgram === 'kwai-cut' ? categoria : '',
+        categoria_narrastars: currentProgram === 'kwai-narrastars' ? categoria : '',
+        whatsapp,
+        whatsapp_final: whatsapp,
+        whatsapp_limpo: digitsOnly(whatsapp),
+        link_perfil: perfil,
+        link_perfil_kwai: perfil,
+        pagina_origem: window.location.href,
+        user_agent: navigator.userAgent,
+        status: 'Novo'
+      };
+    }
+
+    function setSubmitLoading(loading) {
+      isSubmitting = loading;
+
+      if (loading) {
+        dom.btnSubmit.disabled = true;
+        dom.btnSubmit.className = 'btn-submit-disabled';
+        dom.btnSubmit.innerHTML = '<i class="ri-loader-4-line spin"></i> Enviando inscrição...';
+        return;
+      }
+
+      dom.btnSubmit.innerHTML = '<i class="ri-send-plane-2-line"></i> Enviar Formulário de Inscrição';
+      validateForm();
+    }
+
+    async function submitToAppsScript(payload) {
+      
+      // MUDANÇA PRINCIPAL: Encapsulamento da Action para o Roteador do Backend
+      const wrappedPayload = {
+        action: 'cadastrarInscricaoPublica',
+        data: payload
+      };
+
+      if (APP_CONFIG.SUBMIT_MODE === 'cors') {
+        const response = await fetch(APP_CONFIG.API_CONTRATADOS, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(wrappedPayload)
+        });
+
+        const result = parseMaybeJSON(await response.text());
+        if (!result.success && !result.ok) throw new Error(result.msg || result.message || result.error || 'Erro ao enviar inscrição.');
+        return result;
+      }
+
+      // Método Fallback NO-CORS (O mais recomendado para Google Scripts)
+      await fetch(APP_CONFIG.API_CONTRATADOS, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(wrappedPayload)
+      });
+
+      return { ok: true };
+    }
+
+    dom.cards.forEach((card) => {
+      card.addEventListener('click', () => showProgram(card.dataset.program));
+    });
+
+    dom.inputIndicacao.addEventListener('input', scheduleRecruiterSearch);
+    dom.inputIndicacao.addEventListener('paste', () => {
+      window.setTimeout(scheduleRecruiterSearch, 0);
+    });
+    dom.inputIndicacao.addEventListener('blur', () => {
+      const codigo = normalizeCode(dom.inputIndicacao.value);
+      if (codigo.length >= APP_CONFIG.MIN_RECRUITER_CODE_LENGTH && recruiterStatus !== 'found') {
+        window.clearTimeout(recruiterDebounce);
+        loadRecruiter(codigo);
+      }
+    });
+
+    dom.inputWpp.addEventListener('input', formatWhatsappInput);
+    dom.inputNome.addEventListener('input', validateForm);
+    dom.inputPerfil.addEventListener('input', validateForm);
+    dom.inputPerfil.addEventListener('blur', () => {
+      dom.inputPerfil.value = normalizeProfileUrl(dom.inputPerfil.value);
+      validateForm();
+    });
+    dom.selectCut.addEventListener('change', validateForm);
+    dom.selectStars.addEventListener('change', validateForm);
+
+    dom.form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (isSubmitting) return;
+
+      setStatus('', '');
+
+      const codigo = normalizeCode(dom.inputIndicacao.value);
+      if (APP_CONFIG.RECRUITER_REQUIRED && recruiterStatus !== 'found') {
+        const found = await loadRecruiter(codigo);
+        if (!found) {
+          setStatus('error', 'Confirme o código de indicação antes de enviar.');
+          return;
+        }
+      }
+
+      if (!validateForm()) {
+        setStatus('error', 'Preencha todos os campos obrigatórios corretamente.');
+        return;
+      }
+
+      setSubmitLoading(true);
+
+      try {
+        const payload = buildSubmissionPayload();
+        await submitToAppsScript(payload);
+
+        safeStorageSet(window.sessionStorage, STORAGE_KEYS.lastSubmission, JSON.stringify({
+          nome: payload.nome_completo,
+          programa: payload.programa_selecionado,
+          enviado_em: payload.timestamp_cliente
+        }));
+
+        alert('✅ Inscrição enviada com sucesso! A nossa equipe entrará em contato pelo WhatsApp.');
+        window.location.href = `${APP_CONFIG.BASE_URL}/`;
+      } catch (error) {
+        setStatus('error', `❌ Ocorreu um erro ao enviar: ${error.message || 'tente novamente.'}`);
+        setSubmitLoading(false);
+      }
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const programFromUrl = urlParams.get('programa');
+    const codigoFromUrl = urlParams.get('codigo') || urlParams.get('indicacao') || urlParams.get('ref') || urlParams.get('recrutador');
+    const savedRecrutador = safeStorageGet(window.localStorage, STORAGE_KEYS.recruiterCode);
+
+    if (programFromUrl) showProgram(programFromUrl);
+
+    if (codigoFromUrl) {
+      dom.inputIndicacao.value = normalizeCode(codigoFromUrl);
+      scheduleRecruiterSearch();
+    } else if (savedRecrutador) {
+      dom.inputIndicacao.value = normalizeCode(savedRecrutador);
+      scheduleRecruiterSearch();
+    } else {
+      setRecruiterState('empty');
+    }
+
+    validateForm();
+  });
+</script>
+
+<style is:global>
+  .fp-agency-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    background: var(--bg, #0f1117);
+  }
+
+  .kc-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-color, #e2e8f0);
+    padding: 40px 20px;
+    box-sizing: border-box;
+    --orange: #ff6b2b;
+    --orange-dim: rgba(255, 107, 43, 0.12);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59, 130, 246, 0.12);
+    --green: #22c55e;
+    --green-dim: rgba(34, 197, 94, 0.12);
+    --red: #ef4444;
+    --red-dim: rgba(239, 68, 68, 0.10);
+    --bg-card: #181c27;
+    --border: #2a3048;
+    --border-h: #3d4d7a;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  .text-center { text-align: center; }
+  .block { display: block; }
+
+  .form-section {
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-container-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .form-header-main h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: 0;
+    color: #fff;
+  }
+
+  .form-header-main .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 35px;
+  }
+
+  .program-selector-zone {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .program-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .program-select-card {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.25s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: inherit;
+    color: inherit;
+  }
+
+  .program-select-card:hover {
+    border-color: var(--border-h);
+    transform: translateY(-2px);
+  }
+
+  .card-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .card-icon-circle.orange { background: var(--orange-dim); color: var(--orange); }
+  .card-icon-circle.blue { background: var(--blue-dim); color: var(--blue); }
+
+  .program-select-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #fff;
+  }
+
+  .program-select-card p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .select-indicator {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    margin-top: 15px;
+    transition: 0.2s;
+  }
+
+  .program-select-card.active {
+    border-color: var(--orange);
+    background: rgba(255, 107, 43, 0.03);
+  }
+
+  .program-select-card[data-program="kwai-narrastars"].active {
+    border-color: var(--blue);
+    background: rgba(59, 130, 246, 0.03);
+  }
+
+  .program-select-card.active .select-indicator {
+    border-color: currentColor;
+    background: currentColor;
+  }
+
+  .hidden-form { display: none; }
+
+  .visible-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fpFadeIn 0.4s ease forwards;
+  }
+
+  @keyframes fpFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .instruction-box {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+
+  .inst-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+  }
+
+  .inst-header h4 { margin: 0; }
+  .inst-header.orange { background: var(--orange-dim); border-bottom: 1px solid rgba(255, 107, 43, 0.2); }
+  .inst-header.blue { background: var(--blue-dim); border-bottom: 1px solid rgba(59, 130, 246, 0.2); }
+
+  .inst-body {
+    padding: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .inst-body p { margin: 0 0 10px; color: #fff; }
+  .inst-body ul { list-style: none; padding: 0; margin: 0 0 15px; display: flex; flex-direction: column; gap: 8px; }
+  .inst-body li { display: flex; align-items: flex-start; gap: 8px; }
+
+  .text-orange { color: var(--orange); }
+  .text-blue { color: var(--blue); }
+  .link-underlined { color: #fff; text-decoration: underline; font-weight: 600; }
+
+  .inst-warning {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--border);
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .inst-warning strong { color: #fff; margin-bottom: 4px; display: block; }
+  .inst-warning span { font-size: 0.82rem; color: var(--muted); }
+
+  .fields-note {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .field-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .input-status-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-status-wrapper input { padding-right: 52px; }
+
+  .input-status-dot {
+    position: absolute;
+    right: 16px;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 2px solid var(--border);
+    background: transparent;
+  }
+
+  .input-status-dot.loading {
+    border-color: rgba(255, 107, 43, 0.25);
+    border-top-color: var(--orange);
+    animation: fpSpin 0.8s linear infinite;
+  }
+
+  .input-status-dot.success {
+    border-color: var(--green);
+    background: var(--green);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.10);
+  }
+
+  .input-status-dot.error {
+    border-color: var(--red);
+    background: var(--red);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.10);
+  }
+
+  input[type="text"],
+  input[type="url"],
+  select {
+    background: #11141c;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input:focus,
+  select:focus {
+    border-color: var(--border-h);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.03);
+  }
+
+  input[aria-invalid="true"],
+  select[aria-invalid="true"] {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+  }
+
+  select { cursor: pointer; }
+
+  .error-msg {
+    font-size: 0.78rem;
+    color: var(--red);
+    font-weight: 600;
+    display: none;
+    margin-top: 4px;
+    animation: fpFadeIn 0.2s ease forwards;
+  }
+
+  .hidden-block { display: none !important; }
+
+  .recruiter-box {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.20);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px dashed var(--border);
+    transition: 0.3s;
+  }
+
+  .recruiter-box.helper-border {
+    border-color: var(--border-h);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .recruiter-box.success-border {
+    border-color: var(--green);
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  .recruiter-box.error-border {
+    border-color: var(--red);
+    background: var(--red-dim);
+  }
+
+  .loading-recruiter,
+  .recruiter-card-neutral,
+  .recruiter-card-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .recruiter-card-error { color: #fca5a5; font-weight: 600; }
+
+  .spin { animation: fpSpin 1s linear infinite; }
+
+  @keyframes fpSpin { 100% { transform: rotate(360deg); } }
+
+  .recruiter-card-success {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .rc-avatar {
+    width: 42px;
+    height: 42px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    flex: 0 0 auto;
+  }
+
+  .rc-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .rc-info span {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .rc-info strong {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 4px;
+    word-break: break-word;
+  }
+
+  .rc-wpp {
+    font-size: 0.8rem;
+    color: var(--green);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    width: fit-content;
+  }
+
+  .rc-wpp:hover { text-decoration: underline; }
+  .rc-muted { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  .form-submit-zone { margin-top: 10px; }
+
+  .btn-submit-disabled,
+  .btn-submit-active {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Sora', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-submit-disabled {
+    background: #222733;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    cursor: not-allowed;
+  }
+
+  .btn-submit-active {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 8px 24px rgba(255, 107, 43, 0.25);
+  }
+
+  .btn-submit-active:hover {
+    transform: translateY(-2px);
+    background: #e85a1f;
+  }
+
+  .form-status-message {
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .form-status-message.error {
+    color: #fecaca;
+    background: rgba(239, 68, 68, 0.10);
+    border: 1px solid rgba(239, 68, 68, 0.22);
+  }
+
+  .form-status-message.success {
+    color: #bbf7d0;
+    background: rgba(34, 197, 94, 0.10);
+    border: 1px solid rgba(34, 197, 94, 0.22);
+  }
+
+  .form-footer-notes { margin-top: 20px; }
+  .notes-divider { height: 1px; background: var(--border); margin-bottom: 25px; }
+  .form-footer-notes p { font-size: 0.9rem; color: #cbd5e1; margin: 0 0 16px; }
+
+  .wpp-official-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--green-dim);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    padding: 12px 24px;
+    border-radius: 99px;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .wpp-official-box i { font-size: 1.8rem; color: var(--green); }
+  .wpp-official-box div { display: flex; flex-direction: column; }
+  .wpp-official-box span { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 600; }
+  .wpp-official-box strong { font-size: 1rem; color: #fff; font-family: var(--mono); }
+  .faint-alert { font-size: 0.8rem !important; color: var(--muted) !important; font-style: italic; }
+
+  @media (max-width: 580px) {
+    .kc-content { padding: 28px 14px; }
+    .form-container-box { padding: 30px 20px; border-radius: 20px; }
+    .form-header-main h1 { font-size: 1.6rem; }
+    .program-cards-grid { grid-template-columns: 1fr; }
+    .recruiter-card-success { align-items: flex-start; }
+    .wpp-official-box { width: 100%; box-sizing: border-box; justify-content: center; border-radius: 14px; }
+  }
+</style>
