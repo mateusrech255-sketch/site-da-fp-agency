@@ -1,17 +1,37 @@
 {
   "name": "fp-agency",
+  "description": "Plataforma FP Agency para analisar e baixar videos com Astro, Express e yt-dlp.",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=20.11.1"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "concurrently -k -n ASTRO,API -c cyan,green \"npm:dev:astro\" \"npm:dev:api\"",
+    "dev:astro": "astro dev --host 127.0.0.1 --port 4321",
+    "dev:api": "node --watch server/index.js",
     "build": "astro build",
+    "start": "node server/index.js",
+    "server:dev": "node --watch server/index.js",
+    "server:check": "node --check server/index.js",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "npm run server:check && npm run build",
+    "diagnose": "node scripts/diagnose.mjs"
   },
   "dependencies": {
-    "astro": "^6.2.2"
+    "astro": "^5.18.2",
+    "compression": "^1.8.1",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
   }
 }

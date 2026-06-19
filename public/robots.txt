@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mateusrech255-sketch.github.io/site-da-fp-agency/sitemap.xml

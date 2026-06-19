@@ -1,0 +1,21 @@
+{
+  "name": "fp-agency-video-api",
+  "version": "1.0.0",
+  "description": "API Express da plataforma de download de videos FP Agency.",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "check": "node --check index.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0"
+  }
+}

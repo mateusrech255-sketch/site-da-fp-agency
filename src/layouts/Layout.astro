@@ -1,15 +1,59 @@
 ---
 // src/layouts/Layout.astro
 import WhatsAppFab from '../components/WhatsAppFab.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const base = import.meta.env.BASE_URL;
+const basePath = base === '/' ? '' : base.replace(/\/$/, '');
+const site = Astro.site ?? new URL('http://localhost:4321');
+const {
+  title = 'FP Agency',
+  description = 'FP Agency conecta criadores, recrutadores e marcas com tecnologia, treinamento e estrategias de monetizacao digital.',
+  canonical,
+  image = `${basePath}/favicon.svg`,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, site).toString();
+const imageUrl = image.startsWith('http') ? image : new URL(image || '/favicon.svg', site).toString();
+const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 ---
 <!doctype html>
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/fpagency.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
+        <link rel="alternate icon" href={`${basePath}/favicon.ico`} />
         <meta name="generator" content={Astro.generator} />
-        <title>FP Agency</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="FP Agency" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={imageUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl} />
+
+        {schemas.map((schema) => (
+          <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+        ))}
     </head>
     <body>
         <slot />

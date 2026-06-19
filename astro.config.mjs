@@ -1,7 +1,15 @@
 import { defineConfig } from 'astro/config';
 
+const site = process.env.SITE_URL || 'https://mateusrech255-sketch.github.io';
+const isDev = process.env.NODE_ENV === 'development';
+const base = process.env.SITE_BASE_PATH ?? (isDev ? '/' : '/site-da-fp-agency');
+
 export default defineConfig({
-  // Verifique se no GitHub termina com 'agencia' ou 'agency'
-  site: 'https://mateusrech255-sketch.github.io/site-da-fp-agency',
-  base: '/site-da-fp-agency',
+  site,
+  base,
+  output: 'static',
+  compressHTML: true,
+  build: {
+    assets: 'assets',
+  },
 });
