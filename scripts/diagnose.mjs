@@ -1,21 +1,22 @@
 import { spawn } from 'node:child_process';
-import net from 'node:net';
 import fs from 'node:fs/promises';
 import http from 'node:http';
+import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const checks = [];
 
+const packageJson = await readJson(path.join(rootDir, 'package.json'));
+
 await checkNode();
-await checkFiles();
+await checkRequiredFiles();
+await checkPackageScripts();
 await checkDependencies();
-await checkCommand('yt-dlp', ['--version'], 'yt-dlp');
-await checkCommand('ffmpeg', ['-version'], 'ffmpeg');
-await checkPort(3001, '/health');
+await checkCommand(process.execPath, ['--check', path.join(rootDir, 'scripts/diagnose.mjs')], 'diagnose.mjs syntax');
+await checkCommand(getNpmCommand(), ['run', 'build'], 'Astro build');
 await checkPort(4321, '/');
-await checkCommand(process.execPath, ['--check', path.join(rootDir, 'server/index.js')], 'server/index.js syntax');
 
 const failed = checks.filter((check) => check.status === 'FAIL');
 const warned = checks.filter((check) => check.status === 'WARN');
@@ -43,34 +44,51 @@ async function checkNode() {
   add(ok ? 'OK' : 'FAIL', 'Node.js', `${current}${ok ? '' : ' precisa ser >= 20.11.1'}`);
 }
 
-async function checkFiles() {
+async function checkRequiredFiles() {
   const requiredFiles = [
     'package.json',
+    'package-lock.json',
     'astro.config.mjs',
     'tsconfig.json',
-    'server/index.js',
-    'server/package.json',
-    'src/pages/videos.astro',
-    '.env.example',
+    'src/layouts/Layout.astro',
+    'src/pages/index.astro',
+    'src/pages/inscricao.astro',
+    'src/pages/recrutador.astro',
+    'src/pages/treinamento/index.astro',
+    'public/robots.txt',
+    'public/sitemap.xml',
   ];
 
   for (const file of requiredFiles) {
     const exists = await fileExists(path.join(rootDir, file));
     add(exists ? 'OK' : 'FAIL', `Arquivo ${file}`, exists ? 'encontrado' : 'ausente');
   }
+}
 
-  const envExists = await fileExists(path.join(rootDir, '.env'));
-  add(envExists ? 'OK' : 'WARN', 'Arquivo .env', envExists ? 'encontrado' : 'ausente; usando defaults do codigo');
+async function checkPackageScripts() {
+  const requiredScripts = ['dev', 'dev:astro', 'build', 'check', 'preview', 'diagnose'];
+  const scripts = packageJson?.scripts ?? {};
+
+  for (const scriptName of requiredScripts) {
+    add(
+      scripts[scriptName] ? 'OK' : 'FAIL',
+      `Script npm ${scriptName}`,
+      scripts[scriptName] || 'ausente',
+    );
+  }
 }
 
 async function checkDependencies() {
-  const dependencies = ['astro', 'express', 'cors', 'helmet', 'express-rate-limit', 'compression', 'dotenv', 'concurrently'];
+  const dependencies = {
+    ...(packageJson?.dependencies ?? {}),
+    ...(packageJson?.devDependencies ?? {}),
+  };
 
-  for (const dependency of dependencies) {
+  for (const dependency of Object.keys(dependencies).sort()) {
     try {
       const packagePath = path.join(rootDir, 'node_modules', dependency, 'package.json');
-      const packageJson = JSON.parse(await fs.readFile(packagePath, 'utf8'));
-      add('OK', `Dependencia ${dependency}`, packageJson.version);
+      const installedPackage = JSON.parse(await fs.readFile(packagePath, 'utf8'));
+      add('OK', `Dependencia ${dependency}`, installedPackage.version);
     } catch {
       add('FAIL', `Dependencia ${dependency}`, 'nao instalada; execute npm install');
     }
@@ -79,11 +97,11 @@ async function checkDependencies() {
 
 async function checkCommand(command, args, name) {
   const result = await run(command, args);
-  const firstLine = `${result.stdout || result.stderr}`.split('\n').find(Boolean) || 'sem saida';
-  add(result.code === 0 ? 'OK' : 'FAIL', name, result.code === 0 ? firstLine.trim() : firstLine.trim());
+  const output = `${result.stdout || result.stderr}`.split('\n').find(Boolean) || 'sem saida';
+  add(result.code === 0 ? 'OK' : 'FAIL', name, output.trim());
 }
 
-async function checkPort(port, healthPath) {
+async function checkPort(port, requestPath) {
   const open = await isPortOpen(port);
 
   if (!open) {
@@ -91,19 +109,13 @@ async function checkPort(port, healthPath) {
     return;
   }
 
-  const health = await requestJson(port, healthPath);
-
-  if (port === 3001 && health?.status === 'online') {
-    add('OK', `Porta ${port}`, 'API online');
+  const statusCode = await requestStatus(port, requestPath);
+  if (statusCode && statusCode < 500) {
+    add('OK', `Porta ${port}`, `servidor respondendo com HTTP ${statusCode}`);
     return;
   }
 
-  if (port === 4321) {
-    add('OK', `Porta ${port}`, 'Astro ou outro servidor respondendo');
-    return;
-  }
-
-  add('WARN', `Porta ${port}`, 'em uso por outro processo ou resposta inesperada');
+  add('WARN', `Porta ${port}`, 'em uso, mas sem resposta HTTP valida');
 }
 
 function add(status, name, detail) {
@@ -150,7 +162,7 @@ function isPortOpen(port) {
   });
 }
 
-function requestJson(port, requestPath) {
+function requestStatus(port, requestPath) {
   return new Promise((resolve) => {
     const req = http.get(
       {
@@ -160,18 +172,8 @@ function requestJson(port, requestPath) {
         timeout: 1200,
       },
       (res) => {
-        let raw = '';
-        res.setEncoding('utf8');
-        res.on('data', (chunk) => {
-          raw += chunk;
-        });
-        res.on('end', () => {
-          try {
-            resolve(JSON.parse(raw));
-          } catch {
-            resolve(null);
-          }
-        });
+        res.resume();
+        res.on('end', () => resolve(res.statusCode ?? null));
       },
     );
 
@@ -192,6 +194,14 @@ async function fileExists(filePath) {
   }
 }
 
+async function readJson(filePath) {
+  try {
+    return JSON.parse(await fs.readFile(filePath, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
 function compareVersions(left, right) {
   const leftParts = left.split('.').map(Number);
   const rightParts = right.split('.').map(Number);
@@ -205,4 +215,8 @@ function compareVersions(left, right) {
   }
 
   return 0;
+}
+
+function getNpmCommand() {
+  return process.platform === 'win32' ? 'npm.cmd' : 'npm';
 }

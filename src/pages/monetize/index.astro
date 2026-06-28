@@ -99,7 +99,6 @@ import Footer from '../../components/Footer.astro';
               <span class="pm-attr"><i class="ri-check-line"></i> Treinamento incluso</span>
             </div>
             <a href={`${import.meta.env.BASE_URL}/monetize/kwaicut`}
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-btn pm-btn-orange">
               <i class="ri-quill-pen-line"></i> Inscrever-se
@@ -117,7 +116,6 @@ import Footer from '../../components/Footer.astro';
               <span class="pm-attr"><i class="ri-check-line"></i> NARRA Motions</span>
             </div>
             <a href={`${import.meta.env.BASE_URL}/monetize/kwainarrastars`}
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-btn pm-btn-purple">
               <i class="ri-quill-pen-line"></i> Inscrever-se
@@ -169,7 +167,6 @@ import Footer from '../../components/Footer.astro';
               <span class="pm-attr"><i class="ri-check-line"></i> Painel de acompanhamento</span>
             </div>
             <a href={`${import.meta.env.BASE_URL}/recrutador`}
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-btn pm-btn-recruiter" style="width:auto; min-width:200px; flex-shrink:0; margin-top:0;">
               <i class="ri-user-add-line"></i> Quero Recrutar
@@ -191,13 +188,11 @@ import Footer from '../../components/Footer.astro';
             <div class="pm-step-num">Passo 01 — Instalar o app</div>
             <p class="pm-step-text">Baixe o aplicativo <strong>Kako Live</strong> no seu dispositivo:</p>
             <a href="https://play.google.com/store/apps/details?id=live.kako.global"
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-modal-btn android" style="margin-top:12px;">
               <i class="ri-android-fill"></i> Android — Google Play
             </a>
             <a href="https://apps.apple.com/br/app/kako-live-v%C3%ADdeo-chat/id6730126445"
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-modal-btn ios" style="margin-top:8px;">
               <i class="ri-apple-fill"></i> iPhone — App Store
@@ -213,7 +208,6 @@ import Footer from '../../components/Footer.astro';
             <div class="pm-step-num">Passo 03 — Aguardar contato</div>
             <p class="pm-step-text">Após se inscrever, aguarde o contato via WhatsApp pelo número <strong>(54) 9677-8933</strong> ou clique abaixo:</p>
             <a href="https://wa.me/555496778933"
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-modal-btn wpp" style="margin-top:12px;">
               <i class="ri-whatsapp-line"></i> Chamar no WhatsApp
@@ -234,7 +228,6 @@ import Footer from '../../components/Footer.astro';
             <div class="pm-step-num">Cadastro Oficial</div>
             <p class="pm-step-text" style="margin-bottom:12px;">Para que sua conta seja vinculada à <strong>FP Agency</strong> e a monetização seja ativada corretamente, utilize obrigatoriamente o link abaixo:</p>
             <a href="https://www.fantazy.com.br/register?ref=MXGTQ9KC"
-               onclick="pmOpenLink(event,this.href)"
                rel="noopener noreferrer external"
                class="pm-modal-btn primary">
               <i class="ri-external-link-line"></i> Acessar Cadastro Oficial
@@ -275,7 +268,6 @@ import Footer from '../../components/Footer.astro';
     }
 
     function isAndroid(): boolean { return /Android/i.test(navigator.userAgent); }
-    function isIOS(): boolean     { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
 
     function pmShowExit(url: string) {
       window.__pm_target_url = url;
@@ -334,7 +326,9 @@ import Footer from '../../components/Footer.astro';
         ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
         document.body.appendChild(ta);
         ta.focus(); ta.select();
-        document.execCommand('copy');
+        const legacyCopy = (document as unknown as { execCommand?: (commandId: string) => boolean }).execCommand;
+        if (typeof legacyCopy !== 'function') throw new Error('Legacy copy unavailable');
+        legacyCopy.call(document, 'copy');
         document.body.removeChild(ta);
         if (btn) {
           btn.classList.add('copied');

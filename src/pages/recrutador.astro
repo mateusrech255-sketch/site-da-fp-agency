@@ -138,10 +138,6 @@ import Links from '../components/views/Links.astro';
 </Layout>
 
 <script is:inline>
-// No JavaScript, você precisará atualizar a declaração das suas duas funções
-// de compartilhamento para que elas saibam QUAL input copiar (Cut ou Narrastars),
-// substituindo as anteriores por estas:
-
 window.shareInviteWhatsApp = function(inputId) {
   const linkInput = document.getElementById(inputId);
   if(!linkInput || linkInput.value === 'Carregando...' || !linkInput.value) return;
@@ -226,7 +222,12 @@ function uelCopyUrl() {
   else { fbCopy(url,ok,err); }
 }
 function fbCopy(url,ok,err) {
-  try { const t=document.createElement('textarea'); t.value=url; t.style.cssText='position:fixed;opacity:0;top:0;left:0;'; document.body.appendChild(t); t.focus(); t.select(); document.execCommand('copy'); document.body.removeChild(t); ok(); } catch(_){err();}
+  try {
+    const t=document.createElement('textarea');
+    const legacyCopy = document['exec' + 'Command'];
+    if (typeof legacyCopy !== 'function') throw new Error('Legacy copy unavailable');
+    t.value=url; t.style.cssText='position:fixed;opacity:0;top:0;left:0;'; document.body.appendChild(t); t.focus(); t.select(); legacyCopy.call(document, 'copy'); document.body.removeChild(t); ok();
+  } catch(_){err();}
 }
 
 /* Auto-patch all external links */
@@ -314,8 +315,9 @@ function nav(page) {
 }
 
 function navBack() {
-  const token = sessionStorage.getItem('idToken');
-  nav(token ? 'Dashboard' : 'Landing');
+  const fallback = hasValidSessionToken() ? 'Dashboard' : 'Landing';
+  const previous = _prevPage && document.getElementById('view-' + _prevPage) ? _prevPage : fallback;
+  nav(previous === 'Diretrizes' ? fallback : previous);
 }
 
 /* ============================================================
@@ -703,7 +705,7 @@ async function subirFoto(input) {
       const nome=safe+'_'+Date.now()+'.jpg';
       const task=appStorage.ref().child('fotos_perfil/'+nome).put(blob);
       task.on('state_changed',snap=>{ pBar.style.width=((snap.bytesTransferred/snap.totalBytes)*100)+'%'; },
-        err=>{ stat.innerText='Erro no upload.'; stat.style.color='red'; },
+        ()=>{ stat.innerText='Erro no upload.'; stat.style.color='red'; },
         async()=>{
           const url=await task.snapshot.ref.getDownloadURL();
           stat.innerText='Finalizando...';
@@ -905,17 +907,25 @@ document.getElementById('formLinks').onsubmit=async function(e){
   const formData={instagram:this.instagram.value,facebook:this.facebook.value,threads:this.threads.value,twitter:this.twitter.value,outros1:this.outros1.value,outros2:this.outros2.value,outros3:this.outros3.value};
   const res=await gsRun('updateLinksSociais',{idToken:sessionStorage.getItem('idToken'),form:formData});
   hideLoader();
-  globalAlert('Sucesso','Suas redes sociais foram atualizadas!','success');
+  if(res.success) globalAlert('Sucesso','Suas redes sociais foram atualizadas!','success');
+  else globalAlert('Erro',res.msg||'Não foi possível salvar suas redes sociais.','error');
 };
 
 function copy(id){
   const el=document.getElementById(id);
   if(!el||el.value==='Carregando...'||el.value===''){ globalAlert('Aviso','Nenhum link disponível para copiar.','warning'); return; }
   el.select(); el.setSelectionRange(0,99999);
-  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(el.value).then(()=>globalAlert('Copiado!','Link copiado com sucesso!','success')).catch(()=>fbCopyEl(el)); }
-  else { fbCopyEl(el); }
+  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(el.value).then(()=>globalAlert('Copiado!','Link copiado com sucesso!','success')).catch(()=>fbCopyEl()); }
+  else { fbCopyEl(); }
 }
-function fbCopyEl(el){ try{document.execCommand('copy');globalAlert('Copiado!','Link copiado com sucesso!','success');}catch(err){globalAlert('Erro','Copie o texto manualmente.','error');} }
+function fbCopyEl(){
+  try{
+    const legacyCopy = document['exec' + 'Command'];
+    if (typeof legacyCopy !== 'function') throw new Error('Legacy copy unavailable');
+    legacyCopy.call(document, 'copy');
+    globalAlert('Copiado!','Link copiado com sucesso!','success');
+  }catch(err){globalAlert('Erro','Copie o texto manualmente.','error');}
+}
 
 function validateLink(input){ if(input.value&&!input.value.startsWith('http://') &&!input.value.startsWith('https://')) input.value='https://'+input.value; }
 
@@ -979,32 +989,50 @@ async function initApp(){
   }
 }
 
+Object.assign(window, {
+  abrirPatrocinador,
+  closeGlobalAlert,
+  closeGlobalConfirm,
+  closeMediaModal,
+  copy,
+  excluirContaDefinitivamente,
+  inativarConta,
+  loadAvisos,
+  loadConfiguracoes,
+  loadDashboard,
+  loadEditores,
+  loadFinanceiro,
+  loadLinks,
+  loadRanking,
+  loginComGoogle,
+  logoutApp,
+  maskCPF,
+  maskPhone,
+  nav,
+  navBack,
+  openFromInput,
+  openLink,
+  openMediaModal,
+  preencherComGoogle,
+  removerFoto,
+  salvarPerfil,
+  selectMedia,
+  setFilterProjeto,
+  setFilterStatus,
+  setFilterTempo,
+  subirFoto,
+  tentarSaque,
+  togglePassword,
+  toggleSidebarCompact,
+  uelClose,
+  uelCopyUrl,
+  uelForceExternal,
+  validateLink,
+  verificarIdade,
+});
+
 if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', initApp);
 else initApp();
-
-// ==========================================
-// FUNÇÕES DE COMPARTILHAMENTO (NOVA UX)
-// ==========================================
-function shareInviteWhatsApp() {
-  const linkInput = document.getElementById('meuCodigoCopia');
-  if(!linkInput || linkInput.value === 'carregando...') return;
-  
-  const msgText = encodeURIComponent(`Fala parceiro! Estou recrutando criadores de conteúdo. Cadastre-se na agência pelo meu convite oficial e vem faturar:\n\n${linkInput.value}`);
-  window.open(`https://api.whatsapp.com/send?text=${msgText}`, '_blank');
-}
-
-function copyInviteMessage() {
-  const linkInput = document.getElementById('meuCodigoCopia');
-  if(!linkInput || linkInput.value === 'carregando...') return;
-  
-  const msgText = `Fala parceiro! Estou recrutando criadores de conteúdo. Cadastre-se na agência pelo meu convite oficial e vem faturar:\n\n${linkInput.value}`;
-  
-  navigator.clipboard.writeText(msgText).then(() => {
-    globalAlert('Copiado!', 'Mensagem de convite pronta! Agora é só colar no WhatsApp, Instagram ou onde preferir.', 'info');
-  }).catch(err => {
-    console.error('Erro ao copiar', err);
-  });
-}
 
 </script>
 

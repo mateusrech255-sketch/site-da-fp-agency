@@ -60,7 +60,7 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
                 <p><strong>Antes de tudo:</strong></p>
                 <ul>
                   <li><i class="ri-checkbox-circle-line text-orange"></i> Crie uma nova conta no Kwai exclusiva para o projeto. Não use conta antiga.</li>
-                  <li><i class="ri-checkbox-circle-line text-orange"></i> Crie o vídeo teste seguindo os treinamentos disponíveis no site: <a href={`${baseUrl}/kwai-cut/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Clique aqui e acesse o Treinamento</a></li>
+                  <li><i class="ri-checkbox-circle-line text-orange"></i> Crie o vídeo teste seguindo os treinamentos disponíveis no site: <a href={`${baseUrl}/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Clique aqui e acesse o Treinamento</a></li>
                 </ul>
 
                 <div class="inst-warning">
@@ -82,7 +82,7 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
                 <p><strong>Antes de tudo:</strong></p>
                 <ul>
                   <li><i class="ri-checkbox-circle-line text-blue"></i> Crie uma nova conta no Kwai do zero absoluto. Não use contas antigas ou pessoais.</li>
-                  <li><i class="ri-checkbox-circle-line text-blue"></i> Crie e publique o vídeo teste narrado de no mínimo 1 minuto seguindo as diretrizes: <a href={`${baseUrl}/kwai-narrastars/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Acessar Treinamento NarraStars</a></li>
+                  <li><i class="ri-checkbox-circle-line text-blue"></i> Crie e publique o vídeo teste narrado de no mínimo 1 minuto seguindo as diretrizes: <a href={`${baseUrl}/treinamento`} target="_blank" rel="noopener noreferrer" class="link-underlined">Acessar Treinamento NarraStars</a></li>
                 </ul>
 
                 <div class="inst-warning">
@@ -209,7 +209,7 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
   </div>
 </Layout>
 
-<script define:vars={{ baseUrl }}>
+<script is:inline define:vars={{ baseUrl }}>
   document.addEventListener('DOMContentLoaded', () => {
     
     // NOVA URL UNIFICADA DA API (Serve para Busca e para Cadastro)

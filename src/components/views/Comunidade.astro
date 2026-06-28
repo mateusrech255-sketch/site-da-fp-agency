@@ -10,7 +10,7 @@
     <h3 class="custom-modal-title">Nova Publicação</h3>
     <p class="custom-modal-text" style="margin-bottom:15px">Compartilhe seu vídeo ou live do Kwai com a comunidade.</p>
     
-    <form id="formPostFeed" onsubmit="event.preventDefault(); enviarPost();" style="text-align:left">
+    <form id="formPostFeed" style="text-align:left">
       <label>URL do Kwai</label>
       <input type="url" id="postUrl" placeholder="Cole o link do vídeo ou live" required>
       
@@ -229,6 +229,11 @@
       renderFeedCards(filtrado);
     }
   }
+
+  document.getElementById('formPostFeed')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    enviarPost();
+  });
 </script>
 
 <style>

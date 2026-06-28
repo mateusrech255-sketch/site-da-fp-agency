@@ -1,6 +1,6 @@
 {
   "name": "fp-agency",
-  "description": "Plataforma FP Agency para analisar e baixar videos com Astro, Express e yt-dlp.",
+  "description": "Site institucional e portal FP Agency construidos com Astro.",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -8,30 +8,25 @@
     "node": ">=20.11.1"
   },
   "scripts": {
-    "dev": "concurrently -k -n ASTRO,API -c cyan,green \"npm:dev:astro\" \"npm:dev:api\"",
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
     "dev:astro": "astro dev --host 127.0.0.1 --port 4321",
-    "dev:api": "node --watch server/index.js",
     "build": "astro build",
-    "start": "node server/index.js",
-    "server:dev": "node --watch server/index.js",
-    "server:check": "node --check server/index.js",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "npm run server:check && npm run build",
+    "check": "astro check && npm run build",
     "diagnose": "node scripts/diagnose.mjs"
   },
   "dependencies": {
-    "astro": "^7.0.3",
-    "compression": "^1.8.1",
-    "concurrently": "^9.2.1",
-    "cors": "^2.8.6",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
-    "helmet": "^8.1.0"
+    "astro": "^7.0.3"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.2",
     "@types/node": "^24.10.1",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "yaml-language-server": {
+      "yaml": "^2.8.3"
+    }
   }
 }

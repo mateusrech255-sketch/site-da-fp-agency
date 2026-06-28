@@ -91,7 +91,7 @@ const baseUrl = base === '/' ? '' : base;
   <Footer />
 </Layout>
 
-<script type="module">
+<script is:inline type="module">
   // Importação do algoritmo de busca inteligente para a aba "No Site"
   import Fuse from 'https://esm.sh/fuse.js@7.0.0';
 
@@ -117,8 +117,8 @@ const baseUrl = base === '/' ? '' : base;
     { nome: "Sobre a FP Agency", url: `${basePath}/sobre`, icon: "fa-rocket", tags: "sobre historia missao visao valores ecossistema", desc: "Conheça nossa história, ecossistema completo, missão, visão e valores." },
     { nome: "Kwai Cut", url: `${basePath}/monetize/kwaicut`, icon: "fa-video", tags: "kwai cut monetize monetização edição", desc: "Descubra como monetizar editando vídeos virais no programa Kwai Cut." },
     { nome: "NarraStars", url: `${basePath}/monetize/kwainarrastars`, icon: "fa-microphone", tags: "narrastars narração kwai locução", desc: "Monetize sua voz narrando vídeos virais para o Kwai através do NarraStars." },
-    { nome: "Portal do Parceiro", url: `${basePath}/login`, icon: "fa-user-lock", tags: "login cadastro entrar acesso", desc: "Acesse sua conta para visualizar painéis, relatórios completos e realizar cadastros." },
-    { nome: "Carteira e Financeiro", url: `${basePath}/financeiro`, icon: "fa-wallet", tags: "saque saldo dinheiro carteira extrato pagamento financeiro", desc: "Gerencie seu saldo, acompanhe os extratos de pagamentos e solicite saques." },
+    { nome: "Portal do Parceiro", url: `${basePath}/recrutador`, icon: "fa-user-lock", tags: "login cadastro entrar acesso", desc: "Acesse sua conta para visualizar painéis, relatórios completos e realizar cadastros." },
+    { nome: "Carteira e Financeiro", url: `${basePath}/recrutador`, icon: "fa-wallet", tags: "saque saldo dinheiro carteira extrato pagamento financeiro", desc: "Gerencie seu saldo, acompanhe os extratos de pagamentos e solicite saques." },
     { nome: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, icon: "fa-shield-halved", tags: "politica privacidade dados lgpd segurança legal", desc: "Leia nossa política de privacidade e saiba como protegemos e tratamos seus dados." },
     { nome: "Termos de Serviço", url: `${basePath}/termos-de-servico`, icon: "fa-file-contract", tags: "termos serviço regras contrato legal uso", desc: "Termos e condições gerais de uso das plataformas e serviços da FP Agency." },
     { nome: "Aviso Legal", url: `${basePath}/aviso-legal`, icon: "fa-scale-balanced", tags: "aviso legal juridico direitos isencao", desc: "Informações jurídicas, transparência e avisos legais da nossa empresa." },

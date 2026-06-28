@@ -1,5 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+
+const base = import.meta.env.BASE_URL;
+const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 ---
 
     <div id="view-Login" class="view view-container view-public view-auth" data-view="Login" data-public="true">
@@ -12,7 +15,7 @@ import { Image } from 'astro:assets';
           </button>
           <div class="auth-separator"><div></div><span>ou use seu acesso</span><div></div></div>
           
-          <form id="loginForm" onsubmit="event.preventDefault()">
+          <form id="loginForm">
             <input type="email" name="email" placeholder="E-mail cadastrado" required>
             
             <div class="password-wrapper"><input type="password" id="senha" name="senha" placeholder="Sua senha" required><i class="fas fa-eye toggle-password" onclick="togglePassword('senha',this)"></i></div>
@@ -37,7 +40,7 @@ import { Image } from 'astro:assets';
           </button>
           <div id="div-ou-cad" class="auth-separator"><div></div><span>ou digite manualmente</span><div></div></div>
           
-          <form id="formCadastro" onsubmit="event.preventDefault()">
+          <form id="formCadastro">
             <input type="text"  name="nome"     id="cad-nome"     placeholder="Nome Completo" required>
             <input type="email" name="email"    id="cad-email"    placeholder="Seu Email" required>
             <input type="tel"   name="cpf"      id="cad-cpf"      placeholder="CPF (Apenas números)" required maxlength="14" oninput="maskCPF(this)">
@@ -57,7 +60,7 @@ import { Image } from 'astro:assets';
             <div style="text-align:left;margin:10px 0 20px;font-size:.75rem;color:var(--gray)">
              <label for="chkTermos" style="display:flex;align-items:flex-start;gap:8px;margin-bottom:12px;cursor:pointer">
               <input type="checkbox" name="termos" id="chkTermos" required style="width:auto;margin-top:2px">
-             <span style="line-height:1.4">Concordo com a <a href="/site-da-fp-agency/politica-de-privacidade" style="color:var(--primary);cursor:pointer">Política de Privacidade</a>, <a href="/site-da-fp-agency/termos-de-servico" style="color:var(--primary);cursor:pointer">Termos de Serviço</a> e <a href="/site-da-fp-agency/aviso-legal" style="color:var(--primary);cursor:pointer">Aviso Legal</a>.</span>
+             <span style="line-height:1.4">Concordo com a <a href={`${baseUrl}/politica-de-privacidade`} style="color:var(--primary);cursor:pointer">Política de Privacidade</a>, <a href={`${baseUrl}/termos-de-servico`} style="color:var(--primary);cursor:pointer">Termos de Serviço</a> e <a href={`${baseUrl}/aviso-legal`} style="color:var(--primary);cursor:pointer">Aviso Legal</a>.</span>
              </label>
              <label for="chkIdade" style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
              <input type="checkbox" name="idade" id="chkIdade" required style="width:auto;margin-top:2px">
@@ -82,7 +85,7 @@ import { Image } from 'astro:assets';
           <h2 class="auth-title">Redefinir Senha</h2>
           <p id="reset-subtitle" class="auth-subtitle">Digite seu e-mail para receber um link de redefinição.</p>
           <div id="reset-alert" style="display:none;margin-bottom:15px;padding:12px;border-radius:10px;font-size:.85rem;font-weight:600"></div>
-          <form id="resetForm" onsubmit="event.preventDefault()">
+          <form id="resetForm">
             <input type="email" name="email" placeholder="E-mail cadastrado" required>
             <button type="submit" class="btn" id="btnReset" style="margin-top:15px">ENVIAR LINK</button>
           </form>

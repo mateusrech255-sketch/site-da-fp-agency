@@ -14,7 +14,7 @@ import { Image } from 'astro:assets';
       
       <div class="auth-separator"><div></div><span>ou use seu acesso</span><div></div></div>
       
-      <form id="loginForm" onsubmit="event.preventDefault()">
+      <form id="loginForm">
         <input type="email" name="email" placeholder="E-mail cadastrado" required>
         
         <div class="password-wrapper">
@@ -51,7 +51,7 @@ import { Image } from 'astro:assets';
       
       <div id="div-ou-cad" class="auth-separator"><div></div><span>ou digite manualmente</span><div></div></div>
       
-      <form id="formCadastro" onsubmit="event.preventDefault()">
+      <form id="formCadastro">
         <input type="text"  name="nome"     id="cad-nome"     placeholder="Nome Completo" required>
         <input type="email" name="email"    id="cad-email"    placeholder="Seu Email" required>
         <input type="tel"   name="cpf"      id="cad-cpf"      placeholder="CPF (Apenas números)" required maxlength="14" oninput="maskCPF(this)">
@@ -103,7 +103,7 @@ import { Image } from 'astro:assets';
       
       <div id="reset-alert" style="display:none;margin-bottom:15px;padding:12px;border-radius:10px;font-size:.85rem;font-weight:600"></div>
       
-      <form id="resetForm" onsubmit="event.preventDefault()">
+      <form id="resetForm">
         <input type="email" name="email" placeholder="E-mail cadastrado" required>
         <button type="submit" class="btn" id="btnReset" style="margin-top:15px">ENVIAR LINK</button>
       </form>
