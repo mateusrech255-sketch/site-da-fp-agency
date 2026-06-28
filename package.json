@@ -21,7 +21,7 @@
     "diagnose": "node scripts/diagnose.mjs"
   },
   "dependencies": {
-    "astro": "^5.18.2",
+    "astro": "^7.0.3",
     "compression": "^1.8.1",
     "concurrently": "^9.2.1",
     "cors": "^2.8.6",
