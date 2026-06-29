@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
 const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
+const searchApiUrl = import.meta.env.PUBLIC_SEARCH_API_URL || '';
 ---
 
 <Layout title="Central de Busca - FP Agency">
@@ -14,7 +15,7 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 
   <Header />
 
-  <main class="search-page" id="search-page-root" data-base={baseUrl}>
+  <main class="search-page" id="search-page-root" data-base={baseUrl} data-api-url={searchApiUrl}>
     <section class="search-hero" aria-labelledby="search-page-title">
       <div class="search-hero-kicker">
         <i class="fas fa-circle-dot" aria-hidden="true"></i>
@@ -180,7 +181,6 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
     abortController: AbortController | null;
   }
 
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
   const PAGE_SIZE = 20;
   const MIN_TERM = 2;
   const API_DEBOUNCE_MS = 500;
@@ -189,6 +189,7 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 
   const rootEl = document.getElementById('search-page-root') as HTMLElement | null;
   const basePath = rootEl?.getAttribute('data-base') || '';
+  const apiUrl = rootEl?.dataset.apiUrl || '';
   const resultsContainer = document.getElementById('master-results') as HTMLElement | null;
   const resultsTitle = document.getElementById('search-results-title') as HTMLElement | null;
   const resultsMeta = document.getElementById('search-results-meta') as HTMLElement | null;
@@ -492,11 +493,15 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
   };
 
   const fetchApiPage = async (tab: ApiTab, term: string, filter: string, page: number, signal: AbortSignal): Promise<ApiPayload> => {
+    if (!apiUrl) {
+      throw new Error('API de busca nao configurada. Defina PUBLIC_SEARCH_API_URL no ambiente.');
+    }
+
     const cacheKey = makeCacheKey(tab, term, filter, page);
     const cachedPayload = apiCache.get(cacheKey);
     if (cachedPayload) return cachedPayload;
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       body: JSON.stringify({
         action: getApiAction(tab),

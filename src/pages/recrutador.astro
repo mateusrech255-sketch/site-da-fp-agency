@@ -13,6 +13,12 @@ import Configuracoes from '../components/views/Configuracoes.astro';
 import Avisos from '../components/views/Avisos.astro';
 import Editores from '../components/views/Editores.astro';
 import Links from '../components/views/Links.astro';
+import PortalLoader from '../components/recrutador/PortalLoader.astro';
+import PortalNavigation from '../components/recrutador/PortalNavigation.astro';
+
+const base = import.meta.env.BASE_URL;
+const basePath = base === '/' ? '' : base.replace(/\/$/, '');
+const recruiterApiUrl = import.meta.env.PUBLIC_RECRUITER_API_URL || '';
 ---
 
 <Layout>
@@ -42,8 +48,6 @@ import Links from '../components/views/Links.astro';
       border: none !important;
     }
   </style>
-
-  <div id="global-loader"><div class="spinner"></div></div>
 
   <div id="unified-exit-layer" role="dialog" aria-modal="true">
     <div class="uel-icon"><i class="ri-external-link-line"></i></div>
@@ -98,13 +102,21 @@ import Links from '../components/views/Links.astro';
     </div>
   </div>
 
-  <div class="fp-agency-wrapper" id="main-app-container" data-portal-state="public" data-auth-state="checking" data-active-view="Landing">
+  <div
+    class="fp-agency-wrapper"
+    id="main-app-container"
+    data-portal-state="public"
+    data-auth-state="checking"
+    data-active-view="Landing"
+    data-base-path={basePath}
+    data-api-url={recruiterApiUrl}
+  >
     <div class="app-shell-header" id="portalHeaderWrapper">
       <Header />
     </div>
 
     <main class="app-shell-content" id="views-container" aria-live="polite">
-
+    <PortalLoader />
 
     <Landing />
     <Diretrizes />
@@ -118,16 +130,7 @@ import Links from '../components/views/Links.astro';
     <Links />
     </main>
 
-    <nav class="bottom-nav" id="bottomNavSidebar" aria-label="Navegação do portal">
-      <div class="nav-item" data-page="Dashboard"     onclick="nav('Dashboard')">   <i class="fas fa-home"></i>         <span>Início</span></div>
-      <div class="nav-item" data-page="Ranking"       onclick="nav('Ranking')">     <i class="fas fa-trophy"></i>       <span>Ranking</span></div>
-      <div class="nav-item" data-page="Financeiro"    onclick="nav('Financeiro')">  <i class="fas fa-wallet"></i>       <span>Carteira</span></div>
-      <div class="nav-item" data-page="Links"         onclick="nav('Links')">       <i class="fas fa-link"></i>         <span>Links</span></div>
-      <div class="nav-item" data-page="Editores"      onclick="nav('Editores')">    <i class="fas fa-users"></i>        <span>Equipe</span></div>
-      <div class="nav-item" data-page="Avisos"        onclick="nav('Avisos')">      <i class="fas fa-bell"></i>         <span>Avisos</span></div>
-      <div class="nav-item" data-page="Configuracoes" onclick="nav('Configuracoes')"><i class="fas fa-cog"></i>         <span>Ajustes</span></div>
-      <div class="nav-item logout"                    onclick="logoutApp()">        <i class="fas fa-sign-out-alt"></i> <span>Sair</span></div>
-    </nav>
+    <PortalNavigation />
 
     <div class="app-shell-footer" id="portalFooterWrapper">
       <Footer />
@@ -172,7 +175,16 @@ const firebaseConfig = {
 };
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbx30E6Ty1JMZeBGRbAmqe6yHG7uRp1K_wXr198sSoURs_uNtwIa90NMSi-_k9H29dhd/exec";
+const PORTAL_CONFIG = (() => {
+  const root = document.getElementById('main-app-container');
+  const basePath = (root?.dataset.basePath || '').replace(/\/$/, '');
+  return {
+    apiUrl: root?.dataset.apiUrl || '',
+    basePath,
+    siteOrigin: window.location.origin,
+  };
+})();
+const API_URL = PORTAL_CONFIG.apiUrl;
 
 /* ============================================================
    WEBVIEW DETECTION + UNIVERSAL LINK HANDLER
@@ -260,6 +272,97 @@ function storeDashboardSession(idToken, data) {
   sessionStorage.setItem('user_foto',  data?.avatar || data?.foto || '');
 }
 
+const CADASTRO_DRAFT_KEY = 'fp_recrutador_cadastro_draft';
+const CADASTRO_RETURN_KEY = 'fp_recrutador_return_view';
+
+function buildSiteUrl(path = '/') {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${PORTAL_CONFIG.siteOrigin}${PORTAL_CONFIG.basePath}${cleanPath}`;
+}
+
+function buildRegistrationUrl(program, code) {
+  const url = new URL(buildSiteUrl('/inscricao'));
+  url.searchParams.set('programa', program);
+  if (code) url.searchParams.set('codigo', code);
+  return url.toString();
+}
+
+function getCadastroForm() {
+  return document.getElementById('formCadastro');
+}
+
+function saveCadastroDraft() {
+  const form = getCadastroForm();
+  if (!form) return;
+  const data = {};
+  new FormData(form).forEach((value, key) => {
+    data[key] = String(value);
+  });
+  data.termos = document.getElementById('chkTermos')?.checked ? 'on' : '';
+  data.idade = document.getElementById('chkIdade')?.checked ? 'on' : '';
+  sessionStorage.setItem(CADASTRO_DRAFT_KEY, JSON.stringify(data));
+}
+
+function syncGuardianDraftState() {
+  const birthInput = document.getElementById('cad-dataNasc');
+  const block = document.getElementById('blocoResponsavel');
+  const nameInput = document.getElementById('nomeResp');
+  const cpfInput = document.getElementById('cpfResp');
+  if (!birthInput || !block || !nameInput || !cpfInput || !birthInput.value) return;
+
+  const birthDate = new Date(`${birthInput.value}T00:00:00`);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) age--;
+  const needsGuardian = age >= 14 && age < 16;
+  block.classList.toggle('is-visible', needsGuardian);
+  nameInput.required = needsGuardian;
+  cpfInput.required = needsGuardian;
+}
+
+function restoreCadastroDraft() {
+  const form = getCadastroForm();
+  if (!form) return false;
+  const raw = sessionStorage.getItem(CADASTRO_DRAFT_KEY);
+  if (!raw) return false;
+
+  try {
+    const data = JSON.parse(raw);
+    Object.entries(data).forEach(([key, value]) => {
+      const field = form.elements.namedItem(key);
+      if (!field) return;
+      if (field instanceof RadioNodeList) return;
+      if (field.type === 'checkbox') field.checked = value === 'on';
+      else field.value = value;
+    });
+    syncGuardianDraftState();
+    return true;
+  } catch (error) {
+    sessionStorage.removeItem(CADASTRO_DRAFT_KEY);
+    return false;
+  }
+}
+
+function clearCadastroDraft() {
+  sessionStorage.removeItem(CADASTRO_DRAFT_KEY);
+  sessionStorage.removeItem(CADASTRO_RETURN_KEY);
+}
+
+function bindCadastroDraftPersistence() {
+  const form = getCadastroForm();
+  if (!form || form.dataset.draftBound === 'true') return;
+  form.dataset.draftBound = 'true';
+  form.addEventListener('input', saveCadastroDraft);
+  form.addEventListener('change', saveCadastroDraft);
+  form.querySelectorAll('a[href]').forEach((link) => {
+    link.addEventListener('click', () => {
+      saveCadastroDraft();
+      sessionStorage.setItem(CADASTRO_RETURN_KEY, 'Cadastro');
+    });
+  });
+  window.addEventListener('pagehide', saveCadastroDraft);
+}
+
 function setShellState(page) {
   const appCont = document.getElementById('main-app-container');
   const isPublic = isPublicView(page);
@@ -323,12 +426,16 @@ function navBack() {
    ============================================================ */
 let loaderTimeout;
 function showLoader() {
-  document.getElementById('global-loader')?.classList.add('is-visible');
+  const loader = document.getElementById('global-loader');
+  loader?.classList.add('is-visible');
+  loader?.setAttribute('aria-hidden', 'false');
   clearTimeout(loaderTimeout);
   loaderTimeout = setTimeout(hideLoader, 12000);
 }
 function hideLoader() {
-  document.getElementById('global-loader')?.classList.remove('is-visible');
+  const loader = document.getElementById('global-loader');
+  loader?.classList.remove('is-visible');
+  loader?.setAttribute('aria-hidden', 'true');
   clearTimeout(loaderTimeout);
 }
 
@@ -405,6 +512,10 @@ firebase.auth().onAuthStateChanged(async (user) => {
 });
 
 async function gsRun(action, dataObj) {
+  if (!API_URL) {
+    return { success:false, locked:false, msg:"API do portal nao configurada. Defina PUBLIC_RECRUITER_API_URL no ambiente." };
+  }
+
   try {
     const response = await fetch(API_URL, { method:'POST', body:JSON.stringify({ action, data:dataObj }) });
     return await response.json();
@@ -525,6 +636,7 @@ document.getElementById('formCadastro').onsubmit = async (e) => {
     hideLoader(); btn.disabled=false; btn.innerText="CRIAR CONTA";
     if(res.success){
       globalAlert("Bem-Vindo!","Conta criada com sucesso!","success");
+      clearCadastroDraft();
       e.target.reset();
       document.getElementById('blocoResponsavel').classList.remove('is-visible');
       document.getElementById('btnGoogleCad').classList.remove('is-hidden');
@@ -886,8 +998,8 @@ async function loadLinks() {
     document.getElementById('meuCodigoTexto').innerText=cod;
     document.getElementById('meuCodigoTextoNarrastars').innerText=cod;
     document.getElementById('meuCodigoCopia').value=cod;
-    document.getElementById('meuLinkRecrutamento').value=`https://docs.google.com/forms/d/e/1FAIpQLScYfA9m9Ba8pk1otdfRHGr8UgShWsPX96cpr60oMVhgeKu0nw/viewform?usp=pp_url&entry.1972210026=${encodeURIComponent(cod)}`;
-    document.getElementById('meuLinkNarrastarsRecrutamento').value=`https://docs.google.com/forms/d/e/1FAIpQLSf7LaMlmA-LiGEd4aUttMpUVo1vCYdPau_zDi27H5ndShMi7g/viewform?usp=pp_url&entry.983673666=${encodeURIComponent(cod)}`;
+    document.getElementById('meuLinkRecrutamento').value=buildRegistrationUrl('kwai-cut', cod);
+    document.getElementById('meuLinkNarrastarsRecrutamento').value=buildRegistrationUrl('kwai-narrastars', cod);
     document.getElementById('fantazy').value=d.fantazy||'Indisponível';
     document.getElementById('kako').value=d.kako||'Indisponível';
     document.getElementById('instagram').value=d.instagram||'';
@@ -959,9 +1071,16 @@ document.addEventListener('keydown', e => {
 async function initApp(){
   const appCont = document.getElementById('main-app-container');
   const token = sessionStorage.getItem('idToken');
+  bindCadastroDraftPersistence();
 
   if (!token) {
     appCont?.setAttribute('data-auth-state', 'guest');
+    if (sessionStorage.getItem(CADASTRO_RETURN_KEY) === 'Cadastro' && restoreCadastroDraft()) {
+      nav('Cadastro');
+      sessionStorage.removeItem(CADASTRO_RETURN_KEY);
+      hideLoader();
+      return;
+    }
     nav('Landing');
     hideLoader();
     return;
@@ -1096,6 +1215,7 @@ else initApp();
   flex-direction:column;
   min-height:0;
   width:100%;
+  position:relative;
 }
 
 .fp-agency-wrapper[data-portal-state="private"] .app-shell-content {
@@ -1185,17 +1305,35 @@ else initApp();
    GLOBAL LOADER
    ============================================================ */
 #global-loader {
-  position:fixed; inset:0;
-  background:rgba(255,255,255,.9);
-  z-index:999999; display:none;
-  justify-content:center; align-items:center; flex-direction:column;
+  position:absolute;
+  inset:0;
+  min-height:280px;
+  background:linear-gradient(180deg, rgba(248,250,252,.86), rgba(248,250,252,.64));
+  z-index:30;
+  display:none;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:clamp(90px, 14vh, 170px);
+  pointer-events:none;
 }
 #global-loader.is-visible { display:flex; }
-.fp-agency-wrapper[data-portal-state="public"] ~ #global-loader,
-.dark-mode #global-loader { background:rgba(15,17,23,.9); }
+.portal-loader-card {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  border:1px solid rgba(249,115,22,.18);
+  border-radius:999px;
+  background:rgba(255,255,255,.94);
+  color:#475569;
+  font-size:.82rem;
+  font-weight:700;
+  box-shadow:0 18px 48px rgba(15,23,42,.14);
+  backdrop-filter:blur(14px);
+}
 .spinner { 
-  width:40px; height:40px; border:4px solid #fed7aa;
-  border-top:4px solid var(--primary); border-radius:50%; animation:spin 1s linear infinite; 
+  width:24px; height:24px; border:3px solid #fed7aa;
+  border-top:3px solid var(--primary); border-radius:50%; animation:spin 1s linear infinite; 
 }
 @keyframes spin { 100%{transform:rotate(360deg)} }
 
@@ -1305,6 +1443,7 @@ else initApp();
   flex-direction: column;
   flex: 1; /* Estica o meio da tela e obriga o rodapé a ficar no fundo */
   width: 100%;
+  position: relative;
 }
 
 .view.active {
@@ -1445,16 +1584,27 @@ else initApp();
   box-shadow:0 4px 15px rgba(255,107,43,0.2);
 }
 .fp-agency-wrapper .card-float {
-  background:white;
+  background:rgba(255,255,255,.96);
   margin:12px auto 15px;
   padding:18px;
   width:min(calc(100% - 24px), 920px);
   border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  border:1px solid rgba(226,232,240,.88);
+  box-shadow:0 20px 50px -28px rgba(15,23,42,.42), 0 10px 24px -20px rgba(249,115,22,.45);
   position:relative;
   z-index:1;
 }
-.fp-agency-wrapper .balance-card { text-align:center; }
+.fp-agency-wrapper .balance-card {
+  text-align:center;
+  overflow:hidden;
+}
+.fp-agency-wrapper .balance-card::before {
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:4px;
+  background:linear-gradient(90deg, var(--primary), #fbbf24, #22c55e);
+}
 .fp-agency-wrapper .finance-balance-card {
   text-align:center;
   background:linear-gradient(135deg,var(--primary),var(--primary-dark));
@@ -1472,7 +1622,23 @@ else initApp();
   padding:12px 10px;
 }
 .fp-agency-wrapper .links-panel { padding-bottom:20px; }
-.fp-agency-wrapper .card { background:white; margin:15px 12px; padding:18px; border-radius:16px; box-shadow:0 2px 8px -2px rgba(0,0,0,.04); }
+.fp-agency-wrapper .card {
+  background:rgba(255,255,255,.96);
+  margin:15px 12px;
+  padding:18px;
+  border:1px solid rgba(226,232,240,.86);
+  border-radius:16px;
+  box-shadow:0 14px 32px -28px rgba(15,23,42,.42);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.fp-agency-wrapper .card[onclick]:hover,
+.fp-agency-wrapper .counter-box:hover,
+.fp-agency-wrapper .premium-invite-card:hover,
+.fp-agency-wrapper .rank-item:hover {
+  transform:translateY(-2px);
+  border-color:rgba(249,115,22,.26);
+  box-shadow:0 18px 42px -30px rgba(15,23,42,.5), 0 14px 30px -28px rgba(249,115,22,.45);
+}
 .fp-agency-wrapper .guardian-consent {
   display:none;
   background:#fffbeb;
@@ -1584,7 +1750,66 @@ else initApp();
 
 /* Ranking */
 .fp-agency-wrapper .rank-list { padding-bottom:80px; }
-.fp-agency-wrapper .rank-item { background:white; padding:12px 15px; border-radius:16px; margin-bottom:12px; display:flex; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,.03); }
+.fp-agency-wrapper .ranking-forecast-wrap { padding:0 12px 14px; }
+.fp-agency-wrapper .ranking-forecast-card {
+  width:min(100%, 920px);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+  padding:18px;
+  border:1px solid rgba(249,115,22,.2);
+  border-radius:18px;
+  background:
+    linear-gradient(135deg, rgba(255,247,237,.98), rgba(255,255,255,.98)),
+    radial-gradient(circle at top right, rgba(249,115,22,.18), transparent 260px);
+  box-shadow:0 18px 42px -30px rgba(15,23,42,.45);
+}
+.fp-agency-wrapper .ranking-forecast-icon {
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background:#fff7ed;
+  color:var(--primary);
+  border:1px solid rgba(249,115,22,.22);
+}
+.fp-agency-wrapper .ranking-forecast-card p {
+  margin:0;
+  color:#9a3412;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:800;
+}
+.fp-agency-wrapper .ranking-forecast-card h3 {
+  margin:2px 0 0;
+  color:#1e293b;
+  font-size:1.45rem;
+  line-height:1;
+}
+.fp-agency-wrapper .ranking-forecast-card h3 span { color:var(--primary); }
+.fp-agency-wrapper .ranking-forecast-card small {
+  max-width:360px;
+  color:#64748b;
+  font-size:.82rem;
+  line-height:1.45;
+}
+.fp-agency-wrapper .ranking-forecast-card small strong { color:#c2410c; }
+.fp-agency-wrapper .rank-item {
+  background:rgba(255,255,255,.97);
+  padding:14px 15px;
+  border:1px solid rgba(226,232,240,.84);
+  border-radius:16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  box-shadow:0 12px 30px -26px rgba(15,23,42,.38);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
 .fp-agency-wrapper .pos { width:32px; height:32px; background:#fff7ed; color:var(--primary); font-weight:800; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-right:12px; font-size:.9rem; flex-shrink:0; }
 .fp-agency-wrapper .rank-item:nth-child(1) .pos { background:#ffedd5; color:#c2410c; }
 .fp-agency-wrapper .rank-item:nth-child(2) .pos { background:#f1f5f9; color:#475569; }
@@ -1595,6 +1820,15 @@ else initApp();
 .fp-agency-wrapper .score { text-align:right; margin-left:10px; display:flex; flex-direction:column; align-items:flex-end; }
 .fp-agency-wrapper .score div:first-child { font-weight:800; color:var(--primary); font-size:1.25rem; line-height:1; margin-bottom:2px; }
 .fp-agency-wrapper .score div:last-child  { font-size:.8rem; color:#94a3b8; line-height:1; font-weight:600; }
+
+@media (max-width: 640px) {
+  .fp-agency-wrapper .ranking-forecast-card {
+    grid-template-columns:auto 1fr;
+  }
+  .fp-agency-wrapper .ranking-forecast-card small {
+    grid-column:1 / -1;
+  }
+}
 
 /* Configurações */
 .fp-agency-wrapper .avatar-wrapper { position:relative; width:120px; height:120px; margin:0 auto 15px; }
@@ -1617,20 +1851,46 @@ else initApp();
 
 /* Links */
 .fp-agency-wrapper .section-title { font-size:.85rem; color:var(--gray); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin:25px 0 15px; }
-.fp-agency-wrapper .link-group { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:15px; margin-bottom:15px; }
-.fp-agency-wrapper .link-group label { margin-bottom:8px; color:var(--primary-dark); }
+.fp-agency-wrapper .links-section-title { margin-top:0; margin-bottom:10px; }
+.fp-agency-wrapper .links-section-title.spaced { margin-top:26px; margin-bottom:15px; }
+.fp-agency-wrapper .link-group { background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:15px; margin-bottom:15px; }
+.fp-agency-wrapper .link-group label { margin-bottom:8px; color:var(--primary-dark); display:flex; align-items:center; gap:8px; }
+.fp-agency-wrapper .recruiter-code-card {
+  background:linear-gradient(135deg,#fff7ed,#fff);
+  border-color:#fdba74;
+  box-shadow:0 16px 32px -28px rgba(194,65,12,.45);
+}
+.fp-agency-wrapper .recruiter-code-card label { color:#c2410c; }
 .fp-agency-wrapper .input-row { display:flex; gap:8px; }
 .fp-agency-wrapper .input-row input { margin:0; padding:12px; font-size:.9rem; flex:1; background:white; border:1px solid #cbd5e1; }
+.fp-agency-wrapper .input-row .recruiter-code-input {
+  font-weight:800;
+  color:#c2410c;
+  text-align:center;
+  font-size:1.08rem;
+  letter-spacing:.05em;
+}
 .fp-agency-wrapper .action-btn-small { width:42px; height:45px; border-radius:8px; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; color:white; transition:.2s; }
+.fp-agency-wrapper .action-btn-small:hover,
+.fp-agency-wrapper .invite-action-btn:hover { transform:translateY(-1px); filter:saturate(1.05); }
+.fp-agency-wrapper .recruiter-code-copy { background:#f97316; }
 .fp-agency-wrapper .btn-copy { background:var(--primary); } 
 .fp-agency-wrapper .btn-open { background:var(--text); }
 
 /* Premium invite cards */
-.fp-agency-wrapper .premium-invite-card { background:white; border:1px solid #e2e8f0; border-radius:16px; padding:15px; margin-bottom:12px; position:relative; overflow:hidden; }
+.fp-agency-wrapper .premium-invite-card {
+  background:linear-gradient(180deg,#fff,#f8fafc);
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+  position:relative;
+  overflow:hidden;
+}
 .fp-agency-wrapper .premium-invite-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px; }
 .fp-agency-wrapper .premium-invite-card.kwai-cut::before { background:#10b981; }
 .fp-agency-wrapper .premium-invite-card.narrastars::before { background:#3b82f6; }
-.fp-agency-wrapper .invite-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.fp-agency-wrapper .invite-header { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; }
 .fp-agency-wrapper .invite-title { font-size:1rem; font-weight:700; color:#1e293b; display:flex; align-items:center; gap:8px; }
 .fp-agency-wrapper .kwai-cut .invite-title { color:#047857; } 
 .fp-agency-wrapper .narrastars .invite-title { color:#1d4ed8; }
@@ -1638,9 +1898,54 @@ else initApp();
 .fp-agency-wrapper .kwai-cut .invite-code-badge { background:#d1fae5; color:#065f46; }
 .fp-agency-wrapper .narrastars .invite-code-badge { background:#dbeafe; color:#1e40af; }
 .fp-agency-wrapper .invite-desc { font-size:.8rem; color:#64748b; margin:0 0 15px; line-height:1.4; font-weight:500; }
-.fp-agency-wrapper .invite-input-wrapper { display:flex; position:relative; background:#f8fafc; border:1px solid #cbd5e1; border-radius:12px; overflow:hidden; padding:4px; }
-.fp-agency-wrapper .invite-input-wrapper input { border:none; background:transparent; padding:12px 15px; margin:0; font-size:.85rem; color:#334155; width:calc(100% - 100px); }
-.fp-agency-wrapper .invite-input-wrapper input:focus { background:transparent; }
+.fp-agency-wrapper .invite-input-wrapper {
+  display:grid;
+  gap:10px;
+  margin-bottom:4px;
+  border:0;
+  padding:0;
+  background:transparent;
+}
+.fp-agency-wrapper .invite-link-input {
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  background:white;
+  border:1px solid #cbd5e1;
+  color:#334155;
+  font-size:.9rem;
+  margin:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.fp-agency-wrapper .invite-link-input:focus { background:white; }
+.fp-agency-wrapper .invite-actions {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.fp-agency-wrapper .invite-action-btn {
+  min-height:44px;
+  border:0;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:.88rem;
+  transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.fp-agency-wrapper .invite-action-btn.whatsapp {
+  background:#16a34a;
+  color:white;
+  box-shadow:0 12px 24px -20px rgba(22,163,74,.75);
+}
+.fp-agency-wrapper .invite-action-btn.copy-message {
+  background:#fff7ed;
+  border:1px solid rgba(249,115,22,.32);
+  color:#c2410c;
+}
 .fp-agency-wrapper .btn-copy-premium { position:absolute; right:4px; top:4px; bottom:4px; border:none; border-radius:8px; padding:0 15px; font-size:.8rem; font-weight:700; color:white; cursor:pointer; display:flex; align-items:center; gap:6px; transition:.2s; }
 .fp-agency-wrapper .kwai-cut .btn-copy-premium { background:#10b981; } 
 .fp-agency-wrapper .narrastars .btn-copy-premium { background:#3b82f6; }
@@ -1843,5 +2148,12 @@ else initApp();
   .rc-btn-primary, .rc-btn-secondary { width:100%; justify-content:center; }
   .rc-cta, .dg-cta { padding:36px 20px; }
   .dg-level-body { grid-template-columns:1fr; }
+  .fp-agency-wrapper .invite-header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .fp-agency-wrapper .invite-actions {
+    grid-template-columns:1fr;
+  }
 }
 </style>

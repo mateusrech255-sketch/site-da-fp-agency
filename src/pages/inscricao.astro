@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 
 const rawBaseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const baseUrl = rawBaseUrl.replace(/\/$/, '');
+const inscricaoApiUrl = import.meta.env.PUBLIC_INSCRICAO_API_URL || '';
 ---
 
 <Layout title="Inscrição Oficial - FP Agency">
@@ -15,7 +16,7 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
   <div class="fp-agency-wrapper">
     <Header />
 
-    <main class="kc-content">
+    <main class="kc-content" data-inscricao-api-url={inscricaoApiUrl}>
       <section class="form-section">
         <div class="form-container-box">
           <div class="form-header-main text-center">
@@ -211,8 +212,8 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
 <script is:inline define:vars={{ baseUrl }}>
   document.addEventListener('DOMContentLoaded', () => {
     
-    // NOVA URL UNIFICADA DA API (Serve para Busca e para Cadastro)
-    const API_UNIFICADA = 'https://script.google.com/macros/s/AKfycbz2v0Ssig7czjEOQDr1NbxOE4_vy0mGhzWjy2Lo7rocIm-wyB4p1OYChbB2PXwKNj9d/exec';
+    // API publica configurada no ambiente para evitar URL hardcoded no codigo versionado.
+    const API_UNIFICADA = document.querySelector('.kc-content')?.dataset.inscricaoApiUrl || '';
 
     const APP_CONFIG = {
       API_CONTRATADOS: API_UNIFICADA,
@@ -625,6 +626,11 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
 
     function fetchRecruiterWithJsonp(codigo) {
       return new Promise((resolve, reject) => {
+        if (!APP_CONFIG.API_RECRUTADORES) {
+          reject(new Error('API de inscricao nao configurada. Defina PUBLIC_INSCRICAO_API_URL no ambiente.'));
+          return;
+        }
+
         const callbackName = `fpRecruiterCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
         const script = document.createElement('script');
         const url = new URL(APP_CONFIG.API_RECRUTADORES);
@@ -933,6 +939,9 @@ const baseUrl = rawBaseUrl.replace(/\/$/, '');
     }
 
     async function submitToAppsScript(payload) {
+      if (!APP_CONFIG.API_CONTRATADOS) {
+        throw new Error('API de inscricao nao configurada. Defina PUBLIC_INSCRICAO_API_URL no ambiente.');
+      }
       
       // MUDANÇA PRINCIPAL: Encapsulamento da Action para o Roteador do Backend
       const wrappedPayload = {

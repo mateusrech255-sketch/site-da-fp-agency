@@ -1,22 +1,27 @@
     <div id="view-Links" class="view view-container view-private" data-view="Links">
       <h1 class="view-heading">Links & Recrutamento</h1>
       <div class="card-float links-panel">
-        <div class="section-title" style="margin-top:0;margin-bottom:10px">Seu Código de Recrutador</div>
-        <div class="link-group" style="background:#fff7ed;border-color:#fdba74">
-          <label for="meuCodigoCopia" style="color:#c2410c"><i class="fas fa-fingerprint"></i> Código Kwai Cut / Narrastars</label>
-          <div class="input-row"><input type="text" id="meuCodigoCopia" readonly value="Carregando..." style="font-weight:800;color:#c2410c;text-align:center;font-size:1.1rem;letter-spacing:1px"><button type="button" class="action-btn-small" style="background:#f97316" onclick="copy('meuCodigoCopia')"><i class="fas fa-copy"></i></button></div>
+        <div class="section-title links-section-title">Seu Código de Recrutador</div>
+        <div class="link-group recruiter-code-card">
+          <label for="meuCodigoCopia"><i class="fas fa-fingerprint"></i> Código Kwai Cut / Narrastars</label>
+          <div class="input-row">
+            <input type="text" id="meuCodigoCopia" class="recruiter-code-input" readonly value="Carregando...">
+            <button type="button" class="action-btn-small recruiter-code-copy" onclick="copy('meuCodigoCopia')" aria-label="Copiar código">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
         </div>
 
-        <div class="section-title" style="margin-top:25px;margin-bottom:15px">Seus Convites Exclusivos</div>
+        <div class="section-title links-section-title spaced">Seus Convites Exclusivos</div>
 
         <div class="premium-invite-card kwai-cut">
           <div class="invite-header"><div class="invite-title"><i class="fas fa-video"></i> Kwai Cut</div><div class="invite-code-badge">CÓDIGO <strong><span id="meuCodigoTexto">...</span></strong></div></div>
           <p class="invite-desc">Envie este link pré-preenchido para convidar novos criadores.</p>
-          <div class="invite-input-wrapper" style="margin-bottom:15px; border:none; padding:0; background:transparent;">
-            <input type="text" id="meuLinkRecrutamento" readonly value="Carregando..." style="width:100%; padding:15px; border-radius:10px; background:rgba(0,0,0,0.2); border:1px solid var(--border); color:#fff; font-size:0.95rem; margin-bottom:10px;">
-            <div style="display:flex; gap:10px;">
-              <button onclick="window.shareInviteWhatsApp('meuLinkRecrutamento')" style="flex:1; background:#25D366; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-              <button onclick="window.copyInviteMessage('meuLinkRecrutamento')" style="flex:1; background:rgba(255,107,43,0.1); border:1px solid var(--orange); color:var(--orange); padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fas fa-paste"></i> Copiar Msg</button>
+          <div class="invite-input-wrapper">
+            <input type="text" id="meuLinkRecrutamento" class="invite-link-input" readonly value="Carregando...">
+            <div class="invite-actions">
+              <button type="button" class="invite-action-btn whatsapp" onclick="window.shareInviteWhatsApp('meuLinkRecrutamento')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+              <button type="button" class="invite-action-btn copy-message" onclick="window.copyInviteMessage('meuLinkRecrutamento')"><i class="fas fa-paste"></i> Copiar Msg</button>
             </div>
           </div>
         </div>
@@ -24,16 +29,16 @@
         <div class="premium-invite-card narrastars">
           <div class="invite-header"><div class="invite-title"><i class="fas fa-microphone"></i> Narrastars</div><div class="invite-code-badge">CÓDIGO <strong><span id="meuCodigoTextoNarrastars">...</span></strong></div></div>
           <p class="invite-desc">Envie este link pré-preenchido para convidar narradores.</p>
-          <div class="invite-input-wrapper" style="margin-bottom:15px; border:none; padding:0; background:transparent;">
-            <input type="text" id="meuLinkNarrastarsRecrutamento" readonly value="Carregando..." style="width:100%; padding:15px; border-radius:10px; background:rgba(0,0,0,0.2); border:1px solid var(--border); color:#fff; font-size:0.95rem; margin-bottom:10px;">
-            <div style="display:flex; gap:10px;">
-              <button onclick="window.shareInviteWhatsApp('meuLinkNarrastarsRecrutamento')" style="flex:1; background:#25D366; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-              <button onclick="window.copyInviteMessage('meuLinkNarrastarsRecrutamento')" style="flex:1; background:rgba(255,107,43,0.1); border:1px solid var(--orange); color:var(--orange); padding:12px; border-radius:10px; font-weight:bold; cursor:pointer; font-size:0.9rem; transition:0.2s;"><i class="fas fa-paste"></i> Copiar Msg</button>
+          <div class="invite-input-wrapper">
+            <input type="text" id="meuLinkNarrastarsRecrutamento" class="invite-link-input" readonly value="Carregando...">
+            <div class="invite-actions">
+              <button type="button" class="invite-action-btn whatsapp" onclick="window.shareInviteWhatsApp('meuLinkNarrastarsRecrutamento')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+              <button type="button" class="invite-action-btn copy-message" onclick="window.copyInviteMessage('meuLinkNarrastarsRecrutamento')"><i class="fas fa-paste"></i> Copiar Msg</button>
             </div>
           </div>
         </div>
         
-        <div class="section-title" style="margin-top:25px">Outros Oficiais</div>
+        <div class="section-title links-section-title spaced">Outros Oficiais</div>
         <div class="link-group"><label for="fantazy"><i class="fas fa-gem"></i> Fantazy</label><div class="input-row"><input type="text" id="fantazy" readonly value="Carregando..."><button type="button" class="action-btn-small btn-copy" onclick="copy('fantazy')"><i class="fas fa-copy"></i></button></div></div>
         <div class="link-group"><label for="kako"><i class="fas fa-comment-dots"></i> Kako</label><div class="input-row"><input type="text" id="kako" readonly value="Carregando..."><button type="button" class="action-btn-small btn-copy" onclick="copy('kako')"><i class="fas fa-copy"></i></button></div></div>
       </div>
