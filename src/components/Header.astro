@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/fpagency.svg';
+import { publicApiUrls } from '../config/public-api';
 
 const base = import.meta.env.BASE_URL;
 const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
-const searchApiUrl = import.meta.env.PUBLIC_SEARCH_API_URL || '';
+const searchApiUrl = publicApiUrls.search;
 ---
 
 <header class="site-header" id="fp-header" data-base={baseUrl} data-search-api-url={searchApiUrl}>

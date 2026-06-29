@@ -2,10 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { publicApiUrls } from '../config/public-api';
 
 const rawBaseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const baseUrl = rawBaseUrl.replace(/\/$/, '');
-const inscricaoApiUrl = import.meta.env.PUBLIC_INSCRICAO_API_URL || '';
+const inscricaoApiUrl = publicApiUrls.inscricao;
 ---
 
 <Layout title="Inscrição Oficial - FP Agency">

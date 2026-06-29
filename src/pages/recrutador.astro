@@ -15,10 +15,11 @@ import Editores from '../components/views/Editores.astro';
 import Links from '../components/views/Links.astro';
 import PortalLoader from '../components/recrutador/PortalLoader.astro';
 import PortalNavigation from '../components/recrutador/PortalNavigation.astro';
+import { publicApiUrls } from '../config/public-api';
 
 const base = import.meta.env.BASE_URL;
 const basePath = base === '/' ? '' : base.replace(/\/$/, '');
-const recruiterApiUrl = import.meta.env.PUBLIC_RECRUITER_API_URL || '';
+const recruiterApiUrl = publicApiUrls.recruiter;
 ---
 
 <Layout>
