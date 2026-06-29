@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 import WhatsAppFab from '../components/WhatsAppFab.astro';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface Props {
   title?: string;
@@ -54,6 +55,42 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         {schemas.map((schema) => (
           <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
         ))}
+        <script is:inline>
+          (() => {
+            const root = document.documentElement;
+            const markReady = () => {
+              root.classList.remove('fontawesome-fallback');
+              root.classList.add('fontawesome-ready');
+            };
+            const markFallback = () => {
+              if (!root.classList.contains('fontawesome-ready')) {
+                root.classList.add('fontawesome-fallback');
+              }
+            };
+
+            if (!('fonts' in document) || !document.fonts?.load) {
+              markReady();
+              return;
+            }
+
+            const fallbackTimer = window.setTimeout(markFallback, 1200);
+            Promise.all([
+              document.fonts.load('900 1em "Font Awesome 7 Free"'),
+              document.fonts.load('400 1em "Font Awesome 7 Free"'),
+              document.fonts.load('400 1em "Font Awesome 7 Brands"'),
+            ])
+              .then((loadedFonts) => {
+                const hasLoadedFont = loadedFonts.some((fonts) => fonts.length > 0);
+                if (hasLoadedFont) {
+                  window.clearTimeout(fallbackTimer);
+                  markReady();
+                } else {
+                  markFallback();
+                }
+              })
+              .catch(markFallback);
+          })();
+        </script>
     </head>
     <body>
         <slot />
@@ -137,6 +174,36 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     color: inherit;
     text-decoration: none;
   }
+
+  :is(.fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands) {
+    display: inline-block;
+    min-width: 1em;
+    text-align: center;
+    line-height: 1;
+  }
+
+  html:not(.fontawesome-ready) :is(.fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands)::before {
+    content: "•";
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-weight: 800;
+  }
+
+  html:not(.fontawesome-ready) :is(.fa-magnifying-glass, .fa-search)::before { content: "⌕"; }
+  html:not(.fontawesome-ready) :is(.fa-xmark, .fa-times)::before { content: "×"; }
+  html:not(.fontawesome-ready) .fa-chevron-right::before { content: "›"; }
+  html:not(.fontawesome-ready) .fa-chevron-down::before { content: "⌄"; }
+  html:not(.fontawesome-ready) :is(.fa-arrow-right, .fa-arrow-up-right-from-square, .fa-external-link-alt)::before { content: "→"; }
+  html:not(.fontawesome-ready) :is(.fa-house, .fa-home)::before { content: "H"; }
+  html:not(.fontawesome-ready) :is(.fa-user-check, .fa-user-astronaut, .fa-users-gear, .fa-users, .fa-user-tie, .fa-user-circle)::before { content: "U"; }
+  html:not(.fontawesome-ready) :is(.fa-chart-line, .fa-chart-simple)::before { content: "↗"; }
+  html:not(.fontawesome-ready) .fa-layer-group::before { content: "▦"; }
+  html:not(.fontawesome-ready) :is(.fa-circle-info, .fa-info-circle)::before { content: "i"; }
+  html:not(.fontawesome-ready) :is(.fa-circle-question, .fa-question-circle)::before { content: "?"; }
+  html:not(.fontawesome-ready) .fa-keyboard::before { content: "⌨"; }
+  html:not(.fontawesome-ready) .fa-whatsapp::before { content: "W"; }
+  html:not(.fontawesome-ready) :is(.fa-check-circle, .fa-circle-check)::before { content: "✓"; }
+  html:not(.fontawesome-ready) :is(.fa-times-circle, .fa-circle-xmark)::before { content: "×"; }
+  html:not(.fontawesome-ready) :is(.fa-exclamation-triangle, .fa-triangle-exclamation)::before { content: "!"; }
 
   
 </style>

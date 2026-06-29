@@ -4,671 +4,1658 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
-const baseUrl = base === '/' ? '' : base;
+const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 ---
 
 <Layout title="Central de Busca - FP Agency">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <Header />
 
-  <div class="fp" id="fp-root" data-base={baseUrl}>
-    <div class="fp-loader" id="fp-loader">
-      <div class="fp-loader-ring"></div>
-      <span class="fp-loader-text">consultando...</span>
-    </div>
+  <main class="search-page" id="search-page-root" data-base={baseUrl}>
+    <section class="search-hero" aria-labelledby="search-page-title">
+      <div class="search-hero-kicker">
+        <i class="fas fa-circle-dot" aria-hidden="true"></i>
+        Central de busca
+      </div>
+      <h1 id="search-page-title">Encontre qualquer ponto da operação FP Agency.</h1>
+      <p>Pesquise páginas, status de editores e relatórios mensais em uma experiência única, rápida e consistente.</p>
+    </section>
 
-    <div class="fp-hero">
-      <div class="fp-hero-eyebrow"><i class="fas fa-circle-dot"></i> Central de Comando</div>
-      <h1 class="fp-hero-title">O que você deseja <span>localizar</span>?</h1>
-      <p class="fp-hero-sub">Alterne entre as opções abaixo para buscar editores, relatórios ou informações no site.</p>
-    </div>
-
-    <main class="fp-content">
-      
-      <div class="search-master-card">
-        
-        <div class="tab-switcher" id="tabSwitcher" role="tablist">
-          <div class="tab-slider" id="tabSlider"></div>
-          <button class="tab-btn active" data-tab="aprovacao" data-index="0" role="tab" aria-selected="true">
-            <i class="fas fa-user-check"></i> Aprovação
-          </button>
-          <button class="tab-btn" data-tab="relatorio" data-index="1" role="tab" aria-selected="false">
-            <i class="fas fa-chart-line"></i> Relatórios
-          </button>
-          <button class="tab-btn" data-tab="site" data-index="2" role="tab" aria-selected="false">
-            <i class="fas fa-globe"></i> No Site
-          </button>
-        </div>
-
-        <div class="tab-content active" id="content-aprovacao">
-          <p class="sc-desc">Acompanhe aprovações digitando o Nome ou número de WhatsApp.</p>
-          <div class="input-row">
-            <input type="text" id="in-aprovacao" class="fp-input" placeholder="Ex: João ou 81999999999" autocomplete="off" maxlength="150">
-            <select id="sel-aprovacao" class="fp-select">
-              <option value="all">Todo o período</option>
-              <option value="7">Últimos 7 dias</option>
-              <option value="15">Últimos 15 dias</option>
-              <option value="30">Últimos 30 dias</option>
-              <option value="90">Últimos 90 dias</option>
-            </select>
-            <button class="fp-btn" id="btn-aprovacao"><i class="fas fa-magnifying-glass"></i> Buscar</button>
-          </div>
-        </div>
-
-        <div class="tab-content" id="content-relatorio">
-          <p class="sc-desc">Consulte o desempenho mensal através do Nome de Usuário.</p>
-          <div class="input-row">
-            <input type="text" id="in-relatorio" class="fp-input" placeholder="Ex: NewsBR" autocomplete="off" maxlength="150">
-            <select id="sel-relatorio" class="fp-select">
-              <option value="all">Todo o histórico</option>
-              <option value="1">Mês atual</option>
-              <option value="3">Últimos 3 meses</option>
-              <option value="6">Últimos 6 meses</option>
-              <option value="12">1 ano</option>
-            </select>
-            <button class="fp-btn" id="btn-relatorio"><i class="fas fa-magnifying-glass"></i> Buscar</button>
-          </div>
-        </div>
-
-        <div class="tab-content" id="content-site">
-          <p class="sc-desc">Use palavras-chave para encontrar jornadas, regras e páginas institucionais.</p>
-          <div class="input-row">
-            <input type="text" id="in-site" class="fp-input" placeholder="Ex: privacidade, regras, recrutador..." autocomplete="off" maxlength="100" spellcheck="false">
-            <button class="fp-btn" id="btn-site"><i class="fas fa-location-crosshairs"></i> Localizar</button>
-          </div>
-        </div>
-
+    <section class="search-console" aria-label="Ferramentas de busca">
+      <div class="search-tabs" id="search-tabs" role="tablist" aria-label="Tipos de busca">
+        <span class="search-tab-indicator" id="search-tab-indicator" aria-hidden="true"></span>
+        <button id="tab-site" class="search-tab active" type="button" data-tab="site" data-index="0" role="tab" aria-selected="true" aria-controls="panel-site">
+          <i class="fas fa-layer-group" aria-hidden="true"></i>
+          <span>Páginas</span>
+        </button>
+        <button id="tab-aprovacao" class="search-tab" type="button" data-tab="aprovacao" data-index="1" role="tab" aria-selected="false" aria-controls="panel-aprovacao">
+          <i class="fas fa-user-check" aria-hidden="true"></i>
+          <span>Editores</span>
+        </button>
+        <button id="tab-relatorio" class="search-tab" type="button" data-tab="relatorio" data-index="2" role="tab" aria-selected="false" aria-controls="panel-relatorio">
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <span>Relatórios</span>
+        </button>
       </div>
 
-      <div class="results-container" id="master-results" aria-live="polite"></div>
+      <div class="search-panel active" id="panel-site" role="tabpanel" aria-labelledby="tab-site">
+        <div class="search-panel-copy">
+          <strong>Busca local instantânea</strong>
+          <span>Encontre páginas, seções, diretrizes, programas e recursos da FP Agency.</span>
+        </div>
+        <div class="search-input-row">
+          <label class="sr-only" for="in-site">Buscar no site</label>
+          <div class="search-input-shell">
+            <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            <input id="in-site" class="search-input" type="search" placeholder="Ex: recrutador, regras, RPM, inscrição..." autocomplete="off" spellcheck="false" maxlength="100" />
+          </div>
+          <button class="search-action-btn" id="btn-site" type="button">
+            <i class="fas fa-location-crosshairs" aria-hidden="true"></i>
+            Localizar
+          </button>
+        </div>
+      </div>
 
-    </main>
-  </div>
+      <div class="search-panel" id="panel-aprovacao" role="tabpanel" hidden>
+        <div class="search-panel-copy">
+          <strong>Status de editores</strong>
+          <span>Consulte aprovação por nome, WhatsApp ou usuário. Para busca automática ao digitar, use @nome.</span>
+        </div>
+        <div class="search-input-row">
+          <label class="sr-only" for="in-aprovacao">Buscar aprovações</label>
+          <div class="search-input-shell">
+            <i class="fas fa-user-astronaut" aria-hidden="true"></i>
+            <input id="in-aprovacao" class="search-input" type="search" placeholder="Ex: Mateus, 81999999999 ou @mateus" autocomplete="off" maxlength="150" />
+          </div>
+          <label class="sr-only" for="sel-aprovacao">Período de aprovação</label>
+          <select id="sel-aprovacao" class="search-select">
+            <option value="all">Todo o período</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="15">Últimos 15 dias</option>
+            <option value="30">Últimos 30 dias</option>
+            <option value="90">Últimos 90 dias</option>
+          </select>
+          <button class="search-action-btn" id="btn-aprovacao" type="button">
+            <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+
+      <div class="search-panel" id="panel-relatorio" role="tabpanel" hidden>
+        <div class="search-panel-copy">
+          <strong>Relatórios mensais</strong>
+          <span>Consulte histórico, views e indicadores por nome de usuário.</span>
+        </div>
+        <div class="search-input-row">
+          <label class="sr-only" for="in-relatorio">Buscar relatórios</label>
+          <div class="search-input-shell">
+            <i class="fas fa-chart-simple" aria-hidden="true"></i>
+            <input id="in-relatorio" class="search-input" type="search" placeholder="Ex: NewsBR, canal ou @usuario" autocomplete="off" maxlength="150" />
+          </div>
+          <label class="sr-only" for="sel-relatorio">Período de relatório</label>
+          <select id="sel-relatorio" class="search-select">
+            <option value="all">Todo o histórico</option>
+            <option value="1">Mês atual</option>
+            <option value="3">Últimos 3 meses</option>
+            <option value="6">Últimos 6 meses</option>
+            <option value="12">1 ano</option>
+          </select>
+          <button class="search-action-btn" id="btn-relatorio" type="button">
+            <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-results-shell" aria-labelledby="search-results-title">
+      <div class="search-results-heading">
+        <div>
+          <span class="search-results-eyebrow">Resultados</span>
+          <h2 id="search-results-title">Pronto para pesquisar</h2>
+        </div>
+        <div class="search-results-meta" id="search-results-meta">Digite um termo para começar</div>
+      </div>
+
+      <div class="search-results" id="master-results" aria-live="polite"></div>
+    </section>
+  </main>
 
   <Footer />
 </Layout>
 
-<script is:inline type="module">
-  // Importação do algoritmo de busca inteligente para a aba "No Site"
-  import Fuse from 'https://esm.sh/fuse.js@7.0.0';
+<script>
+  import Fuse from 'fuse.js';
+  import { searchIndex } from '../data/search-index';
+  import type { SearchIndexItem, SearchItemType } from '../data/search-index';
 
-  const API_URL   = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
+  type SearchTab = 'site' | 'aprovacao' | 'relatorio';
+  type ApiTab = 'aprovacao' | 'relatorio';
+  type ApiBadgeInfo = [string, string, string];
+
+  interface ApiRecord {
+    nomeCompleto?: string;
+    nome?: string;
+    nomeUsuario?: string;
+    usuario?: string;
+    fonte?: string;
+    categoria?: string;
+    statusResultado?: string;
+    status?: string;
+    perfilUrl?: string;
+    data?: string;
+    whatsapp?: string;
+    motivo?: string;
+    recrutador?: string;
+    whatsRecrutador?: string;
+    uid?: string;
+    totalVv?: string | number;
+    taxaVerticalidade?: string;
+    dataInicio?: string;
+    videosValidos?: string | number;
+    mesReferencia?: string;
+  }
+
+  interface ApiPayload {
+    success?: boolean;
+    status?: string;
+    message?: string;
+    data?: ApiRecord[];
+    total?: number;
+    pages?: number;
+  }
+
+  interface ApiSearchState {
+    page: number;
+    pages: number;
+    total: number;
+    termo: string;
+    filtro: string;
+    loading: boolean;
+    version: number;
+    abortController: AbortController | null;
+  }
+
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwGdUL3p5qf1GozVaGkE0Xx9epH4Pf5pJe59eennDsD34hX0P85HekUl_9p4HqzBzLS/exec';
   const PAGE_SIZE = 20;
-  const MIN_TERM  = 2;
-  const DEBOUNCE_MS = 380;
+  const MIN_TERM = 2;
+  const API_DEBOUNCE_MS = 500;
+  const SITE_INPUT_DEBOUNCE_MS = 80;
+  const VALID_TABS: SearchTab[] = ['site', 'aprovacao', 'relatorio'];
 
-  const rootEl = document.getElementById('fp-root');
-  const basePath = rootEl ? rootEl.getAttribute('data-base') : '';
+  const rootEl = document.getElementById('search-page-root') as HTMLElement | null;
+  const basePath = rootEl?.getAttribute('data-base') || '';
+  const resultsContainer = document.getElementById('master-results') as HTMLElement | null;
+  const resultsTitle = document.getElementById('search-results-title') as HTMLElement | null;
+  const resultsMeta = document.getElementById('search-results-meta') as HTMLElement | null;
+  const tabIndicator = document.getElementById('search-tab-indicator') as HTMLElement | null;
 
-  // ESTADO - (Corrigido para 'relatorio' no singular)
-  const state = {
-    aprovacao:  { page: 1, total: 0, pages: 0, termo: '', filtro: 'all', loading: false },
-    relatorio:  { page: 1, total: 0, pages: 0, termo: '', filtro: 'all', loading: false },
-    activeTab: 'aprovacao'
+  const dom = {
+    tabs: Array.from(document.querySelectorAll<HTMLButtonElement>('.search-tab')),
+    panels: Array.from(document.querySelectorAll<HTMLElement>('.search-panel')),
+    siteInput: document.getElementById('in-site') as HTMLInputElement | null,
+    aprovacaoInput: document.getElementById('in-aprovacao') as HTMLInputElement | null,
+    relatorioInput: document.getElementById('in-relatorio') as HTMLInputElement | null,
+    aprovacaoSelect: document.getElementById('sel-aprovacao') as HTMLSelectElement | null,
+    relatorioSelect: document.getElementById('sel-relatorio') as HTMLSelectElement | null,
+    siteButton: document.getElementById('btn-site') as HTMLButtonElement | null,
+    aprovacaoButton: document.getElementById('btn-aprovacao') as HTMLButtonElement | null,
+    relatorioButton: document.getElementById('btn-relatorio') as HTMLButtonElement | null,
   };
-  const abort = { aprovacao: null, relatorio: null };
 
-  // Base do Site 100% atualizada (Home, Sobre, Monetização)
-  const BASE_SITE = [
-    { nome: "Página Inicial (Home)", url: `${basePath}/`, icon: "fa-home", tags: "home inicio fp agency", desc: "Acesse a página principal com nossos programas, jornadas e estrutura." },
-    { nome: "Sobre a FP Agency", url: `${basePath}/sobre`, icon: "fa-rocket", tags: "sobre historia missao visao valores ecossistema", desc: "Conheça nossa história, ecossistema completo, missão, visão e valores." },
-    { nome: "Kwai Cut", url: `${basePath}/monetize/kwaicut`, icon: "fa-video", tags: "kwai cut monetize monetização edição", desc: "Descubra como monetizar editando vídeos virais no programa Kwai Cut." },
-    { nome: "NarraStars", url: `${basePath}/monetize/kwainarrastars`, icon: "fa-microphone", tags: "narrastars narração kwai locução", desc: "Monetize sua voz narrando vídeos virais para o Kwai através do NarraStars." },
-    { nome: "Portal do Parceiro", url: `${basePath}/recrutador`, icon: "fa-user-lock", tags: "login cadastro entrar acesso", desc: "Acesse sua conta para visualizar painéis, relatórios completos e realizar cadastros." },
-    { nome: "Carteira e Financeiro", url: `${basePath}/recrutador`, icon: "fa-wallet", tags: "saque saldo dinheiro carteira extrato pagamento financeiro", desc: "Gerencie seu saldo, acompanhe os extratos de pagamentos e solicite saques." },
-    { nome: "Política de Privacidade", url: `${basePath}/politica-de-privacidade`, icon: "fa-shield-halved", tags: "politica privacidade dados lgpd segurança legal", desc: "Leia nossa política de privacidade e saiba como protegemos e tratamos seus dados." },
-    { nome: "Termos de Serviço", url: `${basePath}/termos-de-servico`, icon: "fa-file-contract", tags: "termos serviço regras contrato legal uso", desc: "Termos e condições gerais de uso das plataformas e serviços da FP Agency." },
-    { nome: "Aviso Legal", url: `${basePath}/aviso-legal`, icon: "fa-scale-balanced", tags: "aviso legal juridico direitos isencao", desc: "Informações jurídicas, transparência e avisos legais da nossa empresa." },
-    { nome: "Área do Recrutador", url: `${basePath}/recrutador`, icon: "fa-users-gear", tags: "recrutador equipe gerenciar convites painel", desc: "Área de uso exclusivo para recrutadores acompanharem e gerenciarem suas equipes." }
-  ];
+  const apiCache = new Map<string, ApiPayload>();
+  const state = {
+    activeTab: 'site' as SearchTab,
+    site: { termo: '' },
+    aprovacao: { page: 1, pages: 0, total: 0, termo: '', filtro: 'all', loading: false, version: 0, abortController: null } as ApiSearchState,
+    relatorio: { page: 1, pages: 0, total: 0, termo: '', filtro: 'all', loading: false, version: 0, abortController: null } as ApiSearchState,
+  };
 
-  // Configuração do Fuse (Tolerância a erros de digitação e sistema de pontuação)
-  const fuse = new Fuse(BASE_SITE, {
-    keys: ['nome', 'tags', 'desc'],
-    threshold: 0.4,
+  const normalizeText = (value: unknown): string =>
+    String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+
+  const escapeHtml = (value: unknown): string =>
+    String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+
+  const escapeRegex = (value: unknown): string => String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const highlightText = (text: unknown, query: unknown): string => {
+    const safeText = escapeHtml(text);
+    const term = stripSearchPrefix(query);
+    if (normalizeText(term).length < 3) return safeText;
+
+    const regex = new RegExp(`([\\p{L}\\p{N}_-]*${escapeRegex(term)}[\\p{L}\\p{N}_-]*)`, 'giu');
+    return safeText.replace(regex, '<mark>$1</mark>');
+  };
+
+  const stripSearchPrefix = (value: unknown): string => String(value || '').replace(/^@+/, '').trim();
+
+  const routeWithBase = (url: string): string => {
+    const rawUrl = String(url || '/');
+    if (/^https?:\/\//i.test(rawUrl)) return rawUrl;
+    const path = rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`;
+    if (!basePath) return path;
+    return path === '/' ? `${basePath}/` : `${basePath}${path}`;
+  };
+
+  const buildSearchUrl = (tab: string, query: unknown): string => {
+    const safeTab = VALID_TABS.includes(tab as SearchTab) ? (tab as SearchTab) : 'site';
+    const safeQuery = String(query || '').trim();
+    return `${routeWithBase('/busca')}?tab=${encodeURIComponent(safeTab)}${safeQuery ? `&q=${encodeURIComponent(safeQuery)}` : ''}`;
+  };
+
+  const updateUrl = (tab: string, query: unknown): void => {
+    const nextUrl = buildSearchUrl(tab, query);
+    window.history.replaceState(null, '', nextUrl);
+  };
+
+  const safeExternalUrl = (rawUrl: unknown): string | null => {
+    const url = String(rawUrl || '').trim();
+    if (!url || !/^https?:\/\//i.test(url) || /^(javascript|data|vbscript):/i.test(url)) return null;
+    return url;
+  };
+
+  const debounce = <Args extends unknown[]>(callback: (...args: Args) => void, wait: number) => {
+    let timer: number | undefined;
+    return (...args: Args): void => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => callback(...args), wait);
+    };
+  };
+
+  const createIcon = (iconClass?: string): HTMLElement => {
+    const icon = document.createElement('i');
+    icon.className = `fas ${iconClass || 'fa-circle-dot'}`;
+    icon.setAttribute('aria-hidden', 'true');
+    return icon;
+  };
+
+  const setResultsHeader = (title: string, meta = ''): void => {
+    if (resultsTitle) resultsTitle.textContent = title;
+    if (resultsMeta) resultsMeta.textContent = meta;
+  };
+
+  const clearResults = () => {
+    resultsContainer?.replaceChildren();
+  };
+
+  const createFeedback = (message: string, type = 'info'): HTMLElement => {
+    const feedback = document.createElement('div');
+    feedback.className = `search-feedback ${type}`;
+    feedback.append(createIcon(type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info'));
+
+    const text = document.createElement('span');
+    text.textContent = message;
+    feedback.append(text);
+    return feedback;
+  };
+
+  const renderInitialState = () => {
+    setResultsHeader('Pronto para pesquisar', 'Digite um termo para começar');
+    clearResults();
+    resultsContainer?.append(createFeedback('Use a aba Páginas para busca instantânea, ou consulte editores e relatórios pelas abas acima.'));
+  };
+
+  const renderSkeleton = (message = 'Consultando base FP Agency...'): void => {
+    clearResults();
+    setResultsHeader('Buscando...', message);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'search-skeleton-list';
+
+    for (let index = 0; index < 4; index += 1) {
+      const item = document.createElement('div');
+      item.className = 'search-skeleton-card';
+      wrap.append(item);
+    }
+
+    resultsContainer?.append(wrap);
+  };
+
+  const fuse = new Fuse<SearchIndexItem>(searchIndex, {
+    keys: [
+      { name: 'title', weight: 0.42 },
+      { name: 'description', weight: 0.22 },
+      { name: 'keywords', weight: 0.28 },
+      { name: 'category', weight: 0.08 },
+    ],
+    threshold: 0.34,
     ignoreLocation: true,
     includeScore: true,
-    minMatchCharLength: 2
+    minMatchCharLength: 2,
   });
 
-  // ── LÓGICA DE ABAS (UI) ───────────────────────────────────────────────────
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-  const tabSlider = document.getElementById('tabSlider');
-  const resultsContainer = document.getElementById('master-results');
+  const getSiteResults = (query: string): SearchIndexItem[] => {
+    const normalized = normalizeText(query);
+    if (normalized.length < MIN_TERM) {
+      return searchIndex
+        .slice()
+        .sort((a, b) => b.priority - a.priority)
+        .slice(0, 9);
+    }
 
-  function switchTab(tabId, index) {
-    tabSlider.style.transform = `translateX(${index * 100}%)`;
-    
-    tabBtns.forEach(btn => {
-      btn.classList.remove('active');
-      btn.setAttribute('aria-selected', 'false');
-    });
-    tabBtns[index].classList.add('active');
-    tabBtns[index].setAttribute('aria-selected', 'true');
-
-    tabContents.forEach(content => {
-      content.classList.remove('active');
-      content.style.opacity = '0';
-      setTimeout(() => content.style.display = 'none', 200);
-    });
-
-    const activeContent = document.getElementById(`content-${tabId}`);
-    setTimeout(() => {
-      activeContent.style.display = 'block';
-      setTimeout(() => activeContent.style.opacity = '1', 10);
-    }, 200);
-
-    state.activeTab = tabId;
-    resultsContainer.innerHTML = ''; 
-  }
-
-  tabBtns.forEach((btn, index) => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab, index));
-  });
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
-  function esc(v) {
-    return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
-  }
-  
-  function safeUrl(raw) {
-    const u = String(raw || '').trim();
-    if (!u || /^(javascript|data|vbscript):/i.test(u) || !/^https?:\/\//i.test(u)) return null;
-    return u;
-  }
-  
-  function mkLink(url, label) {
-    const u = safeUrl(url);
-    if (!u) return '-';
-    return `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fas fa-arrow-up-right-from-square"></i> ${esc(label || 'Ver Perfil')}</a>`;
-  }
-
-  // Destaque do texto encontrado
-  const highlight = (texto, termo) => {
-    if (!termo) return esc(texto);
-    const regex = new RegExp(`(${termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return esc(texto).replace(regex, '<mark>$1</mark>');
+    return fuse
+      .search(query)
+      .map(({ item, score = 1 }) => ({ item, score }))
+      .sort((a, b) => (a.score - b.score) || (b.item.priority - a.item.priority))
+      .map(({ item }) => item)
+      .slice(0, 16);
   };
 
-  const showLoader = () => document.getElementById('fp-loader').classList.add('on');
-  const hideLoader = () => document.getElementById('fp-loader').classList.remove('on');
+  const getTypeLabel = (type: SearchItemType): string => {
+    if (type === 'feature') return 'Recurso';
+    if (type === 'section') return 'Seção';
+    return 'Página';
+  };
 
-  function setFeedback(msg, isErr = false) {
-    resultsContainer.innerHTML =
-      '<div class="feedback ' + (isErr ? 'error' : '') + '">' +
-      '<i class="fas ' + (isErr ? 'fa-triangle-exclamation' : 'fa-circle-info') + '"></i> ' +
-      esc(msg) + '</div>';
-  }
+  const createSiteCard = (item: SearchIndexItem, query: string): HTMLAnchorElement => {
+    const link = document.createElement('a');
+    link.className = 'site-result-card';
+    link.href = routeWithBase(item.url);
 
-  function debounce(fn, ms) {
-    let t;
-    return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
-  }
+    const iconWrap = document.createElement('span');
+    iconWrap.className = 'site-result-icon';
+    iconWrap.append(createIcon(item.icon));
 
-  // ── API Fetch (POST) ──────────────────────────────────────────────────────
-  async function fetchAPI(action, termo, filtro, page) {
-    const tipo = action === 'buscarAprovacao' ? 'aprovacao' : 'relatorio';
-    if (abort[tipo]) abort[tipo].abort();
-    abort[tipo] = new AbortController();
+    const body = document.createElement('span');
+    body.className = 'site-result-body';
 
-    const resp = await fetch(API_URL, {
+    const top = document.createElement('span');
+    top.className = 'site-result-topline';
+
+    const title = document.createElement('span');
+    title.className = 'site-result-title';
+    title.innerHTML = highlightText(item.title, query);
+
+    const category = document.createElement('span');
+    category.className = 'site-result-category';
+    category.textContent = item.category || getTypeLabel(item.type);
+
+    top.append(title, category);
+
+    const desc = document.createElement('span');
+    desc.className = 'site-result-desc';
+    desc.textContent = item.description;
+
+    const keywordLine = document.createElement('span');
+    keywordLine.className = 'site-result-keywords';
+    keywordLine.textContent = item.keywords.slice(0, 5).join(' · ');
+
+    body.append(top, desc, keywordLine);
+
+    const arrow = createIcon('fa-arrow-right');
+    arrow.classList.add('site-result-arrow');
+
+    link.append(iconWrap, body, arrow);
+    return link;
+  };
+
+  const renderSiteResults = (query: unknown, fromUserAction = false): void => {
+    const term = String(query || '').trim();
+    state.site.termo = term;
+    updateUrl('site', term);
+
+    if (term.length > 0 && normalizeText(term).length < MIN_TERM) {
+      clearResults();
+      setResultsHeader('Continue digitando', `Mínimo de ${MIN_TERM} caracteres`);
+      resultsContainer?.append(createFeedback(`Digite ao menos ${MIN_TERM} caracteres para refinar a busca local.`));
+      return;
+    }
+
+    const results = getSiteResults(term);
+    clearResults();
+
+    if (!results.length) {
+      setResultsHeader('Nenhuma página encontrada', `Busca por "${term}"`);
+      resultsContainer?.append(createFeedback('Tente outro termo ou use a aba Editores para consultar a base de aprovação.'));
+      return;
+    }
+
+    const title = term ? `Páginas para "${term}"` : 'Páginas em destaque';
+    const meta = `${results.length} resultado${results.length === 1 ? '' : 's'} no índice local`;
+    setResultsHeader(title, meta);
+
+    const list = document.createElement('div');
+    list.className = 'site-results-list';
+    results.forEach((item) => list.append(createSiteCard(item, term)));
+    resultsContainer?.append(list);
+
+    if (fromUserAction) {
+      resultsContainer?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+  };
+
+  const setActiveTab = (tab: string | null | undefined, options: { keepResults?: boolean } = {}): void => {
+    const safeTab: SearchTab = VALID_TABS.includes(tab as SearchTab) ? (tab as SearchTab) : 'site';
+    const index = VALID_TABS.indexOf(safeTab);
+    state.activeTab = safeTab;
+
+    dom.tabs.forEach((button) => {
+      const isActive = button.dataset.tab === safeTab;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+      button.tabIndex = isActive ? 0 : -1;
+    });
+
+    dom.panels.forEach((panel) => {
+      const isActive = panel.id === `panel-${safeTab}`;
+      panel.classList.toggle('active', isActive);
+      panel.hidden = !isActive;
+    });
+
+    if (tabIndicator) {
+      tabIndicator.style.transform = `translateX(${index * 100}%)`;
+    }
+
+    if (!options.keepResults) {
+      const activeInput = getInputForTab(safeTab);
+      updateUrl(safeTab, activeInput?.value || '');
+      if (safeTab === 'site') renderSiteResults(activeInput?.value || '');
+      else renderInitialState();
+    }
+  };
+
+  const getInputForTab = (tab: SearchTab): HTMLInputElement | null => {
+    if (tab === 'aprovacao') return dom.aprovacaoInput;
+    if (tab === 'relatorio') return dom.relatorioInput;
+    return dom.siteInput;
+  };
+
+  const getSelectForTab = (tab: ApiTab): HTMLSelectElement | null => (tab === 'aprovacao' ? dom.aprovacaoSelect : dom.relatorioSelect);
+
+  const getButtonForTab = (tab: ApiTab): HTMLButtonElement | null => (tab === 'aprovacao' ? dom.aprovacaoButton : dom.relatorioButton);
+
+  const getApiAction = (tab: ApiTab): string => (tab === 'aprovacao' ? 'buscarAprovacao' : 'buscarRelatorios');
+
+  const makeCacheKey = (tab: ApiTab, term: string, filter: string, page: number): string => `${tab}:${normalizeText(term)}:${filter}:${page}`;
+
+  const parseApiPayload = async (response: Response): Promise<ApiPayload> => {
+    const text = await response.text();
+    try {
+      return JSON.parse(text) as ApiPayload;
+    } catch {
+      throw new Error('A API retornou uma resposta inválida.');
+    }
+  };
+
+  const fetchApiPage = async (tab: ApiTab, term: string, filter: string, page: number, signal: AbortSignal): Promise<ApiPayload> => {
+    const cacheKey = makeCacheKey(tab, term, filter, page);
+    const cachedPayload = apiCache.get(cacheKey);
+    if (cachedPayload) return cachedPayload;
+
+    const response = await fetch(API_URL, {
       method: 'POST',
-      signal: abort[tipo].signal,
       body: JSON.stringify({
-        action: action,
-        data: { termo: termo, filtro: filtro, page: page, limit: PAGE_SIZE }
-      })
+        action: getApiAction(tab),
+        data: { termo: term, filtro: filter, page, limit: PAGE_SIZE },
+      }),
+      signal,
     });
-    const text = await resp.text();
-    try { return JSON.parse(text); } 
-    catch (_) { throw new Error('Back-end retornou resposta inválida.'); }
-  }
 
-  // ── RENDERIZADORES ────────────────────────────────────────────────────────
-  function badgeStatus(status) {
-    var s = String(status || '').toLowerCase();
-    if (s.includes('aprovado')) return ['b-success', 'fa-circle-check', status || 'Aprovado'];
-    if (s.includes('reprovado')) return ['b-danger', 'fa-circle-xmark', status || 'Reprovado'];
-    if (s.includes('pendente') || s.includes('analis')) return ['b-warning', 'fa-clock', status || 'Em Análise'];
-    return ['b-neutral', 'fa-circle-question', status || 'Em Análise'];
-  }
-
-  function badgeFonte(fonte) {
-    if (fonte === 'Cut') return '<span class="badge b-blue"><i class="fas fa-scissors"></i> CUT</span>';
-    if (fonte === 'Narrastars') return '<span class="badge b-purple"><i class="fas fa-star"></i> NARRASTARS</span>';
-    return '<span class="badge b-neutral"><i class="fas fa-database"></i> RESULTADOS</span>';
-  }
-
-  function renderAprovacao(items, append) {
-    if (!append) resultsContainer.innerHTML = '<h3 class="section-badge">Resultados de Aprovação</h3>';
-    const frag = document.createDocumentFragment();
-
-    items.forEach(item => {
-      const [bClass, bIcon, bLabel] = badgeStatus(item.statusResultado);
-      const fonteClass = item.fonte === 'Cut' ? 'from-cut' : item.fonte === 'Narrastars' ? 'from-narrastars' : '';
-      const temRecrutador = item.recrutador && item.recrutador !== 'FP Agency';
-      const temPerfil = safeUrl(item.perfilUrl);
-      const temMotivo = item.motivo && item.motivo.trim();
-
-      const card = document.createElement('div');
-      card.className = `result-card ${fonteClass}`;
-      card.innerHTML = `
-        <div class="rc-head">
-          <div class="rc-name-block">
-            <span class="rc-name">${esc(item.nomeCompleto) || '<em style="opacity:.5">Não identificado</em>'}</span>
-            <span class="rc-fonte">${esc(item.fonte || 'Resultados')}</span>
-          </div>
-          <div class="rc-badges">
-            ${badgeFonte(item.fonte)}
-            <span class="badge ${bClass}"><i class="fas ${bIcon}"></i> ${esc(bLabel)}</span>
-          </div>
-        </div>
-        <div class="rc-grid">
-          <div class="db"><span class="db-label">Data</span><span class="db-value">${esc(item.data) || '-'}</span></div>
-          <div class="db"><span class="db-label">Categoria</span><span class="db-value">${esc(item.categoria) || '-'}</span></div>
-          <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsapp) || '-'}</span></div>
-          <div class="db"><span class="db-label">Perfil</span><span class="db-value">${temPerfil ? mkLink(item.perfilUrl) : '-'}</span></div>
-          ${temMotivo ? `<div class="db"><span class="db-label">Motivo</span><span class="db-value" style="font-size:.82rem; color:var(--text-muted)">${esc(item.motivo)}</span></div>` : ''}
-        </div>
-        ${temRecrutador ? `
-        <div class="rc-recruiter">
-          <div class="rc-recruiter-label"><i class="fas fa-user-tie"></i> Recrutado por</div>
-          <div class="db"><span class="db-label">Recrutador</span><span class="db-value">${esc(item.recrutador)}</span></div>
-          <div class="db"><span class="db-label">WhatsApp</span><span class="db-value">${esc(item.whatsRecrutador) || '-'}</span></div>
-        </div>` : ''}
-      `;
-      frag.appendChild(card);
-    });
-    resultsContainer.appendChild(frag);
-  }
-
-  function renderRelatorios(items, append) {
-    if (!append) resultsContainer.innerHTML = '<h3 class="section-badge">Histórico de Relatórios</h3>';
-    const frag = document.createDocumentFragment();
-
-    items.forEach(item => {
-      const totalInt = parseInt(item.totalVv, 10);
-      const views = isNaN(totalInt) ? esc(item.totalVv || '0') : totalInt.toLocaleString('pt-BR');
-      const uid = item.uid || '';
-      const kwai = uid ? `https://www.kwai.com/@${uid}` : '';
-
-      const card = document.createElement('div');
-      card.className = 'result-card';
-      card.innerHTML = `
-        <div class="rc-head">
-          <div class="rc-name-block">
-            <span class="rc-name">${esc(item.nomeUsuario) || '-'}</span>
-            <span class="rc-fonte">${esc(item.categoria) || '-'}</span>
-          </div>
-          <div class="rc-badges"><span class="tag-mes">${esc(item.mesReferencia) || '-'}</span></div>
-        </div>
-        <div class="rc-grid">
-          <div class="db">
-            <span class="db-label">UID Kwai</span>
-            <span class="db-value" style="font-size:.82rem; color:var(--text-muted); font-family:var(--mono)">${esc(uid) || '-'}</span>
-            ${kwai ? mkLink(kwai, 'Ver Perfil') : ''}
-          </div>
-          <div class="db"><span class="db-label">Taxa Vert.</span><span class="db-value" style="color:var(--orange)">${esc(item.taxaVerticalidade) || '-'}</span></div>
-          <div class="db"><span class="db-label">Data Início</span><span class="db-value">${esc(item.dataInicio) || '-'}</span></div>
-          <div class="db"><span class="db-label">Vídeos Válidos</span><span class="db-value">${esc(item.videosValidos) || '0'}</span></div>
-          <div class="db"><span class="db-label">Total Views</span><span class="db-value">${views}</span></div>
-        </div>
-      `;
-      frag.appendChild(card);
-    });
-    resultsContainer.appendChild(frag);
-  }
-
-  function renderSite(termo) {
-    resultsContainer.innerHTML = '<h3 class="section-badge">Resultados no Site</h3>';
-    
-    // Busca inteligente com Fuse.js
-    const resultadosLocal = fuse.search(termo);
-    
-    if (resultadosLocal.length === 0) {
-      setFeedback("Nenhuma página encontrada para essa palavra-chave.");
-      return;
+    const payload = await parseApiPayload(response);
+    if (payload?.success === false || payload?.status === 'error') {
+      throw new Error(payload?.message || 'Não foi possível consultar a base FP Agency.');
     }
 
-    const carousel = document.createElement('div');
-    carousel.className = 'site-carousel';
+    apiCache.set(cacheKey, payload);
+    return payload;
+  };
 
-    const frag = document.createDocumentFragment();
-    resultadosLocal.forEach(res => {
-      const item = res.item;
-      // Destaque visual da pesquisa (Highlight)
-      const nomeHi = highlight(item.nome, termo);
-      
-      const card = document.createElement('a');
-      card.href = item.url;
-      card.className = 'site-link-card';
-      card.innerHTML = `
-        <div class="site-link-icon"><i class="fas ${item.icon}"></i></div>
-        <div class="site-link-info">
-          <h4>${nomeHi}</h4>
-          <p>${esc(item.desc)}</p>
-        </div>
-        <div class="site-link-action">
-          Acessar <i class="fas fa-arrow-right"></i>
-        </div>
-      `;
-      frag.appendChild(card);
-    });
-    
-    carousel.appendChild(frag);
-    resultsContainer.appendChild(carousel);
-  }
+  const setApiLoading = (tab: ApiTab, isLoading: boolean): void => {
+    const button = getButtonForTab(tab);
+    const s = state[tab];
+    s.loading = isLoading;
 
-  function renderPagination(tipo) {
-    const s = state[tipo];
-    const old = resultsContainer.querySelector('.fp-pagination');
-    if (old) old.remove();
-    if (s.page >= s.pages) return;
+    if (button) {
+      button.disabled = isLoading;
+      button.classList.toggle('loading', isLoading);
+    }
+  };
 
-    const shown = Math.min(s.page * PAGE_SIZE, s.total);
-    const pag = document.createElement('div');
-    pag.className = 'fp-pagination';
-    pag.innerHTML = `
-      <span class="fp-pag-info">${shown} de ${s.total} resultados</span>
-      <button class="btn-more" data-tipo="${tipo}">
-        <i class="fas fa-chevron-down"></i> Carregar mais
-      </button>`;
-    resultsContainer.appendChild(pag);
-  }
+  const createBadge = (label: unknown, iconClass: string, modifier = 'neutral'): HTMLElement => {
+    const badge = document.createElement('span');
+    badge.className = `search-badge ${modifier}`;
+    badge.append(createIcon(iconClass));
 
-  // ── Lógica Central de Busca (BLINDADA CONTRA TRAVAMENTOS) ────────────────
-  async function executarBusca(tipo, append = false) {
-    if (tipo === 'site') {
-      const termoSite = document.getElementById('in-site').value.trim();
-      if (termoSite.length < MIN_TERM) {
-        setFeedback(`Digite ao menos ${MIN_TERM} caracteres para buscar no site.`);
-        return;
+    const text = document.createElement('span');
+    text.textContent = String(label || 'Indefinido');
+    badge.append(text);
+    return badge;
+  };
+
+  const getStatusBadgeInfo = (status: unknown): ApiBadgeInfo => {
+    const normalized = normalizeText(status);
+    if (normalized.includes('aprov')) return ['Aprovado', 'fa-circle-check', 'success'];
+    if (normalized.includes('reprov')) return ['Reprovado', 'fa-circle-xmark', 'danger'];
+    if (normalized.includes('pend') || normalized.includes('analis')) return [String(status || 'Em análise'), 'fa-clock', 'warning'];
+    return [String(status || 'Em análise'), 'fa-circle-question', 'neutral'];
+  };
+
+  const getSourceBadgeInfo = (source: unknown): ApiBadgeInfo => {
+    const normalized = normalizeText(source);
+    if (normalized.includes('cut')) return ['Cut', 'fa-scissors', 'blue'];
+    if (normalized.includes('narra')) return ['Narrastars', 'fa-star', 'purple'];
+    return [String(source || 'Base FP'), 'fa-database', 'neutral'];
+  };
+
+  const createDataBlock = (label: string, value: unknown, extraNode: Node | null = null): HTMLElement => {
+    const block = document.createElement('div');
+    block.className = 'data-block';
+
+    const labelEl = document.createElement('span');
+    labelEl.className = 'data-label';
+    labelEl.textContent = label;
+
+    const valueEl = document.createElement('span');
+    valueEl.className = 'data-value';
+    valueEl.textContent = String(value || '-');
+
+    block.append(labelEl, valueEl);
+    if (extraNode) block.append(extraNode);
+    return block;
+  };
+
+  const createActionLink = (href: string, label: string, iconClass = 'fa-arrow-right', external = false): HTMLAnchorElement => {
+    const link = document.createElement('a');
+    link.className = 'result-action-link';
+    link.href = href;
+    if (external) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+
+    link.append(createIcon(iconClass));
+    const text = document.createElement('span');
+    text.textContent = label;
+    link.append(text);
+    return link;
+  };
+
+  const renderAprovacaoCard = (item: ApiRecord): HTMLElement => {
+    const name = String(item?.nomeCompleto || item?.nome || 'Não identificado').trim();
+    const source = String(item?.fonte || 'Base FP').trim();
+    const status = String(item?.statusResultado || item?.status || 'Em análise').trim();
+    const [statusLabel, statusIcon, statusModifier] = getStatusBadgeInfo(status);
+    const [sourceLabel, sourceIcon, sourceModifier] = getSourceBadgeInfo(source);
+
+    const card = document.createElement('article');
+    card.className = `api-result-card ${sourceModifier === 'blue' ? 'from-cut' : sourceModifier === 'purple' ? 'from-narrastars' : ''}`;
+
+    const head = document.createElement('div');
+    head.className = 'api-card-head';
+
+    const identity = document.createElement('div');
+    identity.className = 'api-card-identity';
+    const title = document.createElement('h3');
+    title.textContent = name;
+    const subtitle = document.createElement('span');
+    subtitle.textContent = source;
+    identity.append(title, subtitle);
+
+    const badges = document.createElement('div');
+    badges.className = 'api-card-badges';
+    badges.append(createBadge(sourceLabel, sourceIcon, sourceModifier), createBadge(statusLabel, statusIcon, statusModifier));
+    head.append(identity, badges);
+
+    const grid = document.createElement('div');
+    grid.className = 'api-card-grid';
+
+    const profileUrl = safeExternalUrl(item?.perfilUrl);
+    const profileLink = profileUrl ? createActionLink(profileUrl, 'Ver perfil', 'fa-arrow-up-right-from-square', true) : null;
+    grid.append(
+      createDataBlock('Data', item?.data),
+      createDataBlock('Categoria', item?.categoria),
+      createDataBlock('WhatsApp', item?.whatsapp),
+      createDataBlock('Perfil', profileUrl ? 'Disponível' : '-', profileLink),
+    );
+
+    if (item?.motivo) {
+      const reason = createDataBlock('Motivo', item.motivo);
+      reason.classList.add('wide');
+      grid.append(reason);
+    }
+
+    const recruiterName = String(item?.recrutador || '').trim();
+    if (recruiterName && recruiterName !== 'FP Agency') {
+      const recruiter = document.createElement('div');
+      recruiter.className = 'recruiter-strip';
+      recruiter.append(createIcon('fa-user-tie'), createDataBlock('Recrutador', recruiterName), createDataBlock('WhatsApp', item?.whatsRecrutador));
+      grid.append(recruiter);
+    }
+
+    const actions = document.createElement('div');
+    actions.className = 'api-card-actions';
+    actions.append(createActionLink(buildSearchUrl('aprovacao', name), 'Abrir esta busca'));
+
+    card.append(head, grid, actions);
+    return card;
+  };
+
+  const renderRelatorioCard = (item: ApiRecord): HTMLElement => {
+    const userName = String(item?.nomeUsuario || item?.usuario || 'Usuário não identificado').trim();
+    const uid = String(item?.uid || '').trim();
+    const totalViews = Number.parseInt(String(item?.totalVv || '0'), 10);
+    const viewsLabel = Number.isFinite(totalViews) ? totalViews.toLocaleString('pt-BR') : String(item?.totalVv || '0');
+
+    const card = document.createElement('article');
+    card.className = 'api-result-card report';
+
+    const head = document.createElement('div');
+    head.className = 'api-card-head';
+
+    const identity = document.createElement('div');
+    identity.className = 'api-card-identity';
+    const title = document.createElement('h3');
+    title.textContent = userName;
+    const subtitle = document.createElement('span');
+    subtitle.textContent = String(item?.categoria || 'Relatório mensal');
+    identity.append(title, subtitle);
+
+    const badges = document.createElement('div');
+    badges.className = 'api-card-badges';
+    badges.append(createBadge(item?.mesReferencia || 'Mês', 'fa-calendar-days', 'neutral'));
+    head.append(identity, badges);
+
+    const profileUrl = uid ? safeExternalUrl(`https://www.kwai.com/@${uid}`) : null;
+    const profileLink = profileUrl ? createActionLink(profileUrl, 'Ver perfil', 'fa-arrow-up-right-from-square', true) : null;
+
+    const grid = document.createElement('div');
+    grid.className = 'api-card-grid';
+    grid.append(
+      createDataBlock('UID Kwai', uid),
+      createDataBlock('Taxa vertical', item?.taxaVerticalidade),
+      createDataBlock('Data início', item?.dataInicio),
+      createDataBlock('Vídeos válidos', item?.videosValidos || '0'),
+      createDataBlock('Total views', viewsLabel),
+      createDataBlock('Perfil', profileUrl ? 'Disponível' : '-', profileLink),
+    );
+
+    const actions = document.createElement('div');
+    actions.className = 'api-card-actions';
+    actions.append(createActionLink(buildSearchUrl('relatorio', userName), 'Abrir este relatório', 'fa-arrow-right'));
+
+    card.append(head, grid, actions);
+    return card;
+  };
+
+  const renderPagination = (tab: ApiTab): void => {
+    const s = state[tab];
+    if (!s.pages || s.page >= s.pages) return;
+
+    const pagination = document.createElement('div');
+    pagination.className = 'search-pagination';
+
+    const info = document.createElement('span');
+    info.textContent = `${Math.min(s.page * PAGE_SIZE, s.total)} de ${s.total} resultados`;
+
+    const button = document.createElement('button');
+    button.className = 'load-more-btn';
+    button.type = 'button';
+    button.dataset.tab = tab;
+    button.append(createIcon('fa-chevron-down'));
+    const text = document.createElement('span');
+    text.textContent = 'Carregar mais';
+    button.append(text);
+
+    pagination.append(info, button);
+    resultsContainer?.append(pagination);
+  };
+
+  const renderApiResults = (tab: ApiTab, payload: ApiPayload, append = false): void => {
+    const items = Array.isArray(payload?.data) ? payload.data : [];
+    const total = Number(payload?.total || items.length || 0);
+    const pages = Number(payload?.pages || 1);
+    const s = state[tab];
+    s.total = total;
+    s.pages = pages;
+
+    if (!append) clearResults();
+
+    if (!items.length) {
+      if (!append) {
+        setResultsHeader('Nenhum registro encontrado', `Busca por "${s.termo}"`);
+        resultsContainer?.append(createFeedback('Não encontramos registros para essa busca na base FP Agency.'));
       }
-      renderSite(termoSite);
       return;
     }
 
-    const s = state[tipo];
-    if (s.loading) {
-      console.warn(`[Aviso] Busca de ${tipo} já está em andamento.`);
-      return; 
+    if (!append) {
+      const label = tab === 'aprovacao' ? 'Editores encontrados' : 'Relatórios encontrados';
+      setResultsHeader(label, `${total || items.length} resultado${(total || items.length) === 1 ? '' : 's'} para "${s.termo}"`);
+    } else {
+      resultsContainer?.querySelector('.search-pagination')?.remove();
     }
 
-    // IDs foram devidamente mapeados para relatorio no singular
-    const inputId  = `in-${tipo}`;
-    const selectId = `sel-${tipo}`;
-    const btnId    = `btn-${tipo}`;
-    const action   = tipo === 'aprovacao' ? 'buscarAprovacao' : 'buscarRelatorios';
+    const list = document.createElement('div');
+    list.className = 'api-results-list';
+    items.forEach((item) => list.append(tab === 'aprovacao' ? renderAprovacaoCard(item) : renderRelatorioCard(item)));
+    resultsContainer?.append(list);
+    renderPagination(tab);
+  };
 
-    const termo  = document.getElementById(inputId).value.trim();
-    const filtro = document.getElementById(selectId).value;
-    const btn    = document.getElementById(btnId);
+  const runApiSearch = async (tab: ApiTab, options: { append?: boolean } = {}): Promise<void> => {
+    const append = Boolean(options.append);
+    const s = state[tab];
+    const input = getInputForTab(tab);
+    const select = getSelectForTab(tab);
+    const term = stripSearchPrefix(input?.value || '');
+    const filter = select?.value || 'all';
 
-    if (!termo || termo.length < MIN_TERM) {
-      setFeedback(`Digite ao menos ${MIN_TERM} caracteres.`);
+    if (normalizeText(term).length < MIN_TERM) {
+      setResultsHeader('Continue digitando', `Mínimo de ${MIN_TERM} caracteres`);
+      clearResults();
+      resultsContainer?.append(createFeedback(`Digite ao menos ${MIN_TERM} caracteres para consultar ${tab === 'aprovacao' ? 'editores' : 'relatórios'}.`));
       return;
     }
 
     if (!append) {
       s.page = 1;
-      s.termo = termo;
-      s.filtro = filtro;
+      s.termo = term;
+      s.filtro = filter;
+      renderSkeleton(tab === 'aprovacao' ? 'Consultando aprovações...' : 'Consultando relatórios...');
+    } else {
+      s.page += 1;
     }
 
-    s.loading = true;
-    if(btn) btn.disabled = true;
-    
-    if (!append) setFeedback('Acessando servidor FP Agency...');
-    showLoader();
+    updateUrl(tab, term);
+
+    const requestVersion = ++s.version;
+    if (s.abortController) s.abortController.abort();
+    s.abortController = new AbortController();
+    setApiLoading(tab, true);
 
     try {
-      console.log(`[Requisicao] Solicitando ${action} para: "${s.termo}"`);
-      const res = await fetchAPI(action, s.termo, s.filtro, s.page);
-      console.log(`[Resposta] ${action} retornou com sucesso.`);
-
-      if (!res || res.status === 'error') {
-        setFeedback(res?.message || 'Erro desconhecido no servidor.', true);
-        return;
-      }
-
-      s.total = res.total || 0;
-      s.pages = res.pages || 1;
-
-      if (!res.data || res.data.length === 0) {
-        if (!append) setFeedback('Nenhum registro encontrado para esta busca na base.');
-        return;
-      }
-
-      if (tipo === 'aprovacao') renderAprovacao(res.data, append);
-      else renderRelatorios(res.data, append);
-
-      renderPagination(tipo);
-
-    } catch (err) {
-      console.error(`[Falha Crítica] Erro ao buscar ${tipo}:`, err);
-      if (err.name === 'AbortError') return;
-      setFeedback(err.message, true);
+      const payload = await fetchApiPage(tab, s.termo, s.filtro, s.page, s.abortController.signal);
+      if (requestVersion !== s.version) return;
+      renderApiResults(tab, payload, append);
+    } catch (error) {
+      if ((error instanceof Error && error.name === 'AbortError') || requestVersion !== s.version) return;
+      if (append) s.page = Math.max(1, s.page - 1);
+      setResultsHeader('Falha na consulta', 'A API não respondeu como esperado');
+      clearResults();
+      resultsContainer?.append(createFeedback(error instanceof Error ? error.message : 'Não foi possível consultar a API agora.', 'error'));
     } finally {
-      hideLoader();
-      s.loading = false;
-      if(btn) btn.disabled = false;
+      if (requestVersion === s.version) setApiLoading(tab, false);
     }
-  }
+  };
 
-  // ── Listeners de Evento ───────────────────────────────────────────────────
-  document.getElementById('btn-aprovacao').addEventListener('click', () => executarBusca('aprovacao'));
-  
-  // Alterado para corresponder perfeitamente à string "relatorio"
-  document.getElementById('btn-relatorio').addEventListener('click', () => executarBusca('relatorio'));
-  document.getElementById('btn-site').addEventListener('click', () => executarBusca('site'));
-
-  const onEnterA = debounce(() => executarBusca('aprovacao'), DEBOUNCE_MS);
-  const onEnterR = debounce(() => executarBusca('relatorio'), DEBOUNCE_MS);
-  const onEnterS = debounce(() => executarBusca('site'), DEBOUNCE_MS);
-
-  document.getElementById('in-aprovacao').addEventListener('keydown', e => { if (e.key==='Enter') onEnterA(); });
-  document.getElementById('in-relatorio').addEventListener('keydown', e => { if (e.key==='Enter') onEnterR(); });
-  document.getElementById('in-site').addEventListener('keydown', e => { if (e.key==='Enter') onEnterS(); });
-
-  document.addEventListener('click', e => {
-    const btn = e.target.closest('.btn-more');
-    if (btn) {
-      const tipo = btn.dataset.tipo;
-      if (tipo) { state[tipo].page++; executarBusca(tipo, true); }
+  const triggerCurrentSearch = (fromUserAction = true): void => {
+    if (state.activeTab === 'site') {
+      renderSiteResults(dom.siteInput?.value || '', fromUserAction);
+      return;
     }
+
+    runApiSearch(state.activeTab);
+  };
+
+  const onSiteInput = debounce(() => {
+    if (state.activeTab === 'site') renderSiteResults(dom.siteInput?.value || '');
+  }, SITE_INPUT_DEBOUNCE_MS);
+
+  const onApiRealtimeInput = debounce((tab: ApiTab) => {
+    const rawValue = getInputForTab(tab)?.value || '';
+    if (state.activeTab === tab && rawValue.trim().startsWith('@')) {
+      runApiSearch(tab);
+    }
+  }, API_DEBOUNCE_MS);
+
+  dom.tabs.forEach((button) => {
+    button.addEventListener('click', () => setActiveTab(button.dataset.tab || 'site'));
   });
 
-  // ── Leitura de URL (?q=) ──────────────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
+  dom.siteButton?.addEventListener('click', () => renderSiteResults(dom.siteInput?.value || '', true));
+  dom.aprovacaoButton?.addEventListener('click', () => runApiSearch('aprovacao'));
+  dom.relatorioButton?.addEventListener('click', () => runApiSearch('relatorio'));
+
+  dom.siteInput?.addEventListener('input', onSiteInput);
+  dom.aprovacaoInput?.addEventListener('input', () => onApiRealtimeInput('aprovacao'));
+  dom.relatorioInput?.addEventListener('input', () => onApiRealtimeInput('relatorio'));
+
+  [dom.siteInput, dom.aprovacaoInput, dom.relatorioInput].forEach((input) => {
+    input?.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        triggerCurrentSearch();
+      }
+    });
+  });
+
+  resultsContainer?.addEventListener('click', (event) => {
+    const button = event.target instanceof HTMLElement ? event.target.closest<HTMLButtonElement>('.load-more-btn') : null;
+    if (!button) return;
+
+    const tab = button.dataset.tab;
+    if (tab === 'aprovacao' || tab === 'relatorio') runApiSearch(tab, { append: true });
+  });
+
+  const bootFromUrl = (): void => {
     const params = new URLSearchParams(window.location.search);
-    const query  = params.get('q');
+    const tabParam = params.get('tab');
+    const tab: SearchTab = VALID_TABS.includes(tabParam as SearchTab) ? (tabParam as SearchTab) : 'site';
+    const query = params.get('q') || '';
 
-    if (query && query.trim() !== '') {
-      document.getElementById('in-aprovacao').value = query.trim();
-      executarBusca('aprovacao');
+    setActiveTab(tab, { keepResults: true });
+
+    const activeInput = getInputForTab(tab);
+    if (activeInput) activeInput.value = query;
+
+    if (query.trim()) {
+      if (tab === 'site') renderSiteResults(query);
+      else runApiSearch(tab);
+      return;
     }
-  });
+
+    if (tab === 'site') renderSiteResults('');
+    else renderInitialState();
+  };
+
+  bootFromUrl();
 </script>
 
 <style is:global>
-  /* ─── TOKENS E RESET ─────────────────────────────────────────────────────── */
-  :root {
-    --bg-card: #181c27;
-    --bg-input: #1e2332;
-    --border: #2a3048;
-    --border-hover: #3d4d7a;
-    --orange: #ff6b2b;
-    --orange-dim: #ff6b2b22;
-    --orange-glow: rgba(255,107,43,.25);
-    --green: #22c55e;
-    --green-dim: #22c55e1a;
-    --red: #ef4444;
-    --red-dim: #ef44441a;
-    --yellow: #f59e0b;
-    --yellow-dim: #f59e0b1a;
-    --blue: #3b82f6;
-    --blue-dim: #3b82f61a;
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
-    --text-faint: #475569;
-    --radius: 12px;
-    --radius-lg: 20px;
-    --mono: 'JetBrains Mono', monospace;
+  .search-page {
+    --sp-bg-card: #171b25;
+    --sp-bg-soft: #1f2533;
+    --sp-border: rgba(255, 255, 255, 0.09);
+    --sp-border-strong: rgba(255, 255, 255, 0.16);
+    --sp-text: #e2e8f0;
+    --sp-muted: #94a3b8;
+    --sp-faint: #64748b;
+    --sp-orange: #ff6b2b;
+    --sp-orange-soft: rgba(255, 107, 43, 0.14);
+    --sp-blue: #60a5fa;
+    --sp-green: #4ade80;
+    --sp-red: #f87171;
+    --sp-yellow: #fbbf24;
+    --sp-radius: 14px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 44px 20px 88px;
+    color: var(--sp-text);
+    font-family: "Sora", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
-  .fp { font-family: 'Sora', sans-serif; min-height: 100vh; width: 100%; color: var(--text); padding-bottom: 80px; }
-
-  /* ─── HIGHLIGHT DO FUSE.JS (Marca Texto) ─────────────────────────────────── */
-  mark { background: rgba(255, 107, 43, 0.15); color: #ff9a5c; border-radius: 3px; padding: 0 2px; font-weight: 700; }
-
-  /* ─── LOADER E HERO ──────────────────────────────────────────────────────── */
-  .fp-loader { display: none; position: fixed; inset: 0; background: rgba(15,17,23,.8); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
-  .fp-loader.on { display: flex; }
-  .fp-loader-ring { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin .8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .fp-loader-text { font-size: .85rem; color: var(--orange); font-family: var(--mono); letter-spacing: .05em; text-transform: uppercase; font-weight: 600;}
-
-  .fp-hero { position: relative; z-index: 1; padding: 50px 24px 40px; text-align: center; }
-  .fp-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .75rem; color: var(--orange); letter-spacing: .1em; text-transform: uppercase; background: var(--orange-dim); padding: 6px 14px; border-radius: 99px; border: 1px solid var(--orange-glow); margin-bottom: 20px; }
-  .fp-hero-title { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 12px; }
-  .fp-hero-title span { color: var(--orange); }
-  .fp-hero-sub { font-size: .95rem; color: var(--text-muted); max-width: 450px; margin: 0 auto; line-height: 1.6; }
-
-  /* ─── ESTRUTURA CENTRAL ──────────────────────────────────────────────────── */
-  .fp-content { position: relative; z-index: 2; padding: 0 20px; max-width: 860px; margin: 0 auto; }
-  
-  .search-master-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 30px; }
-
-  /* ─── TAB SWITCHER ───────────────────────────────────────────────────────── */
-  .tab-switcher { position: relative; display: flex; background: var(--bg-input); border-radius: 99px; padding: 6px; margin-bottom: 30px; border: 1px solid var(--border); }
-  .tab-slider { position: absolute; top: 6px; left: 6px; height: calc(100% - 12px); width: calc(33.333% - 4px); background: var(--orange); border-radius: 99px; z-index: 1; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 15px var(--orange-glow); }
-  .tab-btn { flex: 1; text-align: center; padding: 14px 0; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: .9rem; font-family: 'Sora', sans-serif; cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .tab-btn.active { color: #fff; }
-
-  /* ─── TAB CONTENTS ───────────────────────────────────────────────────────── */
-  .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease; }
-  .tab-content.active { display: block; opacity: 1; }
-  .sc-desc { font-size: .85rem; color: var(--text-muted); margin-bottom: 18px; text-align: center;}
-
-  .input-row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .fp-input, .fp-select { flex: 1 1 200px; padding: 14px 18px; background: #13161e; border: 1px solid var(--border); border-radius: var(--radius); font-family: 'Sora', sans-serif; font-size: .9rem; color: var(--text); outline: none; transition: all .2s; }
-  .fp-select { flex: 0 1 180px; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
-  .fp-input::placeholder { color: var(--text-faint); }
-  .fp-input:focus, .fp-select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px var(--orange-dim); }
-  
-  .fp-btn { flex: 0 1 auto; min-width: 130px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: var(--radius); font-family: 'Sora', sans-serif; font-weight: 700; font-size: .9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all .2s; box-shadow: 0 4px 16px var(--orange-glow); }
-  .fp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); filter: brightness(1.1);}
-  .fp-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-  /* ─── RESULTADOS: APROVAÇÃO E RELATÓRIO ──────────────────────────────────── */
-  .results-container { min-height: 200px; }
-  .section-badge { display: inline-block; font-size: .75rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 2px; color: var(--text-faint); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 8px; width: 100%;}
-  
-  .result-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 26px; margin-bottom: 16px; position: relative; overflow: hidden; animation: slideIn .3s ease both; transition: border-color .2s, transform .2s; }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-  .result-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.15);}
-  
-  .result-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--orange); border-radius: 4px 0 0 4px; }
-  .result-card.from-cut::before { background: var(--blue); }
-  .result-card.from-narrastars::before { background: #a855f7; }
-  
-  .rc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-  .rc-name-block { display: flex; flex-direction: column; gap: 5px; }
-  .rc-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
-  .rc-fonte { font-family: var(--mono); font-size: .7rem; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase;}
-  .rc-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; }
-  
-  .rc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; }
-  .db { display: flex; flex-direction: column; gap: 6px; }
-  .db-label { font-family: var(--mono); font-size: .65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .08em; }
-  .db-value { font-size: .9rem; color: var(--text); font-weight: 500; }
-  
-  .rc-recruiter { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; background: rgba(0,0,0,0.1); border-radius: 8px; padding: 15px;}
-  .rc-recruiter-label { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .7rem; color: var(--orange); text-transform: uppercase; letter-spacing: .08em; }
-
-  /* ─── CARROSSEL DO SITE (ABA 3) ──────────────────────────────────────────── */
-  .site-carousel {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 10px 5px 30px 5px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0 -5px; 
+  .search-hero {
+    width: min(920px, 100%);
+    margin: 0 auto 28px;
+    text-align: center;
   }
-  .site-carousel::-webkit-scrollbar { display: none; }
 
-  .site-link-card {
-    flex: 0 0 280px; 
+  .search-hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    padding: 7px 13px;
+    border: 1px solid rgba(255, 107, 43, 0.32);
+    border-radius: 999px;
+    background: var(--sp-orange-soft);
+    color: #ffad82;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .search-hero h1 {
+    max-width: 760px;
+    margin: 0 auto 12px;
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 850;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .search-hero p {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--sp-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .search-console,
+  .search-results-shell {
+    width: min(940px, 100%);
+    margin: 0 auto;
+    border: 1px solid var(--sp-border);
+    border-radius: 18px;
+    background: rgba(23, 27, 37, 0.86);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  }
+
+  .search-console {
+    padding: 18px;
+  }
+
+  .search-tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin-bottom: 18px;
+    padding: 6px;
+    border: 1px solid var(--sp-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .search-tab-indicator {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 0;
+    width: calc((100% - 12px) / 3);
+    height: calc(100% - 12px);
+    border-radius: 999px;
+    background: var(--sp-orange);
+    box-shadow: 0 8px 24px rgba(255, 107, 43, 0.25);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .search-tab {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--sp-muted);
+    font: 800 0.88rem/1 "Sora", system-ui, sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .search-tab.active {
+    color: #fff;
+  }
+
+  .search-panel {
+    display: grid;
+    gap: 16px;
+  }
+
+  .search-panel[hidden] {
+    display: none;
+  }
+
+  .search-panel-copy {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 24px;
-    text-decoration: none;
+    gap: 5px;
+    padding: 0 4px;
+    text-align: center;
+  }
+
+  .search-panel-copy strong {
+    color: #fff;
+    font-size: 0.98rem;
+  }
+
+  .search-panel-copy span {
+    color: var(--sp-muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .search-input-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  #panel-site .search-input-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .search-input-shell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 50px;
+    padding: 0 16px;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius);
+    background: rgba(9, 12, 18, 0.38);
+    color: var(--sp-faint);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .search-input-shell:focus-within {
+    border-color: rgba(255, 107, 43, 0.56);
+    background: rgba(9, 12, 18, 0.52);
+    box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.1);
+  }
+
+  .search-input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #fff;
+    font: 650 0.92rem/1.4 "Sora", system-ui, sans-serif;
+  }
+
+  .search-input::placeholder {
+    color: #64748b;
+  }
+
+  .search-select {
+    min-height: 50px;
+    min-width: 180px;
+    padding: 0 42px 0 15px;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius);
+    background:
+      linear-gradient(45deg, transparent 50%, #94a3b8 50%) right 19px center / 7px 7px no-repeat,
+      linear-gradient(135deg, #94a3b8 50%, transparent 50%) right 14px center / 7px 7px no-repeat,
+      rgba(9, 12, 18, 0.38);
+    color: var(--sp-text);
+    font: 650 0.86rem/1.4 "Sora", system-ui, sans-serif;
+    appearance: none;
     cursor: pointer;
-    scroll-snap-align: start;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    transition: border-color .2s, transform .2s, box-shadow .2s;
-    animation: slideIn .3s ease both;
   }
-  .site-link-card:hover {
-    border-color: var(--orange);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(255, 107, 43, 0.15);
-  }
-  .site-link-icon {
-    width: 50px; height: 50px;
-    background: var(--orange-dim);
-    color: var(--orange);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-  }
-  .site-link-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-  .site-link-info h4 { font-size: 1.1rem; font-weight: 700; color: #fff; line-height: 1.3;}
-  .site-link-info p { font-size: .8rem; color: var(--text-muted); font-family: var(--mono); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .site-link-action {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 10px;
-    font-family: var(--mono); font-size: .75rem; color: var(--orange);
-    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-  }
-  .site-link-action i { transition: transform 0.2s; }
-  .site-link-card:hover .site-link-action i { transform: translateX(5px); }
 
-  /* ─── BADGES GERAIS ──────────────────────────────────────────────────────── */
-  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 99px; font-family: var(--mono); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
-  .b-success { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
-  .b-danger  { background: var(--red-dim);   color: var(--red);   border: 1px solid var(--red);   }
-  .b-warning { background: var(--yellow-dim);color: var(--yellow);border: 1px solid var(--yellow);}
-  .b-neutral { background: var(--orange-dim);color: var(--orange);border: 1px solid var(--orange);}
-  .b-blue    { background: var(--blue-dim);  color: var(--blue);  border: 1px solid var(--blue);  }
-  .b-purple  { background: #a855f71a; color: #a855f7; border: 1px solid #a855f7; }
-  
-  .btn-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.2); color: var(--orange); padding: 6px 14px; border-radius: 8px; font-family: var(--mono); font-size: .75rem; text-decoration: none; border: 1px solid var(--border); transition: all .2s; }
-  .btn-link:hover { background: var(--orange-dim); border-color: var(--orange); }
-  .tag-mes { font-family: var(--mono); font-size: .75rem; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); }
-  
-  .fp-pagination { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
-  .fp-pag-info { font-family: var(--mono); font-size: .75rem; color: var(--text-faint); }
-  .btn-more { display: flex; align-items: center; gap: 8px; background: var(--bg-card); color: var(--text); border: 1px solid var(--border); padding: 12px 24px; border-radius: 99px; font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600; cursor: pointer; transition: all .2s; }
-  .btn-more:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-dim);}
+  .search-select:focus {
+    border-color: rgba(255, 107, 43, 0.56);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.1);
+  }
 
-  .feedback { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 30px; font-size: .9rem; color: var(--text-muted); font-family: var(--mono); text-align: center; background: rgba(0,0,0,0.1); border-radius: 12px; border: 1px dashed var(--border);}
-  .feedback.error { color: var(--red); border-color: var(--red-dim); background: var(--red-dim); }
+  .search-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 50px;
+    min-width: 132px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: var(--sp-radius);
+    background: var(--sp-orange);
+    color: #fff;
+    font: 850 0.88rem/1 "Sora", system-ui, sans-serif;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(255, 107, 43, 0.22);
+    transition: transform 0.18s ease, filter 0.18s ease, opacity 0.18s ease;
+  }
 
-  @media (max-width: 680px) { 
-    .tab-btn { font-size: 0; padding: 16px 0; }
-    .tab-btn i { font-size: 1.1rem; margin: 0;}
-    .search-master-card { padding: 20px 15px; }
-    .fp-select, .fp-btn { flex: 1 1 100%; } 
+  .search-action-btn:hover,
+  .search-action-btn:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+    outline: none;
+  }
+
+  .search-action-btn:disabled {
+    cursor: wait;
+    opacity: 0.62;
+    transform: none;
+  }
+
+  .search-results-shell {
+    margin-top: 22px;
+    overflow: hidden;
+  }
+
+  .search-results-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--sp-border);
+  }
+
+  .search-results-eyebrow {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--sp-faint);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .search-results-heading h2 {
+    color: #fff;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .search-results-meta {
+    color: var(--sp-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.74rem;
+    text-align: right;
+  }
+
+  .search-results {
+    min-height: 220px;
+    padding: 18px;
+  }
+
+  .site-results-list,
+  .api-results-list,
+  .search-skeleton-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .site-result-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    min-height: 86px;
+    padding: 14px;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius);
+    background: rgba(255, 255, 255, 0.03);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  }
+
+  .site-result-card:hover,
+  .site-result-card:focus-visible {
+    border-color: rgba(255, 107, 43, 0.42);
+    background: rgba(255, 255, 255, 0.055);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .site-result-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 107, 43, 0.22);
+    border-radius: 13px;
+    background: var(--sp-orange-soft);
+    color: #ffad82;
+    font-size: 1.05rem;
+  }
+
+  .site-result-body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .site-result-topline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .site-result-title {
+    overflow: hidden;
+    color: #fff;
+    font-size: 0.98rem;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-result-category {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    border: 1px solid var(--sp-border);
+    border-radius: 999px;
+    color: var(--sp-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.66rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .site-result-desc,
+  .site-result-keywords {
+    overflow: hidden;
+    color: var(--sp-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-result-keywords {
+    color: var(--sp-faint);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+  }
+
+  .site-result-arrow {
+    color: var(--sp-faint);
+    transition: transform 0.18s ease, color 0.18s ease;
+  }
+
+  .site-result-card:hover .site-result-arrow,
+  .site-result-card:focus-visible .site-result-arrow {
+    color: #ffad82;
+    transform: translateX(3px);
+  }
+
+  .api-result-card {
+    position: relative;
+    overflow: hidden;
+    padding: 18px;
+    border: 1px solid var(--sp-border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.032);
+    transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+  }
+
+  .api-result-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: var(--sp-orange);
+  }
+
+  .api-result-card.from-cut::before {
+    background: var(--sp-blue);
+  }
+
+  .api-result-card.from-narrastars::before {
+    background: #c084fc;
+  }
+
+  .api-result-card.report::before {
+    background: var(--sp-green);
+  }
+
+  .api-result-card:hover {
+    border-color: var(--sp-border-strong);
+    background: rgba(255, 255, 255, 0.052);
+    transform: translateY(-1px);
+  }
+
+  .api-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .api-card-identity {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .api-card-identity h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.02rem;
+    line-height: 1.25;
+  }
+
+  .api-card-identity span {
+    color: var(--sp-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .api-card-badges,
+  .api-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .api-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 13px;
+  }
+
+  .data-block {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .data-block.wide,
+  .recruiter-strip {
+    grid-column: 1 / -1;
+  }
+
+  .data-label {
+    color: var(--sp-faint);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .data-value {
+    overflow-wrap: anywhere;
+    color: var(--sp-text);
+    font-size: 0.86rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .recruiter-strip {
+    display: grid;
+    grid-template-columns: auto repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    align-items: stretch;
+    padding: 12px;
+    border: 1px dashed rgba(255, 107, 43, 0.26);
+    border-radius: 12px;
+    background: rgba(255, 107, 43, 0.06);
+  }
+
+  .recruiter-strip > i {
+    align-self: center;
+    color: #ffad82;
+  }
+
+  .api-card-actions {
+    margin-top: 14px;
+  }
+
+  .search-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.08);
+    color: #cbd5e1;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.67rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .search-badge.success {
+    border-color: rgba(74, 222, 128, 0.32);
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--sp-green);
+  }
+
+  .search-badge.danger {
+    border-color: rgba(248, 113, 113, 0.32);
+    background: rgba(248, 113, 113, 0.12);
+    color: var(--sp-red);
+  }
+
+  .search-badge.warning {
+    border-color: rgba(251, 191, 36, 0.34);
+    background: rgba(251, 191, 36, 0.12);
+    color: var(--sp-yellow);
+  }
+
+  .search-badge.blue {
+    border-color: rgba(96, 165, 250, 0.34);
+    background: rgba(96, 165, 250, 0.12);
+    color: var(--sp-blue);
+  }
+
+  .search-badge.purple {
+    border-color: rgba(192, 132, 252, 0.34);
+    background: rgba(192, 132, 252, 0.12);
+    color: #c084fc;
+  }
+
+  .result-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 107, 43, 0.28);
+    border-radius: 10px;
+    background: rgba(255, 107, 43, 0.09);
+    color: #ffad82;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+
+  .result-action-link:hover,
+  .result-action-link:focus-visible {
+    border-color: rgba(255, 107, 43, 0.58);
+    background: rgba(255, 107, 43, 0.16);
+    outline: none;
+  }
+
+  .search-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 16px;
+    color: var(--sp-muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.74rem;
+  }
+
+  .load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid var(--sp-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--sp-text);
+    font: 800 0.82rem/1 "Sora", system-ui, sans-serif;
+    cursor: pointer;
+    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  }
+
+  .load-more-btn:hover,
+  .load-more-btn:focus-visible {
+    border-color: rgba(255, 107, 43, 0.42);
+    background: rgba(255, 107, 43, 0.1);
+    color: #ffad82;
+    outline: none;
+  }
+
+  .search-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 118px;
+    padding: 22px;
+    border: 1px dashed var(--sp-border);
+    border-radius: var(--sp-radius);
+    background: rgba(255, 255, 255, 0.024);
+    color: var(--sp-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  .search-feedback i {
+    color: #ffad82;
+  }
+
+  .search-feedback.error {
+    border-color: rgba(248, 113, 113, 0.28);
+    background: rgba(248, 113, 113, 0.08);
+    color: #fecaca;
+  }
+
+  .search-feedback.error i {
+    color: var(--sp-red);
+  }
+
+  .search-skeleton-card {
+    height: 112px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+    background-size: 220% 100%;
+    animation: search-page-shimmer 1.25s ease-in-out infinite;
+  }
+
+  @keyframes search-page-shimmer {
+    from {
+      background-position: 120% 0;
+    }
+    to {
+      background-position: -120% 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .search-page {
+      padding: 28px 14px 68px;
+    }
+
+    .search-hero {
+      margin-bottom: 20px;
+    }
+
+    .search-console {
+      padding: 12px;
+    }
+
+    .search-tabs {
+      border-radius: 16px;
+    }
+
+    .search-tab-indicator {
+      border-radius: 12px;
+    }
+
+    .search-tab {
+      min-height: 48px;
+      font-size: 0;
+    }
+
+    .search-tab i {
+      font-size: 1.06rem;
+    }
+
+    .search-input-row,
+    #panel-site .search-input-row {
+      grid-template-columns: 1fr;
+    }
+
+    .search-select,
+    .search-action-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .search-results-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .search-results-meta {
+      text-align: left;
+    }
+
+    .search-results {
+      padding: 12px;
+    }
+
+    .site-result-card {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .site-result-arrow {
+      display: none;
+    }
+
+    .site-result-topline {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .site-result-title,
+    .site-result-desc,
+    .site-result-keywords {
+      white-space: normal;
+    }
+
+    .api-card-head {
+      flex-direction: column;
+    }
+
+    .api-card-badges,
+    .api-card-actions {
+      justify-content: flex-start;
+    }
+
+    .recruiter-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .recruiter-strip > i {
+      display: none;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .search-hero h1 {
+      font-size: 1.85rem;
+    }
+
+    .search-input-shell {
+      padding: 0 13px;
+    }
+
+    .api-result-card {
+      padding: 16px 14px;
+    }
   }
 </style>
