@@ -1,6 +1,6 @@
 # FP Agency
 
-Site institucional e portal da FP Agency construidos com Astro. O projeto atual e estatico e publica paginas de apresentacao, monetizacao, inscricao, busca, treinamento e area do recrutador.
+Site institucional e portal da FP Agency construidos com Astro. O projeto atual roda em SSR com `@astrojs/node` para manter o segredo interno no servidor e encaminhar chamadas para a API Cloudflare Worker.
 
 ## Estrutura
 
@@ -17,10 +17,12 @@ FP Agency/
 │   └── diagnose.mjs
 └── src/
     ├── components/
+    ├── config/
     ├── data/
-    │   └── videos.json
+    ├── lib/
     ├── layouts/
     └── pages/
+        └── api/
 ```
 
 ## Requisitos
@@ -41,11 +43,17 @@ O servidor local sobe em `http://127.0.0.1:4321`.
 
 ```sh
 npm run diagnose
-npm run check
+npm run lint
+npm run test
+npm run test:coverage
+npm run build
 ```
 
 - `npm run diagnose` verifica arquivos obrigatorios, scripts, dependencias, sintaxe do diagnostico, build Astro e disponibilidade da porta local.
-- `npm run check` executa `astro check` e depois `astro build`.
+- `npm run lint` executa `astro check`.
+- `npm run test` executa a suite Vitest.
+- `npm run test:coverage` mede cobertura dos helpers SSR em `src/lib` e proxies em `src/pages/api`.
+- `npm run build` gera o bundle SSR em `dist/`.
 
 ## Build e preview
 
@@ -54,23 +62,57 @@ npm run build
 npm run preview
 ```
 
-O build gera os arquivos estaticos em `dist/`.
+O build gera o servidor Astro em `dist/`. As rotas em `src/pages/api` sao proxies SSR e nao devem ser chamadas diretamente pelo navegador com segredo.
 
 ## Configuracao
 
-O build usa:
+### Astro
 
 - `SITE_URL`: origem publica do site. Padrao: `https://mateusrech255-sketch.github.io`.
 - `SITE_BASE_PATH`: base path do deploy. Em desenvolvimento o padrao e `/`; em producao o padrao e `/site-da-fp-agency`.
+- `INTERNAL_SECRET`: segredo server-only usado pelos proxies SSR para chamar o Worker.
+- `PUBLIC_API_BASE`: base publica da API. Padrao: `https://api.fpagency.com.br`.
 
-Exemplo para GitHub Pages:
+Exemplo local:
 
 ```sh
-SITE_URL=https://mateusrech255-sketch.github.io SITE_BASE_PATH=/site-da-fp-agency npm run build
+INTERNAL_SECRET=36a10466840fdf752327206541eb455e215426377873033846b846055e53beef \
+PUBLIC_API_BASE=https://api.fpagency.com.br \
+npm run dev
+```
+
+### Cloudflare Worker
+
+Variaveis e segredos esperados no Worker `fp-agency-api`:
+
+- `GOOGLE_SHEET_ID`: planilha principal do portal.
+- `GOOGLE_REPORT_SHEET_ID`: planilha dedicada para relatorios mensais.
+- `GOOGLE_CREDENTIALS`: JSON/base64 da conta de servico Google.
+- `FIREBASE_API_KEY`: chave do Firebase Authentication.
+- `FIREBASE_BUCKET_NAME`: bucket usado para validar fotos de perfil.
+- `INTERNAL_SECRET`: segredo compartilhado com o SSR.
+- `TIME_ZONE`: padrao recomendado `America/Sao_Paulo`.
+- `ALLOWED_ORIGINS`: opcional.
+- `ALLOW_LEGACY_PASSWORD_STORAGE`: opcional, padrao seguro desabilitado.
+
+Exemplo de chamada real:
+
+```sh
+SECRET=36a10466840fdf752327206541eb455e215426377873033846b846055e53beef \
+curl -H "Authorization: Bearer $SECRET" \
+     "https://api.fpagency.com.br/api/buscar?codigo=66333"
 ```
 
 ## Deploy
 
-O workflow principal de GitHub Pages esta em `.github/workflows/deploy.yml`. Ele instala dependencias, roda `npm run check`, envia `dist/` como artefato e publica no Pages.
+O workflow principal esta em `.github/workflows/deploy.yml`. Ele instala dependencias, roda validacoes e publica o build conforme o ambiente configurado.
 
-O workflow `.github/workflows/static.yml` fica apenas como checagem de build em push e pull request, sem publicar artefatos.
+Para o Worker, rode na pasta `fp-agency-api`:
+
+```sh
+npm run lint
+npm run test
+npx wrangler deploy --keep-vars
+```
+
+Use `--keep-vars` para preservar variaveis criadas pelo dashboard, como `GOOGLE_REPORT_SHEET_ID`.

@@ -1,13 +1,14 @@
 const DEFAULT_API_BASE = 'https://api.fpagency.com.br';
+const PUBLIC_API_BASE = import.meta.env.PUBLIC_API_BASE as string | undefined;
 
 type EnvRecord = Record<string, string | undefined>;
 
 function getRuntimeEnv(): EnvRecord {
-  const viteEnv = import.meta.env as EnvRecord | undefined;
   const processEnv = typeof process !== 'undefined' ? process.env : undefined;
+
   return {
-    ...processEnv,
-    ...viteEnv,
+    PUBLIC_API_BASE: PUBLIC_API_BASE || processEnv?.PUBLIC_API_BASE,
+    INTERNAL_SECRET: processEnv?.INTERNAL_SECRET,
   };
 }
 

@@ -6,6 +6,7 @@ export const workerApiBase =
 export const publicApiUrls = {
   buscar: '/api/buscar',
   inscricao: '/api/inscricao',
+  relatorios: '/api/relatorios',
   recruiter: '/api/worker',
   search: '/api/search',
 } as const;
