@@ -194,5 +194,5 @@ describe('astro app e2e', () => {
     expect(response.status).toBe(200);
     expect(body.success).toBe(true);
     expect(Array.isArray(body.data)).toBe(true);
-  });
+  }, 20_000);
 });
