@@ -8,11 +8,12 @@
     "node": ">=20.11.1"
   },
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1 --port 4321",
-    "dev:astro": "astro dev --host 127.0.0.1 --port 4321",
+    "dev": "set -a; [ ! -f .env ] || . ./.env; set +a; node -e \"console.info('[fp-agency:ssr] INTERNAL_SECRET=' + (process.env.INTERNAL_SECRET ? 'present' : 'missing'))\"; astro dev --host 127.0.0.1 --port 4321",
+    "dev:astro": "set -a; [ ! -f .env ] || . ./.env; set +a; node -e \"console.info('[fp-agency:ssr] INTERNAL_SECRET=' + (process.env.INTERNAL_SECRET ? 'present' : 'missing'))\"; astro dev --host 127.0.0.1 --port 4321",
+    "dev:stop": "astro dev stop",
     "build": "astro build",
     "lint": "astro check",
-    "preview": "astro preview",
+    "preview": "set -a; [ ! -f .env ] || . ./.env; set +a; node -e \"console.info('[fp-agency:ssr] INTERNAL_SECRET=' + (process.env.INTERNAL_SECRET ? 'present' : 'missing'))\"; astro preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage --coverage.include='src/lib/**' --coverage.include='src/pages/api/**'",
     "astro": "astro",
