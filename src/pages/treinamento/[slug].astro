@@ -5,6 +5,8 @@ import Footer from '../../components/Footer.astro';
 import OpenVideoPlayer from '../../components/OpenVideoPlayer.astro';
 import videoList from '../../data/videos.json';
 
+export const prerender = true;
+
 // 1. Tipo do TypeScript para validação dos dados
 interface Video {
   id: string;

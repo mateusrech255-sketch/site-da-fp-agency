@@ -514,11 +514,15 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
 async function gsRun(action, dataObj) {
   if (!API_URL) {
-    return { success:false, locked:false, msg:"API do portal nao configurada. Defina PUBLIC_RECRUITER_API_URL no ambiente." };
+    return { success:false, locked:false, msg:"API do portal indisponível no momento." };
   }
 
   try {
-    const response = await fetch(API_URL, { method:'POST', body:JSON.stringify({ action, data:dataObj }) });
+    const response = await fetch(API_URL, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body:JSON.stringify({ action, data:dataObj })
+    });
     return await response.json();
   } catch (error) {
     hideLoader();
@@ -1016,7 +1020,7 @@ async function loadLinks() {
 document.getElementById('formLinks').onsubmit=async function(e){
   e.preventDefault(); showLoader();
   const formData={instagram:this.instagram.value,facebook:this.facebook.value,threads:this.threads.value,twitter:this.twitter.value,outros1:this.outros1.value,outros2:this.outros2.value,outros3:this.outros3.value};
-  const res=await gsRun('updateLinksSociais',{idToken:sessionStorage.getItem('idToken'),form:formData});
+  const res=await gsRun('saveLinksData',{idToken:sessionStorage.getItem('idToken'),form:formData});
   hideLoader();
   if(res.success) globalAlert('Sucesso','Suas redes sociais foram atualizadas!','success');
   else globalAlert('Erro',res.msg||'Não foi possível salvar suas redes sociais.','error');

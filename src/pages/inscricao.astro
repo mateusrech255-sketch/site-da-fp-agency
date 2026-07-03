@@ -7,6 +7,7 @@ import { publicApiUrls } from '../config/public-api';
 const rawBaseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 const baseUrl = rawBaseUrl.replace(/\/$/, '');
 const inscricaoApiUrl = publicApiUrls.inscricao;
+const buscarApiUrl = publicApiUrls.buscar;
 ---
 
 <Layout title="Inscrição Oficial - FP Agency">
@@ -17,7 +18,7 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
   <div class="fp-agency-wrapper">
     <Header />
 
-    <main class="kc-content" data-inscricao-api-url={inscricaoApiUrl}>
+    <main class="kc-content" data-inscricao-api-url={inscricaoApiUrl} data-buscar-api-url={buscarApiUrl}>
       <section class="form-section">
         <div class="form-container-box">
           <div class="form-header-main text-center">
@@ -213,18 +214,18 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
 <script is:inline define:vars={{ baseUrl }}>
   document.addEventListener('DOMContentLoaded', () => {
     
-    // API publica configurada no ambiente para evitar URL hardcoded no codigo versionado.
-    const API_UNIFICADA = document.querySelector('.kc-content')?.dataset.inscricaoApiUrl || '';
+    const apiRoot = document.querySelector('.kc-content');
+    const API_INSCRICAO = apiRoot?.dataset.inscricaoApiUrl || '';
+    const API_BUSCAR = apiRoot?.dataset.buscarApiUrl || '';
 
     const APP_CONFIG = {
-      API_CONTRATADOS: API_UNIFICADA,
-      API_RECRUTADORES: API_UNIFICADA,
+      API_CONTRATADOS: API_INSCRICAO,
+      API_RECRUTADORES: API_BUSCAR,
       BASE_URL: baseUrl || '',
       MIN_RECRUITER_CODE_LENGTH: 3,
       RECRUITER_DEBOUNCE_MS: 450,
       RECRUITER_TIMEOUT_MS: 12000,
-      RECRUITER_REQUIRED: true,
-      SUBMIT_MODE: 'no-cors' // Mantido no-cors para evitar bloqueios do Google
+      RECRUITER_REQUIRED: true
     };
 
     const PROGRAMS = {
@@ -280,7 +281,6 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
     let recruiterDebounce = null;
     let recruiterAbortController = null;
     let recruiterRequestId = 0;
-    let activeJsonpCancel = null;
     let lastRecruiterQuery = '';
     let isSubmitting = false;
 
@@ -347,11 +347,6 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
         formatted,
         hidden: `+${digits}`
       };
-    }
-
-    function buildWhatsAppLink(value) {
-      const digits = normalizeBrazilPhone(value);
-      return digits ? `https://wa.me/${digits}` : '';
     }
 
     function normalizeProfileUrl(value) {
@@ -452,18 +447,15 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
         dom.errIndicacao.style.display = 'none';
         dom.recruiterInfoBox.className = 'recruiter-box success-border';
 
-        const safeName = escapeHTML(recruiterData.nome);
-        const safeWhatsapp = escapeHTML(recruiterData.whatsapp || '');
-        const wppLink = buildWhatsAppLink(recruiterData.whatsapp);
+        const safeName = escapeHTML(recruiterData.nome || 'Código confirmado');
 
         dom.recruiterInfoBox.innerHTML = `
           <div class="recruiter-card-success">
             <div class="rc-avatar"><i class="ri-user-star-fill"></i></div>
             <div class="rc-info">
-              <span>Indicado por:</span>
+              <span>Indicação validada:</span>
               <strong>${safeName}</strong>
-              ${wppLink ? `<a href="${wppLink}" target="_blank" rel="noopener noreferrer" class="rc-wpp"><i class="ri-whatsapp-line"></i> Contactar via WhatsApp</a>` : '<small class="rc-muted">WhatsApp do recrutador não informado</small>'}
-              ${safeWhatsapp ? `<small class="rc-muted">${safeWhatsapp}</small>` : ''}
+              <small class="rc-muted">O código foi confirmado pela FP Agency.</small>
             </div>
           </div>
         `;
@@ -486,102 +478,12 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
       dom.hiddenRecruiterWhatsapp.value = '';
     }
 
-    function pickFirstValue(source, keys) {
-      if (!source || typeof source !== 'object') return '';
-      for (const key of keys) {
-        if (source[key] !== undefined && source[key] !== null && String(source[key]).trim() !== '') {
-          return source[key];
-        }
-      }
-      return '';
-    }
-
-    function isFalseLike(value) {
-      return ['false', '0', 'no', 'não', 'nao', 'not_found', 'not-found', 'não encontrado', 'nao encontrado', 'erro', 'error']
-        .includes(normalizeText(value).toLowerCase());
-    }
-
-    function findRecordInsideResponse(data, codigo) {
-      const wanted = normalizeCode(codigo);
-
-      if (Array.isArray(data)) {
-        const exact = data.find((item) => {
-          if (!item || typeof item !== 'object') return false;
-          const itemCode = normalizeCode(pickFirstValue(item, ['codigo', 'código', 'codigo_indicacao', 'id', 'cod', 'Code', 'Código']));
-          return itemCode && itemCode === wanted;
-        });
-        if (exact) return exact;
-
-        if (data.length === 1) {
-          const [singleItem] = data;
-          if (!singleItem || typeof singleItem !== 'object') return null;
-
-          const singleItemCode = normalizeCode(pickFirstValue(singleItem, ['codigo', 'código', 'codigo_indicacao', 'id', 'cod', 'Code', 'Código']));
-          return !singleItemCode || singleItemCode === wanted ? singleItem : null;
-        }
-
-        return null;
-      }
-
-      if (!data || typeof data !== 'object') return null;
-
-      const containers = [
-        data.recrutador,
-        data.recruiter,
-        data.data,
-        data.result,
-        data.results,
-        data.items,
-        data.rows,
-        data.registros
-      ].filter(Boolean);
-
-      for (const container of containers) {
-        const found = findRecordInsideResponse(container, codigo);
-        if (found) return found;
-      }
-
-      return data;
-    }
-
     function normalizeRecruiterResponse(data, codigo) {
-      const record = findRecordInsideResponse(data, codigo);
-      if (!record || typeof record !== 'object') return null;
-
-      const okFlag = pickFirstValue(record, ['ok', 'success', 'sucesso', 'found', 'encontrado']);
-      if (isFalseLike(okFlag)) return null;
-
-      const status = pickFirstValue(record, ['status', 'situacao', 'state']);
-      if (isFalseLike(status)) return null;
-
-      const nome = normalizeText(pickFirstValue(record, [
-        'nome',
-        'Nome',
-        'nome_completo',
-        'recrutador_nome',
-        'recrutador',
-        'name',
-        'Name'
-      ]));
-
-      const whatsapp = normalizeText(pickFirstValue(record, [
-        'whatsapp',
-        'WhatsApp',
-        'whatsapp_limpo',
-        'whatsapp_link',
-        'wpp',
-        'telefone',
-        'celular',
-        'phone',
-        'recrutador_whatsapp'
-      ]));
-
-      if (!nome) return null;
-
+      if (!data || typeof data !== 'object' || data.ok !== true || data.found !== true) return null;
       return {
         codigo: normalizeCode(codigo),
-        nome,
-        whatsapp
+        nome: 'Código confirmado',
+        whatsapp: ''
       };
     }
 
@@ -592,16 +494,8 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
       try {
         return JSON.parse(cleanText);
       } catch (error) {
-        const jsonpMatch = cleanText.match(/^[\w$.]+\((.*)\);?$/s);
-        if (jsonpMatch) return JSON.parse(jsonpMatch[1]);
         throw new Error('A API de recrutadores não retornou JSON válido.');
       }
-    }
-
-    function createAbortError(message = 'Busca cancelada.') {
-      const error = new Error(message);
-      error.name = 'AbortError';
-      return error;
     }
 
     function isAbortError(error) {
@@ -618,60 +512,33 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
         recruiterAbortController.abort();
         recruiterAbortController = null;
       }
-
-      if (activeJsonpCancel) {
-        activeJsonpCancel();
-        activeJsonpCancel = null;
-      }
     }
 
-    function fetchRecruiterWithJsonp(codigo) {
-      return new Promise((resolve, reject) => {
-        if (!APP_CONFIG.API_RECRUTADORES) {
-          reject(new Error('API de inscricao nao configurada. Defina PUBLIC_INSCRICAO_API_URL no ambiente.'));
-          return;
-        }
+    async function fetchRecruiterByCode(codigo) {
+      if (!APP_CONFIG.API_RECRUTADORES) {
+        throw new Error('API de validação de código indisponível.');
+      }
 
-        const callbackName = `fpRecruiterCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-        const script = document.createElement('script');
-        const url = new URL(APP_CONFIG.API_RECRUTADORES);
+      recruiterAbortController = new AbortController();
+      const timeout = window.setTimeout(() => {
+        if (recruiterAbortController) recruiterAbortController.abort();
+      }, APP_CONFIG.RECRUITER_TIMEOUT_MS);
 
-        let done = false;
-        const timeout = window.setTimeout(() => finish(new Error('A API de Recrutadores respondeu sem executar o callback JSONP.')), APP_CONFIG.RECRUITER_TIMEOUT_MS);
-
-        function cleanup() {
-          window.clearTimeout(timeout);
-          if (script.parentNode) script.parentNode.removeChild(script);
-          try { delete window[callbackName]; } catch (error) { window[callbackName] = undefined; }
-          if (activeJsonpCancel === cancel) activeJsonpCancel = null;
-        }
-
-        function finish(error, data) {
-          if (done) return;
-          done = true;
-          cleanup();
-          if (error) reject(error);
-          else resolve(data);
-        }
-
-        function cancel() {
-          finish(createAbortError());
-        }
-
-        activeJsonpCancel = cancel;
-        window[callbackName] = (data) => finish(null, data);
-
+      try {
+        const url = new URL(APP_CONFIG.API_RECRUTADORES, window.location.origin);
         url.searchParams.set('codigo', codigo);
-        url.searchParams.set('q', codigo);
-        url.searchParams.set('callback', callbackName);
-        url.searchParams.set('_', String(Date.now()));
+        const response = await fetch(url.toString(), {
+          method: 'GET',
+          signal: recruiterAbortController.signal,
+        });
 
-        script.src = url.toString();
-        script.async = true;
-        script.onerror = () => finish(new Error('A URL da API de Recrutadores não abriu como script público.'));
-
-        document.head.appendChild(script);
-      });
+        const payload = await parseMaybeJSON(await response.text());
+        if (!response.ok) throw new Error(payload?.msg || payload?.message || 'Não foi possível validar o código.');
+        return payload;
+      } finally {
+        window.clearTimeout(timeout);
+        recruiterAbortController = null;
+      }
     }
 
     async function loadRecruiter(codigoRaw, options = {}) {
@@ -700,7 +567,7 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
       validateForm();
 
       try {
-        const rawData = await fetchRecruiterWithJsonp(codigo);
+        const rawData = await fetchRecruiterByCode(codigo);
 
         if (requestId !== recruiterRequestId || normalizeCode(dom.inputIndicacao.value) !== codigo) return null;
 
@@ -941,36 +808,25 @@ const inscricaoApiUrl = publicApiUrls.inscricao;
 
     async function submitToAppsScript(payload) {
       if (!APP_CONFIG.API_CONTRATADOS) {
-        throw new Error('API de inscricao nao configurada. Defina PUBLIC_INSCRICAO_API_URL no ambiente.');
+        throw new Error('API de inscrição indisponível no momento.');
       }
-      
-      // MUDANÇA PRINCIPAL: Encapsulamento da Action para o Roteador do Backend
+
       const wrappedPayload = {
         action: 'cadastrarInscricaoPublica',
         data: payload
       };
 
-      if (APP_CONFIG.SUBMIT_MODE === 'cors') {
-        const response = await fetch(APP_CONFIG.API_CONTRATADOS, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(wrappedPayload)
-        });
-
-        const result = parseMaybeJSON(await response.text());
-        if (!result.success && !result.ok) throw new Error(result.msg || result.message || result.error || 'Erro ao enviar inscrição.');
-        return result;
-      }
-
-      // Método Fallback NO-CORS (O mais recomendado para Google Scripts)
-      await fetch(APP_CONFIG.API_CONTRATADOS, {
+      const response = await fetch(APP_CONFIG.API_CONTRATADOS, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(wrappedPayload)
       });
 
-      return { ok: true };
+      const result = parseMaybeJSON(await response.text());
+      if (!response.ok || (!result.success && !result.ok)) {
+        throw new Error(result.msg || result.message || result.error || 'Erro ao enviar inscrição.');
+      }
+      return result;
     }
 
     dom.cards.forEach((card) => {

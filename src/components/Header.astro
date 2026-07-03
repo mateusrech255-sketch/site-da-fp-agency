@@ -458,7 +458,7 @@ const searchApiUrl = publicApiUrls.search;
           group.className = 'global-search-group';
           group.dataset.apiResults = 'true';
           group.append(createSectionTitle('Editores'));
-          group.append(createEmptyState('Busca de editores indisponivel: configure PUBLIC_SEARCH_API_URL.'));
+          group.append(createEmptyState('Busca de editores indisponivel no momento.'));
           resultsContainer?.append(group);
           resetActiveItem();
           return;
@@ -478,6 +478,7 @@ const searchApiUrl = publicApiUrls.search;
         try {
           const response = await fetch(apiUrl, {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               action: 'buscarAprovacao',
               data: { termo: editorTerm, filtro: 'all', page: 1, limit: API_LIMIT },

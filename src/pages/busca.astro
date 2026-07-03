@@ -495,7 +495,7 @@ const searchApiUrl = publicApiUrls.search;
 
   const fetchApiPage = async (tab: ApiTab, term: string, filter: string, page: number, signal: AbortSignal): Promise<ApiPayload> => {
     if (!apiUrl) {
-      throw new Error('API de busca nao configurada. Defina PUBLIC_SEARCH_API_URL no ambiente.');
+      throw new Error('API de busca indisponivel no momento.');
     }
 
     const cacheKey = makeCacheKey(tab, term, filter, page);
@@ -504,6 +504,7 @@ const searchApiUrl = publicApiUrls.search;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         action: getApiAction(tab),
         data: { termo: term, filtro: filter, page, limit: PAGE_SIZE },
