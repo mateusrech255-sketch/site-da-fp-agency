@@ -6,6 +6,7 @@ import { publicApiUrls } from '../src/config/public-api';
 const SECRET = 'test-internal-secret';
 
 afterEach(() => {
+  vi.resetModules();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
 });

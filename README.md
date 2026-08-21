@@ -1,6 +1,6 @@
 # FP Agency
 
-Site institucional e portal da FP Agency construidos com Astro. O projeto atual roda em SSR com `@astrojs/node` para manter o segredo interno no servidor e encaminhar chamadas para a API Cloudflare Worker.
+Site institucional e portal da FP Agency construidos com Astro. O projeto roda em SSR com o adapter oficial `@astrojs/cloudflare` para manter o segredo interno no servidor e encaminhar chamadas para a API Cloudflare Worker.
 
 ## Estrutura
 
@@ -12,7 +12,6 @@ FP Agency/
 │   ├── favicon.ico
 │   ├── favicon.svg
 │   ├── robots.txt
-│   └── sitemap.xml
 ├── scripts/
 │   └── diagnose.mjs
 └── src/
@@ -22,6 +21,7 @@ FP Agency/
     ├── lib/
     ├── layouts/
     └── pages/
+        ├── sitemap.xml.ts
         └── api/
 ```
 
@@ -60,16 +60,17 @@ npm run build
 ```sh
 npm run build
 npm run preview
+npm run preview:worker
 ```
 
-O build gera o servidor Astro em `dist/`. As rotas em `src/pages/api` sao proxies SSR e nao devem ser chamadas diretamente pelo navegador com segredo.
+O build gera o bundle SSR em `dist/`. `npm run preview` usa o preview do Astro e `npm run preview:worker` sobe o runtime Cloudflare local via Wrangler. As rotas em `src/pages/api` sao proxies SSR e nao devem ser chamadas diretamente pelo navegador com segredo.
 
 ## Configuracao
 
 ### Astro
 
-- `SITE_URL`: origem publica do site. Padrao: `https://mateusrech255-sketch.github.io`.
-- `SITE_BASE_PATH`: base path do deploy. Em desenvolvimento o padrao e `/`; em producao o padrao e `/site-da-fp-agency`.
+- `SITE_URL`: origem publica do site. Padrao: `https://www.fpagency.com.br`.
+- `SITE_BASE_PATH`: base path do deploy. Padrao: `/`.
 - `INTERNAL_SECRET`: segredo server-only usado pelos proxies SSR para chamar o Worker.
 - `PUBLIC_API_BASE`: base publica da API. Padrao: `https://api.fpagency.com.br`.
 
@@ -81,7 +82,7 @@ PUBLIC_API_BASE=https://api.fpagency.com.br \
 npm run dev
 ```
 
-### Cloudflare Worker
+### Cloudflare
 
 Variaveis e segredos esperados no Worker `fp-agency-api`:
 
@@ -105,7 +106,23 @@ curl -H "Authorization: Bearer $SECRET" \
 
 ## Deploy
 
-O workflow principal esta em `.github/workflows/deploy.yml`. Ele instala dependencias, roda validacoes e publica o build conforme o ambiente configurado.
+O workflow principal esta em `.github/workflows/deploy.yml`. Ele instala dependencias, roda validacoes e publica o front SSR no Cloudflare Workers via Wrangler.
+
+Segredos esperados no GitHub Actions:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `INTERNAL_SECRET`
+
+Deploy local do front:
+
+```sh
+npm run lint
+npm run test
+npm run build:cf
+npm run sync:secret
+npm run deploy
+```
 
 Para o Worker, rode na pasta `fp-agency-api`:
 

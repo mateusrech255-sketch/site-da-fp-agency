@@ -10,6 +10,11 @@ on:
 permissions:
   contents: read
 
+env:
+  PUBLIC_API_BASE: https://api.fpagency.com.br
+  SITE_BASE_PATH: /
+  SITE_URL: https://www.fpagency.com.br
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,4 +32,9 @@ jobs:
         run: npm ci
 
       - name: Check and build
-        run: npm run check
+        env:
+          INTERNAL_SECRET: ${{ secrets.INTERNAL_SECRET }}
+        run: |
+          npm run lint
+          npm run test
+          npm run build:cf

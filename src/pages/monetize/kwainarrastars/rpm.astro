@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
 
-// Tratamento seguro para URLs
-const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout title="NarraStars: Monetização, RPM e Tarefas | FP Agency">
@@ -181,10 +181,10 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
           <h2>O momento de surfar essa onda é agora.</h2>
           <p>Enquanto muitos continuam nos cortes simples perdendo RPM, você pode iniciar na Narração e acessar o maior nível de monetização da plataforma.</p>
           <div class="ns-cta-actions">
-            <a href={`${baseUrl}/inscricao?programa=kwai-narrastars`} class="btn-primary-large">
+            <a href={sitePath('/inscricao?programa=kwai-narrastars')} class="btn-primary-large">
               <i class="ri-quill-pen-line"></i> Inscrever Conta NarraStars
             </a>
-            <a href={`${baseUrl}/treinamento`} class="btn-secondary-large">
+            <a href={sitePath('/treinamento')} class="btn-secondary-large">
               <i class="ri-play-circle-line"></i> Acessar Treinamentos
             </a>
           </div>

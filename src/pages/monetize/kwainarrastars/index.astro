@@ -2,6 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
+
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout>
@@ -36,10 +39,10 @@ import Footer from '../../../components/Footer.astro';
           </p>
 
           <div class="ns-hero-actions">
-            <a href={`${import.meta.env.BASE_URL}/inscricao?programa=kwai-narrastars`} class="ns-btn-primary">
+            <a href={sitePath('/inscricao?programa=kwai-narrastars')} class="ns-btn-primary">
               <i class="ri-quill-pen-line"></i> Quero me Inscrever
             </a>
-            <a href={`${import.meta.env.BASE_URL}/treinamento`} class="ns-btn-secondary">
+            <a href={sitePath('/treinamento')} class="ns-btn-secondary">
               <i class="ri-play-circle-line"></i> Ver Treinamento
             </a>
           </div>
@@ -111,7 +114,7 @@ import Footer from '../../../components/Footer.astro';
           <div class="ns-section-label-line"></div>
         </div>
 
-        <a href={`${import.meta.env.BASE_URL}/monetize/kwainarrastars/rpm`} class="ns-tasks-card">
+        <a href={sitePath('/monetize/kwainarrastars/rpm')} class="ns-tasks-card">
           <div class="ns-tasks-icon"><i class="ri-coins-line"></i></div>
           <div class="ns-tasks-body">
             <div class="ns-tasks-tag"><i class="ri-star-fill" style="font-size:.6rem"></i> Diferencial exclusivo</div>
@@ -134,7 +137,7 @@ import Footer from '../../../components/Footer.astro';
         </div>
 
         <div class="ns-nav-grid">
-          <a href={`${import.meta.env.BASE_URL}/treinamento`} class="ns-nav-card c-purple">
+          <a href={sitePath('/treinamento')} class="ns-nav-card c-purple">
             <div class="ns-nav-icon"><i class="ri-graduation-cap-line"></i></div>
             <div class="ns-nav-tag">Passo a passo</div>
             <h3 class="ns-nav-title">Treinamento Narrastars</h3>
@@ -142,7 +145,7 @@ import Footer from '../../../components/Footer.astro';
             <div class="ns-nav-arrow"><i class="ri-arrow-right-line"></i> Acessar Treinamento</div>
           </a>
 
-          <a href={`${import.meta.env.BASE_URL}/monetize/kwainarrastars/rpm`} class="ns-nav-card c-green">
+          <a href={sitePath('/monetize/kwainarrastars/rpm')} class="ns-nav-card c-green">
             <div class="ns-nav-icon"><i class="ri-money-dollar-circle-line"></i></div>
             <div class="ns-nav-tag">Como ganhar</div>
             <h3 class="ns-nav-title">Monetização & RPM</h3>
@@ -158,7 +161,7 @@ import Footer from '../../../components/Footer.astro';
            <div class="ns-nav-arrow"><i class="ri-arrow-right-line"></i> Ver NARRA Motions</div>
          </a>
 
-          <a href={`${import.meta.env.BASE_URL}/inscricao?programa=kwai-narrastars`} class="ns-nav-card c-orange">
+          <a href={sitePath('/inscricao?programa=kwai-narrastars')} class="ns-nav-card c-orange">
             <div class="ns-nav-icon"><i class="ri-quill-pen-line"></i></div>
             <div class="ns-nav-tag">Faça parte</div>
             <h3 class="ns-nav-title">Inscrição</h3>
@@ -166,7 +169,7 @@ import Footer from '../../../components/Footer.astro';
             <div class="ns-nav-arrow"><i class="ri-arrow-right-line"></i> Inscrever-se</div>
           </a>
 
-          <a href={`${import.meta.env.BASE_URL}/monetize/kwainarrastars/regras`} class="ns-nav-card c-red">
+          <a href={sitePath('/monetize/kwainarrastars/regras')} class="ns-nav-card c-red">
             <div class="ns-nav-icon"><i class="ri-file-list-3-line"></i></div>
             <div class="ns-nav-tag">Leia antes</div>
             <h3 class="ns-nav-title">Regras do Programa</h3>
@@ -174,7 +177,7 @@ import Footer from '../../../components/Footer.astro';
             <div class="ns-nav-arrow"><i class="ri-arrow-right-line"></i> Ler Regras</div>
           </a>
 
-          <a href={`${import.meta.env.BASE_URL}/busca`} class="ns-nav-card c-purple">
+          <a href={sitePath('/busca')} class="ns-nav-card c-purple">
             <div class="ns-nav-icon"><i class="ri-search-eye-line"></i></div>
             <div class="ns-nav-tag">Já é membro</div>
             <h3 class="ns-nav-title">Consultar Status</h3>
@@ -235,7 +238,7 @@ import Footer from '../../../components/Footer.astro';
           <div class="ns-section-label-line"></div>
         </div>
 
-        <a href={`${import.meta.env.BASE_URL}/busca`} class="ns-featured-card">
+        <a href={sitePath('/busca')} class="ns-featured-card">
           <div class="ns-featured-icon"><i class="ri-user-star-line"></i></div>
           <div class="ns-featured-body">
             <div class="ns-featured-tag"><i class="ri-circle-fill" style="font-size:.5rem;vertical-align:middle"></i> Acesso Exclusivo</div>

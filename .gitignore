@@ -4,6 +4,7 @@ coverage/
 
 # generated types
 .astro/
+.wrangler/
 
 # dependencies
 node_modules/

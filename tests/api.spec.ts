@@ -1,15 +1,14 @@
 import { afterEach, expect, test, vi } from 'vitest';
-import {
-  apiFetch,
-  apiRawFetch,
-  buildApiUrl,
-  jsonError,
-  proxyWorkerResponse,
-} from '../src/lib/api';
 
 const SECRET = 'test-internal-secret';
 
+async function importApiModule() {
+  vi.resetModules();
+  return import('../src/lib/api');
+}
+
 afterEach(() => {
+  vi.resetModules();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
 });
@@ -17,6 +16,7 @@ afterEach(() => {
 test('buscar codigo valido', async () => {
   vi.stubEnv('INTERNAL_SECRET', SECRET);
   vi.stubEnv('PUBLIC_API_BASE', 'https://api.fpagency.com.br');
+  const { apiFetch } = await importApiModule();
 
   const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     expect(String(input)).toBe('https://api.fpagency.com.br/api/buscar?codigo=66333');
@@ -44,14 +44,16 @@ test('buscar codigo valido', async () => {
 
 test('apiRawFetch rejects missing server secret', async () => {
   vi.stubEnv('INTERNAL_SECRET', '');
+  const { apiRawFetch } = await importApiModule();
 
   await expect(apiRawFetch('/api/buscar')).rejects.toThrow(
     'INTERNAL_SECRET ausente',
   );
 });
 
-test('buildApiUrl accepts only relative API paths', () => {
+test('buildApiUrl accepts only relative API paths', async () => {
   vi.stubEnv('PUBLIC_API_BASE', 'https://api.fpagency.com.br/');
+  const { buildApiUrl } = await importApiModule();
 
   expect(buildApiUrl('/api/buscar')).toBe('https://api.fpagency.com.br/api/buscar');
   expect(() => buildApiUrl('https://example.com/api')).toThrow(
@@ -61,6 +63,7 @@ test('buildApiUrl accepts only relative API paths', () => {
 
 test('apiFetch throws on non-ok response', async () => {
   vi.stubEnv('INTERNAL_SECRET', SECRET);
+  const { apiFetch } = await importApiModule();
   vi.stubGlobal(
     'fetch',
     vi.fn(async () => new Response('Nope', { status: 500, statusText: 'Bad' })),
@@ -71,6 +74,7 @@ test('apiFetch throws on non-ok response', async () => {
 
 test('apiFetch preserves caller content type and handles empty responses', async () => {
   vi.stubEnv('INTERNAL_SECRET', SECRET);
+  const { apiFetch } = await importApiModule();
 
   const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     expect(String(input)).toBe('https://api.fpagency.com.br/api/ping');
@@ -94,17 +98,16 @@ test('apiFetch preserves caller content type and handles empty responses', async
 });
 
 test('buildApiUrl falls back to the production base when env base is blank', async () => {
-  vi.resetModules();
   vi.stubEnv('PUBLIC_API_BASE', '');
+  const { buildApiUrl } = await importApiModule();
 
-  const freshApi = await import('../src/lib/api');
-
-  expect(freshApi.buildApiUrl('/api/buscar')).toBe(
+  expect(buildApiUrl('/api/buscar')).toBe(
     'https://api.fpagency.com.br/api/buscar',
   );
 });
 
 test('proxyWorkerResponse strips encoded body headers and disables cache', async () => {
+  const { proxyWorkerResponse } = await importApiModule();
   const proxied = proxyWorkerResponse(
     new Response(JSON.stringify({ success: true }), {
       status: 201,
@@ -124,6 +127,7 @@ test('proxyWorkerResponse strips encoded body headers and disables cache', async
 });
 
 test('jsonError returns the shared proxy error shape', async () => {
+  const { jsonError } = await importApiModule();
   const response = jsonError('Falhou', 502);
 
   expect(response.status).toBe(502);

@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
 
-// Tratamento seguro para URLs
-const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout title="Regras e Monetização - Kwai Cut | FP Agency">
@@ -169,10 +169,10 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
           <h2>Tudo entendido? Pronto para faturar?</h2>
           <p>O mercado de vídeos curtos recompensa a constância e a qualidade. Se você tem isso, nós temos o caminho.</p>
           <div class="rules-cta-actions">
-            <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="btn-primary-large">
+            <a href={sitePath('/inscricao?programa=kwai-cut')} class="btn-primary-large">
               <i class="ri-quill-pen-line"></i> Preencher Formulário de Inscrição
             </a>
-            <a href={`${baseUrl}/treinamento`} class="btn-secondary-large">
+            <a href={sitePath('/treinamento')} class="btn-secondary-large">
               <i class="ri-play-circle-line"></i> Começar o Treinamento
             </a>
           </div>

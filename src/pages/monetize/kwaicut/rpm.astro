@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
 
-// Tratamento seguro para evitar barras duplas nas URLs
-const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout title="Monetização e RPM - Kwai Cut | FP Agency">
@@ -175,7 +175,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
           <h2>Quanto antes começar, mais rápido vai faturar.</h2>
           <p>O acesso antecipado à monetização é a sua maior vantagem. Preencha o formulário e inicie no programa hoje mesmo.</p>
           <div class="money-cta-actions">
-            <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="btn-primary-large">
+            <a href={sitePath('/inscricao?programa=kwai-cut')} class="btn-primary-large">
               <i class="ri-quill-pen-line"></i> Quero Entrar na Agência
             </a>
           </div>

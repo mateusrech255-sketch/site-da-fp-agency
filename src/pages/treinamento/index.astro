@@ -3,6 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import videoList from '../../data/videos.json';
+import { withBasePath } from '../../lib/site-path';
+
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 
 // Definimos o formato do vídeo para o TypeScript não reclamar do tipo 'any'
 interface Video {
@@ -26,7 +29,7 @@ interface Video {
     <section class="video-grid">
       {/* Indicamos ao TypeScript que cada item da lista segue a interface Video */}
       {(videoList as Video[]).map((video) => (
-        <a href={`${import.meta.env.BASE_URL}/treinamento/${video.slug}`} class="video-card">
+        <a href={sitePath(`/treinamento/${video.slug}`)} class="video-card">
           <div class="thumbnail-container">
             <img src={video.thumbnail} alt={video.title} loading="lazy" />
             <div class="play-overlay">
@@ -51,20 +54,40 @@ interface Video {
   .page-header h1 { font-size: 2.5rem; color: #fff; margin-bottom: 0.5rem; }
   .page-header p { color: #a1a1aa; }
   
-  .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 2rem; }
   
-  .video-card { background-color: #18181b; border: 1px solid #27272a; border-radius: 12px; overflow: hidden; text-decoration: none; transition: all 0.2s ease; display: flex; flex-direction: column; }
+  .video-card { background-color: #18181b; border: 1px solid #27272a; border-radius: 12px; overflow: hidden; text-decoration: none; transition: all 0.2s ease; display: flex; align-items: center; gap: 1.25rem; padding: 0.75rem; min-width: 0; }
   .video-card:hover { transform: translateY(-5px); border-color: #ff4500; box-shadow: 0 10px 25px rgba(255, 69, 0, 0.15); }
   
-  .thumbnail-container { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
-  .thumbnail-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+  .thumbnail-container { position: relative; flex: 0 0 clamp(96px, 30%, 150px); aspect-ratio: 9 / 16; overflow: hidden; background: #000; border-radius: 10px; }
+  .thumbnail-container img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
   .video-card:hover .thumbnail-container img { transform: scale(1.05); }
   
   .play-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
   .video-card:hover .play-overlay { opacity: 1; }
   .play-button { background: #ff4500; color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-left: 4px; }
   
-  .video-info { padding: 1.5rem; flex-grow: 1; }
-  .video-info h2 { font-size: 1.2rem; color: #fff; margin: 0 0 0.5rem 0; }
-  .video-info p { font-size: 0.9rem; color: #a1a1aa; margin: 0; line-height: 1.4; }
+  .video-info { flex: 1 1 auto; min-width: 0; padding: 0.5rem 0.75rem 0.5rem 0; display: flex; flex-direction: column; justify-content: center; }
+  .video-info h2 { font-size: 1.2rem; line-height: 1.25; color: #fff; margin: 0 0 0.6rem 0; overflow-wrap: anywhere; }
+  .video-info p { font-size: 0.9rem; color: #a1a1aa; margin: 0; line-height: 1.4; overflow-wrap: anywhere; }
+
+  @media (max-width: 480px) {
+    .page-wrapper { padding: 2.5rem 1rem; }
+    .page-header { margin-bottom: 2rem; }
+    .page-header h1 { font-size: 2rem; }
+    .video-grid { gap: 1rem; }
+    .video-card { gap: 1rem; padding: 0.65rem; }
+    .thumbnail-container { flex-basis: clamp(84px, 31%, 112px); }
+    .video-info { padding: 0.35rem 0.4rem 0.35rem 0; }
+    .video-info h2 { font-size: 1rem; }
+    .video-info p { font-size: 0.84rem; line-height: 1.35; }
+    .play-button { width: 42px; height: 42px; }
+  }
+
+  @media (max-width: 340px) {
+    .page-wrapper { padding-inline: 0.75rem; }
+    .video-card { gap: 0.75rem; padding: 0.55rem; }
+    .thumbnail-container { flex-basis: 78px; }
+    .video-info { padding-right: 0.25rem; }
+  }
 </style>

@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
 
-// Tratamento seguro para evitar barras duplas nas URLs
-const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout title="Kwai NarraStars - Regras e Monetização | FP Agency">
@@ -31,7 +31,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             Utilize sua voz ou Inteligência Artificial (IA) para criar vídeos envolventes a partir de conteúdos virais. Menos vídeos exigidos por mês, maior potencial de RPM.
           </p>
           <div class="ns-hero-actions">
-            <a href={`${baseUrl}/treinamento`} class="btn-primary-blue">
+            <a href={sitePath('/treinamento')} class="btn-primary-blue">
               <i class="ri-play-circle-line"></i> Acessar Treinamento
             </a>
             <a href="https://wa.me/message/3YJWHJM7UOR6C1" target="_blank" class="btn-secondary-blue">
@@ -196,10 +196,10 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
           </div>
 
           <div class="ns-cta-actions">
-            <a href={`${import.meta.env.BASE_URL}/inscricao?programa=kwai-narrastars`} class="btn-primary-large">
+            <a href={sitePath('/inscricao?programa=kwai-narrastars')} class="btn-primary-large">
               <i class="ri-quill-pen-line"></i> Formulário de Inscrição
             </a>
-            <a href={`${baseUrl}/busca`} class="btn-secondary-large">
+            <a href={sitePath('/busca')} class="btn-secondary-large">
               <i class="ri-user-star-line"></i> Área do Criador (Status)
             </a>
           </div>

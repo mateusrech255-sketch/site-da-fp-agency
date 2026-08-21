@@ -1,3 +1,5 @@
+import { INTERNAL_SECRET as ASTRO_INTERNAL_SECRET } from 'astro:env/server';
+
 const DEFAULT_API_BASE = 'https://api.fpagency.com.br';
 const PUBLIC_API_BASE = import.meta.env.PUBLIC_API_BASE as string | undefined;
 
@@ -8,7 +10,7 @@ function getRuntimeEnv(): EnvRecord {
 
   return {
     PUBLIC_API_BASE: PUBLIC_API_BASE || processEnv?.PUBLIC_API_BASE,
-    INTERNAL_SECRET: processEnv?.INTERNAL_SECRET,
+    INTERNAL_SECRET: ASTRO_INTERNAL_SECRET || processEnv?.INTERNAL_SECRET,
   };
 }
 

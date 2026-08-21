@@ -2,9 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import { withBasePath } from '../../../lib/site-path';
 
-// Tratamento seguro para evitar barras duplas nas URLs (ex: "//kwai-cut")
-const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 ---
 
 <Layout>
@@ -34,10 +34,10 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             Tudo com suporte, treinamento e comunidade da FP Agency.
           </p>
           <div class="kc-hero-actions">
-            <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="kc-btn-primary">
+            <a href={sitePath('/inscricao?programa=kwai-cut')} class="kc-btn-primary">
               <i class="ri-quill-pen-line" aria-hidden="true"></i> Quero me Inscrever
             </a>
-            <a href={`${baseUrl}/treinamento`} class="kc-btn-secondary">
+            <a href={sitePath('/treinamento')} class="kc-btn-secondary">
               <i class="ri-play-circle-line" aria-hidden="true"></i> Ver Treinamento
             </a>
           </div>
@@ -109,7 +109,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
         </div>
 
         <div class="kc-nav-grid">
-          <a href={`${baseUrl}/treinamento`} class="kc-nav-card c-orange">
+          <a href={sitePath('/treinamento')} class="kc-nav-card c-orange">
             <div class="kc-nav-icon"><i class="ri-graduation-cap-line"></i></div>
             <div class="kc-nav-tag">Passo a passo</div>
             <h3 class="kc-nav-title">Treinamento CUT</h3>
@@ -117,7 +117,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Acessar Treinamento</div>
           </a>
 
-          <a href={`${baseUrl}/monetize/kwaicut/rpm`} class="kc-nav-card c-green">
+          <a href={sitePath('/monetize/kwaicut/rpm')} class="kc-nav-card c-green">
             <div class="kc-nav-icon"><i class="ri-money-dollar-circle-line"></i></div>
             <div class="kc-nav-tag">Como ganhar</div>
             <h3 class="kc-nav-title">Monetização & RPM</h3>
@@ -133,7 +133,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Ver NARRA Motions</div>
           </a>
 
-          <a href={`${baseUrl}/inscricao?programa=kwai-cut`} class="kc-nav-card c-purple">
+          <a href={sitePath('/inscricao?programa=kwai-cut')} class="kc-nav-card c-purple">
             <div class="kc-nav-icon"><i class="ri-quill-pen-line"></i></div>
             <div class="kc-nav-tag">Faça parte</div>
             <h3 class="kc-nav-title">Inscrição</h3>
@@ -141,7 +141,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Inscrever-se</div>
           </a>
 
-          <a href={`${baseUrl}/monetize/kwaicut/regras`} class="kc-nav-card c-yellow">
+          <a href={sitePath('/monetize/kwaicut/regras')} class="kc-nav-card c-yellow">
             <div class="kc-nav-icon"><i class="ri-file-list-3-line"></i></div>
             <div class="kc-nav-tag">Leia antes</div>
             <h3 class="kc-nav-title">Regras do Programa</h3>
@@ -149,7 +149,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
             <div class="kc-nav-arrow"><i class="ri-arrow-right-line"></i> Ler Regras</div>
           </a>
 
-          <a href={`${baseUrl}/busca`} class="kc-nav-card c-red">
+          <a href={sitePath('/busca')} class="kc-nav-card c-red">
             <div class="kc-nav-icon"><i class="ri-search-eye-line"></i></div>
             <div class="kc-nav-tag">Já é membro</div>
             <h3 class="kc-nav-title">Consultar Status</h3>
@@ -165,7 +165,7 @@ const baseUrl = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL
           <div class="kc-section-label-line"></div>
         </div>
 
-        <a href={`${baseUrl}/busca`} class="kc-featured-card">
+        <a href={sitePath('/busca')} class="kc-featured-card">
           <div class="kc-featured-icon"><i class="ri-user-star-line"></i></div>
           <div class="kc-featured-body">
             <div class="kc-featured-tag"><i class="ri-circle-fill" style="font-size:.5rem;vertical-align:middle"></i> Acesso Exclusivo</div>
