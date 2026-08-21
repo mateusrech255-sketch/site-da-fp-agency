@@ -22,12 +22,34 @@ const { videoId } = Astro.props;
       if (!playerRoot) return;
 
       const removeShareControls = () => {
+        // Remove explicitly known share/redirect buttons
         playerRoot
           .querySelectorAll('.vjs-share-control, .vignette-top-share, #vignette-top-button')
           .forEach((element) => element.remove());
 
         playerRoot.querySelectorAll('.video-js').forEach((element) => {
           element.classList.remove('vjs-share', 'vjs-videojs-share');
+        });
+
+        // Block any <a> tags that lead outside by replacing them with <div>
+        playerRoot.querySelectorAll('a').forEach((a) => {
+          if (a.href && (a.href.includes('academy.fpagency.com.br') || a.href.includes('open.video'))) {
+            const div = document.createElement('div');
+            // Copy all attributes except href and target
+            Array.from(a.attributes).forEach(attr => {
+              if (attr.name !== 'href' && attr.name !== 'target') {
+                div.setAttribute(attr.name, attr.value);
+              }
+            });
+            // Move all children to the new div
+            while (a.firstChild) {
+              div.appendChild(a.firstChild);
+            }
+            // Replace the <a> with the new <div> in the DOM
+            if (a.parentNode) {
+              a.parentNode.replaceChild(div, a);
+            }
+          }
         });
       };
 
@@ -37,6 +59,19 @@ const { videoId } = Astro.props;
       observer.observe(playerRoot, { childList: true, subtree: true });
       window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
     })();
+
+    // Globally intercept window.open for the player to prevent new tabs
+    if (!window.__openVideoIntercepted) {
+      window.__openVideoIntercepted = true;
+      const originalOpen = window.open;
+      window.open = function(url, name, specs) {
+        if (typeof url === 'string' && (url.includes('academy.fpagency.com.br') || url.includes('open.video'))) {
+          console.warn('Bloqueando redirecionamento externo para:', url);
+          return null;
+        }
+        return originalOpen.apply(this, arguments);
+      };
+    }
   </script>
 </div>
 
