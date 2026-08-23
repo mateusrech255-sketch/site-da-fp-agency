@@ -1,0 +1,2165 @@
+<USER_REQUEST>
+Certifque que todos os vídeos estejam presentes:
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script>
+            var __ezHttpConsent = {
+                setByCat: function(src, tagType, attributes, category, force, customSetScriptFn=null) {
+                    var setScript = function() {
+                        if (force || window.ezTcfConsent[category]) {
+                            if (typeof customSetScriptFn === 'function') {
+                                customSetScriptFn();
+                            } else {
+                                var scriptElement = document.createElement(tagType);
+                                scriptElement.src = src;
+                                attributes.forEach(function(attr) {
+                                    for (var key in attr) {
+                                        if (attr.hasOwnProperty(key)) {
+                                            scriptElement.setAttribute(key, attr[key]);
+                                        }
+                                    }
+                                });
+                                var firstScript = document.getElementsByTagName(tagType)[0];
+                                firstScript.parentNode.insertBefore(scriptElement, firstScript);
+                            }
+                        }
+                    };
+                    if (force || (window.ezTcfConsent && window.ezTcfConsent.loaded)) {
+                        setScript();
+                    } else if (typeof getEzConsentData === "function") {
+                        getEzConsentData().then(function(ezTcfConsent) {
+                            if (ezTcfConsent && ezTcfConsent.loaded) {
+                                setScript();
+                            } else {
+                                console.error("cannot get ez consent data");
+                                force = true;
+                                setScript();
+                            }
+                        });
+                    } else {
+                        force = true;
+                        setScript();
+                        console.error("getEzConsentData is not a function");
+                    }
+                },
+            };
+        </script>
+        <script>
+            var ezTcfConsent = window.ezTcfConsent ? window.ezTcfConsent : {
+                loaded: false,
+                store_info: false,
+                develop_and_improve_services: false,
+                measure_ad_performance: false,
+                measure_content_performance: false,
+                select_basic_ads: false,
+                create_ad_profile: false,
+                select_personalized_ads: false,
+                create_content_profile: false,
+                select_personalized_content: false,
+                understand_audiences: false,
+                use_limited_data_to_select_content: false,
+            };
+            function getEzConsentData() {
+                return new Promise(function(resolve) {
+                    document.addEventListener("ezConsentEvent", function(event) {
+                        var ezTcfConsent = event.detail.ezTcfConsent;
+                        resolve(ezTcfConsent);
+                    });
+                }
+                );
+            }
+        </script>
+        <script>
+            if (typeof _setEzCookies !== 'function') {
+                function _setEzCookies(ezConsentData) {
+                    var cookies = window.ezCookieQueue;
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i];
+                        if (ezConsentData && ezConsentData.loaded && ezConsentData[cookie.tcfCategory]) {
+                            document.cookie = cookie.name + "=" + cookie.value;
+                        }
+                    }
+                }
+            }
+            window.ezCookieQueue = window.ezCookieQueue || [];
+            if (typeof addEzCookies !== 'function') {
+                function addEzCookies(arr) {
+                    window.ezCookieQueue = [...window.ezCookieQueue, ...arr];
+                }
+            }
+            addEzCookies([{
+                name: "ezoab_670851",
+                value: "mod1; Path=/; Domain=fpagency.com.br; Max-Age=7200",
+                tcfCategory: "store_info",
+                isEzoic: "true",
+            }, {
+                name: "ezoid",
+                value: "77e11424-b970-44b9-4edc-0ea30b8c8350; Path=/; Domain=ezoic.net; Max-Age=31536000; SameSite=None; Secure; HttpOnly",
+                tcfCategory: "store_info",
+                isEzoic: "true",
+            }, {
+                name: "ezoid",
+                value: "77e11424-b970-44b9-4edc-0ea30b8c8350; Path=/; Max-Age=31536000; SameSite=None; Secure; HttpOnly",
+                tcfCategory: "store_info",
+                isEzoic: "true",
+            }]);
+            if (window.ezTcfConsent && window.ezTcfConsent.loaded) {
+                _setEzCookies(window.ezTcfConsent);
+            } else if (typeof getEzConsentData === "function") {
+                getEzConsentData().then(function(ezTcfConsent) {
+                    if (ezTcfConsent && ezTcfConsent.loaded) {
+                        _setEzCookies(window.ezTcfConsent);
+                    } else {
+                        console.error("cannot get ez consent data");
+                        _setEzCookies(window.ezTcfConsent);
+                    }
+                });
+            } else {
+                console.error("getEzConsentData is not a function");
+                _setEzCookies(window.ezTcfConsent);
+            }
+        </script>
+        <script type="text/javascript" data-ezscrex='false' data-cfasync='false'>
+            window._ezaq = Object.assign({
+                "edge_cache_status": 32,
+                "edge_response_time": 792,
+                "url": "https://academy.fpagency.com.br/"
+            }, typeof window._ezaq !== "undefined" ? window._ezaq : {});
+        </script>
+        <script type="text/javascript" data-ezscrex='false' data-cfasync='false'>
+            window._ezaq = Object.assign({
+                "ab_test_id": "mod1"
+            }, typeof window._ezaq !== "undefined" ? window._ezaq : {});
+            window.__ez = window.__ez || {};
+            window.__ez.tf = {
+                "lcpm": "false"
+            };
+            window.__ez = window.__ez || {};
+            window.__ez.fs = {
+                "ADXHardFloorsSplit": "false",
+                "AdaptiveExclusion": "false",
+                "AffiliateWidgets": "false",
+                "AnchorExpansionBanditSplit": "true",
+                "AnchorOverrideArmSplit": "control",
+                "CenteredAds": "false",
+                "DirectRenderBanditSplit": "true",
+                "DirectRenderDoseSplit": "off",
+                "DirectRenderFloormultHoldoutSplit": "off",
+                "DirectRenderPt4ThresholdSplit": "off",
+                "EscalationDownround": "false",
+                "EscalationEarlyGam": "true",
+                "EscalationHighFloorDownround": "false",
+                "EscalationMidFloorDownround": "true",
+                "EscalationS2sLowFloor": "true",
+                "EscalationS2sLowFloorAllowlist": "true",
+                "EscalationS2sMidFloor": "true",
+                "FloatingInterstitialBanditSplit": "true",
+                "FloorBanditSplit": "true",
+                "FloorEscalation": "true",
+                "FlyingCarpet": "false",
+                "HbFloorArmBoost": "false",
+                "HbFloorBanditSplit": "true",
+                "LazyloadBanditSplit": "true",
+                "OutstreamAspectBanditV3Split": "control",
+                "OutstreamBidderInclusionCurve": "standard",
+                "OutstreamBidderInclusionSplit": "false",
+                "OutstreamReserveBanditSplit": "true",
+                "PoolAuctionLock": "false",
+                "RefreshFloorBanditSplit": "true",
+                "SizeBanditSplit": "true",
+                "TimeoutBanditSplit": "true"
+            };
+            window.__ez.fss = '2320024458';
+        </script>
+        <meta charset="utf-8"/>
+        <script data-ezscrex='false' data-cfasync='false' data-pagespeed-no-defer>
+            var __ez = __ez || {};
+            __ez.stms = Date.now();
+            __ez.evt = {};
+            __ez.script = {};
+            __ez.ck = __ez.ck || {};
+            __ez.template = {};
+            __ez.template.isOrig = true;
+            window.__ezScriptHost = "//www.ezojs.com";
+            __ez.queue = __ez.queue || function() {
+                var e = 0
+                  , i = 0
+                  , t = []
+                  , n = !1
+                  , o = []
+                  , r = []
+                  , s = !0
+                  , a = function(e, i, n, o, r, s, a) {
+                    var l = arguments.length > 7 && void 0 !== arguments[7] ? arguments[7] : window
+                      , d = this;
+                    this.name = e,
+                    this.funcName = i,
+                    this.parameters = null === n ? null : w(n) ? n : [n],
+                    this.isBlock = o,
+                    this.blockedBy = r,
+                    this.deleteWhenComplete = s,
+                    this.isError = !1,
+                    this.isComplete = !1,
+                    this.isInitialized = !1,
+                    this.proceedIfError = a,
+                    this.fWindow = l,
+                    this.isTimeDelay = !1,
+                    this.process = function() {
+                        f("... func = " + e),
+                        d.isInitialized = !0,
+                        d.isComplete = !0,
+                        f("... func.apply: " + e);
+                        var i = d.funcName.split(".")
+                          , n = null
+                          , o = this.fWindow || window;
+                        i.length > 3 || (n = 3 === i.length ? o[i[0]][i[1]][i[2]] : 2 === i.length ? o[i[0]][i[1]] : o[d.funcName]),
+                        null != n && n.apply(null, this.parameters),
+                        !0 === d.deleteWhenComplete && delete t[e],
+                        !0 === d.isBlock && (f("----- F'D: " + d.name),
+                        p())
+                    }
+                }
+                  , l = function(e, i, t, n, o, r, s) {
+                    var a = arguments.length > 7 && void 0 !== arguments[7] ? arguments[7] : window
+                      , l = this;
+                    this.name = e,
+                    this.path = i,
+                    this.async = o,
+                    this.defer = r,
+                    this.isBlock = t,
+                    this.blockedBy = n,
+                    this.isInitialized = !1,
+                    this.isError = !1,
+                    this.isComplete = !1,
+                    this.proceedIfError = s,
+                    this.fWindow = a,
+                    this.isTimeDelay = !1,
+                    this.isPath = function(e) {
+                        return "/" === e[0] && "/" !== e[1]
+                    }
+                    ,
+                    this.getSrc = function(e) {
+                        return void 0 !== window.__ezScriptHost && this.isPath(e) ? window.__ezScriptHost + e : e
+                    }
+                    ,
+                    this.process = function() {
+                        l.isInitialized = !0,
+                        f("... file = " + e);
+                        var i = this.fWindow ? this.fWindow.document : document
+                          , t = i.createElement("script");
+                        t.src = this.getSrc(this.path),
+                        !0 === o ? t.async = !0 : !0 === r && (t.defer = !0),
+                        t.onerror = function() {
+                            var e = {
+                                url: window.location.href,
+                                name: l.name,
+                                path: l.path,
+                                user_agent: window.navigator.userAgent
+                            };
+                            "undefined" != typeof _ezaq && (e.pageview_id = _ezaq.page_view_id);
+                            var i = encodeURIComponent(JSON.stringify(e))
+                              , t = new XMLHttpRequest;
+                            t.open("GET", "//g.ezoic.net/ezqlog?d=" + i, !0),
+                            t.send(),
+                            f("----- ERR'D: " + l.name),
+                            l.isError = !0,
+                            !0 === l.isBlock && p()
+                        }
+                        ,
+                        t.onreadystatechange = t.onload = function() {
+                            var e = t.readyState;
+                            f("----- F'D: " + l.name),
+                            e && !/loaded|complete/.test(e) || (l.isComplete = !0,
+                            !0 === l.isBlock && p())
+                        }
+                        ,
+                        i.getElementsByTagName("head")[0].appendChild(t)
+                    }
+                }
+                  , d = function(e, i) {
+                    this.name = e,
+                    this.path = "",
+                    this.async = !1,
+                    this.defer = !1,
+                    this.isBlock = !1,
+                    this.blockedBy = [],
+                    this.isInitialized = !0,
+                    this.isError = !1,
+                    this.isComplete = i,
+                    this.proceedIfError = !1,
+                    this.isTimeDelay = !1,
+                    this.process = function() {}
+                };
+                function c(e, i, n, s, a, d, c, u, f) {
+                    var p = new l(e,i,n,s,a,d,c,f);
+                    !0 === u ? o[e] = p : r[e] = p,
+                    t[e] = p,
+                    h(p)
+                }
+                function h(e) {
+                    !0 !== u(e) && 0 != s && e.process()
+                }
+                function u(e) {
+                    if (!0 === e.isTimeDelay && !1 === n)
+                        return f(e.name + " blocked = TIME DELAY!"),
+                        !0;
+                    if (w(e.blockedBy))
+                        for (var i = 0; i < e.blockedBy.length; i++) {
+                            var o = e.blockedBy[i];
+                            if (!1 === t.hasOwnProperty(o))
+                                return f(e.name + " blocked = " + o),
+                                !0;
+                            if (!0 === e.proceedIfError && !0 === t[o].isError)
+                                return !1;
+                            if (!1 === t[o].isComplete)
+                                return f(e.name + " blocked = " + o),
+                                !0
+                        }
+                    return !1
+                }
+                function f(e) {
+                    var i = window.location.href
+                      , t = new RegExp("[?&]ezq=([^&#]*)","i").exec(i);
+                    "1" === (t ? t[1] : null) && console.debug(e)
+                }
+                function p() {
+                    ++e > 200 || (f("let's go"),
+                    m(o),
+                    m(r))
+                }
+                function m(e) {
+                    for (var i in e)
+                        if (!1 !== e.hasOwnProperty(i)) {
+                            var t = e[i];
+                            !0 === t.isComplete || u(t) || !0 === t.isInitialized || !0 === t.isError ? !0 === t.isError ? f(t.name + ": error") : !0 === t.isComplete ? f(t.name + ": complete already") : !0 === t.isInitialized && f(t.name + ": initialized already") : t.process()
+                        }
+                }
+                function w(e) {
+                    return "[object Array]" == Object.prototype.toString.call(e)
+                }
+                return window.addEventListener("load", (function() {
+                    setTimeout((function() {
+                        n = !0,
+                        f("TDELAY -----"),
+                        p()
+                    }
+                    ), 5e3)
+                }
+                ), !1),
+                {
+                    addFile: c,
+                    addFileOnce: function(e, i, n, o, r, s, a, l, d) {
+                        t[e] || c(e, i, n, o, r, s, a, l, d)
+                    },
+                    addDelayFile: function(e, i) {
+                        var n = new l(e,i,!1,[],!1,!1,!0);
+                        n.isTimeDelay = !0,
+                        f(e + " ...  FILE! TDELAY"),
+                        r[e] = n,
+                        t[e] = n,
+                        h(n)
+                    },
+                    addFunc: function(e, n, s, l, d, c, u, f, p, m) {
+                        !0 === c && (e = e + "_" + i++);
+                        var w = new a(e,n,s,l,d,u,f,m);
+                        !0 === p ? o[e] = w : r[e] = w,
+                        t[e] = w,
+                        h(w)
+                    },
+                    addDelayFunc: function(e, i, n) {
+                        var o = new a(e,i,n,!1,[],!0,!0);
+                        o.isTimeDelay = !0,
+                        f(e + " ...  FUNCTION! TDELAY"),
+                        r[e] = o,
+                        t[e] = o,
+                        h(o)
+                    },
+                    items: t,
+                    processAll: p,
+                    setallowLoad: function(e) {
+                        s = e
+                    },
+                    markLoaded: function(e) {
+                        if (e && 0 !== e.length) {
+                            if (e in t) {
+                                var i = t[e];
+                                !0 === i.isComplete ? f(i.name + " " + e + ": error loaded duplicate") : (i.isComplete = !0,
+                                i.isInitialized = !0)
+                            } else
+                                t[e] = new d(e,!0);
+                            f("markLoaded dummyfile: " + t[e].name)
+                        }
+                    },
+                    logWhatsBlocked: function() {
+                        for (var e in t)
+                            !1 !== t.hasOwnProperty(e) && u(t[e])
+                    }
+                }
+            }();
+            __ez.evt.add = function(e, t, n) {
+                e.addEventListener ? e.addEventListener(t, n, !1) : e.attachEvent ? e.attachEvent("on" + t, n) : e["on" + t] = n()
+            }
+            ,
+            __ez.evt.remove = function(e, t, n) {
+                e.removeEventListener ? e.removeEventListener(t, n, !1) : e.detachEvent ? e.detachEvent("on" + t, n) : delete e["on" + t]
+            }
+            ;
+            __ez.script.add = function(e) {
+                var t = document.createElement("script");
+                t.src = e,
+                t.async = !0,
+                t.type = "text/javascript",
+                document.getElementsByTagName("head")[0].appendChild(t)
+            }
+            ;
+            __ez.dot = __ez.dot || {};
+            __ez.queue.addFileOnce('/detroitchicago/boise.js', '/detroitchicago/boise.js?gcb=195-0&cb=5', true, [], true, false, true, false);
+            __ez.queue.addFileOnce('/parsonsmaize/abilene.js', '/parsonsmaize/abilene.js?gcb=195-0&cb=e2f76748f4', true, [], true, false, true, false);
+            __ez.queue.addFileOnce('/parsonsmaize/mulvane.js', '/parsonsmaize/mulvane.js?gcb=195-0&cb=e75e48eec0', true, ['/parsonsmaize/abilene.js'], true, false, true, false);
+            __ez.queue.addFileOnce('/detroitchicago/birmingham.js', '/detroitchicago/birmingham.js?gcb=195-0&cb=c4ed651ab8', true, ['/parsonsmaize/abilene.js'], true, false, true, false);
+        </script>
+        <script data-ezscrex="false" type="text/javascript" data-cfasync="false">
+            window._ezaq = Object.assign({
+                "ad_cache_level": 0,
+                "adpicker_placement_cnt": 0,
+                "ai_placeholder_cache_level": 0,
+                "ai_placeholder_placement_cnt": -1,
+                "domain": "fpagency.com.br",
+                "domain_id": 670851,
+                "ezcache_level": 1,
+                "ezcache_skip_code": 0,
+                "has_bad_image": 0,
+                "has_bad_words": 0,
+                "is_sitespeed": 0,
+                "lt_cache_level": 0,
+                "response_size": 132489,
+                "response_size_orig": 126709,
+                "response_time_orig": 974,
+                "template_id": 120,
+                "url": "https://academy.fpagency.com.br/",
+                "word_count": 0,
+                "worst_bad_word_level": 0
+            }, typeof window._ezaq !== "undefined" ? window._ezaq : {});
+            __ez.queue.markLoaded('ezaqBaseReady');
+            if (window._ezaq && window._ezaq.page_view_id === "2b7a7408-662f-413f-6362-517b253f5fdf") {
+                window.__ezPvSig = window.__ezPvSig || "tk8wnd.9a1e640411941e366f659a7e177243a6";
+            }
+        </script>
+        <script type='text/javascript' data-ezscrex='false' data-cfasync='false'>
+            window.ezAnalyticsStatic = true;
+
+            function analyticsAddScript(script) {
+                var ezDynamic = document.createElement('script');
+                ezDynamic.type = 'text/javascript';
+                ezDynamic.innerHTML = script;
+                document.head.appendChild(ezDynamic);
+            }
+            function getCookiesWithPrefix() {
+                var allCookies = document.cookie.split(';');
+                var cookiesWithPrefix = {};
+
+                for (var i = 0; i < allCookies.length; i++) {
+                    var cookie = allCookies[i].trim();
+
+                    for (var j = 0; j < arguments.length; j++) {
+                        var prefix = arguments[j];
+                        if (cookie.indexOf(prefix) === 0) {
+                            var cookieParts = cookie.split('=');
+                            var cookieName = cookieParts[0];
+                            var cookieValue = cookieParts.slice(1).join('=');
+                            cookiesWithPrefix[cookieName] = decodeURIComponent(cookieValue);
+                            break;
+                            // Once matched, no need to check other prefixes
+                        }
+                    }
+                }
+
+                return cookiesWithPrefix;
+            }
+            function getOrMintFss() {
+                var UINT32_MAX = 4294967295;
+                var UINT32_DECIMAL = /^\d{1,10}$/;
+                function ensureEz() {
+                    if (!window.__ez || typeof window.__ez !== 'object') {
+                        window.__ez = {};
+                    }
+                    return window.__ez;
+                }
+                function isValidUint32String(value) {
+                    if (typeof value !== 'string' || !value) {
+                        return false;
+                    }
+                    if (!UINT32_DECIMAL.test(value)) {
+                        return false;
+                    }
+                    return Number(value) <= UINT32_MAX;
+                }
+                if (window.__ez && isValidUint32String(window.__ez.fss)) {
+                    return window.__ez.fss;
+                }
+                var cookieStr = '';
+                try {
+                    cookieStr = document.cookie;
+                } catch (err) {
+                    cookieStr = '';
+                }
+                if (cookieStr && typeof cookieStr === 'string') {
+                    var parts = cookieStr.split(';');
+                    for (var i = 0; i < parts.length; i++) {
+                        var part = parts[i];
+                        var eq = part.indexOf('=');
+                        if (eq === -1) {
+                            continue;
+                        }
+                        var name = part.slice(0, eq).trim();
+                        if (name.indexOf('ezfs_') !== 0) {
+                            continue;
+                        }
+                        var raw = part.slice(eq + 1).trim();
+                        var value;
+                        try {
+                            value = decodeURIComponent(raw);
+                        } catch (err) {
+                            continue;
+                        }
+                        if (!isValidUint32String(value)) {
+                            continue;
+                        }
+                        ensureEz().fss = value;
+                        return value;
+                    }
+                }
+                var seed;
+                if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function' && typeof Uint32Array === 'function') {
+                    seed = crypto.getRandomValues(new Uint32Array(1))[0];
+                } else {
+                    seed = Math.floor(Math.random() * 4294967296);
+                }
+                var minted = String(seed >>> 0);
+                ensureEz().fss = minted;
+                return minted;
+            }
+            function productAnalytics() {
+                var d = {
+                    "pr": [6],
+                    "omd5": "810217d17dee29991d276729624346ad",
+                    "fs_seed": "2320024458"
+                };
+                d.u = _ezaq.url;
+                d.p = _ezaq.page_view_id;
+                d.v = _ezaq.visit_uuid;
+                d.ab = _ezaq.ab_test_id;
+                d.e = JSON.stringify(_ezaq);
+                d.ref = document.referrer;
+                d.dw = document.documentElement.clientWidth || window.innerWidth || 0;
+                d.dh = window.screen.height || 0;
+                d.vpw = window.innerWidth || document.documentElement.clientWidth || 0;
+                d.vph = window.innerHeight || document.documentElement.clientHeight || 0;
+                d.doch = Math.max((document.body && document.body.scrollHeight) || 0, (document.documentElement && document.documentElement.scrollHeight) || 0, (document.body && document.body.offsetHeight) || 0, (document.documentElement && document.documentElement.offsetHeight) || 0, (document.body && document.body.clientHeight) || 0, (document.documentElement && document.documentElement.clientHeight) || 0);
+                d.c = getCookiesWithPrefix('active_template', 'ez', 'lp_');
+                if (typeof ez_utmParams !== 'undefined') {
+                    d.utm = ez_utmParams;
+                }
+                d.qs = window.location.search;
+                if (typeof d.fs_seed === 'string' && d.fs_seed && (!window.__ez || !window.__ez.fss)) {
+                    if (!window.__ez || typeof window.__ez !== 'object') {
+                        window.__ez = {};
+                    }
+                    window.__ez.fss = d.fs_seed;
+                }
+                d.fs_seed = getOrMintFss();
+
+                var dataText = JSON.stringify(d);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/ezais/analytics?cb=1', true);
+                xhr.onload = function() {
+                    if (xhr.status != 200) {
+                        return;
+                    }
+
+                    if (document.readyState !== 'loading') {
+                        analyticsAddScript(xhr.response);
+                        return;
+                    }
+
+                    var eventFunc = function() {
+                        if (document.readyState === 'loading') {
+                            return;
+                        }
+                        document.removeEventListener('readystatechange', eventFunc, false);
+                        analyticsAddScript(xhr.response);
+                    };
+
+                    document.addEventListener('readystatechange', eventFunc, false);
+                }
+                ;
+                xhr.setRequestHeader('Content-Type', 'text/plain');
+                xhr.send(dataText);
+            }
+            __ez.queue.addFunc("productAnalytics", "productAnalytics", null, true, ['ezaqBaseReady'], false, false, false, true);
+        </script>
+        <base href="https://academy.fpagency.com.br/"/>
+        <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+        <title>FP Agency Videos</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+        <link rel="canonical" href="https://academy.fpagency.com.br/"/>
+        <meta name="description" content="Bem-vindo ao canal oficial da FP Agency! Aqui você encontra os treinamentos oficiais e exclusivos para criadores de conteúdo que buscam crescer, viralizar e monetizar na maior plataforma de vídeos curtos.  Se você quer transformar a sua produção de conteúdo em uma carreira lucrativa, este é o lugar certo. Assista aos nossos tutoriais e domine as melhores estratégias do mercado.  🚀 Nossos Programas de Aceleração:  Kwai Cut: Aprenda técnicas de edição ágil, cortes estratégicos, retenção de públ..."/>
+        <meta property="og:title" content="FP Agency"/>
+        <meta property="og:description" content="Bem-vindo ao canal oficial da FP Agency! Aqui você encontra os treinamentos oficiais e exclusivos para criadores de conteúdo que buscam crescer, viralizar e monetizar na maior plataforma de vídeos curtos.  Se você quer transformar a sua produção de conteúdo em uma carreira lucrativa, este é o lugar certo. Assista aos nossos tutoriais e domine as melhores estratégias do mercado.  🚀 Nossos Programas de Aceleração:  Kwai Cut: Aprenda técnicas de edição ágil, cortes estratégicos, retenção de públ..."/>
+        <meta property="og:image" content="https://video-meta.open.video/logo/140150/logo-1766771120.webp"/>
+        <meta property="og:url" content="https://academy.fpagency.com.br/"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content="FP Agency"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="FP Agency"/>
+        <meta name="twitter:description" content="Bem-vindo ao canal oficial da FP Agency! Aqui você encontra os treinamentos oficiais e exclusivos para criadores de conteúdo que buscam crescer, viralizar e monetizar na maior plataforma de vídeos curtos.  Se você quer transformar a sua produção de conteúdo em uma carreira lucrativa, este é o lugar certo. Assista aos nossos tutoriais e domine as melhores estratégias do mercado.  🚀 Nossos Programas de Aceleração:  Kwai Cut: Aprenda técnicas de edição ágil, cortes estratégicos, retenção de públ..."/>
+        <meta name="twitter:image" content="https://video-meta.open.video/logo/140150/logo-1766771120.webp"/>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                "description": "Bem-vindo ao canal oficial da FP Agency! Aqui você encontra os treinamentos oficiais e exclusivos para criadores de conteúdo que buscam crescer, viralizar e monetizar na maior plataforma de vídeos curtos.  Se você quer transformar a sua produção de conteúdo em uma carreira lucrativa, este é o lugar certo. Assista aos nossos tutoriais e domine as melhores estratégias do mercado.  🚀 Nossos Programas de Aceleração:  Kwai Cut: Aprenda técnicas de edição ágil, cortes estratégicos, retenção de público e como prender a atenção do espectador nos primeiros segundos.  Kwai Narrastars: Desenvolva habilidades de narração profissional, roteirização de alto impacto e storytelling para engajar sua audiência de forma única.  🔗 Acesse os Treinamentos Completos e Materiais de Apoio:  Treinamento Kwai Cut: fpagency.com.br/kwai-cut/treinamento  Treinamento Kwai Narrastars: fpagency.com.br/kwai-narrastars/treinamento  Inscreva-se no canal, acompanhe as atualizações e faça parte da agência que mais cresce no ecossistema de criadores!",
+                "image": "https://video-meta.open.video/logo/140150/logo-1766771120.webp",
+                "name": "FP Agency",
+                "publisher": {
+                    "@type": "Organization",
+                    "logo": "https://video-meta.open.video/logo/140150/logo-1766771120.webp",
+                    "name": "FP Agency",
+                    "url": "https://academy.fpagency.com.br/"
+                },
+                "url": "https://academy.fpagency.com.br/"
+            }</script>
+        <meta name="platform" content="open.video"/>
+        <link rel="icon" type="image/png" href="https://assets.open.video/open-video-favicon/favicon-96x96.png" sizes="96x96"/>
+        <link rel="icon" type="image/png" href="https://assets.open.video/open-video-favicon/favicon-128x128.png" sizes="128x128"/>
+        <link rel="icon" type="image/png" href="https://assets.open.video/open-video-favicon/favicon-192x192.png" sizes="192x192"/>
+        <link rel="icon" type="image/svg+xml" href="https://assets.open.video/open-video-favicon/favicon.svg"/>
+        <link rel="shortcut icon" href="/favicon.ico"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="https://assets.open.video/open-video-favicon/apple-touch-icon.png"/>
+        <meta name="apple-mobile-web-app-title" content="Open.Video"/>
+        <link rel="manifest" href="https://assets.open.video/open-video-favicon/site.webmanifest"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;icon_names=account_circle,arrow_upward,calendar_month,chevron_left,chevron_right,close,cloud_upload,code,delete,description,devices,help_center,home,info,ios_share,keyboard_arrow_down,keyboard_arrow_right,keyboard_arrow_up,live_tv,location_on,login,mail,menu,movie,news,open_in_new,person,play_arrow,policy,schedule,search,security,sell,shopping_bag,thumb_down,thumb_up,video_camera_front,video_library,videocam_off,visibility&amp;display=block"/>
+        <link rel="stylesheet" href="https://assets.open.video/static/humix-10c553ed.css" onerror="this.onerror=null;this.href=`https://open.video/static/humix.css`;"/>
+        <script>
+            window.HUMIX = window.HUMIX || {};
+            window.is_humix_app = true;
+            window.HUMIX.CGC_PREFIX = "hmx_cg-";
+        </script>
+        <script>
+            var __advertiserRule = [];
+        </script>
+        <script type='text/javascript'>
+            var ezoTemplate = 'old_site_noads';
+            var ezouid = '1';
+            var ezoFormfactor = '1';
+        </script>
+        <script data-ezscrex="false" type='text/javascript'>
+            var soc_app_id = '0';
+            var did = 670851;
+            var ezdomain = 'fpagency.com.br';
+            var ezoicSearchable = 1;
+        </script>
+    </head>
+    <body class="logged-out page-channel ss-page">
+        <script type="module" src="https://assets.open.video/static/sidebar.8f81e8fc.js"></script>
+        <header class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#000">
+            <nav class="bd-gutter align-middle">
+                <div id="menu-icon-container">
+                    <button onclick="HUMIX.toggleSidebar()" class="navbar-menu">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+                <div class="navbar-custom navbar-custom-open-video">
+                    <div id="navbar-channel-icon" class="navbar-channel-icon">
+                        <a href="https://academy.fpagency.com.br" alt="Open.Video Channel FP Agency">
+                            <img src="https://video-meta.open.video/logo/140150/logo-1766771120.webp" class="img-fluid logo-img-header logo-img-custom" alt="FP Agency Logo"/>
+                        </a>
+                    </div>
+                    <div class="custom-line"></div>
+                    <div id="navbar-main-logo" class="navbar-logo">
+                        <a href="https://open.video" alt="Open.Video Home Page">
+                            <img src="https://assets.open.video/open-video-logo-color.png" class="img-fluid" alt="Open.Video Logo"/>
+                        </a>
+                    </div>
+                </div>
+                <div id="navbar-searchbar" style="background-color:#000">
+                    <div id="searchbar" class="px-0 form-outline input-group searchbar">
+                        <select name="search-param" id="search-param" style="display:none">
+                            <option value="all">All</option>
+                            <option value="channel" selected="">Channel</option>
+                        </select>
+                        <input type="search" id="search" placeholder="Search..." aria-label="search" class="form-control text-white navbar-search-input" style="border-bottom-left-radius:25px!important;border-top-left-radius:25px!important"/>
+                        <button class="btn" type="button" id="search-btn" data-mdb-ripple-color="dark" aria-label="search">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </div>
+                    <div onclick="HUMIX.toggleMobileSearch()" class="close material-symbols-outlined close-icon"></div>
+                </div>
+                <div id="search-mobile-icon" onclick="HUMIX.toggleMobileSearch()">
+                    <span class="material-symbols-outlined search-icon"></span>
+                </div>
+                <div class="nav-bar-btns">
+                    <button type="button" id="toggleMode" aria-label="toggle light and dark mode">
+                        <svg id="toggle-on" width="30" height="14" viewBox="0 0 30 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="14" rx="7" fill="url(#paint0_linear_499_43)"></rect>
+                            <circle cx="6.10859" cy="7" r="5.32353" fill="#fcee0d"></circle>
+                            <defs>
+                                <linearGradient id="paint0_linear_499_43" x1="15" y1="0" x2="15" y2="14" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c5e4eb"></stop>
+                                    <stop offset="1" stop-color="#6acee3"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <svg id="toggle-off" width="30" height="14" viewBox="0 0 30 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="14" rx="7" fill="url(#paint0_linear_499_34)"></rect>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21.991 11.9294C23.9189 11.1316 25.2641 9.24348 25.2641 6.99826c0-2.24526-1.3452-4.13339-3.2731-4.93119C22.632 1.80569 23.3199 1.66491 24.0412 1.66491c2.9241.0 5.2942 2.37013 5.2942 5.33335.0 2.96321-2.3701 5.33334-5.2942 5.33334C23.3199 12.3316 22.632 12.1908 21.991 11.9294z" fill="#fcee0d"></path>
+                            <defs>
+                                <linearGradient id="paint0_linear_499_34" x1="15" y1="0" x2="15" y2="14" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#394446"></stop>
+                                    <stop offset="1"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </button>
+                    <button onclick="HUMIX.openLoginModal()" class="nav-log-in nav-logged-out-user">Log in</button>
+                    <a href="https://open.video/join" class="nav-get-started nav-logged-out-user register-link">
+                        Join Open.Video
+<span class="material-symbols-outlined arrow-right-icon"></span>
+                    </a>
+                    <button onclick="HUMIX.logout()" class="nav-log-in nav-logged-in-user">Log out</button>
+                </div>
+            </nav>
+        </header>
+        <aside id="sidebar">
+            <div id="sidebar-contents" class="sidebar-narrow">
+                <div class="menu">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="https://open.video">
+                                <span class="material-symbols-outlined home-icon" aria-hidden="true"></span>
+                                <span class="text">Open.Video</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/browse">
+                                <span class="material-symbols-outlined browse-icon" aria-hidden="true"></span>
+                                <span class="text">Browse Videos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button onclick="HUMIX.goToMyChannel()" class="my-channel">
+                                <span class="material-symbols-outlined my-channel-icon" aria-hidden="true"></span>
+                                <span class="text">My Channel</span>
+                            </button>
+                            <div class="my-channel-links" style="display:none"></div>
+                        </li>
+                        <li>
+                            <button onclick="HUMIX.goToStudio()">
+                                <span class="material-symbols-outlined studio-icon" aria-hidden="true"></span>
+                                <span class="text">Studio</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="https://open.video/about">
+                                <span class="material-symbols-outlined about-icon" aria-hidden="true"></span>
+                                <span class="text">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/terms">
+                                <span class="material-symbols-outlined terms-icon" aria-hidden="true"></span>
+                                <span class="text">Terms</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/privacy">
+                                <span class="material-symbols-outlined privacy-icon" aria-hidden="true"></span>
+                                <span class="text">Privacy</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <aside id="sidebar-slide">
+            <div id="items">
+                <div class="menu">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="https://open.video">
+                                <span class="material-symbols-outlined home-icon" aria-hidden="true"></span>
+                                <span class="text">Open.Video</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/browse">
+                                <span class="material-symbols-outlined browse-icon" aria-hidden="true"></span>
+                                <span class="text">Browse Videos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button onclick="HUMIX.goToMyChannel()" class="my-channel">
+                                <span class="material-symbols-outlined my-channel-icon" aria-hidden="true"></span>
+                                <span class="text">My Channel</span>
+                            </button>
+                            <div class="my-channel-links" style="display:none"></div>
+                        </li>
+                        <li>
+                            <button onclick="HUMIX.goToStudio()">
+                                <span class="material-symbols-outlined studio-icon" aria-hidden="true"></span>
+                                <span class="text">Studio</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="https://open.video/about">
+                                <span class="material-symbols-outlined about-icon" aria-hidden="true"></span>
+                                <span class="text">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/terms">
+                                <span class="material-symbols-outlined terms-icon" aria-hidden="true"></span>
+                                <span class="text">Terms</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://open.video/privacy">
+                                <span class="material-symbols-outlined privacy-icon" aria-hidden="true"></span>
+                                <span class="text">Privacy</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="sidebar-footer">
+                        <button type="button" id="toggleMode-mobile" aria-label="toggle light and dark mode">
+                            <svg id="toggle-on-mobile" width="43.4028" height="20" viewBox="0 0 43.4028 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="43.4028" height="20" rx="10" fill="url(#paint0_linear_499_33)"></rect>
+                                <circle cx="8.8267" cy="10" r="7.6563" fill="#fcee0d"></circle>
+                                <defs>
+                                    <linearGradient id="paint0_linear_499_33" x1="21.7014" y1="0" x2="21.7014" y2="20" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#c5e4eb"></stop>
+                                        <stop offset="1" stop-color="#6acee3"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <svg id="toggle-off-mobile" width="43.4028" height="20" viewBox="0 0 43.4028 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y=".0672" width="43.4028" height="20" rx="10" fill="url(#paint0_linear_499_44)"></rect>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M31.8034 17.1311c2.7584-1.1233 4.6827-3.8784 4.6827-7.0639.0-3.18545-1.9243-5.94057-4.6827-7.06392C32.6273 2.62926 33.5339 2.42017 34.4861 2.42017c4.4894.0 8 3.51064 8 7.64703.0 4.1364-3.5106 7.647-8 7.647C33.5339 17.7142 32.6273 17.5051 31.8034 17.1311z" fill="#fcee0d"></path>
+                                <defs>
+                                    <linearGradient id="paint0_linear_499_44" x1="21.7014" y1=".0672" x2="21.7014" y2="20.0672" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#394446"></stop>
+                                        <stop offset="1"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </button>
+                        <span class="toggle-text">Toggle dark &amp;light mode</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main id="main-content" class="home-content">
+            <div id="livestream-banner" class="livestream-banner" style="display:none">
+                <div class="livestream-banner-content">
+                    <div class="livestream-banner-left">
+                        <span class="livestream-badge">LIVE</span>
+                        <span class="livestream-banner-text">
+                            <strong id="livestream-channel-name"></strong>
+                            <span id="livestream-title"></span>
+                            <span id="livestream-action-text"></span>
+                        </span>
+                    </div>
+                    <a href="#" id="livestream-banner-link" class="livestream-banner-button">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        Watch Now
+                    </a>
+                </div>
+            </div>
+            <style>
+                .livestream-banner {
+                    background: var(--template-accent-color,#08b6d4);
+                    padding: .75rem 1rem;
+                    margin-bottom: 1rem;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,.15)
+                }
+
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px)
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0)
+                    }
+                }
+
+                .livestream-banner-content {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    gap: .75rem
+                }
+
+                .livestream-banner-left {
+                    display: flex;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: .625rem;
+                    flex: 1;
+                    width: 100%
+                }
+
+                .livestream-badge {
+                    display: none!important
+                }
+
+                .livestream-banner-text {
+                    color: var(--template-accent-text-color,white);
+                    font-size: .875rem;
+                    line-height: 1.4
+                }
+
+                .livestream-banner-text strong {
+                    font-weight: 600
+                }
+
+                .livestream-banner-button {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .5rem;
+                    background: var(--template-card-bg-color,white);
+                    color: var(--template-accent-color,#667eea);
+                    padding: .5rem 1rem;
+                    border-radius: 24px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: .875rem;
+                    transition: all .2s ease;
+                    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+                    width: 100%
+                }
+
+                .livestream-banner-button:hover {
+                    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+                    text-decoration: none
+                }
+
+                .livestream-banner-button .material-symbols-outlined {
+                    font-size: 18px
+                }
+
+                @media(min-width: 768px) {
+                    .livestream-banner {
+                        padding:1rem 1.5rem;
+                        margin-bottom: 1.5rem
+                    }
+
+                    .livestream-banner-content {
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 1rem
+                    }
+
+                    .livestream-banner-left {
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 1rem
+                    }
+
+                    .livestream-badge {
+                        display: inline-flex!important;
+                        align-items: center!important;
+                        gap: .5rem!important;
+                        background: #ea0101!important;
+                        background-color: #ea0101!important;
+                        opacity: 1!important;
+                        padding: .375rem .75rem!important;
+                        border-radius: 20px!important;
+                        font-weight: 700!important;
+                        font-size: .875rem!important;
+                        color: #fff!important;
+                        letter-spacing: .5px!important;
+                        text-transform: uppercase
+                    }
+
+                    .livestream-banner-text {
+                        font-size: 1rem
+                    }
+
+                    .livestream-banner-button {
+                        width: auto;
+                        padding: .625rem 1.25rem;
+                        font-size: .9375rem
+                    }
+
+                    .livestream-banner-button .material-symbols-outlined {
+                        font-size: 20px
+                    }
+                }
+            </style>
+            <div class="container">
+                <div class="main-ml" id="video-contents-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="channel-top">
+                                <div id="channel-banner" class="channel-banner--no-image">
+                                    <button id="back-button-channel" onclick="HUMIX.backToSite()" aria-label="back" style="color:#fff;background:#000">
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                        Visit Site
+                                    </button>
+                                </div>
+                                <div id="channel-info">
+                                    <div id="channel-avatar">
+                                        <img src="https://video-meta.open.video/logo/140150/logo-1766771120.webp" class="img-fluid" alt="FP Agency Logo"/>
+                                    </div>
+                                    <div id="channel-details">
+                                        <h1>FP Agency</h1>
+                                        <div id="channel-sub-details">
+                                            <div>
+                                                <a class="external-link pr-2" href="https://www.fpagency.com.br/kwai-cut" target="_blank" rel="ugc noopener">Kwai Cut</a>
+                                            </div>
+                                            <div>
+                                                <a class="external-link pr-2" href="https://www.fpagency.com.br/kwai-narrastars" target="_blank" rel="ugc noopener">Kwai Narrastars</a>
+                                            </div>
+                                            <div class="website">
+                                                <a href="https://fpagency.com.br" target="_blank" rel="ugc noopener">
+                                                    <span class="material-symbols-outlined">open_in_new</span>
+                                                    fpagency.com.br
+                                                </a>
+                                            </div>
+                                            <div class="video-count" style="margin-right:10px">26 Videos</div>
+                                        </div>
+                                        <div id="channel-description-preview">
+                                            Bem-vindo ao canal oficial da FP Agency! Aqui você encontra os treinamentos oficiais e exclusivos p... <a href="javascript:void(0)" id="channel-see-more-link" onclick="HUMIX.openAboutModal()">See more</a>
+                                        </div>
+                                    </div>
+                                    <div id="channel-subscribe">
+                                        <button id="channel-subscribe-btn" class="btn btn-primary btn-loading">Subscribe</button>
+                                    </div>
+                                </div>
+                                <div id="channel-tab-menu">
+                                    <ul class="tab-menu">
+                                        <li>
+                                            <a href="#channel" class="tab-link active">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#latest" class="tab-link">All Videos</a>
+                                        </li>
+                                        <li>
+                                            <a href="#shorts" class="tab-link">Shorts</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="channel" class="tab-pane active">
+                        <div class="video-section carousel-container" id="section-shorts-carousel-container">
+                            <div class="mx-2">
+                                <h2 class="section-title">Shorts</h2>
+                            </div>
+                            <div class="carousel-inner">
+                                <div id="section-shorts-carousel-prev" class="carousel-nav prev d-none">
+                                    <button class="prev" onclick="HUMIX.carouselPrev(&#39;section-shorts&#39;)" aria-label="previous">
+                                        <span class="material-symbols-outlined" style="float:left">chevron_left</span>
+                                    </button>
+                                </div>
+                                <div class="track" id="section-shorts-track">
+                                    <div class="track-inner video-display" id="section-shorts-display">
+                                        <div class="card card-vertical">
+                                            <div class="card-video card-video-vertical" style="position:relative">
+                                                <img alt="Video thumbnail for Como ativar a Receita de Anúncios" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" class="img-fluid lazy card-thumbnail-img-vertical" loading="lazy"/>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">0:15</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/como-ativar-a-receita-de-anúncios" class="stretched-link">Como ativar a Receita de Anúncios</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card-vertical">
+                                            <div class="card-video card-video-vertical" style="position:relative">
+                                                <img alt="Video thumbnail for Ajustando a Legenda" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/opDIhtyORSyd/t1769074507_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/BriXUOoQsyu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/BriXUOoQsyu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/opDIhtyORSyd/t1769074507_poster.005.jpg" class="img-fluid lazy card-thumbnail-img-vertical" loading="lazy"/>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">0:40</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/ajustando-a-legenda" class="stretched-link">Ajustando a Legenda</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="section-shorts-carousel-next" class="carousel-nav next">
+                                    <button class="next" onclick="HUMIX.carouselNext(&#39;section-shorts&#39;)" aria-label="next">
+                                        <span class="material-symbols-outlined" style="float:right">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-section carousel-container" id="section-views-carousel-container">
+                            <div class="mx-2">
+                                <h2 class="section-title">Popular</h2>
+                            </div>
+                            <div class="carousel-inner">
+                                <div id="section-views-carousel-prev" class="carousel-nav prev d-none">
+                                    <button class="prev" onclick="HUMIX.carouselPrev(&#39;section-views&#39;)" aria-label="previous">
+                                        <span class="material-symbols-outlined" style="float:left">chevron_left</span>
+                                    </button>
+                                </div>
+                                <div class="track" id="section-views-track">
+                                    <div class="track-inner video-display" id="section-views-display">
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/N6u4-nLql2Nk/N6u4-nLql2Nk_upload_t1766772239-NctzvV.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/sLLLczVYs4u/res640.webp?cb=2" data-bg-src-tablet="https://video-meta.open.video/resized-posters/sLLLczVYs4u/res1280.webp?cb=2" data-bg-src-desktop="https://video-meta.open.video/poster/N6u4-nLql2Nk/N6u4-nLql2Nk_upload_t1766772239-NctzvV.jpg"></div>
+                                                    <img alt="Video thumbnail for Edição Básica para Kwai Cut" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/N6u4-nLql2Nk/N6u4-nLql2Nk_upload_t1766772239-NctzvV.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/sLLLczVYs4u/res640.webp?cb=2" data-src-tablet="https://video-meta.open.video/resized-posters/sLLLczVYs4u/res1280.webp?cb=2" data-src-desktop="https://video-meta.open.video/poster/N6u4-nLql2Nk/N6u4-nLql2Nk_upload_t1766772239-NctzvV.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:36</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/edição-básica-para-kwai-cut" class="stretched-link">Edição Básica para Kwai Cut</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Dec 26, 2025</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Notícias com Inteligência Artificial" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:02</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/notícias-com-inteligência-artificial" class="stretched-link">Notícias com Inteligência Artificial</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/wTb2wn8rgOVH/t1766852234_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/wTb2wn8rgOVH/t1766852234_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Criando vídeos motivacionais com vozes de IA (Inteligência Artificial)" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/wTb2wn8rgOVH/t1766852234_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/wTb2wn8rgOVH/t1766852234_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:46</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/criandovideosmotivacionaiscomvozesdeiainteligenciaartificial" class="stretched-link">Criando vídeos motivacionais com vozes de IA (Inteligência Artificial)</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Dec 27, 2025</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/3lDEgpjjkGKR/3lDEgpjjkGKR_upload_t1766854784-ZOOsIV.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/YnmCION6Yzu/res640.webp?cb=2" data-bg-src-tablet="https://video-meta.open.video/resized-posters/YnmCION6Yzu/res1280.webp?cb=2" data-bg-src-desktop="https://video-meta.open.video/poster/3lDEgpjjkGKR/3lDEgpjjkGKR_upload_t1766854784-ZOOsIV.jpg"></div>
+                                                    <img alt="Video thumbnail for Vídeos motivacionais com vozes de personagens" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/3lDEgpjjkGKR/3lDEgpjjkGKR_upload_t1766854784-ZOOsIV.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/YnmCION6Yzu/res640.webp?cb=2" data-src-tablet="https://video-meta.open.video/resized-posters/YnmCION6Yzu/res1280.webp?cb=2" data-src-desktop="https://video-meta.open.video/poster/3lDEgpjjkGKR/3lDEgpjjkGKR_upload_t1766854784-ZOOsIV.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:37</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/criandovídeosmotivacionaiscomvozesdeiainteligenciaartificial" class="stretched-link">Vídeos motivacionais com vozes de personagens</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Dec 27, 2025</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Editando vídeos de Cartoon" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:48</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/editando-vídeos-de-cartoon" class="stretched-link">Editando vídeos de Cartoon</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Melhorando a Qualidade" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">1:35</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/melhorando-a-qualidade" class="stretched-link">Melhorando a Qualidade</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/mRDEBFuak4jG/t1769075697_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/Y4PWoOVQZOu/res640.webp?cb=2" data-bg-src-tablet="https://video-meta.open.video/resized-posters/Y4PWoOVQZOu/res1280.webp?cb=2" data-bg-src-desktop="https://video-meta.open.video/poster/mRDEBFuak4jG/t1769075697_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Edição no Nicho de FTV" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/mRDEBFuak4jG/t1769075697_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/Y4PWoOVQZOu/res640.webp?cb=2" data-src-tablet="https://video-meta.open.video/resized-posters/Y4PWoOVQZOu/res1280.webp?cb=2" data-src-desktop="https://video-meta.open.video/poster/mRDEBFuak4jG/t1769075697_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">1:51</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/edição-no-nicho-de-ftv" class="stretched-link">Edição no Nicho de FTV</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/SmfYsvyHJ4Jb/t1769074137_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/6HjWV4pAszu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/6HjWV4pAszu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/SmfYsvyHJ4Jb/t1769074137_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Criando uma Logo" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/SmfYsvyHJ4Jb/t1769074137_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/6HjWV4pAszu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/6HjWV4pAszu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/SmfYsvyHJ4Jb/t1769074137_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:10</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/criando-uma-logo" class="stretched-link">Criando uma Logo</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/oyjkABGyUKRG/t1769075507_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/ZjProjVkYiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/ZjProjVkYiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/oyjkABGyUKRG/t1769075507_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Nicho de Música (Cut)" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/oyjkABGyUKRG/t1769075507_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/ZjProjVkYiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/ZjProjVkYiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/oyjkABGyUKRG/t1769075507_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:26</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/nicho-de-música-cut" class="stretched-link">Nicho de Música (Cut)</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Jan 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="section-views-carousel-next" class="carousel-nav next">
+                                    <button class="next" onclick="HUMIX.carouselNext(&#39;section-views&#39;)" aria-label="next">
+                                        <span class="material-symbols-outlined" style="float:right">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-section carousel-container" id="section-recent-carousel-container">
+                            <div class="mx-2">
+                                <h2 class="section-title">Just Added</h2>
+                            </div>
+                            <div class="carousel-inner">
+                                <div id="section-recent-carousel-prev" class="carousel-nav prev d-none">
+                                    <button class="prev" onclick="HUMIX.carouselPrev(&#39;section-recent&#39;)" aria-label="previous">
+                                        <span class="material-symbols-outlined" style="float:left">chevron_left</span>
+                                    </button>
+                                </div>
+                                <div class="track" id="section-recent-track">
+                                    <div class="track-inner video-display" id="section-recent-display">
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/25POc9MBBiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/25POc9MBBiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Novela das Frutas" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/25POc9MBBiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/25POc9MBBiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">19:35</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/novela-das-frutas" class="stretched-link">Novela das Frutas</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 23, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <img alt="Video thumbnail for Inteligência Artificial para Geração de Vídeos" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/koq8FjK46MPq/t1787442878_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/34HrI9pJBOu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/34HrI9pJBOu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/koq8FjK46MPq/t1787442878_poster.005.jpg" class="img-fluid lazy card-thumbnail-img" loading="lazy"/>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">9:18</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/inteligência-artificial-para-geração-de-vídeos" class="stretched-link">Inteligência Artificial para Geração de Vídeos</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wibbJnUt65u/res640.webp?cb=2" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wibbJnUt65u/res1280.webp?cb=2" data-bg-src-desktop="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Como criar vídeos de notícias com Inteligência Artificial" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wibbJnUt65u/res640.webp?cb=2" data-src-tablet="https://video-meta.open.video/resized-posters/wibbJnUt65u/res1280.webp?cb=2" data-src-desktop="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">3:54</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/como-criar-vídeos-de-notícias-com-inteligência-artificial" class="stretched-link">Como criar vídeos de notícias com Inteligência Artificial</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Como assinar gratuitamente o Gemini" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">2:19</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/como-assinar-gratuitamente-o-gemini" class="stretched-link">Como assinar gratuitamente o Gemini</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Uma edição mais simples que funciona muito bem" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">11:03</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/uma-edição-mais-simples-que-funciona-muito-bem" class="stretched-link">Uma edição mais simples que funciona muito bem</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for Como borrar cenas fortes" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">1:32</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/como-borrar-cenas-fortes" class="stretched-link">Como borrar cenas fortes</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for 4. Edição final" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">23:23</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/4-edição-final" class="stretched-link">4. Edição final</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for 3. Como editar audio e cenas" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">8:37</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/3-como-editar-audio-e-cenas" class="stretched-link">3. Como editar audio e cenas</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-video" style="position:relative">
+                                                <div class="thumbnail-blurred-container">
+                                                    <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg"></div>
+                                                    <img alt="Video thumbnail for 2. Como e onde elaborar os roteiros" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                                </div>
+                                                <div class="after">
+                                                    <span class="material-symbols-outlined">play_arrow</span>
+                                                </div>
+                                                <div class="rounded time">3:29</div>
+                                            </div>
+                                            <div class="card-body-home">
+                                                <div class="card-body-detail">
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="https://academy.fpagency.com.br/v/como-e-onde-elaborar-os-roteiros" class="stretched-link">2. Como e onde elaborar os roteiros</a>
+                                                    </h5>
+                                                    <p class="card-body-detail-text card-text text-muted">
+                                                        <span>Aug 22, 2026</span>
+                                                        <br/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="section-recent-carousel-next" class="carousel-nav next">
+                                    <button class="next" onclick="HUMIX.carouselNext(&#39;section-recent&#39;)" aria-label="next">
+                                        <span class="material-symbols-outlined" style="float:right">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-section" id="featured-container">
+                            <div class="mx-2">
+                                <h4>Explore More</h4>
+                            </div>
+                            <div class="video-display" id="featured-display">
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for 1. Onde encontrar filmes e séries com qualidade" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">4:15</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/onde-encontrar-filmes-e-séries-com-qualidade" class="stretched-link">1. Onde encontrar filmes e séries com qualidade</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Como realizar o login em uma conta cut da Zâmbia" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:23</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-realizar-o-login-em-uma-conta-cut-da-zâmbia" class="stretched-link">Como realizar o login em uma conta cut da Zâmbia</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg"></div>
+                                            <img alt="Video thumbnail for Como ativar a Receita de Anúncios" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">0:15</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-ativar-a-receita-de-anúncios" class="stretched-link">Como ativar a Receita de Anúncios</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Notícias com Inteligência Artificial" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:02</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/notícias-com-inteligência-artificial" class="stretched-link">Notícias com Inteligência Artificial</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Editando vídeos de Cartoon" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:48</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/editando-vídeos-de-cartoon" class="stretched-link">Editando vídeos de Cartoon</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/BijboyVksOu/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/BijboyVksOu/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Histórias com IA" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/BijboyVksOu/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/BijboyVksOu/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">3:43</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/histórias-com-ia" class="stretched-link">Histórias com IA</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Melhorando a Qualidade" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">1:35</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/melhorando-a-qualidade" class="stretched-link">Melhorando a Qualidade</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/T2zsEpfHQSWa/t1769076317_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/AjOXpPVkZju/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/AjOXpPVkZju/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/T2zsEpfHQSWa/t1769076317_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Editando Vídeos Cristãos" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/T2zsEpfHQSWa/t1769076317_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/AjOXpPVkZju/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/AjOXpPVkZju/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/T2zsEpfHQSWa/t1769076317_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">4:39</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/editando-vídeos-cristãos" class="stretched-link">Editando Vídeos Cristãos</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/iYzQEpHXMOWi/t1769076007_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/Z4iHpzp7ZPu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/Z4iHpzp7ZPu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/iYzQEpHXMOWi/t1769076007_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Editando Animes" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/iYzQEpHXMOWi/t1769076007_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/Z4iHpzp7ZPu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/Z4iHpzp7ZPu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/iYzQEpHXMOWi/t1769076007_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:45</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/editando-animes" class="stretched-link">Editando Animes</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="latest" class="tab-pane">
+                        <div class="video-section" id="latest-container">
+                            <div class="video-display" id="latest-display">
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/25POc9MBBiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/25POc9MBBiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Novela das Frutas" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/25POc9MBBiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/25POc9MBBiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/FwqiJFCaBSAz/t1787522652_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">19:35</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/novela-das-frutas" class="stretched-link">Novela das Frutas</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 23, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <img alt="Video thumbnail for Inteligência Artificial para Geração de Vídeos" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/koq8FjK46MPq/t1787442878_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/34HrI9pJBOu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/34HrI9pJBOu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/koq8FjK46MPq/t1787442878_poster.005.jpg" class="img-fluid lazy card-thumbnail-img" loading="lazy"/>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">9:18</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/inteligência-artificial-para-geração-de-vídeos" class="stretched-link">Inteligência Artificial para Geração de Vídeos</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wibbJnUt65u/res640.webp?cb=2" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wibbJnUt65u/res1280.webp?cb=2" data-bg-src-desktop="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Como criar vídeos de notícias com Inteligência Artificial" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wibbJnUt65u/res640.webp?cb=2" data-src-tablet="https://video-meta.open.video/resized-posters/wibbJnUt65u/res1280.webp?cb=2" data-src-desktop="https://video-meta.open.video/poster/OWvysjf46I65/t1787442558_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">3:54</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-criar-vídeos-de-notícias-com-inteligência-artificial" class="stretched-link">Como criar vídeos de notícias com Inteligência Artificial</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Como assinar gratuitamente o Gemini" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/2zabJSpY7iu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QbjKpzr5Z-ys/t1787442166_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:19</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-assinar-gratuitamente-o-gemini" class="stretched-link">Como assinar gratuitamente o Gemini</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Uma edição mais simples que funciona muito bem" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/7SzikDjRE4pt/t1787436436_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">11:03</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/uma-edição-mais-simples-que-funciona-muito-bem" class="stretched-link">Uma edição mais simples que funciona muito bem</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Como borrar cenas fortes" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/-Nf8BBS6EWTB/t1787435901_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">1:32</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-borrar-cenas-fortes" class="stretched-link">Como borrar cenas fortes</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for 4. Edição final" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/_ObjQuVc74u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/FdySwzm7EWMB/t1787435711_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">23:23</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/4-edição-final" class="stretched-link">4. Edição final</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for 3. Como editar audio e cenas" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/PnjSkjzBwW2y/t1787426203_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">8:37</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/3-como-editar-audio-e-cenas" class="stretched-link">3. Como editar audio e cenas</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for 2. Como e onde elaborar os roteiros" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/wObrk0VJBiu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/TUC4hFa6sG0W/t1787425191_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">3:29</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-e-onde-elaborar-os-roteiros" class="stretched-link">2. Como e onde elaborar os roteiros</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for 1. Onde encontrar filmes e séries com qualidade" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/_HaWlfoI74u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QOCmonrIZSLA/t1787425119_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">4:15</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/onde-encontrar-filmes-e-séries-com-qualidade" class="stretched-link">1. Onde encontrar filmes e séries com qualidade</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Como realizar o login em uma conta cut da Zâmbia" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/FOOPIuos6zu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/UcDOohP62WFq/t1787422357_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:23</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-realizar-o-login-em-uma-conta-cut-da-zâmbia" class="stretched-link">Como realizar o login em uma conta cut da Zâmbia</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg"></div>
+                                            <img alt="Video thumbnail for Como ativar a Receita de Anúncios" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Vsr8sxCA_Snt/t1787421452_poster.002.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">0:15</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/como-ativar-a-receita-de-anúncios" class="stretched-link">Como ativar a Receita de Anúncios</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Aug 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Notícias com Inteligência Artificial" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/QOv-kzv5cGNG/t1769094101_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:02</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/notícias-com-inteligência-artificial" class="stretched-link">Notícias com Inteligência Artificial</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-bg-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-bg-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Editando vídeos de Cartoon" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp?cb=1" data-src-tablet="https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res1280.webp?cb=1" data-src-desktop="https://video-meta.open.video/poster/Owf-BnmbkKtH/t1769077279_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">2:48</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/editando-vídeos-de-cartoon" class="stretched-link">Editando vídeos de Cartoon</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/BijboyVksOu/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/BijboyVksOu/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Histórias com IA" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/BijboyVksOu/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/BijboyVksOu/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/ogzUtBzzgS4c/t1769076969_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">3:43</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/histórias-com-ia" class="stretched-link">Histórias com IA</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-video" style="position:relative">
+                                        <div class="thumbnail-blurred-container">
+                                            <div class="thumbnail-blurred-bg lazy" style="background-image:url(&#39;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E&#39;)" data-bg-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-bg-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-bg-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-bg-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg"></div>
+                                            <img alt="Video thumbnail for Melhorando a Qualidade" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 16 9&#39;%3E%3Crect width=&#39;16&#39; height=&#39;9&#39; fill=&#39;%23cccccc&#39;/%3E%3C/svg%3E" data-src="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" data-src-mobile="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp?cb=0" data-src-tablet="https://video-meta.open.video/resized-posters/AyiHpypBYPu/res1280.webp?cb=0" data-src-desktop="https://video-meta.open.video/poster/UyCUlpbXoW7b/t1769076659_poster.005.jpg" class="lazy card-thumbnail-img-mixed" loading="lazy"/>
+                                        </div>
+                                        <div class="after">
+                                            <span class="material-symbols-outlined">play_arrow</span>
+                                        </div>
+                                        <div class="rounded time">1:35</div>
+                                    </div>
+                                    <div class="card-body-home">
+                                        <div class="card-body-detail">
+                                            <h5 class="card-title mb-0">
+                                                <a href="https://academy.fpagency.com.br/v/melhorando-a-qualidade" class="stretched-link">Melhorando a Qualidade</a>
+                                            </h5>
+                                            <p class="card-body-detail-text card-text text-muted">
+                                                <span>Jan 22, 2026</span>
+                                                <br/>
+                                            </p>
+                  
+<truncated 53488 bytes>
+
+NOTE: The output was truncated because it was too long. Use a more targeted query or a smaller range to get the information you need.

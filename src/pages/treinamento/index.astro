@@ -2,12 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import videoList from '../../data/videos.json';
+import data from '../../data/videos.json';
 import { withBasePath } from '../../lib/site-path';
 
 const sitePath = (path: string) => withBasePath(path, import.meta.env.BASE_URL);
 
-// Definimos o formato do vídeo para o TypeScript não reclamar do tipo 'any'
 interface Video {
   id: string;
   slug: string;
@@ -15,6 +14,16 @@ interface Video {
   description: string;
   thumbnail: string;
 }
+
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+  tutor: string | null;
+  videos: Video[];
+}
+
+const courses = data.courses as Course[];
 ---
 
 <Layout title="Treinamento Kwai Cut | FP Agency">
@@ -26,23 +35,35 @@ interface Video {
       <p>Desenvolva suas habilidades de edição com o método FP Agency.</p>
     </header>
 
-    <section class="video-grid">
-      {/* Indicamos ao TypeScript que cada item da lista segue a interface Video */}
-      {(videoList as Video[]).map((video) => (
-        <a href={sitePath(`/treinamento/${video.slug}`)} class="video-card">
-          <div class="thumbnail-container">
-            <img src={video.thumbnail} alt={video.title} loading="lazy" />
-            <div class="play-overlay">
-              <div class="play-button">▶</div>
-            </div>
+    <div class="courses-container">
+      {courses.map((course) => (
+        <section class="course-section">
+          <div class="course-header">
+            <h2>{course.title}</h2>
+            {course.tutor && <p class="course-tutor">Tutor: {course.tutor}</p>}
+            <p class="course-description">{course.description}</p>
+            <p class="course-count">{course.videos.length} treinamentos</p>
           </div>
-          <div class="video-info">
-            <h2>{video.title}</h2>
-            <p>{video.description}</p>
+          
+          <div class="video-grid">
+            {course.videos.map((video) => (
+              <a href={sitePath(`/treinamento/${video.slug}`)} class="video-card">
+                <div class="thumbnail-container">
+                  <img src={video.thumbnail} alt={video.title} loading="lazy" />
+                  <div class="play-overlay">
+                    <div class="play-button">▶</div>
+                  </div>
+                </div>
+                <div class="video-info">
+                  <h3>{video.title}</h3>
+                  {video.description && <p>{video.description}</p>}
+                </div>
+              </a>
+            ))}
           </div>
-        </a>
+        </section>
       ))}
-    </section>
+    </div>
   </main>
 
   <Footer />
@@ -50,9 +71,17 @@ interface Video {
 
 <style>
   .page-wrapper { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; font-family: system-ui, sans-serif; }
-  .page-header { text-align: center; margin-bottom: 3rem; }
+  .page-header { text-align: center; margin-bottom: 4rem; }
   .page-header h1 { font-size: 2.5rem; color: #fff; margin-bottom: 0.5rem; }
   .page-header p { color: #a1a1aa; }
+  
+  .course-section { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid #27272a; }
+  .course-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .course-header { margin-bottom: 2rem; }
+  .course-header h2 { font-size: 2rem; color: #fff; margin: 0 0 0.5rem 0; }
+  .course-tutor { font-size: 1.1rem; color: #ff4500; font-weight: 600; margin: 0 0 0.5rem 0; }
+  .course-description { color: #a1a1aa; font-size: 1rem; margin: 0 0 0.75rem 0; max-width: 800px; line-height: 1.5; }
+  .course-count { font-size: 0.9rem; color: #71717a; margin: 0; font-weight: 500; display: inline-block; background: #27272a; padding: 0.25rem 0.75rem; border-radius: 1rem; }
   
   .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 2rem; }
   
@@ -68,18 +97,20 @@ interface Video {
   .play-button { background: #ff4500; color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding-left: 4px; }
   
   .video-info { flex: 1 1 auto; min-width: 0; padding: 0.5rem 0.75rem 0.5rem 0; display: flex; flex-direction: column; justify-content: center; }
-  .video-info h2 { font-size: 1.2rem; line-height: 1.25; color: #fff; margin: 0 0 0.6rem 0; overflow-wrap: anywhere; }
+  .video-info h3 { font-size: 1.2rem; line-height: 1.25; color: #fff; margin: 0 0 0.6rem 0; overflow-wrap: anywhere; font-weight: 600; }
   .video-info p { font-size: 0.9rem; color: #a1a1aa; margin: 0; line-height: 1.4; overflow-wrap: anywhere; }
 
   @media (max-width: 480px) {
     .page-wrapper { padding: 2.5rem 1rem; }
     .page-header { margin-bottom: 2rem; }
     .page-header h1 { font-size: 2rem; }
+    .course-header h2 { font-size: 1.75rem; }
+    .course-section { margin-bottom: 3rem; padding-bottom: 2rem; }
     .video-grid { gap: 1rem; }
     .video-card { gap: 1rem; padding: 0.65rem; }
     .thumbnail-container { flex-basis: clamp(84px, 31%, 112px); }
     .video-info { padding: 0.35rem 0.4rem 0.35rem 0; }
-    .video-info h2 { font-size: 1rem; }
+    .video-info h3 { font-size: 1rem; }
     .video-info p { font-size: 0.84rem; line-height: 1.35; }
     .play-button { width: 42px; height: 42px; }
   }

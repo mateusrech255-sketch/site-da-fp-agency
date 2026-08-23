@@ -1,17 +1,209 @@
-[
-  {
-    "id": "sLLLczVYs4u",
-    "slug": "edicao-basica-para-kwai-cut",
-    "title": "Edição Básica para Kwai Cut",
-    "description": "Aprenda os primeiros passos de corte, ritmo e narrativa para o Kwai.",
-    "thumbnail": "https://video-meta.open.video/resized-posters/sLLLczVYs4u/res640.webp"
-  },
-  {
-    "id": "Y8mTIjhkYiu",
-    "slug": "criando-videos-motivacionais-com-vozes-de-ia-inteligencia-artificial",
-    "title": "Criando vídeos motivacionais com vozes de IA (Inteligência Artificial)",
-    "description": "Aprenda os primeiros passos de corte, ritmo e narrativa para o Kwai.",
-    "thumbnail": "https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res640.webp"
-  }
-]
-
+{
+  "courses": [
+    {
+      "id": "primeiros-passos-kwai-cut",
+      "title": "Primeiros Passos Kwai Cut",
+      "description": "Aprenda edição de vídeos para Kwai Cut, criação de conteúdo, cortes, legendas, inteligência artificial, narrativa e técnicas para produzir vídeos para redes sociais.",
+      "tutor": null,
+      "videos": [
+        {
+          "id": "BriXUOoQsyu",
+          "slug": "ajustando-a-legenda",
+          "title": "Ajustando a Legenda",
+          "description": "Aprenda como ajustar legendas em vídeos, melhorar a sincronização do texto e deixar a edição mais clara, dinâmica e profissional para redes sociais.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/BriXUOoQsyu/res640.webp"
+        },
+        {
+          "id": "sLLLczVYs4u",
+          "slug": "edicao-basica-para-kwai-cut",
+          "title": "Edição Básica para Kwai Cut",
+          "description": "Aprenda edição básica de vídeos para Kwai Cut, incluindo cortes, ritmo, narrativa e técnicas essenciais para criar vídeos mais envolventes para o Kwai.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/sLLLczVYs4u/res640.webp"
+        },
+        {
+          "id": "YbG5MXhtBzu",
+          "slug": "notícias-com-inteligência-artificial",
+          "title": "Notícias com Inteligência Artificial",
+          "description": "Aprenda a criar vídeos de notícias com inteligência artificial, utilizando ferramentas de IA para produzir conteúdos informativos, rápidos e atrativos para redes sociais.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/YbG5MXhtBzu/res640.webp"
+        },
+        {
+          "id": "Y8mTIjhkYiu",
+          "slug": "criando-videos-motivacionais-com-vozes-de-ia-inteligencia-artificial",
+          "title": "Criando vídeos motivacionais com vozes de IA (Inteligência Artificial)",
+          "description": "Aprenda a criar vídeos motivacionais com inteligência artificial, utilizando vozes de IA, edição de vídeo e técnicas de narrativa para produzir conteúdos inspiradores para redes sociais.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/Y8mTIjhkYiu/res640.webp"
+        },
+        {
+          "id": "YnmCION6Yzu",
+          "slug": "criandovídeosmotivacionaiscomvozesdeiainteligenciaartificial",
+          "title": "Vídeos motivacionais com vozes de personagens",
+          "description": "Aprenda a criar vídeos motivacionais com vozes de personagens geradas por inteligência artificial, combinando narração, edição e storytelling para criar conteúdos envolventes.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/YnmCION6Yzu/res640.webp"
+        },
+        {
+          "id": "sWGPUyUAsyu",
+          "slug": "editando-vídeos-de-cartoon",
+          "title": "Editando vídeos de Cartoon",
+          "description": "Aprenda a editar vídeos de Cartoon para redes sociais, utilizando cortes, ritmo, legendas e técnicas de edição para transformar cenas animadas em conteúdos mais atrativos.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/sWGPUyUAsyu/res640.webp"
+        },
+        {
+          "id": "AyiHpypBYPu",
+          "slug": "melhorando-a-qualidade",
+          "title": "Melhorando a Qualidade",
+          "description": "Aprenda técnicas para melhorar a qualidade dos vídeos, corrigindo problemas de imagem e aprimorando resolução, nitidez e aparência final antes da publicação.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/AyiHpypBYPu/res640.webp"
+        },
+        {
+          "id": "Y4PWoOVQZOu",
+          "slug": "edição-no-nicho-de-ftv",
+          "title": "Edição no Nicho de FTV",
+          "description": "Aprenda técnicas de edição para o nicho de FTV, com estratégias de cortes, ritmo, seleção de cenas e montagem de vídeos pensados para aumentar o interesse do público.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/Y4PWoOVQZOu/res640.webp"
+        },
+        {
+          "id": "6HjWV4pAszu",
+          "slug": "criando-uma-logo",
+          "title": "Criando uma Logo",
+          "description": "Aprenda a criar uma logo para seus projetos e conteúdos digitais, desenvolvendo uma identidade visual simples, reconhecível e adequada para vídeos e redes sociais.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/6HjWV4pAszu/res640.webp"
+        },
+        {
+          "id": "ZjProjVkYiu",
+          "slug": "nicho-de-música-cut",
+          "title": "Nicho de Música (Cut)",
+          "description": "Aprenda técnicas de edição para o nicho de música, criando vídeos com cortes sincronizados, ritmo, cenas envolventes e formatos adaptados para conteúdo curto.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/ZjProjVkYiu/res640.webp"
+        },
+        {
+          "id": "BijboyVksOu",
+          "slug": "histórias-com-ia",
+          "title": "Histórias com IA",
+          "description": "Aprenda a criar histórias com inteligência artificial, utilizando ferramentas de IA para desenvolver roteiros, narrativas e vídeos envolventes para redes sociais.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/BijboyVksOu/res640.webp"
+        },
+        {
+          "id": "AjOXpPVkZju",
+          "slug": "editando-vídeos-cristãos",
+          "title": "Editando Vídeos Cristãos",
+          "description": "Aprenda a editar vídeos cristãos para redes sociais, combinando mensagens, imagens, música, legendas e cortes para criar conteúdos de fé mais envolventes.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/AjOXpPVkZju/res640.webp"
+        },
+        {
+          "id": "Z4iHpzp7ZPu",
+          "slug": "editando-animes",
+          "title": "Editando Animes",
+          "description": "Aprenda técnicas de edição de vídeos de anime, incluindo seleção de cenas, cortes, sincronização, efeitos e ritmo para criar conteúdos curtos e atrativos.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/Z4iHpzp7ZPu/res640.webp"
+        },
+        {
+          "id": "ArjrUyU7Yzu",
+          "slug": "criando-plano-de-fundo",
+          "title": "Criando Plano de Fundo",
+          "description": "Aprenda a criar planos de fundo para vídeos e edições, utilizando recursos visuais para melhorar a composição, destacar elementos e deixar o conteúdo mais profissional.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/ArjrUyU7Yzu/res640.webp"
+        },
+        {
+          "id": "wiiPd1UtA5u",
+          "slug": "como-ativar-a-receita-de-anúncios",
+          "title": "Como Ativar a Receita de Anúncios",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/wiiPd1UtA5u/res640.webp"
+        },
+        {
+          "id": "FOOPIuos6zu",
+          "slug": "como-realizar-o-login-em-uma-conta-cut-da-zâmbia",
+          "title": "Como Realizar Login em uma Conta CUT da Zâmbia",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/FOOPIuos6zu/res640.webp"
+        },
+        {
+          "id": "25POc9MBBiu",
+          "slug": "como-editar--novela-das-frutas",
+          "title": "Como Editar a Novela das Frutas",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/25POc9MBBiu/res640.webp"
+        }
+      ]
+    },
+    {
+      "id": "narrastars-lucas-evandro",
+      "title": "Narrastars",
+      "description": "Aprenda a encontrar conteúdos, criar roteiros, editar cenas e áudios e finalizar vídeos para o treinamento Narrastars.",
+      "tutor": "Lucas Evandro",
+      "videos": [
+        {
+          "id": "_HaWlfoI74u",
+          "slug": "onde-encontrar-filmes-e-séries-com-qualidade",
+          "title": "1. Onde Encontrar Filmes e Séries com Qualidade",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/_HaWlfoI74u/res640.webp"
+        },
+        {
+          "id": "wObrk0VJBiu",
+          "slug": "como-e-onde-elaborar-os-roteiros",
+          "title": "2. Como Criar e Elaborar Roteiros",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/wObrk0VJBiu/res640.webp"
+        },
+        {
+          "id": "3jGbkLUZBOu",
+          "slug": "3-como-editar-audio-e-cenas",
+          "title": "3. Como Editar Áudios e Cenas",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/3jGbkLUZBOu/res640.webp"
+        },
+        {
+          "id": "_ObjQuVc74u",
+          "slug": "4-edição-final",
+          "title": "4. Edição Final",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/_ObjQuVc74u/res640.webp"
+        },
+        {
+          "id": "xaOiR1oYAiu",
+          "slug": "como-borrar-cenas-fortes",
+          "title": "Como Ofuscar Cenas Fortes",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/xaOiR1oYAiu/res640.webp"
+        },
+        {
+          "id": "2HjjQ0odAPu",
+          "slug": "uma-edição-mais-simples-que-funciona-muito-bem",
+          "title": "Uma Edição Simples que Funciona Muito Bem",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/2HjjQ0odAPu/res640.webp"
+        }
+      ]
+    },
+    {
+      "id": "inteligencia-artificial",
+      "title": "Inteligência Artificial",
+      "description": "Aprenda a utilizar ferramentas de Inteligência Artificial para otimizar suas produções, roteiros e geração de conteúdo.",
+      "videos": [
+        {
+          "id": "34HrI9pJBOu",
+          "slug": "inteligência-artificial-para-geração-de-vídeos",
+          "title": "Inteligência Artificial para Geração de Vídeos",
+          "description": "Aprenda a utilizar Inteligência Artificial para gerar vídeos de forma automatizada e eficiente.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/34HrI9pJBOu/res640.webp"
+        },
+        {
+          "id": "wibbJnUt65u",
+          "slug": "como-criar-vídeos-de-notícias-com-inteligência-artificial",
+          "title": "Como criar vídeos de notícias com Inteligência Artificial",
+          "description": "Aprenda o passo a passo para criar vídeos de notícias completos utilizando ferramentas de Inteligência Artificial.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/wibbJnUt65u/res640.webp"
+        },
+        {
+          "id": "2zabJSpY7iu",
+          "slug": "como-assinar-gratuitamente-o-gemini",
+          "title": "Como assinar gratuitamente o Gemini",
+          "description": "Veja como acessar e assinar gratuitamente o Gemini, a avançada Inteligência Artificial do Google.",
+          "thumbnail": "https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp"
+        }
+      ]
+    }
+  ]
+}
