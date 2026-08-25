@@ -204,6 +204,99 @@
           "thumbnail": "https://video-meta.open.video/resized-posters/2zabJSpY7iu/res640.webp"
         }
       ]
+    },
+    {
+      "id": "narrastars-priscila-souza",
+      "title": "Narrastars",
+      "tutor": "Priscila Souza",
+      "description": "Aprenda o passo a passo da narração, roteirização e edição com a tutora Priscila Souza.",
+      "videos": [
+        {
+          "id": "FXajlSVQ7Pu",
+          "slug": "aula-1-onde-encontrar-vídeos-de-qualidade",
+          "title": "Aula 1 Onde encontrar Vídeos de Qualidade",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/FXajlSVQ7Pu/res640.webp"
+        },
+        {
+          "id": "xzG4Q9U76Pu",
+          "slug": "aula-2-como-fazer-um-roteiro-de-narração",
+          "title": "Aula 2 Como fazer um Roteiro de Narração",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/xzG4Q9U76Pu/res640.webp"
+        },
+        {
+          "id": "-qi5QTUl64u",
+          "slug": "aula-3-como-transformar-seu-roteiro-em-voz",
+          "title": "Aula 3 Como transformar seu Roteiro em Voz",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/-qi5QTUl64u/res640.webp"
+        },
+        {
+          "id": "wyPyQCoRBPu",
+          "slug": "aula-4-como-sincronizar-cena-com-audio",
+          "title": "Aula 4 Como sincronizar Cena com Audio",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/wyPyQCoRBPu/res640.webp"
+        },
+        {
+          "id": "tvHGJKgJsru",
+          "slug": "aula-5-como-fazer-edição-final-do-video",
+          "title": "Aula 5 Como fazer edição final do Video",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/tvHGJKgJsru/res640.webp"
+        },
+        {
+          "id": "t8aacehdsru",
+          "slug": "como-borrar-cenas-ou-legendas",
+          "title": "Como Borrar Cenas ou Legendas",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/t8aacehdsru/res640.webp"
+        },
+        {
+          "id": "7DGWIKhYZGu",
+          "slug": "como-fazer-uma-edição-básica-em-hd",
+          "title": "Como fazer uma edição básica em HD",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/7DGWIKhYZGu/res640.webp"
+        },
+        {
+          "id": "seiGJfhdsHu",
+          "slug": "como-utilizar-vozes-lentas-de-ia-scott-filmora",
+          "title": "Como utilizar Vozes Lentas de IA (Scott Filmora)",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/seiGJfhdsHu/res640.webp"
+        }
+      ]
+    },
+    {
+      "id": "tarefas-remuneradas-priscila-souza",
+      "title": "Tarefas Remuneradas",
+      "tutor": "Priscila Souza",
+      "description": "Descubra o que são, onde encontrar e como executar Tarefas Remuneradas com eficiência.",
+      "videos": [
+        {
+          "id": "AvjbdvgsYGu",
+          "slug": "aula-1-o-que-são-tarefas-remuneradas-e-onde-encontralas",
+          "title": "Aula 1 O que são Tarefas Remuneradas e onde encontralas",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/AvjbdvgsYGu/res640.webp"
+        },
+        {
+          "id": "BCjXJKMttXu",
+          "slug": "aula-2-como-criar-um-roteiro-para-tarefa-remunerada",
+          "title": "Aula 2 Como criar um roteiro para Tarefa Remunerada",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/BCjXJKMttXu/res640.webp"
+        },
+        {
+          "id": "6fHicehZZau",
+          "slug": "aula-3-como-inserir-o-anúncio-da-tarefa-no-video",
+          "title": "Aula 3 Como inserir o anúncio da Tarefa no video",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/6fHicehZZau/res640.webp"
+        }
+      ]
     }
   ]
 }
