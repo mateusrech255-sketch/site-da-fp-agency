@@ -1,7 +1,7 @@
 import cloudflare from '@astrojs/cloudflare';
 import { defineConfig, envField } from 'astro/config';
 
-const site = process.env.SITE_URL || 'https://www.fpagency.com.br';
+const site = process.env.SITE_URL || 'https://fpagency.com.br';
 const base = process.env.SITE_BASE_PATH ?? '/';
 
 export default defineConfig({

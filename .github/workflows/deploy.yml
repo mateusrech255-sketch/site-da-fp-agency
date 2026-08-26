@@ -11,7 +11,7 @@ permissions:
 env:
   PUBLIC_API_BASE: https://api.fpagency.com.br
   SITE_BASE_PATH: /
-  SITE_URL: https://www.fpagency.com.br
+  SITE_URL: https://fpagency.com.br
 
 jobs:
   deploy:

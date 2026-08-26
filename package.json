@@ -12,7 +12,7 @@
     "dev:astro": "set -a; [ ! -f .env ] || . ./.env; set +a; node -e \"console.info('[fp-agency:ssr] INTERNAL_SECRET=' + (process.env.INTERNAL_SECRET ? 'present' : 'missing'))\"; astro dev --host 127.0.0.1 --port 4321",
     "dev:stop": "astro dev stop",
     "build": "astro build",
-    "build:cf": "set -a; [ ! -f .env ] || . ./.env; set +a; SITE_URL=${SITE_URL:-https://www.fpagency.com.br} SITE_BASE_PATH=${SITE_BASE_PATH:-/} astro build",
+    "build:cf": "set -a; [ ! -f .env ] || . ./.env; set +a; SITE_URL=${SITE_URL:-https://fpagency.com.br} SITE_BASE_PATH=${SITE_BASE_PATH:-/} astro build",
     "sync:secret": "bash -lc 'set -a; [ ! -f .env ] || . ./.env; set +a; test -n \"$INTERNAL_SECRET\" || { echo \"INTERNAL_SECRET ausente para o deploy Cloudflare.\" >&2; exit 1; }; printf \"%s\" \"$INTERNAL_SECRET\" | npx wrangler secret put INTERNAL_SECRET'",
     "deploy": "npm run sync:secret && npm run build:cf && wrangler deploy",
     "lint": "astro check",

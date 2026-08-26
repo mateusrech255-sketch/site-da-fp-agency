@@ -69,7 +69,7 @@ O build gera o bundle SSR em `dist/`. `npm run preview` usa o preview do Astro e
 
 ### Astro
 
-- `SITE_URL`: origem publica do site. Padrao: `https://www.fpagency.com.br`.
+- `SITE_URL`: origem publica do site. Padrao: `https://fpagency.com.br`.
 - `SITE_BASE_PATH`: base path do deploy. Padrao: `/`.
 - `INTERNAL_SECRET`: segredo server-only usado pelos proxies SSR para chamar o Worker.
 - `PUBLIC_API_BASE`: base publica da API. Padrao: `https://api.fpagency.com.br`.

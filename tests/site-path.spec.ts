@@ -15,6 +15,6 @@ test('withBasePath preserves deploy subpaths without duplicate slashes', () => {
 });
 
 test('normalizeBasePath tolerates accidental absolute site values', () => {
-  expect(normalizeBasePath('https://www.fpagency.com.br')).toBe('');
-  expect(normalizeBasePath('https://www.fpagency.com.br/app/')).toBe('/app');
+  expect(normalizeBasePath('https://fpagency.com.br')).toBe('');
+  expect(normalizeBasePath('https://fpagency.com.br/app/')).toBe('/app');
 });
