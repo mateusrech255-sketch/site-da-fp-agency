@@ -29,6 +29,16 @@ const { videoId } = Astro.props;
         playerRoot.querySelectorAll('.video-js').forEach((element) => {
           element.classList.remove('vjs-share', 'vjs-videojs-share');
         });
+
+        // Remove a marca d'agua "Watch on..." caçando pelo texto
+        playerRoot.querySelectorAll('a, div, span, button').forEach(el => {
+          if (el.textContent && el.textContent.includes('Watch on ')) {
+            if (el.innerText && el.innerText.length < 50) {
+              el.style.display = 'none';
+            }
+          }
+        });
+
       };
 
       removeShareControls();
@@ -285,6 +295,17 @@ const { videoId } = Astro.props;
   }
 
   
+
+  /* Oculta marcas d'agua e botoes "Watch on" conhecidos */
+  .video-player-container .vjs-watermark,
+  .video-player-container .ez-watermark,
+  .video-player-container .vignette-watermark,
+  .video-player-container [class*="watermark"],
+  .video-player-container [class*="branding"],
+  .video-player-container [class*="watch-on"] {
+    display: none !important;
+  }
+
   /* O FANTASMA: Barra de Progresso Visual Indestrutivel */
   .kwai-ghost-progress {
     position: absolute;
