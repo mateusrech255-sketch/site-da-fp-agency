@@ -54,6 +54,15 @@ const { videoId } = Astro.props;
       timeDisplay.className = 'kwai-time-display';
       playerRoot.appendChild(timeDisplay);
 
+      // Kwai Ghost Progress Bar (Barra visual imune as ocultacoes da Ezoic)
+      const ghostProgressContainer = document.createElement('div');
+      ghostProgressContainer.className = 'kwai-ghost-progress';
+      const ghostProgressFill = document.createElement('div');
+      ghostProgressFill.className = 'kwai-ghost-fill';
+      ghostProgressContainer.appendChild(ghostProgressFill);
+      playerRoot.appendChild(ghostProgressContainer);
+
+
       const formatTime = (seconds) => {
         if (isNaN(seconds)) return '00:00';
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -70,9 +79,15 @@ const { videoId } = Astro.props;
           return;
         }
 
+        
         const updateTimeDisplay = () => {
           timeDisplay.innerText = `${formatTime(videoElement.currentTime)} / ${formatTime(videoElement.duration)}`;
+          if (videoElement.duration > 0) {
+            const pct = (videoElement.currentTime / videoElement.duration) * 100;
+            ghostProgressFill.style.width = `${pct}%`;
+          }
         };
+
 
         videoElement.addEventListener('timeupdate', updateTimeDisplay);
         videoElement.addEventListener('durationchange', updateTimeDisplay);
@@ -88,11 +103,12 @@ const { videoId } = Astro.props;
           playerRoot.classList.remove('is-kwai-scrubbing');
         };
 
-        progressControl.addEventListener('mousedown', startScrubbing);
-        progressControl.addEventListener('touchstart', startScrubbing, {passive: true});
+        // Usa capture: true para garantir que a Ezoic nao engula o evento antes de nos
+        progressControl.addEventListener('mousedown', startScrubbing, true);
+        progressControl.addEventListener('touchstart', startScrubbing, {passive: true, capture: true});
         
-        document.addEventListener('mouseup', stopScrubbing);
-        document.addEventListener('touchend', stopScrubbing);
+        document.addEventListener('mouseup', stopScrubbing, true);
+        document.addEventListener('touchend', stopScrubbing, true);
         
         videoElement.addEventListener('seeking', startScrubbing);
         videoElement.addEventListener('seeked', () => { setTimeout(stopScrubbing, 500); });
@@ -147,6 +163,7 @@ const { videoId } = Astro.props;
 
 <style is:global>
   .video-player-container {
+    position: relative;
     width: min(100%, 420px);
     aspect-ratio: 9 / 16;
     margin: 0 auto;
@@ -246,12 +263,85 @@ const { videoId } = Astro.props;
   }
 
   /* Impede a barra de sumir enquanto arrasta */
+  
+  /* FORÇA BRUTA: Impede que a Ezoic esconda qualquer elemento da barra durante o arrasto */
   .video-player-container.is-kwai-scrubbing .vjs-control-bar,
-  .video-player-container.is-kwai-scrubbing .vjs-progress-control {
+  .video-player-container.is-kwai-scrubbing .vjs-progress-control,
+  .video-player-container.is-kwai-scrubbing .vjs-progress-holder,
+  .video-player-container.is-kwai-scrubbing .vjs-play-progress,
+  .video-player-container.vjs-scrubbing .vjs-control-bar,
+  .video-player-container.vjs-scrubbing .vjs-progress-control {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    height: 40px !important;
+  }
+
+  .video-player-container.is-kwai-scrubbing .vjs-play-progress:before {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  
+  /* O FANTASMA: Barra de Progresso Visual Indestrutivel */
+  .kwai-ghost-progress {
+    position: absolute;
+    bottom: 25px; /* Altura ideal acima dos controles nativos */
+    left: 5%;
+    width: 90%;
+    height: 8px;
+    background: rgba(255,255,255,0.3);
+    z-index: 1000;
+    pointer-events: none; /* Ignora toques para vazar pra barra real */
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .kwai-ghost-fill {
+    height: 100%;
+    width: 0%;
+    background: #fff;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .kwai-ghost-fill:after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: -4px;
+    width: 24px;
+    height: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  }
+
+  .video-player-container.is-kwai-scrubbing .kwai-ghost-progress {
+    opacity: 1;
+  }
+
+  /* Oculta os fragmentos quebrados da barra nativa durante o scrub */
+  .video-player-container.is-kwai-scrubbing .vjs-progress-holder {
+    opacity: 0 !important;
+  }
+
+  /* Forca a exibicao da barra durante o arrasto */
+  .video-player-container.is-kwai-scrubbing .vjs-control-bar {
     opacity: 1 !important;
     visibility: visible !important;
     display: flex !important;
-    transform: none !important;
+    transform: translateY(0) !important;
+    z-index: 999 !important;
+  }
+  
+  /* Mantem o video.js em estado ativo visualmente */
+  .video-player-container.is-kwai-scrubbing.vjs-user-inactive .vjs-control-bar {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   /* Remove default tooltips from video.js */
@@ -261,23 +351,12 @@ const { videoId } = Astro.props;
   }
 
 
-  /* Style the progress bar like Kwai (Floating) */
+  /* Style the progress bar like Kwai */
   .video-player-container .vjs-progress-control {
-    position: absolute !important;
-    bottom: 0px !important;
-    left: 0% !important;
-    width: 100% !important;
     height: 40px !important;
     display: flex !important;
     align-items: center !important;
-    padding: 0 15px !important;
-    z-index: 50 !important;
-  }
-  
-  .video-player-container .vjs-progress-control:hover,
-  .video-player-container.is-kwai-scrubbing .vjs-progress-control {
-    opacity: 1 !important;
-    visibility: visible !important;
+    width: 100% !important;
   }
 
   
