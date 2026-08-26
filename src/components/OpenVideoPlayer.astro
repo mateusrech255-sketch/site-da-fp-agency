@@ -48,6 +48,56 @@ const { videoId } = Astro.props;
         }
       }, true); // Fase de captura (intercepta antes do script da Ezoic)
 
+      
+      // Kwai Style Time Display
+      const timeDisplay = document.createElement('div');
+      timeDisplay.className = 'kwai-time-display';
+      playerRoot.appendChild(timeDisplay);
+
+      const formatTime = (seconds) => {
+        if (isNaN(seconds)) return '00:00';
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+      };
+
+      const setupKwaiTimeline = () => {
+        const videoElement = playerRoot.querySelector('video');
+        const progressControl = playerRoot.querySelector('.vjs-progress-control');
+        
+        if (!videoElement || !progressControl) {
+          setTimeout(setupKwaiTimeline, 500);
+          return;
+        }
+
+        const updateTimeDisplay = () => {
+          timeDisplay.innerText = `${formatTime(videoElement.currentTime)} / ${formatTime(videoElement.duration)}`;
+        };
+
+        videoElement.addEventListener('timeupdate', updateTimeDisplay);
+        videoElement.addEventListener('durationchange', updateTimeDisplay);
+
+        const startScrubbing = () => {
+          playerRoot.classList.add('is-kwai-scrubbing');
+          updateTimeDisplay();
+        };
+
+        const stopScrubbing = () => {
+          playerRoot.classList.remove('is-kwai-scrubbing');
+        };
+
+        progressControl.addEventListener('mousedown', startScrubbing);
+        progressControl.addEventListener('touchstart', startScrubbing, {passive: true});
+        
+        document.addEventListener('mouseup', stopScrubbing);
+        document.addEventListener('touchend', stopScrubbing);
+        
+        videoElement.addEventListener('seeking', startScrubbing);
+        videoElement.addEventListener('seeked', () => { setTimeout(stopScrubbing, 500); });
+      };
+
+      setupKwaiTimeline();
+
       let lastTap = 0;
       playerRoot.addEventListener('click', (e) => {
         const currentTime = new Date().getTime();
@@ -170,23 +220,76 @@ const { videoId } = Astro.props;
     display: none !important;
   }
 
-  /* UX Improvement: Thicker timeline for easier scrubbing */
+  /* Kwai Style Timeline & Time Display */
+  .kwai-time-display {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0px 4px 15px rgba(0,0,0,0.9), 0px 0px 5px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 100;
+    letter-spacing: 1px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .video-player-container.is-kwai-scrubbing .kwai-time-display {
+    opacity: 1;
+  }
+
+  /* Impede a barra de sumir enquanto arrasta */
+  .video-player-container.is-kwai-scrubbing .vjs-control-bar {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+  }
+
+  /* Remove default tooltips from video.js */
+  .video-player-container .vjs-time-tooltip,
+  .video-player-container .vjs-mouse-display {
+    display: none !important;
+  }
+
+  /* Style the progress bar like Kwai */
   .video-player-container .vjs-progress-control {
-    height: 35px !important;
+    height: 40px !important;
     display: flex !important;
     align-items: center !important;
   }
+  
   .video-player-container .vjs-progress-holder {
-    height: 10px !important;
-    border-radius: 5px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    background: rgba(255,255,255,0.3) !important;
+    margin: 0 15px !important;
   }
-  .video-player-container .vjs-play-progress,
+  
+  .video-player-container .vjs-play-progress {
+    background: #fff !important;
+    border-radius: 4px !important;
+  }
+  
   .video-player-container .vjs-load-progress {
-    border-radius: 5px !important;
+    background: rgba(255,255,255,0.15) !important;
+    border-radius: 4px !important;
   }
+  
+  /* The Kwai white drag pill */
   .video-player-container .vjs-play-progress:before {
-    font-size: 1.8em !important;
-    top: -0.35em !important;
+    content: '' !important;
+    position: absolute !important;
+    right: -12px !important;
+    top: -4px !important;
+    width: 24px !important;
+    height: 16px !important;
+    background: #fff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important;
   }
 
   /* Ripple effect for double tap */
