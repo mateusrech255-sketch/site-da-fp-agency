@@ -79,6 +79,8 @@ const { videoId } = Astro.props;
 
         const startScrubbing = () => {
           playerRoot.classList.add('is-kwai-scrubbing');
+          playerRoot.classList.remove('vjs-user-inactive');
+          playerRoot.classList.add('vjs-user-active');
           updateTimeDisplay();
         };
 
@@ -223,10 +225,11 @@ const { videoId } = Astro.props;
   /* Kwai Style Timeline & Time Display */
   .kwai-time-display {
     position: absolute;
-    bottom: 80px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2.2rem;
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    white-space: nowrap;
     font-weight: 900;
     color: #fff;
     text-shadow: 0px 4px 15px rgba(0,0,0,0.9), 0px 0px 5px rgba(0,0,0,0.5);
@@ -243,10 +246,12 @@ const { videoId } = Astro.props;
   }
 
   /* Impede a barra de sumir enquanto arrasta */
-  .video-player-container.is-kwai-scrubbing .vjs-control-bar {
+  .video-player-container.is-kwai-scrubbing .vjs-control-bar,
+  .video-player-container.is-kwai-scrubbing .vjs-progress-control {
     opacity: 1 !important;
     visibility: visible !important;
     display: flex !important;
+    transform: none !important;
   }
 
   /* Remove default tooltips from video.js */
@@ -255,18 +260,32 @@ const { videoId } = Astro.props;
     display: none !important;
   }
 
-  /* Style the progress bar like Kwai */
+
+  /* Style the progress bar like Kwai (Floating) */
   .video-player-container .vjs-progress-control {
+    position: absolute !important;
+    bottom: 0px !important;
+    left: 0% !important;
+    width: 100% !important;
     height: 40px !important;
     display: flex !important;
     align-items: center !important;
+    padding: 0 15px !important;
+    z-index: 50 !important;
   }
+  
+  .video-player-container .vjs-progress-control:hover,
+  .video-player-container.is-kwai-scrubbing .vjs-progress-control {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
   
   .video-player-container .vjs-progress-holder {
     height: 8px !important;
     border-radius: 4px !important;
     background: rgba(255,255,255,0.3) !important;
-    margin: 0 15px !important;
+    width: 100% !important;
   }
   
   .video-player-container .vjs-play-progress {
