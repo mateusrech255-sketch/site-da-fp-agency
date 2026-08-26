@@ -9,11 +9,8 @@ import Footer from '../components/Footer.astro';
     <Header />
 
     <main class="container section legal-page">
-      <div class="legal-card">
-        <div class="legal-accent-line"></div>
-
+      <div class="legal-container">
         <div class="legal-header">
-          <div class="legal-badge"><i class="fas fa-shield-alt"></i> Conformidade Legal</div>
           <h1>Política de Privacidade</h1>
           <div class="update-chip">
             <i class="far fa-calendar-alt"></i> Atualizado em 09/05/2026
@@ -91,199 +88,123 @@ import Footer from '../components/Footer.astro';
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(15, 23, 42, 0.8) !important; /* Fundo escuro do seu tema */
-    backdrop-filter: blur(12px) !important; /* Efeito de vidro borrado premium */
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  /* Compensa o espaço do header fixo para o card não sumir por baixo dele */
-  .legal-page, .premium-page {
-    padding-top: 140px !important; /* Ajuste essa altura se o seu header for menor/maior */
+  .legal-page {
+    padding-top: 140px !important;
   }
 
   .section {
-    padding: 80px 20px;
+    padding: 60px 20px 100px;
     display: flex;
     justify-content: center;
   }
 
-  /* O Card Principal - Simula um documento elegante */
-  .legal-card {
-    background: var(--bg-2, #181c27);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 50px 60px;
-    max-width: 900px;
+  .legal-container {
+    max-width: 800px; /* max-w-3xl/4xl equivalent for reading */
     width: 100%;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     position: relative;
-    overflow: hidden;
   }
 
-  /* Linha de destaque na parte superior do card */
-  .legal-accent-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary, #ff6b2b), transparent);
-  }
-
-  /* Header do Documento */
+  /* Document Header */
   .legal-header {
-    margin-bottom: 40px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-    padding-bottom: 30px;
-  }
-
-  .legal-badge {
-    display: inline-block;
-    color: var(--primary);
-    background: rgba(255, 107, 43, 0.1);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    border: 1px solid rgba(255, 107, 43, 0.2);
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* border-zinc-800 equivalent */
+    padding-bottom: 40px;
   }
 
   .legal-page h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700; /* Less heavy for a document */
+    color: #f8fafc;
+    letter-spacing: -0.02em;
     margin: 0 0 15px 0;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
-  /* Chip/Selo de Atualização */
-  .update-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    color: var(--muted, #94a3b8);
-    font-weight: 500;
+  .update-text {
+    font-size: 0.95rem;
+    color: #64748b; /* slate-500 */
+    margin: 0;
   }
 
-  /* Conteúdo do Documento */
+  /* Document Content */
   .legal-content {
-    color: var(--text, #e2e8f0);
-    line-height: 1.8;
+    color: #cbd5e1;
+    line-height: 1.8; /* leading-relaxed */
   }
 
-  /* Estilização dos H2 (Títulos Principais) */
   .legal-content h2 {
-    font-size: 1.6rem;
-    color: #fff;
+    font-size: 1.5rem;
+    color: #f8fafc;
     margin-top: 50px;
     margin-bottom: 20px;
-    letter-spacing: -0.02em;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
-  /* Detalhe visual na lateral esquerda dos H2 */
-  .legal-content h2::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 24px;
-    background: var(--primary, #ff6b2b);
-    border-radius: 4px;
-  }
-
-  /* Estilização dos H3 (Subtítulos) */
   .legal-content h3 {
     font-size: 1.15rem;
-    color: var(--orange2, #ff9a5c);
-    margin-top: 30px;
-    margin-bottom: 12px;
-    font-weight: 700;
+    color: #e2e8f0;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    font-weight: 600;
   }
 
   .legal-content p {
-    margin-bottom: 20px;
-    color: #cbd5e1; /* Cor de texto ligeiramente mais suave para leitura longa */
+    margin-bottom: 24px;
+    color: #94a3b8; /* text-slate-400 */
     font-size: 1.05rem;
-    text-align: justify; /* Alinhamento formal para documentos */
+    text-align: left; /* No justify, better readability */
   }
 
-  /* Estilização de Listas Premium */
   .legal-content ul {
-    margin-bottom: 25px;
-    padding-left: 0;
-    list-style: none;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    list-style-type: disc;
+    color: #94a3b8;
   }
 
   .legal-content li {
     margin-bottom: 12px;
     font-size: 1.05rem;
-    color: #cbd5e1;
-    position: relative;
-    padding-left: 28px;
-    line-height: 1.6;
-  }
-
-  /* Bullets personalizados */
-  .legal-content li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--primary, #ff6b2b);
-    font-weight: 900;
-    font-size: 1.1rem;
-    top: 0;
+    color: #94a3b8;
+    line-height: 1.7;
   }
 
   .legal-content li strong {
-    color: #fff;
-    font-weight: 700;
+    color: #e2e8f0;
+    font-weight: 600;
   }
 
-  /* Links com destaque elegante */
   .legal-content a {
-    color: var(--orange2, #ff9a5c);
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 1px dashed var(--orange2, #ff9a5c);
+    color: #cbd5e1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(255, 255, 255, 0.2);
     transition: all 0.2s ease;
   }
 
   .legal-content a:hover {
-    color: var(--primary, #ff6b2b);
-    border-bottom: 1px solid var(--primary, #ff6b2b);
-    background: rgba(255, 107, 43, 0.05);
+    color: #fff;
+    text-decoration-color: #fff;
   }
 
-  /* Responsividade */
   @media (max-width: 768px) {
     .section {
-      padding: 40px 15px;
-    }
-    
-    .legal-card {
-      padding: 35px 25px;
-      border-radius: 16px;
+      padding: 20px 15px 80px;
     }
 
     .legal-content h2 { 
-      font-size: 1.4rem; 
+      font-size: 1.3rem; 
       margin-top: 40px; 
     }
     
     .legal-content p, .legal-content li {
       font-size: 1rem;
-      text-align: left; /* Desativa justify no celular para evitar buracos no texto */
     }
   }
 </style>
