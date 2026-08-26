@@ -297,6 +297,134 @@
           "thumbnail": "https://video-meta.open.video/resized-posters/6fHicehZZau/res640.webp"
         }
       ]
+    },
+    {
+      "id": "narrastars-lucas-silva",
+      "title": "Narrastars",
+      "tutor": "Lucas Silva",
+      "description": "Treinamento completo de Narração com foco em nichos virais.",
+      "videos": [
+        {
+          "id": "6fP5lCpItHu",
+          "slug": "aula1-como-encontrar-cenas-de-qualidade-ftv",
+          "title": "AULA1 Como encontrar cenas de qualidade (FTV)",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/6fP5lCpItHu/res640.webp"
+        },
+        {
+          "id": "sTOORnpctqu",
+          "slug": "aula2-como-fazer-um-roteiro-ftv",
+          "title": "AULA2 Como fazer um roteiro (FTV)",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/sTOORnpctqu/res640.webp"
+        },
+        {
+          "id": "68Oil9UIYru",
+          "slug": "aula3-como-converter-texto-em-fala",
+          "title": "AULA3 Como converter texto em fala",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/68Oil9UIYru/res640.webp"
+        },
+        {
+          "id": "s0abJfMAYru",
+          "slug": "aula4-como-sincronizar-audio-com-a-cena",
+          "title": "AULA4 Como sincronizar Audio com a Cena",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/s0abJfMAYru/res640.webp"
+        },
+        {
+          "id": "BfbXd1gltau",
+          "slug": "aula5-como-finalizar-sua-edição",
+          "title": "AULA5 Como finalizar sua edição!",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/BfbXd1gltau/res640.webp"
+        },
+        {
+          "id": "sCarJvgkZWu",
+          "slug": "como-colocar-marca-dagua-dinamica",
+          "title": "COMO COLOCAR MARCA D &#39;AGUA DINAMICA",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/sCarJvgkZWu/res640.webp"
+        },
+        {
+          "id": "YCbbI1MQYGu",
+          "slug": "educação-narra-stars-parte-1",
+          "title": "Educação Narra Stars PARTE 1",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/YCbbI1MQYGu/res640.webp"
+        },
+        {
+          "id": "7naqILM7Yau",
+          "slug": "educação-narra-stars-parte-2",
+          "title": "Educação Narra Stars PARTE 2",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/7naqILM7Yau/res640.webp"
+        },
+        {
+          "id": "s1jGIvhRZHu",
+          "slug": "educação-narra-stars-parte-3-final",
+          "title": "Educação Narra Stars PARTE 3 (FINAL))",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/s1jGIvhRZHu/res640.webp"
+        },
+        {
+          "id": "YmOaIKMRsru",
+          "slug": "exemplo-educação",
+          "title": "EXEMPLO EDUCAÇÃO",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/YmOaIKMRsru/res640.webp"
+        },
+        {
+          "id": "t8PXIvhlsau",
+          "slug": "tutorial-esportes-parte-1",
+          "title": "TUTORIAL ESPORTES PARTE 1",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/t8PXIvhlsau/res640.webp"
+        },
+        {
+          "id": "tSiadLgkZHu",
+          "slug": "tutorial-esportes-parte-2",
+          "title": "Tutorial Esportes PARTE 2",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/tSiadLgkZHu/res640.webp"
+        },
+        {
+          "id": "subjJvMRtbu",
+          "slug": "tutorial-esportes-parte-3",
+          "title": "Tutorial Esportes PARTE 3",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/subjJvMRtbu/res640.webp"
+        }
+      ]
+    },
+    {
+      "id": "tarefas-pagas-lucas-silva",
+      "title": "Tarefas Pagas",
+      "tutor": "Lucas Silva",
+      "description": "Descubra como estruturar vídeos para Tarefas Pagas com o tutor Lucas Silva.",
+      "videos": [
+        {
+          "id": "svb5J0hAsHu",
+          "slug": "aula-01-o-que-são-tarefas-pagas-e-saber-se-meu-perfil-tem-tarefas-liberadas",
+          "title": "Aula 01 O que são tarefas pagas e saber se meu perfil tem tarefas liberadas",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/svb5J0hAsHu/res640.webp"
+        },
+        {
+          "id": "A0bidfNRtqu",
+          "slug": "aula-02-como-fazer-o-roteiro-para-a-tarefa-paga",
+          "title": "Aula 02, como fazer o roteiro para a tarefa paga",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/A0bidfNRtqu/res640.webp"
+        },
+        {
+          "id": "71bOd0hQtbu",
+          "slug": "aula-03-final-como-colocar-a-tarefa-paga-no-seu-vídeo",
+          "title": "Aula 03 final Como colocar a tarefa paga no seu vídeo",
+          "description": "",
+          "thumbnail": "https://video-meta.open.video/resized-posters/71bOd0hQtbu/res640.webp"
+        }
+      ]
     }
   ]
 }
