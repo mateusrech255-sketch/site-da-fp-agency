@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 import WhatsAppFab from '../components/WhatsAppFab.astro';
+import PrivacyBanner from '../components/PrivacyBanner.astro';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'remixicon/fonts/remixicon.css';
 
@@ -63,6 +64,7 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <body>
         <slot />
         <WhatsAppFab />
+        <PrivacyBanner />
     </body>
 </html>
 
