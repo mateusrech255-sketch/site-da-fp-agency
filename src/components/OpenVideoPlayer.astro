@@ -23,7 +23,7 @@ const { videoId } = Astro.props;
 
       const removeShareControls = () => {
         playerRoot
-          .querySelectorAll('.vjs-share-control, .vignette-top-share, #vignette-top-button')
+          .querySelectorAll('.vjs-share-control, .vignette-top-share, #vignette-top-button, .vignette-top-fullscreen, #vignette-top-fullscreen, .vjs-top-fullscreen-control, [class*="vignette-top-expand"], [class*="vignette-top"] [class*="fullscreen"], .vjs-fullscreen-control:not(.vjs-control-bar *), .vjs-dock-right, .vignette-report-button, .vjs-report-control, [class*="report"]')
           .forEach((element) => element.remove());
 
         playerRoot.querySelectorAll('.video-js').forEach((element) => {
@@ -32,6 +32,59 @@ const { videoId } = Astro.props;
       };
 
       removeShareControls();
+
+      // UX Improvement: Double tap to seek (Rewind/Forward)
+      
+      // Anti-Redirect: Bloqueia cliques que levam para fora (open.video ou rotas /v/)
+      playerRoot.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (anchor) {
+          const href = anchor.href || '';
+          if (href.includes('open.video') || href.includes('/v/')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+        }
+      }, true); // Fase de captura (intercepta antes do script da Ezoic)
+
+      let lastTap = 0;
+      playerRoot.addEventListener('click', (e) => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        
+        // Double tap threshold: 300ms
+        if (tapLength < 300 && tapLength > 0) {
+          const videoElement = playerRoot.querySelector('video');
+          if (videoElement) {
+            const rect = playerRoot.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const width = rect.width;
+            
+            if (x < width * 0.4) {
+              // Left side: Rewind 10s
+              videoElement.currentTime = Math.max(0, videoElement.currentTime - 10);
+              showRipple(playerRoot, 'left', '-10s');
+            } else if (x > width * 0.6) {
+              // Right side: Forward 10s
+              videoElement.currentTime = Math.min(videoElement.duration, videoElement.currentTime + 10);
+              showRipple(playerRoot, 'right', '+10s');
+            }
+          }
+          e.preventDefault();
+        }
+        lastTap = currentTime;
+      });
+
+      // Simple visual feedback for double tap
+      function showRipple(container, position, text) {
+        const ripple = document.createElement('div');
+        ripple.className = `seek-ripple ${position}`;
+        ripple.innerText = text;
+        container.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 500);
+      }
+
 
       const observer = new MutationObserver(removeShareControls);
       observer.observe(playerRoot, { childList: true, subtree: true });
@@ -71,7 +124,91 @@ const { videoId } = Astro.props;
 
   .video-player-container .vjs-share-control,
   .video-player-container .vignette-top-share,
-  .video-player-container #vignette-top-button {
+  .video-player-container #vignette-top-button,
+  .video-player-container .vignette-top-fullscreen,
+  .video-player-container #vignette-top-fullscreen,
+  .video-player-container .vjs-top-fullscreen-control,
+  .video-player-container [class*="vignette-top-expand"],
+  .video-player-container [class*="vignette-top"] [class*="fullscreen"] {
     display: none !important;
   }
+
+  /* Oculta botoes de tela cheia que nao estejam na barra inferior */
+  .video-player-container .vjs-fullscreen-control:not(.vjs-control-bar *),
+  .video-player-container .vjs-dock-right,
+  .video-player-container .vjs-top-bar-right,
+  .video-player-container .vignette-report-button,
+  .video-player-container .vjs-report-control,
+  .video-player-container [class*="report"] {
+    display: none !important;
+  }
+
+
+  /* Impede que logos, titulos e overlays da Ezoic recebam cliques (Anti-Redirect) */
+  .video-player-container a,
+  .video-player-container .vjs-logo,
+  .video-player-container .vignette-logo,
+  .video-player-container [class*="logo"] {
+    pointer-events: none !important;
+    cursor: default !important;
+  }
+
+  /* Desativa os cliques na barra de titulo superior inteira */
+  .video-player-container .vjs-dock-text,
+  .video-player-container .vignette-title,
+  .video-player-container [class*="vignette-title"],
+  .video-player-container [class*="vjs-dock"] {
+    pointer-events: none !important;
+  }
+
+
+  /* Oculta o botao de reportar (bandeira) */
+  .video-player-container .vjs-control-bar button[title*="Report" i],
+  .video-player-container .vjs-control-bar button[title*="Denunciar" i],
+  .video-player-container button[class*="report"],
+  .video-player-container button[class*="flag"] {
+    display: none !important;
+  }
+
+  /* UX Improvement: Thicker timeline for easier scrubbing */
+  .video-player-container .vjs-progress-control {
+    height: 35px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .video-player-container .vjs-progress-holder {
+    height: 10px !important;
+    border-radius: 5px !important;
+  }
+  .video-player-container .vjs-play-progress,
+  .video-player-container .vjs-load-progress {
+    border-radius: 5px !important;
+  }
+  .video-player-container .vjs-play-progress:before {
+    font-size: 1.8em !important;
+    top: -0.35em !important;
+  }
+
+  /* Ripple effect for double tap */
+  .seek-ripple {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    pointer-events: none;
+    animation: fadeOut 0.5s ease-out;
+    z-index: 999;
+  }
+  .seek-ripple.left { left: 15%; }
+  .seek-ripple.right { right: 15%; }
+  @keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(-50%) scale(0.9); }
+    100% { opacity: 0; transform: translateY(-50%) scale(1.2); }
+  }
+
 </style>
