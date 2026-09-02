@@ -60,6 +60,7 @@ const searchApiUrl = publicApiUrls.search;
         <input
           type="search"
           id="global-search-input"
+          aria-label="Busca global"
           placeholder="Busque páginas, relatórios ou @editores"
           autocomplete="off"
           spellcheck="false"
@@ -901,12 +902,15 @@ const searchApiUrl = publicApiUrls.search;
     backdrop-filter: blur(14px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.18s ease;
+    visibility: hidden;
+    transition: opacity 0.18s ease, visibility 0s linear 0.18s;
   }
 
   .global-search-overlay.active {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
+    transition: opacity 0.18s ease, visibility 0s linear 0s;
   }
 
   .global-search-panel {
@@ -1278,7 +1282,7 @@ const searchApiUrl = publicApiUrls.search;
       top: 100%;
       right: 0;
       left: 0;
-      display: none;
+      display: none !important;
       flex-direction: column;
       align-items: stretch;
       gap: 16px;
@@ -1289,7 +1293,7 @@ const searchApiUrl = publicApiUrls.search;
     }
 
     .fp-header-links.open {
-      display: flex;
+      display: flex !important;
     }
 
     .fp-header-links a {

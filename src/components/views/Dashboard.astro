@@ -1,12 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-
 const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&background=fed7aa&color=c2410c&bold=true&size=256';
 ---
 
     <div id="view-Dashboard" class="view view-container view-private" data-view="Dashboard">
       <section class="dashboard-hero" aria-label="Resumo do recrutador">
-        <Image id="uFoto" class="profile-avatar profile-avatar-sm" src={defaultProfileAvatar} width={50} height={50} alt="Foto de perfil" loading="eager" decoding="async" />
+        <img id="uFoto" class="profile-avatar profile-avatar-sm" src={defaultProfileAvatar} width="50" height="50" alt="Foto de perfil" loading="eager" decoding="async" />
         <div class="dashboard-welcome"><small>Bem-vindo(a),</small><div id="uName">...</div></div>
       </section>
       

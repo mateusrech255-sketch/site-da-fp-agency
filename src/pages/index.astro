@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 ---
 
 <Layout>
@@ -121,7 +124,7 @@ import Footer from '../components/Footer.astro';
                 <li>Entrada orientada por programa</li>
                 <li>Suporte focado em RPM</li>
               </ul>
-              <a href="#contato" class="inline-link">Começar como criador →</a>
+              <a href={`${baseUrl}/monetize`} class="inline-link">Começar como criador →</a>
             </article>
 
             <article class="audience-card reveal">
@@ -135,9 +138,8 @@ import Footer from '../components/Footer.astro';
                 <li>Acesso a regras e materiais</li>
                 <li>Base sólida para escalar</li>
               </ul>
-              <a href="#contato" class="inline-link">Entrar como recrutador →</a>
+              <a href={`${baseUrl}/recrutador`} class="inline-link">Entrar como recrutador →</a>
             </article>
-
             <article class="audience-card reveal">
               <div class="icon-box">📈</div>
               <h3>Para Marcas e Parceiros</h3>
@@ -233,10 +235,9 @@ import Footer from '../components/Footer.astro';
               </ul>
               <div class="program-foot">
                 <span>Vagas qualificadas</span>
-                <a href="#contato" class="inline-link" style="margin-top: 0;">Ver detalhes</a>
+                <a href={`${baseUrl}/monetize/kwainarrastars`} class="inline-link" style="margin-top: 0;">Ver detalhes</a>
               </div>
             </article>
-
             <article class="program-card reveal">
               <span class="program-tag">Creator Economy</span>
               <h3>Kwai Cut</h3>
@@ -250,7 +251,7 @@ import Footer from '../components/Footer.astro';
               </ul>
               <div class="program-foot">
                 <span>Entrada guiada</span>
-                <a href="#contato" class="inline-link" style="margin-top: 0;">Saiba mais</a>
+                <a href={`${baseUrl}/monetize/kwaicut`} class="inline-link" style="margin-top: 0;">Saiba mais</a>
               </div>
             </article>
 
@@ -344,11 +345,11 @@ import Footer from '../components/Footer.astro';
 
           <div class="faq-wrap reveal">
             <div class="faq-item active">
-              <button class="faq-question" type="button">
+              <button class="faq-question" type="button" aria-expanded="true" aria-controls="faq-ans-1">
                 <span>Como funciona o programa NarraStars?</span>
-                <span>+</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="faq-answer" style="max-height: 180px;">
+              <div class="faq-answer" id="faq-ans-1" role="region">
                 <div class="faq-answer-inner">
                   O NarraStars é o nosso programa de treinamento e monetização voltado para editores e criadores de vídeo. Ele oferece documentação detalhada sobre regras, foco na otimização do RPM e metodologias para alavancar a audiência nas redes.
                 </div>
@@ -356,11 +357,11 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <div class="faq-item">
-              <button class="faq-question" type="button">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ans-2">
                 <span>Qualquer pessoa pode entrar nos programas da FP Agency?</span>
-                <span>+</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-ans-2" role="region">
                 <div class="faq-answer-inner">
                   Cada programa possui requisitos específicos de qualidade, nicho e formato de conteúdo (como o Kwai Cut). Após o primeiro contato, direcionamos você para o onboarding do programa que melhor se alinha ao seu perfil.
                 </div>
@@ -368,11 +369,11 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <div class="faq-item">
-              <button class="faq-question" type="button">
+              <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-ans-3">
                 <span>Como a FP Agency ajuda os recrutadores?</span>
-                <span>+</span>
+                <span aria-hidden="true">+</span>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-ans-3" role="region">
                 <div class="faq-answer-inner">
                   Fornecemos as regras de recrutamento claras e a infraestrutura necessária (painéis e documentação) para que você possa captar e gerenciar novos talentos com eficiência e suporte constante.
                 </div>
@@ -406,8 +407,12 @@ import Footer from '../components/Footer.astro';
 <script>
   // Scripts específicos da página inicial (FAQ e Animações)
   document.querySelectorAll(".faq-item").forEach((item) => {
-    const button = item.querySelector(".faq-question") as HTMLElement;
-    const answer = item.querySelector(".faq-answer") as HTMLElement;
+    const button = item.querySelector(".faq-question") as HTMLElement | null;
+    const answer = item.querySelector(".faq-answer") as HTMLElement | null;
+
+    if (item.classList.contains("active") && answer) {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
 
     if (button && answer) {
       button.addEventListener("click", () => {
@@ -415,12 +420,15 @@ import Footer from '../components/Footer.astro';
 
         document.querySelectorAll(".faq-item").forEach((other) => {
           other.classList.remove("active");
-          const otherAnswer = other.querySelector(".faq-answer") as HTMLElement;
-          if (otherAnswer) otherAnswer.style.removeProperty("maxHeight");
+          const otherBtn = other.querySelector(".faq-question");
+          const otherAnswer = other.querySelector(".faq-answer") as HTMLElement | null;
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+          if (otherAnswer) otherAnswer.style.maxHeight = "";
         });
 
         if (!isActive) {
           item.classList.add("active");
+          button.setAttribute("aria-expanded", "true");
           answer.style.maxHeight = answer.scrollHeight + "px";
         }
       });
@@ -485,6 +493,8 @@ import Footer from '../components/Footer.astro';
   h1 {
     font-size: clamp(3rem, 7vw, 6.2rem);
     font-weight: 900;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   h2 {
@@ -580,6 +590,11 @@ import Footer from '../components/Footer.astro';
     align-items: center;
   }
 
+  .hero-copy {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .hero-copy p.lead {
     margin-top: 22px;
   }
@@ -599,6 +614,7 @@ import Footer from '../components/Footer.astro';
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--shadow);
     overflow: hidden;
+    min-width: 0;
   }
 
   .hero-panel::before {

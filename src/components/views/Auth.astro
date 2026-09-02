@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
 const base = import.meta.env.BASE_URL;
 const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
 ---
@@ -11,10 +9,9 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
           <h1 class="auth-title">Portal Parceiro</h1>
           <p class="auth-subtitle auth-subtitle-accent">Faça login para continuar</p>
           <button type="button" class="btn auth-google-btn" onclick="loginComGoogle()">
-            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Continuar com o Google
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width="20" height="20" alt="Google" loading="lazy" decoding="async" /> Continuar com o Google
           </button>
           <div class="auth-separator"><div></div><span>ou use seu acesso</span><div></div></div>
-          
           <form id="loginForm">
             <input type="email" name="email" placeholder="E-mail cadastrado" required>
             
@@ -36,7 +33,7 @@ const baseUrl = base === '/' ? '' : base.replace(/\/$/, '');
           <h1 class="auth-title">Cadastro</h1>
           <p class="auth-subtitle">Crie sua conta para começar</p>
           <button type="button" class="btn auth-google-btn" id="btnGoogleCad" onclick="preencherComGoogle()">
-            <Image src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width={20} height={20} alt="Google" loading="lazy" decoding="async" /> Preencher dados com o Google
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="auth-google-icon" width="20" height="20" alt="Google" loading="lazy" decoding="async" /> Preencher dados com o Google
           </button>
           <div id="div-ou-cad" class="auth-separator"><div></div><span>ou digite manualmente</span><div></div></div>
           

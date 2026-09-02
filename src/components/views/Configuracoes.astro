@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
 const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&background=fed7aa&color=c2410c&bold=true&size=256';
 ---
 
@@ -10,7 +8,7 @@ const defaultProfileAvatar = 'https://ui-avatars.com/api/?name=Usuario&backgroun
         <div style="text-align:center">
 
           <div class="avatar-wrapper" style="display:flex; justify-content:center; align-items:center; position:relative; margin-bottom:15px;">
-            <Image id="ui_foto" class="avatar-img profile-avatar profile-avatar-lg" src={defaultProfileAvatar} width={120} height={120} alt="Minha foto de perfil" loading="lazy" decoding="async" />
+            <img id="ui_foto" class="avatar-img profile-avatar profile-avatar-lg" src={defaultProfileAvatar} width="120" height="120" alt="Minha foto de perfil" loading="lazy" decoding="async" />
           </div>
 
           <div class="progress-bar-container" id="progContainer" style="max-width:200px;margin:0 auto"><div class="progress-bar" id="progBar"></div></div>

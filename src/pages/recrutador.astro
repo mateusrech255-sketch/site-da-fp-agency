@@ -1239,7 +1239,10 @@ else initApp();
   --primary:      #f97316;
   --primary-dark: #ea580c;
   --bg:           #f8fafc;
-  --bg-app:       transparent;
+  --bg-app:
+    radial-gradient(circle at top left, rgba(255, 107, 43, 0.16), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(255, 154, 92, 0.1), transparent 22%),
+    linear-gradient(180deg, #0f1117 0%, #13161e 40%, #181c27 100%);
   --bg-soft:      #f1f5f9;
   --bg-card:      #ffffff;
   --bg-input:     #f8fafc;
@@ -1275,7 +1278,10 @@ else initApp();
 }
 
 .fp-agency-wrapper[data-portal-state="public"] {
-  --bg-app: transparent;
+  --bg-app:
+    radial-gradient(circle at top left, rgba(255, 107, 43, 0.16), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(255, 154, 92, 0.1), transparent 22%),
+    linear-gradient(180deg, #0f1117 0%, #13161e 40%, #181c27 100%);
 }
 
 .app-shell-header,
