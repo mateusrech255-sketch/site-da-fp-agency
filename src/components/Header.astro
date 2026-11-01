@@ -56,19 +56,21 @@ const searchApiUrl = publicApiUrls.search;
     <div class="global-search-panel" role="document">
       <div class="global-search-inputbar">
         <i class="fas fa-magnifying-glass global-search-main-icon" aria-hidden="true"></i>
-        <label id="global-search-title" class="sr-only" for="global-search-input">Busca global</label>
-        <input
-          type="search"
-          id="global-search-input"
-          aria-label="Busca global"
-          placeholder="Busque páginas, relatórios ou @editores"
-          autocomplete="off"
-          spellcheck="false"
-          role="combobox"
-          aria-expanded="false"
-          aria-controls="global-search-results"
-          aria-autocomplete="list"
-        />
+        <label id="global-search-title" class="global-search-label" for="global-search-input">
+          <span class="global-search-text">Busca global</span>
+          <input
+            type="search"
+            id="global-search-input"
+            aria-label="Busca global"
+            placeholder="Busque páginas, relatórios ou @editores"
+            autocomplete="off"
+            spellcheck="false"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="global-search-results"
+            aria-autocomplete="list"
+          />
+        </label>
         <button class="global-search-close" id="btn-close-search" type="button" aria-label="Fechar busca">
           <i class="fas fa-xmark" aria-hidden="true"></i>
         </button>
@@ -251,6 +253,7 @@ const searchApiUrl = publicApiUrls.search;
         link.className = 'global-search-item global-search-focusable';
         link.href = routeWithBase(item.url);
         link.setAttribute('role', 'option');
+        link.setAttribute('aria-selected', 'false');
         link.tabIndex = -1;
 
         const iconWrap = document.createElement('span');
@@ -298,6 +301,7 @@ const searchApiUrl = publicApiUrls.search;
         link.className = 'global-search-item global-search-focusable editor-result';
         link.href = buildSearchUrl('aprovacao', name);
         link.setAttribute('role', 'option');
+        link.setAttribute('aria-selected', 'false');
         link.tabIndex = -1;
 
         const iconWrap = document.createElement('span');
@@ -329,6 +333,7 @@ const searchApiUrl = publicApiUrls.search;
         link.className = 'global-search-item global-search-focusable command';
         link.href = url;
         link.setAttribute('role', 'option');
+        link.setAttribute('aria-selected', 'false');
         link.tabIndex = -1;
 
         const iconWrap = document.createElement('span');
@@ -394,18 +399,26 @@ const searchApiUrl = publicApiUrls.search;
           return;
         }
 
-        items.forEach((item) => item.classList.remove('active'));
+        items.forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
         activeIndex = (nextIndex + items.length) % items.length;
 
         const activeItem = items[activeIndex];
         if (!activeItem.id) activeItem.id = `global-search-option-${activeIndex}`;
         activeItem.classList.add('active');
+        activeItem.setAttribute('aria-selected', 'true');
         searchInput.setAttribute('aria-activedescendant', activeItem.id);
         activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       };
 
       const resetActiveItem = () => {
         activeIndex = -1;
+        getFocusableItems().forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
         searchInput?.removeAttribute('aria-activedescendant');
       };
 
@@ -891,7 +904,7 @@ const searchApiUrl = publicApiUrls.search;
     position: fixed;
     inset: 0;
     z-index: 9999;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: flex-start;
     min-height: 100dvh;
@@ -907,6 +920,7 @@ const searchApiUrl = publicApiUrls.search;
   }
 
   .global-search-overlay.active {
+    display: flex;
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
@@ -944,6 +958,28 @@ const searchApiUrl = publicApiUrls.search;
   .global-search-main-icon {
     color: #ff6b2b;
     font-size: 1.15rem;
+  }
+
+  .global-search-label {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    cursor: text;
+  }
+
+  .global-search-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .site-header .global-search-overlay .global-search-inputbar input {
